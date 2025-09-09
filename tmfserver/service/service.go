@@ -715,11 +715,13 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
 	_, err := svc.processAccessToken(req)
 	if err != nil {
+		slog.Error("invalid access token", slog.String("error", err.Error()))
 		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
 	}
 
 	objs, totalCount, err := svc.listObjects(req.ResourceName, req.QueryParams)
 	if err != nil {
+		slog.Error("failed to list objects from service", slog.String("error", err.Error()))
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to list objects from service: %w")
 	}
 
@@ -734,6 +736,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		var item map[string]any
 		err := json.Unmarshal(obj.Content, &item)
 		if err != nil {
+			slog.Error("failed to unmarshal object content for listing", slog.String("error", err.Error()))
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content for listing: %w")
 		}
 		responseData = append(responseData, item)
@@ -891,6 +894,7 @@ func getHTTPStatusInfo(statusCode int) (int, string, string) {
 func ErrorResponse(err error, statusCode int) *Response {
 	_, code, status := getHTTPStatusInfo(statusCode)
 	wrappedErr := errl.Error2(err)
+	slog.Error("error response", slog.String("error", wrappedErr.Error()))
 	apiErr := NewApiError(code, status, wrappedErr.Error(), fmt.Sprintf("%d", statusCode), "")
 	return &Response{StatusCode: statusCode, Body: apiErr}
 }
@@ -899,6 +903,7 @@ func ErrorResponse(err error, statusCode int) *Response {
 func ErrorResponsef(err error, statusCode int, format string, args ...any) *Response {
 	_, code, status := getHTTPStatusInfo(statusCode)
 	wrappedErr := errl.Errorf2(format, append(args, err)...)
+	slog.Error("error response", slog.String("error", wrappedErr.Error()))
 	apiErr := NewApiError(code, status, wrappedErr.Error(), fmt.Sprintf("%d", statusCode), "")
 	return &Response{StatusCode: statusCode, Body: apiErr}
 }
