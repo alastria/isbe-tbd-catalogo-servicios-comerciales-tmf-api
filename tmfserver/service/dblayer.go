@@ -20,8 +20,8 @@ func (svc *Service) createObject(obj *repo.TMFObject) error {
 	if svc.storage != nil {
 		return svc.storage.CreateObject(obj)
 	}
-	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, last_update, content, created_at, updated_at)
-		VALUES (:id, :type, :version, :last_update, :content, :created_at, :updated_at)`, obj)
+	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, last_update, content, created_at, updated_at)
+		VALUES (:id, :type, :version, :api_version, :last_update, :content, :created_at, :updated_at)`, obj)
 	if err != nil {
 		var sqliteErr sqlite3.Error
 		if errors.As(err, &sqliteErr) {

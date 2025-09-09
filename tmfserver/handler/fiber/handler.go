@@ -2,7 +2,6 @@ package fiber
 
 import (
 	"net/url"
-	"strings"
 
 	"encoding/json"
 	"log/slog"
@@ -18,20 +17,20 @@ type Handler struct {
 
 // extractAPIVersion extracts the API version from the URL path
 func extractAPIVersion(path string) string {
-	// Expected path format: /tmf-api/{apiFamily}/v{version}/...
-	parts := strings.Split(path, "/")
-	for i, part := range parts {
-		if strings.HasPrefix(part, "v") && len(part) > 1 {
-			// Check if this is likely a version (v4 or v5)
-			if part == "v4" || part == "v5" {
-				return part
-			}
-		}
-		// Also check for the pattern where version comes after apiFamily
-		if i > 0 && parts[i-1] != "" && strings.HasPrefix(part, "v") {
-			return part
-		}
-	}
+	// // Expected path format: /tmf-api/{apiFamily}/v{version}/...
+	// parts := strings.Split(path, "/")
+	// for i, part := range parts {
+	// 	if strings.HasPrefix(part, "v") && len(part) > 1 {
+	// 		// Check if this is likely a version (v4 or v5)
+	// 		if part == "v4" || part == "v5" {
+	// 			return part
+	// 		}
+	// 	}
+	// 	// Also check for the pattern where version comes after apiFamily
+	// 	if i > 0 && parts[i-1] != "" && strings.HasPrefix(part, "v") {
+	// 		return part
+	// 	}
+	// }
 	// Default to v5 if not found
 	return "v5"
 }
