@@ -23,7 +23,7 @@ FROM alpine/curl:latest
 WORKDIR /
 COPY --from=builder /isbetmf /isbetmf
 COPY www /www
-
+COPY ./auth_policies.star /auth_policies.star
 
 # Expose the port the server runs on
 EXPOSE 9991

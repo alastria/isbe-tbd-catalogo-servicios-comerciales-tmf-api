@@ -12,6 +12,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/hesusruiz/isbetmf/internal/errl"
 	"gitlab.com/greyxor/slogor"
 )
 
@@ -94,7 +95,7 @@ func NewSimpleFileCache(options *FileCacheOptions) *SimpleFileCache {
 func (m *SimpleFileCache) Get(fileName string) (*FileEntry, error) {
 
 	if fileName == "" {
-		return nil, fmt.Errorf("file name is empty")
+		return nil, errl.Errorf("file name is empty")
 	}
 
 	// We only support https or local files
@@ -324,15 +325,15 @@ func (m *SimpleFileCache) GetFile(fileName string) (*FileEntry, error) {
 	// We get the file info, to check if it was modified.
 	fileInfo, err := os.Stat(fileName)
 	if err != nil {
-		return nil, fmt.Errorf("readFileIfNew: error checking file %s: %w", fileName, err)
+		return nil, errl.Errorf("readFileIfNew: error checking file %s: %w", fileName, err)
 	} else if fileInfo.Mode().IsDir() {
 		// We cannot read a directory
-		return nil, fmt.Errorf("readFileIfNew: file %s is a directory, not a file", fileName)
+		return nil, errl.Errorf("readFileIfNew: file %s is a directory, not a file", fileName)
 	}
 
 	// Check if the size is "reasonable" to be loaded in the cache. Default is 1MB, enogh for many policies.
 	if fileInfo.Size() > maxFileSize {
-		return nil, fmt.Errorf("readFileIfNew: file %s is too big", fileName)
+		return nil, errl.Errorf("readFileIfNew: file %s is too big", fileName)
 	}
 
 	modifiedAt := fileInfo.ModTime()
@@ -342,7 +343,7 @@ func (m *SimpleFileCache) GetFile(fileName string) (*FileEntry, error) {
 		slog.Info("readFileIfNew", "file", fileName, "msg", "entry not found in cache, reading")
 		content, err := os.ReadFile(fileName)
 		if err != nil {
-			return nil, err
+			return nil, errl.Errorf("readFileIfNew: error reading file %s: %w", fileName, err)
 		}
 
 		// Add or replace the content of the file cache
@@ -369,7 +370,7 @@ func (m *SimpleFileCache) GetFile(fileName string) (*FileEntry, error) {
 		// The entry in the cache is old, so we read again the file.
 		content, err := os.ReadFile(fileName)
 		if err != nil {
-			return nil, fmt.Errorf("readFileIfNew: error reading file %s: %w", fileName, err)
+			return nil, errl.Errorf("readFileIfNew: error reading file %s: %w", fileName, err)
 		}
 
 		// Add to the cache. There is only one instance of each file in the cache.
@@ -403,7 +404,7 @@ func (m *SimpleFileCache) GetFile(fileName string) (*FileEntry, error) {
 // The content is the contents of the file to be cached. The name is the key of the entry in the cache.
 func (m *SimpleFileCache) Set(fileName string, content []byte, ttl time.Duration) error {
 	if fileName == "" {
-		return fmt.Errorf("file name is empty")
+		return errl.Errorf("file name is empty")
 	}
 
 	// If the user did not specify a TTL, we set it to 100 years (no expiration of the cache entry)
@@ -437,7 +438,7 @@ func (m *SimpleFileCache) MustExist(fileName string) (*FileEntry, error) {
 		entry := fe.(*FileEntry)
 		return entry, nil
 	} else {
-		return nil, fmt.Errorf("file %s not found in cache", fileName)
+		return nil, errl.Errorf("file %s not found in cache", fileName)
 	}
 
 }
