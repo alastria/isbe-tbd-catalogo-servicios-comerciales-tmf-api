@@ -14,12 +14,12 @@ import (
 
 const AllowFakeClaims = true
 
-// extractCallerInfo retrieves the Access Token from the request, verifies it if it exists and
+// processAccessToken retrieves the Access Token from the request, verifies it if it exists and
 // creates a map ready to be passed to the rules engine.
 //
 // The access token may not exist, but if it does then it must be valid.
 // For convenience of the policies, some calculated fields are created and returned in the 'user' object.
-func (svc *Service) extractCallerInfo(r *Request) (tokenClaims map[string]any, err error) {
+func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, err error) {
 
 	var authUser *AuthUser
 
@@ -99,10 +99,13 @@ func (svc *Service) extractCallerInfo(r *Request) (tokenClaims map[string]any, e
 
 	}
 
+	// Update the request with the authenticated user info
 	r.AuthUser = authUser
 
+	// If the user has an organization identifier, create a new organization object.
+	// If it is created, we just receive an error which we ignore
+	// This is needed to be able to create a new organization object in the DOME Marketplace.
 	if len(authUser.OrganizationIdentifier) > 0 {
-		// Create a new organization object. If it is created, we just receive an error which we ignore
 
 		org := &repository.Organization{
 			CommonName:             authUser.CommonName,
@@ -130,8 +133,22 @@ func (svc *Service) extractCallerInfo(r *Request) (tokenClaims map[string]any, e
 }
 
 // setSellerAndBuyerInfo adds the required fields to the incoming object argument
+// It calls the appropriate version-specific function based on the API version
+func setSellerAndBuyerInfo(tmfObjectMap map[string]any, organizationIdentifier string, apiVersion string) (err error) {
+	switch apiVersion {
+	case "v4":
+		return setSellerAndBuyerInfoV4(tmfObjectMap, organizationIdentifier)
+	case "v5":
+		return setSellerAndBuyerInfoV5(tmfObjectMap, organizationIdentifier)
+	default:
+		// Default to V5 for backward compatibility
+		return setSellerAndBuyerInfoV5(tmfObjectMap, organizationIdentifier)
+	}
+}
+
+// setSellerAndBuyerInfoV5 adds the required fields to the incoming object argument
 // Specifically, the Seller and SellerOperator roles are added to the relatedParty list
-func setSellerAndBuyerInfo(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
+func setSellerAndBuyerInfoV5(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
 
 	// Normalize all organization identifiers to the DID format
 	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
@@ -226,7 +243,108 @@ func setSellerAndBuyerInfo(tmfObjectMap map[string]any, organizationIdentifier s
 
 }
 
-func getSellerAndBuyerInfo(tmfObjectMap map[string]any) (sellerDid string, sellerOperatorDid string, err error) {
+// setSellerAndBuyerInfoV4 adds the required fields to the incoming object argument for V4 API
+// Specifically, the Seller and SellerOperator roles are added to the relatedParty list
+func setSellerAndBuyerInfoV4(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
+
+	// Normalize all organization identifiers to the DID format
+	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
+		organizationIdentifier = "did:elsi:" + organizationIdentifier
+	}
+
+	// Look for the "Seller", "SellerOperator", "Buyer" and "BuyerOperator" roles
+	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
+
+	// Build the two entries for V4 format
+	sellerEntry := map[string]any{
+		"role":          "Seller",
+		"id":            "urn:ngsi-ld:organization:" + organizationIdentifier,
+		"href":          "urn:ngsi-ld:organization:" + organizationIdentifier,
+		"name":          organizationIdentifier,
+		"@referredType": "Organization",
+	}
+	sellerOperator := map[string]any{
+		"role":          "SellerOperator",
+		"id":            "urn:ngsi-ld:organization:" + config.ServerOperatorDid,
+		"href":          "urn:ngsi-ld:organization:" + config.ServerOperatorDid,
+		"name":          config.ServerOperatorDid,
+		"@referredType": "Organization",
+	}
+
+	if len(relatedParties) == 0 {
+		slog.Debug("setSellerAndBuyerInfoV4: no relatedParty, adding seller and sellerOperator")
+		tmfObjectMap["relatedParty"] = []any{sellerEntry, sellerOperator}
+		return nil
+	}
+
+	foundSeller := false
+	foundSellerOperator := false
+
+	newRelatedParties := []any{}
+
+	for _, rp := range relatedParties {
+
+		// Convert entry to a map
+		rpMap, _ := rp.(map[string]any)
+		if len(rpMap) == 0 {
+			return errl.Errorf("invalid relatedParty entry")
+		}
+
+		rpRole, _ := rpMap["role"].(string)
+		rpRole = strings.ToLower(rpRole)
+
+		if rpRole != "seller" && rpRole != "selleroperator" {
+			newRelatedParties = append(newRelatedParties, rp)
+			// Go to next entry
+			continue
+		}
+
+		if rpRole == "seller" {
+			// Overwrite the entry, because we can not allow the user to create fake info
+			newRelatedParties = append(newRelatedParties, sellerEntry)
+			foundSeller = true
+			continue
+		}
+		if rpRole == "selleroperator" {
+			// Overwrite the entry, because we can not allow the user to create fake info
+			newRelatedParties = append(newRelatedParties, sellerOperator)
+			foundSellerOperator = true
+			continue
+		}
+
+	}
+
+	if !foundSeller {
+		// Add the seller if it is not already in the list
+		slog.Debug("setSellerAndBuyerInfoV4: adding seller", "organizationIdentifier", organizationIdentifier)
+		newRelatedParties = append(newRelatedParties, sellerEntry)
+	}
+
+	if !foundSellerOperator {
+		// Add the seller operator if it is not already in the list
+		slog.Debug("setSellerAndBuyerInfoV4: adding seller operator", "organizationIdentifier", organizationIdentifier)
+		newRelatedParties = append(newRelatedParties, sellerOperator)
+	}
+
+	tmfObjectMap["relatedParty"] = newRelatedParties
+
+	return nil
+
+}
+
+func getSellerAndBuyerInfo(tmfObjectMap map[string]any, apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+	switch apiVersion {
+	case "v4":
+		return getSellerAndBuyerInfoV4(tmfObjectMap)
+	case "v5":
+		return getSellerAndBuyerInfoV5(tmfObjectMap)
+	default:
+		// Default to V5 for backward compatibility
+		return getSellerAndBuyerInfoV5(tmfObjectMap)
+	}
+}
+
+func getSellerAndBuyerInfoV5(tmfObjectMap map[string]any) (sellerDid string, sellerOperatorDid string, err error) {
 
 	// Look for the "Seller", "SellerOperator", "Buyer" and "BuyerOperator" roles
 	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
@@ -263,6 +381,63 @@ func getSellerAndBuyerInfo(tmfObjectMap map[string]any) (sellerDid string, selle
 			continue
 		}
 
+	}
+
+	if sellerDid == "" && sellerOperatorDid == "" {
+		err = errl.Errorf("no seller or seller operator")
+		return
+	}
+
+	if sellerDid == "" {
+		err = errl.Errorf("no seller")
+		return
+	}
+	if sellerOperatorDid == "" {
+		err = errl.Errorf("no seller operator")
+		return
+	}
+
+	return
+
+}
+
+func getSellerAndBuyerInfoV4(tmfObjectMap map[string]any) (sellerDid string, sellerOperatorDid string, err error) {
+	// In V4, relatedParty is a list of maps with fields like "role", "id", "href", "name", "@referredType"
+	// We need to extract the "name" for the "Seller" and "SellerOperator" roles
+
+	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
+
+	if len(relatedParties) == 0 {
+		err = errl.Errorf("no relatedParty")
+		return
+	}
+
+	for _, rp := range relatedParties {
+		rpMap, _ := rp.(map[string]any)
+		if len(rpMap) == 0 {
+			return "", "", errl.Errorf("invalid relatedParty entry")
+		}
+
+		rpRole, _ := rpMap["role"].(string)
+		rpRole = strings.ToLower(rpRole)
+
+		if rpRole != "seller" && rpRole != "selleroperator" {
+			continue
+		}
+
+		if rpRole == "seller" {
+			sellerDid, _ = rpMap["name"].(string)
+			continue
+		}
+		if rpRole == "selleroperator" {
+			sellerOperatorDid, _ = rpMap["name"].(string)
+			continue
+		}
+	}
+
+	if sellerDid == "" && sellerOperatorDid == "" {
+		err = errl.Errorf("no seller or seller operator")
+		return
 	}
 
 	if sellerDid == "" {

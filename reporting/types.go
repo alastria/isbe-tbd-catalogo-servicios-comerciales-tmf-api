@@ -17,8 +17,8 @@ type TMFObject struct {
 	AdditionalFields map[string]any `json:"-"`
 }
 
-// RelatedParty represents a related party reference
-type RelatedParty struct {
+// RelatedPartyV5 represents a related party reference
+type RelatedPartyV5 struct {
 	Role             string              `json:"role"`
 	PartyOrPartyRole PartyRefOrPartyRole `json:"partyOrPartyRole"`
 	Type             string              `json:"@type"`
@@ -151,6 +151,40 @@ var RequiredFields = map[string][]string{
 
 // RequiredRelatedPartyRoles defines the required related party roles for each object type
 var RequiredRelatedPartyRoles = map[string][]string{
+	"productOffering": {
+		"Seller", "SellerOperator",
+	},
+	"productSpecification": {
+		"Seller", "SellerOperator",
+	},
+	"productOfferingPrice": {
+		"Seller", "SellerOperator",
+	},
+	"category": {
+		"Seller", "SellerOperator",
+	},
+	"individual": {
+		"Seller", "SellerOperator",
+	},
+	"organization": {
+		"Seller", "SellerOperator",
+	},
+	"productCatalog": {
+		"Seller", "SellerOperator",
+	},
+	"customer": {
+		"Seller", "SellerOperator",
+	},
+	"product": {
+		"Seller", "SellerOperator",
+	},
+	"service": {
+		"Seller", "SellerOperator",
+	},
+}
+
+// RequiredRelatedPartyRolesV4 defines the required related party roles for each object type in V4 API
+var RequiredRelatedPartyRolesV4 = map[string][]string{
 	"productOffering": {
 		"Seller", "SellerOperator",
 	},

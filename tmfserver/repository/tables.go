@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS tmf_object (
 	"id" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
 	"version" TEXT,
+	"api_version" TEXT,
 	"last_update" TEXT,
 	"content" BLOB NOT NULL,
 	"created_at" DATETIME NOT NULL,

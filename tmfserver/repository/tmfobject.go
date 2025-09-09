@@ -14,6 +14,7 @@ type TMFObject struct {
 	ID         string    `db:"id"`
 	Type       string    `db:"type"`
 	Version    string    `db:"version"`
+	APIVersion string    `db:"api_version"`
 	LastUpdate string    `db:"last_update"`
 	Content    []byte    `db:"content"`
 	CreatedAt  time.Time `db:"created_at"`
@@ -21,12 +22,13 @@ type TMFObject struct {
 }
 
 // NewTMFObject creates a new TMFObject.
-func NewTMFObject(id, objectType, version, lastUpdate string, content []byte) *TMFObject {
+func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, content []byte) *TMFObject {
 	now := time.Now()
 	return &TMFObject{
 		ID:         id,
 		Type:       objectType,
 		Version:    version,
+		APIVersion: apiVersion,
 		LastUpdate: lastUpdate,
 		Content:    content,
 		CreatedAt:  now,
