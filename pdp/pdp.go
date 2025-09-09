@@ -7,6 +7,7 @@ package pdp
 import (
 	"errors"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"sync"
 	"time"
@@ -92,7 +93,13 @@ func NewPDP(
 	// Create the pool of parsed and compiled Starlark policy rules.
 	m.threadPool = sync.Pool{
 		New: func() any {
-			return m.bufferedParseAndCompileFile(m.scriptname)
+			slog.Info("Creating a new thread entry in the PDP pool")
+			te, err := m.bufferedParseAndCompileFile(m.scriptname)
+			if err != nil {
+				slog.Error("Error creating a new thread entry in the PDP pool", slog.String("error", err.Error()))
+				return nil
+			}
+			return te
 		},
 	}
 
@@ -115,29 +122,30 @@ func NewPDP(
 }
 
 // bufferedParseAndCompileFile reads a file with Starlark code and compiles it
-func (m *PDP) bufferedParseAndCompileFile(scriptname string) *threadEntry {
+func (m *PDP) bufferedParseAndCompileFile(scriptname string) (*threadEntry, error) {
 	te := m.createThreadEntry(scriptname)
+	slog.Debug("Created a new thread entry in the PDP pool")
 	if te == nil {
-		return nil
+		return nil, errl.Errorf("error creating thread entry")
 	}
 
 	entry, err := m.fileCache.Get(scriptname)
 	if err != nil {
-		return nil
+		return nil, errl.Errorf("error getting file cache entry")
 	}
 
 	te.scriptHash = entry.FileHash
 	src := entry.Content
 
 	if err := m.compileStarlarkScript(te, string(src)); err != nil {
-		return nil
+		return nil, errl.Errorf("error compiling Starlark program")
 	}
 
 	if err := m.validateCompiledScript(te); err != nil {
-		return nil
+		return nil, errl.Errorf("error getting authorize function")
 	}
 
-	return te
+	return te, nil
 }
 
 // reset checks if the thread entry needs to be recompiled
