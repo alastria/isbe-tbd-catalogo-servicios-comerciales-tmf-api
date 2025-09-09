@@ -40,7 +40,7 @@ func newTestService(t *testing.T) *Service {
 func newReq(method, action, api, resource, id string, body []byte, qp url.Values) *Request {
 	return &Request{
 		Method:       method,
-		Action:       action,
+		Action:       HttpActions[method],
 		APIfamily:    api,
 		ResourceName: resource,
 		ID:           id,

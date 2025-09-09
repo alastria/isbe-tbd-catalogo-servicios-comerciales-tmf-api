@@ -107,7 +107,7 @@ func TestDefaultObjectTypes(t *testing.T) {
 
 func TestTMFObject(t *testing.T) {
 	// Test V5 object
-	v5RelatedParty := []RelatedParty{
+	v5RelatedParty := []RelatedPartyV5{
 		{
 			Role: "Seller",
 			PartyOrPartyRole: PartyRefOrPartyRole{
@@ -240,7 +240,7 @@ func TestValidatorWithV4AndV5(t *testing.T) {
 	validator := NewValidator(config)
 
 	// Test V5 object validation
-	v5RelatedParty := []RelatedParty{
+	v5RelatedParty := []RelatedPartyV5{
 		{
 			Role: "Seller",
 			PartyOrPartyRole: PartyRefOrPartyRole{

@@ -73,7 +73,7 @@ func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, res
 	}
 
 	// Unmarshall the raw messages into RelatedPartyV4
-	var relatedParties = []RelatedParty{}
+	var relatedParties = []RelatedPartyV5{}
 	json.Unmarshal(obj.RelatedParty, &relatedParties)
 
 	// The object requires some related party. The detailed verification will be done
@@ -124,7 +124,7 @@ func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, res
 }
 
 // validateRelatedPartyEntry validates a single related party entry
-func (v *Validator) validateRelatedPartyEntry(rp RelatedParty, index int, result *ValidationResult) {
+func (v *Validator) validateRelatedPartyEntry(rp RelatedPartyV5, index int, result *ValidationResult) {
 	if rp.Role == "" {
 		result.Warnings = append(result.Warnings, ValidationWarning{
 			Field:   fmt.Sprintf("relatedParty[%d].role", index),

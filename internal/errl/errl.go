@@ -80,6 +80,66 @@ func buildError(theError error) *ErrorWithLocation {
 
 }
 
+// Errorf2 provides error location for the caller of the caller of this function.
+// This enables error handling patterns where a function is called when
+// an error occurs, and this function uses Errorf2 to wrap the error.
+func Errorf2(format string, a ...any) *ErrorWithLocation {
+	return buildError2(fmt.Errorf(format, a...))
+}
+
+// Error2 provides error location for the caller of the caller of this function.
+// This enables error handling patterns where a function is called when
+// an error occurs, and this function uses Error2 to wrap the error.
+func Error2(err error) *ErrorWithLocation {
+	if err == nil {
+		return nil
+	}
+	return buildError2(err)
+}
+
+func buildError2(theError error) *ErrorWithLocation {
+	if theError == nil {
+		return nil
+	}
+	var pc uintptr
+	var pcs [1]uintptr
+	// skip runtime.Callers, this function (buildError2), this function caller (Error2 or Errorf2),
+	// and the caller of Error2 or Errorf2, which is a function to manage errors used at the location of the error.
+	runtime.Callers(4, pcs[:])
+	pc = pcs[0]
+
+	fs := runtime.CallersFrames([]uintptr{pc})
+	f, _ := fs.Next()
+
+	dir, file := filepath.Split(f.File)
+
+	// Trim the root directory prefix to get the relative directory of the source file
+	fullFileName := f.File
+	cwd, err := os.Getwd()
+	if err == nil {
+		relativeDir, err := filepath.Rel(cwd, filepath.Dir(dir))
+		if err == nil {
+			fullFileName = filepath.Join(relativeDir, file)
+		}
+	}
+
+	funcName := f.Function
+	idx := strings.LastIndex(funcName, ".")
+	if idx > 0 {
+		funcName = funcName[idx+1:]
+	}
+
+	location := fmt.Sprintf("%s:%d %s", fullFileName, f.Line, funcName)
+
+	e := &ErrorWithLocation{
+		location: location,
+		err:      theError,
+	}
+
+	return e
+
+}
+
 type SeverityLevel int
 
 const (

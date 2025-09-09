@@ -9,28 +9,21 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
-	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 func takeDecision(
 	ruleEngine *pdp.PDP,
 	r *Request,
 	tokenClaims map[string]any,
-	tmfObject *repository.TMFObject,
+	incomingObjectMap map[string]any,
+	existingObjectMap map[string]any,
 ) (err error) {
 
 	// Some rules are hardcoded because they are always enforced
 	// The rest is delegated to the policy engine
 
-	// First we need to get a map representing the object
-	objMap := make(map[string]any)
-	err = json.Unmarshal(tmfObject.Content, &objMap)
-	if err != nil {
-		return errl.Error(err)
-	}
-
 	// The object must have both the seller and sellerOperator identities
-	sellerDid, sellerOperatorDid, err := getSellerAndBuyerInfo(objMap)
+	sellerDid, sellerOperatorDid, err := getSellerAndBuyerInfo(incomingObjectMap, r.APIVersion)
 	if err != nil || sellerDid == "" || sellerOperatorDid == "" {
 		err = errl.Errorf("failed to get seller and buyer info: %w", err)
 		return err
@@ -41,21 +34,22 @@ func takeDecision(
 		userDid = "did:elsi:" + userDid
 	}
 
+	// The user is the 'owner' of the object if it is the seller or seller operator
 	r.AuthUser.isOwner = (userDid == sellerDid) || (userDid == sellerOperatorDid)
+
+	userArgument := pdp.StarTMFMap(r.AuthUser.ToMap())
+	incomingObjectArgument := pdp.StarTMFMap(incomingObjectMap)
+	requestArgument := pdp.StarTMFMap(r.ToMap())
+	tokenArgument := pdp.StarTMFMap(tokenClaims)
 
 	// Assemble all data in a single "input" argument, to the style of OPA.
 	// We mutate the predeclared identifier, so the policy can access the data for this request.
 	// We can also service possible callbacks from the rules engine.
 
-	userArgument := pdp.StarTMFMap(r.AuthUser.ToMap())
-	tmfObjectArgument := pdp.StarTMFMap(tmfObject.ToMap())
-	requestArgument := pdp.StarTMFMap(r.ToMap())
-	tokenArgument := pdp.StarTMFMap(tokenClaims)
-
 	input := map[string]any{
 		"request": requestArgument,
 		"token":   tokenArgument,
-		"tmf":     tmfObjectArgument,
+		"tmf":     incomingObjectArgument,
 		"user":    userArgument,
 	}
 

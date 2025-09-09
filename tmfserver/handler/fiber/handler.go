@@ -2,6 +2,7 @@ package fiber
 
 import (
 	"net/url"
+	"strings"
 
 	"encoding/json"
 	"log/slog"
@@ -10,9 +11,29 @@ import (
 	svc "github.com/hesusruiz/isbetmf/tmfserver/service"
 )
 
-// Handler is the handler for the v5 API.
+// Handler is the handler for the TMF API (both V4 and V5).
 type Handler struct {
 	service *svc.Service
+}
+
+// extractAPIVersion extracts the API version from the URL path
+func extractAPIVersion(path string) string {
+	// Expected path format: /tmf-api/{apiFamily}/v{version}/...
+	parts := strings.Split(path, "/")
+	for i, part := range parts {
+		if strings.HasPrefix(part, "v") && len(part) > 1 {
+			// Check if this is likely a version (v4 or v5)
+			if part == "v4" || part == "v5" {
+				return part
+			}
+		}
+		// Also check for the pattern where version comes after apiFamily
+		if i > 0 && parts[i-1] != "" && strings.HasPrefix(part, "v") {
+			return part
+		}
+	}
+	// Default to v5 if not found
+	return "v5"
 }
 
 // NewHandler creates a new handler.
@@ -33,10 +54,14 @@ func (h *Handler) Health(c *fiber.Ctx) error {
 func (h *Handler) CreateHubSubscription(c *fiber.Ctx) error {
 	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	req := &svc.Request{
 		Method:      c.Method(),
-		Action:      svc.HttpMethodAliases[c.Method()],
+		Action:      svc.HttpActions[c.Method()],
 		APIfamily:   c.Params("apiFamily"),
+		APIVersion:  apiVersion,
 		Body:        c.Body(),
 		AccessToken: jwtToken,
 	}
@@ -49,11 +74,15 @@ func (h *Handler) CreateHubSubscription(c *fiber.Ctx) error {
 func (h *Handler) DeleteHubSubscription(c *fiber.Ctx) error {
 	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	idParam, _ := url.QueryUnescape(c.Params("id"))
 	req := &svc.Request{
 		Method:      c.Method(),
-		Action:      svc.HttpMethodAliases[c.Method()],
+		Action:      svc.HttpActions[c.Method()],
 		APIfamily:   c.Params("apiFamily"),
+		APIVersion:  apiVersion,
 		ID:          idParam,
 		AccessToken: jwtToken,
 	}
@@ -89,10 +118,14 @@ func (h *Handler) CreateGenericObject(c *fiber.Ctx) error {
 		return h.CreateHubSubscription(c)
 	}
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	req := &svc.Request{
 		Method:       c.Method(),
-		Action:       svc.HttpMethodAliases[c.Method()],
+		Action:       svc.HttpActions[c.Method()],
 		APIfamily:    c.Params("apiFamily"),
+		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		Body:         c.Body(),
 		AccessToken:  jwtToken, // Store the raw JWT token
@@ -110,7 +143,7 @@ func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
 	idParam, _ := url.QueryUnescape(c.Params("id"))
 	req := &svc.Request{
 		Method:       c.Method(),
-		Action:       svc.HttpMethodAliases[c.Method()],
+		Action:       svc.HttpActions[c.Method()],
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
 		QueryParams:  queryParams,
@@ -125,10 +158,14 @@ func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
 func (h *Handler) UpdateGenericObject(c *fiber.Ctx) error {
 	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	idParam, _ := url.QueryUnescape(c.Params("id"))
 	req := &svc.Request{
 		Method:       c.Method(),
-		Action:       svc.HttpMethodAliases[c.Method()],
+		Action:       svc.HttpActions[c.Method()],
+		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
 		Body:         c.Body(),
@@ -149,10 +186,14 @@ func (h *Handler) DeleteGenericObject(c *fiber.Ctx) error {
 		return h.DeleteHubSubscription(c)
 	}
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	idParam, _ := url.QueryUnescape(c.Params("id"))
 	req := &svc.Request{
 		Method:       c.Method(),
-		Action:       svc.HttpMethodAliases[c.Method()],
+		Action:       svc.HttpActions[c.Method()],
+		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
 		AccessToken:  jwtToken, // Store the raw JWT token
@@ -166,10 +207,14 @@ func (h *Handler) DeleteGenericObject(c *fiber.Ctx) error {
 func (h *Handler) ListGenericObjects(c *fiber.Ctx) error {
 	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	queryParams, _ := url.ParseQuery(string(c.Request().URI().QueryString()))
 	req := &svc.Request{
 		Method:       c.Method(),
-		Action:       "LIST",
+		Action:       svc.HttpActions["LIST"],
+		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		QueryParams:  queryParams,
 		AccessToken:  jwtToken, // Store the raw JWT token
