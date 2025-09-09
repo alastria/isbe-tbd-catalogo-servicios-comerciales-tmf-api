@@ -88,7 +88,10 @@ func NewPDP(
 
 	// Create the file cache and initialize it with the policy file.
 	m.fileCache = filecache.NewSimpleFileCache(nil)
-	m.fileCache.Get(config.PolicyFileName)
+	_, err := m.fileCache.Get(config.PolicyFileName)
+	if err != nil {
+		return nil, errl.Errorf("error getting file cache entry for: %s: %w", config.PolicyFileName, err)
+	}
 
 	// Create the pool of parsed and compiled Starlark policy rules.
 	m.threadPool = sync.Pool{
