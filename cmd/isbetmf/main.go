@@ -154,7 +154,8 @@ func main() {
 	// Consider implementing request timeouts at the handler level if needed
 
 	// Serve the OpenAPI UI
-	app.Static("/oapi", "./www/oapiui")
+	app.Static("/oapiv5", "./www/oapiv5")
+	app.Static("/oapiv4", "./www/oapiv4")
 
 	// Create handler and set the routes for the APIs
 	h := fiberhandler.NewHandler(s)

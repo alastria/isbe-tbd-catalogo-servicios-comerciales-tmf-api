@@ -21,7 +21,7 @@ info:
     individual
   version: 5.0.0
 servers:
-  - url: '/tmf-api/partyManagement/v5/'
+  - url: '/tmf-api/productCatalogManagement/v5/'
 security:
   - bearerAuth: []
 tags:

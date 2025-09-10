@@ -16,7 +16,7 @@ import (
 
 // createObject creates a new TMF object.
 func (svc *Service) createObject(obj *repo.TMFObject) error {
-	slog.Debug("Service: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
+	slog.Debug("dbLayer: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 	if svc.storage != nil {
 		return svc.storage.CreateObject(obj)
 	}
@@ -36,7 +36,7 @@ func (svc *Service) createObject(obj *repo.TMFObject) error {
 
 // getObject retrieves a TMF object by its ID and type, returning the latest version.
 func (svc *Service) getObject(id, objectType string) (*repo.TMFObject, error) {
-	slog.Debug("Service: Getting object", slog.String("id", id), slog.String("type", objectType))
+	slog.Debug("dbLayer: Getting object", slog.String("id", id), slog.String("type", objectType))
 	if svc.storage != nil {
 		return svc.storage.GetObject(id, objectType)
 	}
@@ -53,7 +53,7 @@ func (svc *Service) getObject(id, objectType string) (*repo.TMFObject, error) {
 
 // updateObject updates an existing TMF object.
 func (svc *Service) updateObject(obj *repo.TMFObject) error {
-	slog.Debug("Service: Updating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
+	slog.Debug("dbLayer: Updating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 	if svc.storage != nil {
 		return svc.storage.UpdateObject(obj)
 	}
@@ -72,7 +72,7 @@ func (svc *Service) updateObject(obj *repo.TMFObject) error {
 
 // deleteObject deletes a TMF object by its ID and type.
 func (svc *Service) deleteObject(id, objectType string) error {
-	slog.Debug("Service: Deleting object", slog.String("id", id), slog.String("type", objectType))
+	slog.Debug("dbLayer: Deleting object", slog.String("id", id), slog.String("type", objectType))
 	if svc.storage != nil {
 		return svc.storage.DeleteObject(id, objectType)
 	}
@@ -85,10 +85,10 @@ func (svc *Service) deleteObject(id, objectType string) error {
 
 // listObjects retrieves all TMF objects of a given type, returning only the latest version for each unique ID.
 // It supports pagination, filtering, and sorting according to TMF630 guidelines.
-func (svc *Service) listObjects(objectType string, queryParams url.Values) ([]repo.TMFObject, int, error) {
-	slog.Debug("Service: Listing objects", "type", objectType, "queryParams", queryParams)
+func (svc *Service) listObjects(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error) {
+	slog.Debug("dbLayer: Listing objects", "type", objectType, "queryParams", queryParams)
 	if svc.storage != nil {
-		return svc.storage.ListObjects(objectType, queryParams)
+		return svc.storage.ListObjects(objectType, apiVersion, queryParams)
 	}
 	var objs []repo.TMFObject
 	var totalCount int
@@ -100,11 +100,11 @@ func (svc *Service) listObjects(objectType string, queryParams url.Values) ([]re
 		INNER JOIN (
 			SELECT id, type, MAX(version) AS max_version
 			FROM tmf_object
-			WHERE type = ?
+			WHERE type = ? AND api_version = ?
 			GROUP BY id, type
 		) AS t2
 		ON t1.id = t2.id AND t1.type = t2.type AND t1.version = t2.max_version
-		WHERE t1.type = ?
+		WHERE t1.type = ? AND t1.api_version = ?
 	`
 	countQuery := `
 		SELECT COUNT(DISTINCT t1.id)
@@ -112,15 +112,15 @@ func (svc *Service) listObjects(objectType string, queryParams url.Values) ([]re
 		INNER JOIN (
 			SELECT id, type, MAX(version) AS max_version
 			FROM tmf_object
-			WHERE type = ?
+			WHERE type = ? AND api_version = ?
 			GROUP BY id, type
 		) AS t2
 		ON t1.id = t2.id AND t1.type = t2.type AND t1.version = t2.max_version
-		WHERE t1.type = ?
+		WHERE t1.type = ? AND t1.api_version = ?
 	`
 
-	args := []any{objectType, objectType}
-	countArgs := []any{objectType, objectType}
+	args := []any{objectType, apiVersion, objectType, apiVersion}
+	countArgs := []any{objectType, apiVersion, objectType, apiVersion}
 
 	// Add filters
 	filterClauses := []string{}

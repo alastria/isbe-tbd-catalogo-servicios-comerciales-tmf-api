@@ -12,5 +12,5 @@ type Storage interface {
 	GetObject(id, objectType string) (*repo.TMFObject, error)
 	UpdateObject(obj *repo.TMFObject) error
 	DeleteObject(id, objectType string) error
-	ListObjects(objectType string, queryParams url.Values) ([]repo.TMFObject, int, error)
+	ListObjects(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error)
 }

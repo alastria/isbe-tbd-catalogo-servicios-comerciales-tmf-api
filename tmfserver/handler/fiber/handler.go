@@ -2,6 +2,7 @@ package fiber
 
 import (
 	"net/url"
+	"strings"
 
 	"encoding/json"
 	"log/slog"
@@ -17,20 +18,16 @@ type Handler struct {
 
 // extractAPIVersion extracts the API version from the URL path
 func extractAPIVersion(path string) string {
-	// // Expected path format: /tmf-api/{apiFamily}/v{version}/...
-	// parts := strings.Split(path, "/")
-	// for i, part := range parts {
-	// 	if strings.HasPrefix(part, "v") && len(part) > 1 {
-	// 		// Check if this is likely a version (v4 or v5)
-	// 		if part == "v4" || part == "v5" {
-	// 			return part
-	// 		}
-	// 	}
-	// 	// Also check for the pattern where version comes after apiFamily
-	// 	if i > 0 && parts[i-1] != "" && strings.HasPrefix(part, "v") {
-	// 		return part
-	// 	}
-	// }
+	// Expected path format: /tmf-api/{apiFamily}/v{version}/...
+	path = strings.Trim(path, "/")
+	for part := range strings.SplitSeq(path, "/") {
+		if strings.EqualFold(part, "v5") {
+			return "v5"
+		}
+		if strings.EqualFold(part, "v4") {
+			return "v4"
+		}
+	}
 	// Default to v5 if not found
 	return "v5"
 }
@@ -138,11 +135,15 @@ func (h *Handler) CreateGenericObject(c *fiber.Ctx) error {
 func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
 	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
 
+	// Extract API version from the URL path
+	apiVersion := extractAPIVersion(c.Path())
+
 	queryParams, _ := url.ParseQuery(string(c.Request().URI().QueryString()))
 	idParam, _ := url.QueryUnescape(c.Params("id"))
 	req := &svc.Request{
 		Method:       c.Method(),
 		Action:       svc.HttpActions[c.Method()],
+		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
 		QueryParams:  queryParams,

@@ -164,8 +164,8 @@ func (svc *Service) initializeService() error {
 		if errors.Is(err, &ErrObjectExists{}) {
 			slog.Debug("server operator organization already exists", "organizationIdentifier", config.ServerOperatorOrganizationIdentifier)
 		} else {
-			err = errl.Error(err)
-			panic("error creatingserver operator organization")
+			err = errl.Errorf("error creating server operator organization: %w", err)
+			panic(err)
 		}
 	}
 
@@ -346,6 +346,11 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			slog.Debug("Set default version", slog.String("version", version))
 		}
 
+		// Set the 'lifecycleStatus' property, it is not specified by the caller
+		if lifecycleStatus, _ := incomingObjectMap["lifecycleStatus"].(string); lifecycleStatus == "" {
+			incomingObjectMap["lifecycleStatus"] = "In Study"
+		}
+
 		// Set the lastUpdate property. We overwrite whatever the user set.
 		now := time.Now()
 		lastUpdate = now.Format(time.RFC3339Nano)
@@ -445,7 +450,7 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	if fieldsParam != "" {
 		var fields []string
 		if fieldsParam == "none" {
-			fields = []string{"id", "href", "lastUpdate", "version"}
+			fields = []string{"id", "href", "lastUpdate", "version", "lifecycleStatus"}
 		} else {
 			fields = strings.Split(fieldsParam, ",")
 		}
@@ -456,12 +461,13 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 			fieldSet[strings.TrimSpace(f)] = true
 		}
 
-		// Always include id, href, lastUpdate, version and @type
+		// Always include id, href, lastUpdate, version, @type and lifecycleStatus
 		fieldSet["id"] = true
 		fieldSet["href"] = true
 		fieldSet["lastUpdate"] = true
 		fieldSet["version"] = true
 		fieldSet["@type"] = true
+		fieldSet["lifecycleStatus"] = true
 
 		filteredItem := make(map[string]any)
 		for key, value := range responseData {
@@ -511,7 +517,6 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	var sellerOperatorDid string
 	{
 		// Parse the request body, which contains the TMForum object being created
-		var incomingObjMap map[string]any
 		if err := json.Unmarshal(req.Body, &incomingObjMap); err != nil {
 			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
 		}
@@ -524,11 +529,6 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			return ErrorResponsef(nil, http.StatusBadRequest, "ID in body must match ID in URL")
 		}
 
-		// version must be specified for update operations
-		incomingVersion, _ = incomingObjMap["version"].(string)
-		if incomingVersion == "" {
-			return ErrorResponsef(nil, http.StatusBadRequest, "version field is required for update operations")
-		}
 		// TODO: should we do the same for href?
 
 		// Check and process '@type' field
@@ -564,6 +564,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	var existingObj *repo.TMFObject
 	var existingSellerDid string
 	var existingSellerOperatorDid string
+	var existingObjectMap map[string]any
 	{
 		// Retrieve existing object
 		existingObj, err = svc.getObject(req.ID, req.ResourceName)
@@ -575,14 +576,13 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			return ErrorResponsef(nil, http.StatusNotFound, "object not found")
 		}
 
-		// incomingVersion must be lexicographically greater than existingVersion
-		if incomingVersion <= existingObj.Version {
-			return ErrorResponsef(nil, http.StatusBadRequest, "incoming version must be greater than existing version")
-		}
-
 		existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObj.ToMap(), req.APIVersion)
 		if err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
+		}
+
+		if err := json.Unmarshal(existingObj.Content, &existingObjectMap); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content for merge: %w")
 		}
 
 	}
@@ -597,21 +597,39 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		return ErrorResponsef(nil, http.StatusForbidden, "seller or seller operator mismatch")
 	}
 
+	// Incoming version must be greater or equal to the existing version
+	// But if existing lifecycleStatus is 'Launched', 'Retired' or 'Obsolete', incoming version must be greater than the existing version
+	existingLifecycleStatus, _ := existingObjectMap["lifecycleStatus"].(string)
+	incomingVersion, _ = incomingObjMap["version"].(string)
+
+	if existingLifecycleStatus == "Launched" || existingLifecycleStatus == "Retired" || existingLifecycleStatus == "Obsolete" {
+		if incomingVersion == "" || incomingVersion <= existingObj.Version {
+			// It is forbidden to update an object which is already launched, using the same or previous version.
+			// Only a new version can be created.
+			return ErrorResponsef(nil, http.StatusBadRequest, "for launched objects, incoming version must be greater than existing version")
+		}
+	} else {
+		if incomingVersion == "" {
+			incomingObjMap["version"] = existingObj.Version
+		} else {
+			// incomingVersion must be lexicographically greater than existingVersion
+			if incomingVersion < existingObj.Version {
+				return ErrorResponsef(nil, http.StatusBadRequest, "incoming version must be greater or equal than existing version")
+			}
+		}
+	}
+
 	// ************************************************************************************************
 	// Now we can proceed.
 	// ************************************************************************************************
 
 	// Merge incomingObjMap into existing object using RFC7396 (JSON Merge Patch)
-	var existingMap map[string]any
-	if err := json.Unmarshal(existingObj.Content, &existingMap); err != nil {
-		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content for merge: %w")
-	}
 
 	// RFC7396 merge implementation: modify target in place
-	mergeRFC7396(existingMap, incomingObjMap)
+	mergeRFC7396(existingObjectMap, incomingObjMap)
 
 	// update incomingObjMap to the merged result so response/notification contains the final content
-	incomingObjMap = existingMap
+	incomingObjMap = existingObjectMap
 
 	incomingContent, err := json.Marshal(incomingObjMap)
 	if err != nil {
@@ -683,8 +701,14 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 
 	}
 
+	// Normalize all organization identifiers to the DID format
+	organizationIdentifier := req.AuthUser.OrganizationIdentifier
+	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
+		organizationIdentifier = "did:elsi:" + organizationIdentifier
+	}
+
 	// The user must be either the Seller or the SellerOperator to delete the object
-	if existingSellerDid != req.AuthUser.OrganizationIdentifier && existingSellerOperatorDid != req.AuthUser.OrganizationIdentifier {
+	if existingSellerDid != organizationIdentifier && existingSellerOperatorDid != organizationIdentifier {
 		return ErrorResponsef(nil, http.StatusForbidden, "user must be either the Seller or the SellerOperator")
 	}
 
@@ -719,7 +743,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
 	}
 
-	objs, totalCount, err := svc.listObjects(req.ResourceName, req.QueryParams)
+	objs, totalCount, err := svc.listObjects(req.ResourceName, req.APIVersion, req.QueryParams)
 	if err != nil {
 		slog.Error("failed to list objects from service", slog.String("error", err.Error()))
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to list objects from service: %w")
