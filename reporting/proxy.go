@@ -35,21 +35,6 @@ func (p *Proxy) Run(ctx context.Context) error {
 	log.Printf("Base URL: %s", p.config.BaseURL)
 	log.Printf("Object types: %v", p.config.ObjectTypes)
 
-	// // Test connection to remote server
-	// log.Printf("Testing connection to remote server...")
-	// if err := p.client.TestConnection(ctx); err != nil {
-	// 	return fmt.Errorf("connection test failed: %w", err)
-	// }
-	// log.Printf("Connection successful")
-
-	// // Get server information
-	// log.Printf("Retrieving server information...")
-	// if _, err := p.client.GetServerInfo(ctx); err != nil {
-	// 	log.Printf("Warning: Failed to get server info: %v", err)
-	// } else {
-	// 	log.Printf("Server info retrieved successfully")
-	// }
-
 	// Process each object type
 	var allResults []ValidationResult
 	var allObjects []TMFObject
@@ -57,34 +42,60 @@ func (p *Proxy) Run(ctx context.Context) error {
 	for _, objectType := range p.config.ObjectTypes {
 		log.Printf("Processing object type: %s", objectType)
 
-		objects, err := p.client.GetObjects(ctx, objectType, p.config)
-		if err != nil {
-			log.Printf("Warning: Failed to retrieve %s objects: %v", objectType, err)
-			continue
-		}
+		// Process objects page by page to avoid loading all into memory
+		offset := 0
+		totalObjectsForType := 0
+		totalValidForType := 0
+		totalErrorsForType := 0
+		totalWarningsForType := 0
 
-		log.Printf("Retrieved %d %s objects", len(objects), objectType)
-		allObjects = append(allObjects, objects...)
-
-		// Validate objects
-		results := p.validator.ValidateObjects(objects, objectType)
-		allResults = append(allResults, results...)
-
-		// Log validation summary
-		validCount := 0
-		errorCount := 0
-		warningCount := 0
-
-		for _, result := range results {
-			if result.Valid {
-				validCount++
+		for {
+			// Get a single page of objects
+			objects, err := p.client.GetObjectsPage(ctx, objectType, p.config, offset)
+			if err != nil {
+				log.Printf("Warning: Failed to retrieve %s objects at offset %d: %v", objectType, offset, err)
+				break
 			}
-			errorCount += len(result.Errors)
-			warningCount += len(result.Warnings)
+
+			// If no objects returned, we've reached the end
+			if len(objects) == 0 {
+				break
+			}
+
+			log.Printf("Retrieved %d %s objects (offset %d)", len(objects), objectType, offset)
+			allObjects = append(allObjects, objects...)
+			totalObjectsForType += len(objects)
+
+			// Validate objects from this page
+			results := p.validator.ValidateObjects(objects, objectType)
+			allResults = append(allResults, results...)
+
+			// Count validation results for this page
+			for _, result := range results {
+				if result.Valid {
+					totalValidForType++
+				}
+				totalErrorsForType += len(result.Errors)
+				totalWarningsForType += len(result.Warnings)
+			}
+
+			// If we got fewer objects than the page size, we've reached the end
+			if len(objects) < p.config.PageSize {
+				break
+			}
+
+			// Move to next page
+			offset += p.config.PageSize
+
+			// Safety check to prevent infinite loops
+			if offset >= p.config.MaxObjects {
+				log.Printf("Warning: Reached maximum objects limit (%d) for %s", p.config.MaxObjects, objectType)
+				break
+			}
 		}
 
-		log.Printf("Validation complete for %s: %d valid, %d errors, %d warnings",
-			objectType, validCount, errorCount, warningCount)
+		log.Printf("Validation complete for %s: %d total objects, %d valid, %d errors, %d warnings",
+			objectType, totalObjectsForType, totalValidForType, totalErrorsForType, totalWarningsForType)
 	}
 
 	// Generate report
@@ -159,19 +170,47 @@ func (p *Proxy) RunWithProgress(ctx context.Context, progressChan chan<- Progres
 
 		fmt.Printf("################# Processing %s objects\n", objectType)
 
-		objects, err := p.client.GetObjects(ctx, objectType, p.config)
-		if err != nil {
-			log.Printf("Warning: Failed to retrieve %s objects: %v", objectType, err)
-			continue
-		}
+		// Process objects page by page to avoid loading all into memory
+		offset := 0
+		totalObjectsForType := 0
 
-		// Validate objects
-		results := p.validator.ValidateObjects(objects, objectType)
-		allResults = append(allResults, results...)
+		for {
+			// Get a single page of objects
+			objects, err := p.client.GetObjectsPage(ctx, objectType, p.config, offset)
+			if err != nil {
+				log.Printf("Warning: Failed to retrieve %s objects at offset %d: %v", objectType, offset, err)
+				break
+			}
+
+			// If no objects returned, we've reached the end
+			if len(objects) == 0 {
+				break
+			}
+
+			totalObjectsForType += len(objects)
+
+			// Validate objects from this page
+			results := p.validator.ValidateObjects(objects, objectType)
+			allResults = append(allResults, results...)
+
+			// If we got fewer objects than the page size, we've reached the end
+			if len(objects) < p.config.PageSize {
+				break
+			}
+
+			// Move to next page
+			offset += p.config.PageSize
+
+			// Safety check to prevent infinite loops
+			if offset >= p.config.MaxObjects {
+				log.Printf("Warning: Reached maximum objects limit (%d) for %s", p.config.MaxObjects, objectType)
+				break
+			}
+		}
 
 		progressChan <- ProgressUpdate{
 			Stage:     "Processing",
-			Message:   fmt.Sprintf("Completed %s: %d objects processed", objectType, len(objects)),
+			Message:   fmt.Sprintf("Completed %s: %d objects processed", objectType, totalObjectsForType),
 			Progress:  progress + (60 / totalObjectTypes),
 			Timestamp: time.Now(),
 		}
