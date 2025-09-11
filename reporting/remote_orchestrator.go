@@ -7,21 +7,21 @@ import (
 	"time"
 )
 
-// Proxy orchestrates the validation process
-type Proxy struct {
+// RemoteOrchestrator orchestrates the validation process
+type RemoteOrchestrator struct {
 	config    *Config
 	client    *Client
 	validator *Validator
 	reporter  *Reporter
 }
 
-// NewProxy creates a new proxy instance
-func NewProxy(config *Config) (*Proxy, error) {
+// NewRemoteOrchestrator creates a new proxy instance
+func NewRemoteOrchestrator(config *Config) (*RemoteOrchestrator, error) {
 	if err := config.Validate(); err != nil {
 		return nil, fmt.Errorf("invalid configuration: %w", err)
 	}
 
-	return &Proxy{
+	return &RemoteOrchestrator{
 		config:    config,
 		client:    NewClient(config),
 		validator: NewValidator(config),
@@ -30,7 +30,7 @@ func NewProxy(config *Config) (*Proxy, error) {
 }
 
 // Run performs the complete validation process
-func (p *Proxy) Run(ctx context.Context) error {
+func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 	log.Printf("Starting TMForum object validation process")
 	log.Printf("Base URL: %s", p.config.BaseURL)
 	log.Printf("Object types: %v", p.config.ObjectTypes)
@@ -119,7 +119,7 @@ func (p *Proxy) Run(ctx context.Context) error {
 }
 
 // RunWithProgress runs the validation process with progress reporting
-func (p *Proxy) RunWithProgress(ctx context.Context, progressChan chan<- ProgressUpdate) error {
+func (p *RemoteOrchestrator) RunWithProgress(ctx context.Context, progressChan chan<- ProgressUpdate) error {
 	defer close(progressChan)
 
 	progressChan <- ProgressUpdate{
@@ -255,7 +255,7 @@ type ProgressUpdate struct {
 }
 
 // GetStatistics returns the current validation statistics
-func (p *Proxy) GetStatistics() *Statistics {
+func (p *RemoteOrchestrator) GetStatistics() *Statistics {
 	return &Statistics{
 		StartTime: time.Now(),
 		EndTime:   time.Now(),
