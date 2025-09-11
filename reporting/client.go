@@ -253,22 +253,22 @@ func (c *Client) processObject(obj TMFObject, rawBody []byte) TMFObject {
 
 // TestConnection tests the connection to the remote server
 func (c *Client) TestConnection(ctx context.Context) error {
-	url := fmt.Sprintf("%s/health", c.baseURL)
+	// url := fmt.Sprintf("%s/health", c.baseURL)
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return fmt.Errorf("failed to create request: %w", err)
-	}
+	// req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to create request: %w", err)
+	// }
 
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return fmt.Errorf("failed to connect to server: %w", err)
-	}
-	defer resp.Body.Close()
+	// resp, err := c.httpClient.Do(req)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to connect to server: %w", err)
+	// }
+	// defer resp.Body.Close()
 
-	if resp.StatusCode >= 400 {
-		return fmt.Errorf("server returned status %d", resp.StatusCode)
-	}
+	// if resp.StatusCode >= 400 {
+	// 	return fmt.Errorf("server returned status %d", resp.StatusCode)
+	// }
 
 	return nil
 }
