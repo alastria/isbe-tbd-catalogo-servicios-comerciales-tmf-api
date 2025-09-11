@@ -49,9 +49,11 @@ func (r *Reporter) GenerateReport(results []ValidationResult) (*ValidationReport
 // calculateStatistics calculates statistics from validation results
 func (r *Reporter) calculateStatistics(results []ValidationResult) *Statistics {
 	stats := &Statistics{
-		ObjectsByType:  make(map[string]TypeStats),
-		ErrorsByType:   make(map[string]int),
-		WarningsByType: make(map[string]int),
+		ObjectsByType:       make(map[string]TypeStats),
+		ErrorsByType:        make(map[string]int),
+		WarningsByType:      make(map[string]int),
+		ErrorsFixedByType:   make(map[string]int),
+		WarningsFixedByType: make(map[string]int),
 	}
 
 	for _, result := range results {
@@ -73,11 +75,15 @@ func (r *Reporter) calculateStatistics(results []ValidationResult) *Statistics {
 		}
 		typeStats.Errors += len(result.Errors)
 		typeStats.Warnings += len(result.Warnings)
+		typeStats.ErrorsFixed += len(result.ErrorsFixed)
+		typeStats.WarningsFixed += len(result.WarningsFixed)
 		stats.ObjectsByType[result.ObjectType] = typeStats
 
 		// Count errors and warnings
 		stats.TotalErrors += len(result.Errors)
 		stats.TotalWarnings += len(result.Warnings)
+		stats.TotalErrorsFixed += len(result.ErrorsFixed)
+		stats.TotalWarningsFixed += len(result.WarningsFixed)
 
 		// Count errors by type
 		for _, err := range result.Errors {
@@ -87,6 +93,16 @@ func (r *Reporter) calculateStatistics(results []ValidationResult) *Statistics {
 		// Count warnings by type
 		for _, warning := range result.Warnings {
 			stats.WarningsByType[warning.Code]++
+		}
+
+		// Count fixed errors by type
+		for _, err := range result.ErrorsFixed {
+			stats.ErrorsFixedByType[err.Code]++
+		}
+
+		// Count fixed warnings by type
+		for _, warning := range result.WarningsFixed {
+			stats.WarningsFixedByType[warning.Code]++
 		}
 	}
 
@@ -150,14 +166,16 @@ func (r *Reporter) writeSummaryStatistics(file *os.File, stats *Statistics) {
 	fmt.Fprintf(file, "| Invalid Objects | %d |\n", stats.InvalidObjects)
 	fmt.Fprintf(file, "| Total Errors | %d |\n", stats.TotalErrors)
 	fmt.Fprintf(file, "| Total Warnings | %d |\n", stats.TotalWarnings)
+	fmt.Fprintf(file, "| Total Errors Fixed | %d |\n", stats.TotalErrorsFixed)
+	fmt.Fprintf(file, "| Total Warnings Fixed | %d |\n", stats.TotalWarningsFixed)
 	fmt.Fprintf(file, "| Processing Time | %v |\n\n", stats.Duration)
 }
 
 // writeDetailedStatistics writes detailed statistics by object type
 func (r *Reporter) writeDetailedStatistics(file *os.File, stats *Statistics) {
 	fmt.Fprintf(file, "## Statistics by Object Type\n\n")
-	fmt.Fprintf(file, "| Object Type | Count | Valid | Invalid | Errors | Warnings |\n")
-	fmt.Fprintf(file, "|-------------|-------|-------|---------|--------|----------|\n")
+	fmt.Fprintf(file, "| Object Type | Count | Valid | Invalid | Errors | Warnings | Errors Fixed | Warnings Fixed |\n")
+	fmt.Fprintf(file, "|-------------|-------|-------|---------|--------|----------|--------------|----------------|\n")
 
 	// Sort object types for consistent output
 	var objectTypes []string
@@ -168,8 +186,8 @@ func (r *Reporter) writeDetailedStatistics(file *os.File, stats *Statistics) {
 
 	for _, objType := range objectTypes {
 		typeStats := stats.ObjectsByType[objType]
-		fmt.Fprintf(file, "| %s | %d | %d | %d | %d | %d |\n",
-			objType, typeStats.Count, typeStats.Valid, typeStats.Invalid, typeStats.Errors, typeStats.Warnings)
+		fmt.Fprintf(file, "| %s | %d | %d | %d | %d | %d | %d | %d |\n",
+			objType, typeStats.Count, typeStats.Valid, typeStats.Invalid, typeStats.Errors, typeStats.Warnings, typeStats.ErrorsFixed, typeStats.WarningsFixed)
 	}
 	fmt.Fprintf(file, "\n")
 }

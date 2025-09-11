@@ -27,6 +27,7 @@ type Config struct {
 	// Validation settings
 	ValidateRequiredFields bool `json:"validate_required_fields" yaml:"validate_required_fields"`
 	ValidateRelatedParty   bool `json:"validate_related_party" yaml:"validate_related_party"`
+	FixValidationErrors    bool `json:"fix_validation_errors" yaml:"fix_validation_errors"`
 
 	// Replication settings
 	SkipInvalidObjects bool `json:"skip_invalid_objects" yaml:"skip_invalid_objects"`
@@ -45,6 +46,7 @@ func DefaultConfig() *Config {
 		MaxObjects:             10000,
 		ValidateRequiredFields: true,
 		ValidateRelatedParty:   true,
+		FixValidationErrors:    false,
 		SkipInvalidObjects:     true,
 		UpdateExisting:         true,
 	}
@@ -119,6 +121,12 @@ func (c *Config) LoadConfigFromEnv() {
 	if validateRelatedParty := os.Getenv("REPLICATE_VALIDATE_RELATED_PARTY"); validateRelatedParty != "" {
 		if enabled, err := strconv.ParseBool(validateRelatedParty); err == nil {
 			c.ValidateRelatedParty = enabled
+		}
+	}
+
+	if fixErrors := os.Getenv("REPLICATE_FIX_VALIDATION_ERRORS"); fixErrors != "" {
+		if enabled, err := strconv.ParseBool(fixErrors); err == nil {
+			c.FixValidationErrors = enabled
 		}
 	}
 

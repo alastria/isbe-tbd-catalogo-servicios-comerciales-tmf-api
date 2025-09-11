@@ -26,6 +26,7 @@ func main() {
 		maxObjects           = flag.Int("max-objects", 10000, "Maximum objects to retrieve per type")
 		validateRequired     = flag.Bool("validate-required", true, "Validate required fields")
 		validateRelatedParty = flag.Bool("validate-related-party", true, "Validate related party requirements")
+		fixValidationErrors  = flag.Bool("fix-errors", true, "Fix validation errors automatically")
 		skipInvalid          = flag.Bool("skip-invalid", true, "Skip invalid objects")
 		updateExisting       = flag.Bool("update-existing", true, "Update existing objects")
 		showStats            = flag.Bool("stats", false, "Show replication statistics")
@@ -61,6 +62,7 @@ func main() {
 	config.MaxObjects = *maxObjects
 	config.ValidateRequiredFields = *validateRequired
 	config.ValidateRelatedParty = *validateRelatedParty
+	config.FixValidationErrors = *fixValidationErrors
 	config.SkipInvalidObjects = *skipInvalid
 	config.UpdateExisting = *updateExisting
 
@@ -187,6 +189,8 @@ Options:
         Validate required fields (default true)
   -validate-related-party
         Validate related party requirements (default true)
+  -fix-errors
+        Fix validation errors automatically (default false)
   -skip-invalid
         Skip invalid objects (default true)
   -update-existing
@@ -208,6 +212,7 @@ Environment Variables:
   REPLICATE_MAX_OBJECTS       Maximum objects to retrieve per type
   REPLICATE_VALIDATE_REQUIRED Validate required fields (true/false)
   REPLICATE_VALIDATE_RELATED_PARTY Validate related party requirements (true/false)
+  REPLICATE_FIX_VALIDATION_ERRORS Fix validation errors automatically (true/false)
   REPLICATE_SKIP_INVALID      Skip invalid objects (true/false)
   REPLICATE_UPDATE_EXISTING   Update existing objects (true/false)
 

@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Fixing",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "cmd/replicate/main.go"
+        },
+        {
             "name": "Report",
             "type": "go",
             "request": "launch",

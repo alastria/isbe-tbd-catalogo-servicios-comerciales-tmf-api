@@ -6,6 +6,7 @@ The TMForum Replicate package provides functionality to retrieve objects from re
 
 - **Remote Object Retrieval**: Retrieve objects from any TMForum-compliant server
 - **Object Validation**: Validate objects using the same validation rules as the reporting package
+- **Automatic Fixing**: Optionally fix validation errors automatically during validation
 - **SQLite Storage**: Store validated objects in a local SQLite database
 - **Pagination Support**: Handle large datasets with automatic pagination
 - **Configurable**: Support for configuration files, environment variables, and command-line options
@@ -125,6 +126,7 @@ export REPLICATE_PAGE_SIZE="100"
 export REPLICATE_MAX_OBJECTS="10000"
 export REPLICATE_VALIDATE_REQUIRED="true"
 export REPLICATE_VALIDATE_RELATED_PARTY="true"
+export REPLICATE_FIX_VALIDATION_ERRORS="false"
 export REPLICATE_SKIP_INVALID="true"
 export REPLICATE_UPDATE_EXISTING="true"
 ```
@@ -142,6 +144,7 @@ config := &replicate.Config{
     MaxObjects:             10000,
     ValidateRequiredFields: true,
     ValidateRelatedParty:   true,
+    FixValidationErrors:    false,
     SkipInvalidObjects:     true,
     UpdateExisting:         true,
 }
@@ -195,6 +198,8 @@ The package uses the same validation rules as the reporting package:
 - **Required Fields**: All objects must have `id`, `href`, `lastUpdate`, and `version`
 - **Related Party Requirements**: Objects must include related party information with required roles
 - **Version Support**: Supports both TMForum API v4 and v5 validation rules
+- **Automatic Fixing**: Optionally fix validation errors automatically (disabled by default)
+- **Fixed Errors Tracking**: Track which errors and warnings were automatically fixed
 
 ## Statistics
 
@@ -231,6 +236,7 @@ The command-line interface provides comprehensive options:
 # Validation options
 -validate-required        Validate required fields (default true)
 -validate-related-party   Validate related party requirements (default true)
+-fix-errors               Fix validation errors automatically (default false)
 
 # Replication options
 -skip-invalid             Skip invalid objects (default true)

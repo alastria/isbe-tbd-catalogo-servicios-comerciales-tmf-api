@@ -41,6 +41,7 @@ func NewReplicator(config *Config) (*Replicator, error) {
 		MaxObjects:             config.MaxObjects,
 		ValidateRequiredFields: config.ValidateRequiredFields,
 		ValidateRelatedParty:   config.ValidateRelatedParty,
+		FixValidationErrors:    config.FixValidationErrors,
 	}
 
 	// Create client and validator
@@ -180,8 +181,8 @@ func (r *Replicator) replicateObjectType(ctx context.Context, objectType string)
 
 // processObject processes a single object: validates it and stores it in the database
 func (r *Replicator) processObject(ctx context.Context, obj reporting.TMFObject, objectType string) (int, int, int, int, error) {
-	// Validate the object
-	result := r.validator.ValidateObject(obj, objectType)
+	// Validate the object (using the new ValidateAndFixObject method)
+	result := r.validator.ValidateAndFixObject(&obj, objectType)
 
 	// Count validation results
 	valid := 0

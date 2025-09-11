@@ -20,8 +20,13 @@ func NewValidator(config *Config) *Validator {
 	}
 }
 
-// ValidateObject validates a single TMF object
+// ValidateObject validates a single TMF object (legacy method for backward compatibility)
 func (v *Validator) ValidateObject(obj TMFObject, objectType string) ValidationResult {
+	return v.ValidateAndFixObject(&obj, objectType)
+}
+
+// ValidateAndFixObject validates a single TMF object and optionally fixes validation errors
+func (v *Validator) ValidateAndFixObject(obj *TMFObject, objectType string) ValidationResult {
 	result := ValidationResult{
 		ObjectID:   obj.ID,
 		ObjectType: objectType,
@@ -43,18 +48,22 @@ func (v *Validator) ValidateObject(obj TMFObject, objectType string) ValidationR
 		}
 	}
 
-	// Determine overall validity
+	// Determine overall validity (object is valid if it has zero validation errors)
 	result.Valid = len(result.Errors) == 0
 
 	return result
 }
 
-// validateRequiredFields checks if all required fields are present
-func (v *Validator) validateRequiredFields(obj TMFObject, objectType string, result *ValidationResult) {
+// validateRequiredFields checks if all required fields are present and optionally fixes them
+func (v *Validator) validateRequiredFields(obj *TMFObject, objectType string, result *ValidationResult) {
 
 	// This checks the fields that are required for all objects
 	for _, field := range RequiredFieldsForAllObjects {
 		if !v.hasField(obj, field) {
+			// TODO: Implement fixing logic for missing required fields
+			// If v.config.FixValidationErrors is true, attempt to fix the missing field
+			// and move the error to result.ErrorsFixed if successfully fixed
+
 			result.Errors = append(result.Errors, ValidationError{
 				Field:   field,
 				Message: fmt.Sprintf("Required field '%s' is missing", field),
@@ -65,19 +74,23 @@ func (v *Validator) validateRequiredFields(obj TMFObject, objectType string, res
 
 }
 
-// validateRelatedPartyV5 checks if required related party roles are present
-func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, result *ValidationResult) {
+// validateRelatedPartyV5 checks if required related party roles are present and optionally fixes them
+func (v *Validator) validateRelatedPartyV5(obj *TMFObject, objectType string, result *ValidationResult) {
 	// We just return if the object does not require any Related Party
 	if slices.Contains(DoNotRequireRelatedParties, objectType) {
 		return
 	}
 
-	// Unmarshall the raw messages into RelatedPartyV4
+	// Unmarshall the raw messages into RelatedPartyV5
 	var relatedParties = []RelatedPartyV5{}
 	json.Unmarshal(obj.RelatedParty, &relatedParties)
 
 	// The object requires some related party. The detailed verification will be done
 	if len(relatedParties) == 0 {
+		// TODO: Implement fixing logic for missing related party information
+		// If v.config.FixValidationErrors is true, attempt to add default related party information
+		// and move the error to result.ErrorsFixed if successfully fixed
+
 		result.Errors = append(result.Errors, ValidationError{
 			Field:   "relatedParty",
 			Message: "Related party information is required but missing",
@@ -109,6 +122,10 @@ func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, res
 
 	for _, requiredRole := range requiredRoles {
 		if !foundRoles[requiredRole] {
+			// TODO: Implement fixing logic for missing required roles
+			// If v.config.FixValidationErrors is true, attempt to add default role information
+			// and move the warning to result.WarningsFixed if successfully fixed
+
 			result.Warnings = append(result.Warnings, ValidationWarning{
 				Field:   "relatedParty",
 				Message: fmt.Sprintf("Required related party role '%s' is missing", requiredRole),
@@ -123,9 +140,13 @@ func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, res
 	}
 }
 
-// validateRelatedPartyEntry validates a single related party entry
+// validateRelatedPartyEntry validates a single related party entry and optionally fixes issues
 func (v *Validator) validateRelatedPartyEntry(rp RelatedPartyV5, index int, result *ValidationResult) {
 	if rp.Role == "" {
+		// TODO: Implement fixing logic for empty role
+		// If v.config.FixValidationErrors is true, attempt to set a default role
+		// and move the warning to result.WarningsFixed if successfully fixed
+
 		result.Warnings = append(result.Warnings, ValidationWarning{
 			Field:   fmt.Sprintf("relatedParty[%d].role", index),
 			Message: "Related party role is empty",
@@ -134,6 +155,10 @@ func (v *Validator) validateRelatedPartyEntry(rp RelatedPartyV5, index int, resu
 	}
 
 	if rp.PartyOrPartyRole.ID == "" {
+		// TODO: Implement fixing logic for missing party ID
+		// If v.config.FixValidationErrors is true, attempt to generate or set a default ID
+		// and move the warning to result.WarningsFixed if successfully fixed
+
 		result.Warnings = append(result.Warnings, ValidationWarning{
 			Field:   fmt.Sprintf("relatedParty[%d].partyOrPartyRole.id", index),
 			Message: "Related party ID is missing",
@@ -142,6 +167,10 @@ func (v *Validator) validateRelatedPartyEntry(rp RelatedPartyV5, index int, resu
 	}
 
 	if rp.PartyOrPartyRole.Href == "" {
+		// TODO: Implement fixing logic for missing party href
+		// If v.config.FixValidationErrors is true, attempt to generate or set a default href
+		// and move the warning to result.WarningsFixed if successfully fixed
+
 		result.Warnings = append(result.Warnings, ValidationWarning{
 			Field:   fmt.Sprintf("relatedParty[%d].partyOrPartyRole.href", index),
 			Message: "Related party href is missing",
@@ -151,7 +180,7 @@ func (v *Validator) validateRelatedPartyEntry(rp RelatedPartyV5, index int, resu
 }
 
 // hasField checks if an object has a specific field
-func (v *Validator) hasField(obj TMFObject, field string) bool {
+func (v *Validator) hasField(obj *TMFObject, field string) bool {
 	switch field {
 	case "id":
 		return obj.ID != ""
@@ -179,7 +208,7 @@ func (v *Validator) ValidateObjects(objects []TMFObject, objectType string) []Va
 	return results
 }
 
-func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, result *ValidationResult) {
+func (v *Validator) validateRelatedPartyV4(obj *TMFObject, objectType string, result *ValidationResult) {
 	if obj.ID == "urn:ngsi-ld:applied-customer-billing-rate:a886304d-d699-4adf-b93e-dcdcd54474f1" {
 		fmt.Println("urn:ngsi-ld:applied-customer-billing-rate:a886304d-d699-4adf-b93e-dcdcd54474f1")
 	}
@@ -195,6 +224,10 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 
 	// The object requires some related party.
 	if len(relatedParties) == 0 {
+		// TODO: Implement fixing logic for missing related party information (V4)
+		// If v.config.FixValidationErrors is true, attempt to add default related party information
+		// and move the error to result.ErrorsFixed if successfully fixed
+
 		result.Errors = append(result.Errors, ValidationError{
 			Field:   "relatedParty",
 			Message: "Related party information is required but missing",
@@ -214,6 +247,10 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 		if rp.Role == "seller" || rp.Role == "selleroperator" || rp.Role == "buyer" || rp.Role == "buyeroperator" {
 			foundRoles[rp.Role] = true
 			if rp.ID == "" {
+				// TODO: Implement fixing logic for missing party ID (V4)
+				// If v.config.FixValidationErrors is true, attempt to generate or set a default ID
+				// and move the error to result.ErrorsFixed if successfully fixed
+
 				result.Errors = append(result.Errors, ValidationError{
 					Field:   fmt.Sprintf("relatedParty %s.id", rp.Role),
 					Message: "Related party ID is missing",
@@ -222,6 +259,10 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 			}
 
 			if rp.Href == "" {
+				// TODO: Implement fixing logic for missing party href (V4)
+				// If v.config.FixValidationErrors is true, attempt to generate or set a default href
+				// and move the error to result.ErrorsFixed if successfully fixed
+
 				result.Errors = append(result.Errors, ValidationError{
 					Field:   fmt.Sprintf("relatedParty %s.href", rp.Role),
 					Message: "Related party href is missing",
@@ -230,6 +271,10 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 			}
 
 			if rp.Name == "" {
+				// TODO: Implement fixing logic for missing party name (V4)
+				// If v.config.FixValidationErrors is true, attempt to generate or set a default name
+				// and move the error to result.ErrorsFixed if successfully fixed
+
 				result.Errors = append(result.Errors, ValidationError{
 					Field:   fmt.Sprintf("relatedParty %s.name", rp.Role),
 					Message: "Related party name is missing",
@@ -238,6 +283,10 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 			}
 
 			if rp.ReferredType == "" {
+				// TODO: Implement fixing logic for missing party referred type (V4)
+				// If v.config.FixValidationErrors is true, attempt to generate or set a default referred type
+				// and move the error to result.ErrorsFixed if successfully fixed
+
 				result.Errors = append(result.Errors, ValidationError{
 					Field:   fmt.Sprintf("relatedParty %s.referredType", rp.Role),
 					Message: "Related party referred type is missing",
@@ -257,6 +306,10 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 	// Check if we found all the required roles
 	for _, requiredRole := range requiredRoles {
 		if !foundRoles[requiredRole] {
+			// TODO: Implement fixing logic for missing required roles (V4)
+			// If v.config.FixValidationErrors is true, attempt to add default role information
+			// and move the error to result.ErrorsFixed if successfully fixed
+
 			result.Errors = append(result.Errors, ValidationError{
 				Field:   "relatedParty",
 				Message: fmt.Sprintf("Required related party role '%s' is missing", requiredRole),
