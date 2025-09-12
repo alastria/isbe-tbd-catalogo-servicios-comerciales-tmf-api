@@ -27,8 +27,11 @@ func main() {
 	// Configure slog logger
 	var debugFlag bool
 	var verifierServer string
+	var proxyEnabled bool
+
 	flag.BoolVar(&debugFlag, "d", false, "Enable debug logging")
 	flag.StringVar(&verifierServer, "verifier", "", "Full URL of the verifier which signs access tokens")
+	flag.BoolVar(&proxyEnabled, "proxy", false, "Enable proxy functionality")
 	flag.Parse()
 
 	// Get the url of the verifier from command line (priority) or environment variable
@@ -36,6 +39,13 @@ func main() {
 		verifierServer = os.Getenv("ISBETMF_VERIFIER")
 		if verifierServer == "" {
 			verifierServer = "https://verifier.dome-marketplace.eu"
+		}
+	}
+
+	// Get the proxyEnabled from command line (priority) or environment variable
+	if !proxyEnabled { // Only check env if not set by flag
+		if os.Getenv("ISBETMF_PROXY_ENABLED") == "true" {
+			proxyEnabled = true
 		}
 	}
 
@@ -80,7 +90,7 @@ func main() {
 	}
 
 	// Create the service
-	s := service.NewService(db, rulesEngine, verifierServer)
+	s := service.NewService(db, rulesEngine, verifierServer, proxyEnabled)
 
 	// Create Fiber app with custom configuration
 	app := fiber.New(fiber.Config{

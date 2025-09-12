@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -17,6 +18,7 @@ import (
 	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
+	"github.com/hesusruiz/isbetmf/tmfclient"
 	"github.com/hesusruiz/isbetmf/tmfserver/notifications"
 	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
@@ -124,14 +126,30 @@ type Service struct {
 
 	// Notifications manager
 	notif *notifications.Manager
+
+	// TMF Client for proxying requests
+	tmfClient *tmfclient.Client
+
+	// Flag to enable/disable proxy functionality
+	proxyEnabled bool
 }
 
 // NewService creates a new service.
-func NewService(db *sqlx.DB, ruleEngine *pdp.PDP, verifierServer string) *Service {
+func NewService(db *sqlx.DB, ruleEngine *pdp.PDP, verifierServer string, proxyEnabled bool) *Service {
 	svc := &Service{
 		db:             db,
 		ruleEngine:     ruleEngine,
 		verifierServer: verifierServer,
+		proxyEnabled:   proxyEnabled,
+	}
+
+	if proxyEnabled {
+		clientCfg := &tmfclient.Config{
+			BaseURL: "https://tmf.dome-marketplace-sbx.org",
+			Timeout: 20,
+		}
+
+		svc.tmfClient = tmfclient.NewClient(clientCfg)
 	}
 
 	err := svc.initializeService()
@@ -272,6 +290,59 @@ func (svc *Service) DeleteHubSubscription(req *Request) *Response {
 func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("CreateGenericObject called", slog.String("apiFamily", req.APIfamily), slog.String("resourceName", req.ResourceName))
+
+	if svc.proxyEnabled {
+		// Proxy logic
+		headers := map[string]string{
+			"Content-Type":  "application/json",
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
+		resp, err := svc.tmfClient.Post(path, req.Body, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+		}
+
+		if resp.StatusCode >= 300 {
+			return &Response{
+				StatusCode: resp.StatusCode,
+				Body:       body,
+			}
+		}
+
+		var incomingObjectMap map[string]any
+		if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
+			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
+		}
+
+		id, _ := incomingObjectMap["id"].(string)
+		version, _ := incomingObjectMap["version"].(string)
+		lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
+
+		incomingContent, err := json.Marshal(incomingObjectMap)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
+		}
+
+		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
+
+		if err := svc.createObject(incomingObject); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to create object in service: %w")
+		}
+
+		return &Response{
+			StatusCode: resp.StatusCode,
+			Headers:    convertHeaders(resp.Header),
+			Body:       incomingObjectMap,
+		}
+
+	}
 
 	// ************************************************************************************************
 	// Authentication: we require the user to be authenticated
@@ -441,6 +512,76 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
 	}
 
+	if svc.proxyEnabled {
+		// Try to get the object from the local database first
+		obj, err := svc.getObject(req.ID, req.ResourceName)
+		if err != nil {
+			// If there is an error, log it and proceed to the remote server
+			slog.Error("failed to get object from local cache", slog.Any("error", err))
+		}
+		// If the object is found in the local cache, return it
+		if obj != nil {
+			slog.Debug("object found in cache", "id", req.ID)
+			var responseData map[string]any
+			err = json.Unmarshal(obj.Content, &responseData)
+			if err != nil {
+				return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content: %w")
+			}
+			return &Response{StatusCode: http.StatusOK, Body: responseData}
+		}
+
+		// If the object is not in the cache, get it from the remote server
+		slog.Debug("object not found in cache, getting from remote", slog.String("id", req.ID))
+		headers := map[string]string{
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
+		resp, err := svc.tmfClient.Get(path, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+		}
+
+		if resp.StatusCode >= 300 {
+			return &Response{
+				StatusCode: resp.StatusCode,
+				Body:       body,
+			}
+		}
+
+		var incomingObjectMap map[string]any
+		if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
+			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
+		}
+
+		id, _ := incomingObjectMap["id"].(string)
+		version, _ := incomingObjectMap["version"].(string)
+		lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
+
+		incomingContent, err := json.Marshal(incomingObjectMap)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
+		}
+
+		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
+
+		if err := svc.createObject(incomingObject); err != nil {
+			slog.Error("failed to cache object", slog.Any("error", err))
+			// Do not return an error to the client, just log it
+		}
+
+		return &Response{
+			StatusCode: resp.StatusCode,
+			Headers:    convertHeaders(resp.Header),
+			Body:       incomingObjectMap,
+		}
+	}
+
 	// Retrieve the object from the database. If it is not found, we return a 404 error.
 	obj, err := svc.getObject(req.ID, req.ResourceName)
 	if err != nil {
@@ -512,6 +653,65 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("UpdateGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
+
+	if svc.proxyEnabled {
+		// Proxy logic
+		headers := map[string]string{
+			"Content-Type":  "application/json",
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
+		resp, err := svc.tmfClient.Patch(path, req.Body, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+		}
+
+		if resp.StatusCode >= 300 {
+			return &Response{
+				StatusCode: resp.StatusCode,
+				Body:       body,
+			}
+		}
+
+		var incomingObjectMap map[string]any
+		if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
+			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
+		}
+
+		id, _ := incomingObjectMap["id"].(string)
+		version, _ := incomingObjectMap["version"].(string)
+		lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
+
+		incomingContent, err := json.Marshal(incomingObjectMap)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
+		}
+
+		incomingObject := &repo.TMFObject{
+			ID:         id,
+			Type:       req.ResourceName,
+			Version:    version,
+			APIVersion: req.APIVersion,
+			LastUpdate: lastUpdate,
+			Content:    incomingContent,
+		}
+
+		if err := svc.updateObject(incomingObject); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to update object in service: %w")
+		}
+
+		return &Response{
+			StatusCode: resp.StatusCode,
+			Headers:    convertHeaders(resp.Header),
+			Body:       incomingObjectMap,
+		}
+	}
 
 	// ************************************************************************************************
 	// Authentication: we require the user to be authenticated
@@ -691,6 +891,38 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	slog.Debug("DeleteGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
+	if svc.proxyEnabled {
+		// Proxy logic
+		headers := map[string]string{
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
+		resp, err := svc.tmfClient.Delete(path, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode >= 300 {
+			body, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+			}
+			return &Response{
+				StatusCode: resp.StatusCode,
+				Body:       body,
+			}
+		}
+
+		if err := svc.deleteObject(req.ID, req.ResourceName); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to delete object in service: %w")
+		}
+
+		return &Response{
+			StatusCode: resp.StatusCode,
+		}
+	}
+
 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
 	token, err := svc.processAccessToken(req)
 	if err != nil {
@@ -762,6 +994,47 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 func (svc *Service) ListGenericObjects(req *Request) *Response {
 	slog.Debug("ListGenericObjects called", slog.String("resourceName", req.ResourceName))
 
+	if svc.proxyEnabled {
+		// Proxy logic
+		headers := map[string]string{
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
+		if len(req.QueryParams) > 0 {
+			path += "?" + req.QueryParams.Encode()
+		}
+		resp, err := svc.tmfClient.Get(path, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+		}
+
+		if resp.StatusCode >= 300 {
+			return &Response{
+				StatusCode: resp.StatusCode,
+				Body:       body,
+			}
+		}
+
+		var responseData []map[string]any
+		if err := json.Unmarshal(body, &responseData); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content for listing: %w")
+		}
+
+		// TODO: Cache the results
+
+		return &Response{
+			StatusCode: resp.StatusCode,
+			Headers:    convertHeaders(resp.Header),
+			Body:       responseData,
+		}
+	}
+
 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
 	_, err := svc.processAccessToken(req)
 	if err != nil {
@@ -830,6 +1103,16 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 	slog.Info("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
 	return &Response{StatusCode: http.StatusOK, Headers: headers, Body: responseData}
+}
+
+func convertHeaders(h http.Header) map[string]string {
+	headers := make(map[string]string)
+	for key, values := range h {
+		if len(values) > 0 {
+			headers[key] = values[0]
+		}
+	}
+	return headers
 }
 
 // mergeRFC7396 implements JSON Merge Patch (RFC 7396) to merge a patch object into a target object.

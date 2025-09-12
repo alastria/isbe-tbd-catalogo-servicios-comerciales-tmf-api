@@ -13,6 +13,7 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/sqlogger"
+	"github.com/hesusruiz/isbetmf/tmfclient"
 )
 
 type Config struct {
@@ -82,6 +83,12 @@ type Config struct {
 
 	// LogLevel is a slog.LevelVar that can be set to different log levels (e.g. Debug, Info, Warn, Error).
 	LogLevel *slog.LevelVar
+
+	// ProxyEnabled enables the TMF caching proxy functionality.
+	ProxyEnabled bool
+
+	// TMFClient is the configuration for the TMF client.
+	TMFClient *tmfclient.Config
 }
 
 // TODO: These are here until the DOME foundation is created and the DOME operator did is set.
@@ -169,6 +176,10 @@ var isbeConfig = &Config{
 }
 
 func DefaultConfig(where Environment, internal bool, usingBAEProxy bool) *Config {
+	return NewDefaultConfig(where, internal, usingBAEProxy, false)
+}
+
+func NewDefaultConfig(where Environment, internal bool, usingBAEProxy bool, proxyEnabled bool) *Config {
 	var conf *Config
 
 	switch where {
@@ -191,6 +202,11 @@ func DefaultConfig(where Environment, internal bool, usingBAEProxy bool) *Config
 	conf.InitUpstreamHosts(defaultInternalUpstreamHosts)
 
 	conf.resourceToPath = NewResourceToExternalPathPrefix(where)
+
+	conf.ProxyEnabled = proxyEnabled
+	if proxyEnabled {
+		conf.TMFClient = tmfclient.DefaultConfig()
+	}
 
 	return conf
 }
@@ -483,7 +499,7 @@ var defaultBAEResourceToPathPrefix = map[string]string{
 // It returns an error if the ID format is invalid.
 func FromIdToResourceType(id string) (string, error) {
 	// id must be like "urn:ngsi-ld:product-offering-price:32611feb-6f78-4ccd-a4a2-547cb01cf33d"
-	// We will convert from product-offering-price to productOfferingPrice
+// We will convert from product-offering-price to productOfferingPrice
 
 	// Extract the different components
 	idParts := strings.Split(id, ":")
