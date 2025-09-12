@@ -59,7 +59,7 @@ func DefaultConfig() *Config {
 func DefaultObjectTypes() []string {
 
 	objectTypes := []string{}
-	for objectType, _ := range GeneratedDefaultResourceToPathPrefixV4 {
+	for objectType := range GeneratedDefaultResourceToPathPrefixV4 {
 		objectTypes = append(objectTypes, objectType)
 	}
 

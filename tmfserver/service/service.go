@@ -110,7 +110,7 @@ type Service struct {
 	db *sqlx.DB
 
 	// Pluggable storage backend (optional). When nil, falls back to built-in SQLite via db
-	storage Storage
+	storage TMFStorage
 
 	// The rules engine in Starlark
 	ruleEngine *pdp.PDP
@@ -300,7 +300,6 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var id string
 	var version string
 	var lastUpdate string
-	var href string
 	{
 
 		// Parse the request body
@@ -308,8 +307,30 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
 		}
 
+		// Check for the different required name fields depending on the object type
+		if strings.EqualFold(req.ResourceName, "Individual") {
+			if givenName, _ := incomingObjectMap["givenName"].(string); givenName == "" {
+				return ErrorResponsef(nil, http.StatusBadRequest, "givenName is required")
+			}
+			if familyName, _ := incomingObjectMap["familyName"].(string); familyName == "" {
+				return ErrorResponsef(nil, http.StatusBadRequest, "familyName is required")
+			}
+		} else if strings.EqualFold(req.ResourceName, "Organization") {
+			if tradingName, _ := incomingObjectMap["tradingName"].(string); tradingName == "" {
+				return ErrorResponsef(nil, http.StatusBadRequest, "tradingName is required")
+			}
+		} else if name, _ := incomingObjectMap["name"].(string); name == "" {
+			return ErrorResponsef(nil, http.StatusBadRequest, "name is required")
+		}
+
 		id, _ = incomingObjectMap["id"].(string)
 		version, _ = incomingObjectMap["version"].(string)
+
+		// If the incoming object specifies an 'id', this is only possible if it creates a new version.
+		// That means the incoming object must have a 'version' property.
+		if id != "" && version == "" {
+			return ErrorResponsef(nil, http.StatusBadRequest, "id specified but version is missing")
+		}
 
 		// Create a new 'id' if the user did not specify it
 		if id == "" {
@@ -318,15 +339,20 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			id = fmt.Sprintf("urn:ngsi-ld:%s:%s", ToKebabCase(req.ResourceName), uuid.NewString())
 			incomingObjectMap["id"] = id
 			slog.Debug("Generated new ID for object", "id", id)
+
+			// Set default 'version' if not provided by the user
+			if version == "" {
+				version = "1.0"
+				incomingObjectMap["version"] = version // Update data map for content marshaling
+				slog.Debug("Set default version", slog.String("version", version))
+			}
+
 		}
 
-		// Create a new 'href' if the user did not specify it
-		href, _ = incomingObjectMap["href"].(string)
-		if href == "" {
-			// Add href to the object using the correct API version
-			incomingObjectMap["href"] = fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, id)
-			slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
-		}
+		// Overwrite href in case it is specified by the caller.
+		// We could be more strict and reject the request, but this is more permissive.
+		incomingObjectMap["href"] = fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, id)
+		slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
 
 		// Check and process '@type' field
 		if typeVal, typeOk := incomingObjectMap["@type"].(string); typeOk {
@@ -339,28 +365,24 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			slog.Debug("Added missing @type field", slog.String("type", req.ResourceName))
 		}
 
-		// Set default 'version' if not provided by the user
-		if version == "" {
-			version = "1.0"
-			incomingObjectMap["version"] = version // Update data map for content marshaling
-			slog.Debug("Set default version", slog.String("version", version))
+		// If the object requires a lifecycleStatus, add it if not specified by the caller
+		if baseStatus, ok := LifecycleStatusMandatory[req.ResourceName]; ok {
+			if lifecycleStatus, _ := incomingObjectMap["lifecycleStatus"].(string); lifecycleStatus == "" {
+				incomingObjectMap["lifecycleStatus"] = baseStatus
+			}
 		}
 
-		// Set the 'lifecycleStatus' property, it is not specified by the caller
-		if lifecycleStatus, _ := incomingObjectMap["lifecycleStatus"].(string); lifecycleStatus == "" {
-			incomingObjectMap["lifecycleStatus"] = "In Study"
+		// TODO: add the Seller and Buyer info only to the objects where it is mandatory.
+		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
+		err = setSellerAndBuyerInfo(incomingObjectMap, req.AuthUser.OrganizationIdentifier, req.APIVersion)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to add Seller and Buyer info: %w")
 		}
 
 		// Set the lastUpdate property. We overwrite whatever the user set.
 		now := time.Now()
 		lastUpdate = now.Format(time.RFC3339Nano)
 		incomingObjectMap["lastUpdate"] = lastUpdate
-
-		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
-		err = setSellerAndBuyerInfo(incomingObjectMap, req.AuthUser.OrganizationIdentifier, req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to add Seller and Buyer info: %w")
-		}
 
 	}
 
@@ -398,6 +420,10 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	eventPayload := buildEventPayload(req, eventType, incomingObjectMap)
 	svc.notif.PublishEvent(req.APIfamily, eventType, eventPayload)
 
+	// We respond with the created object withh all the properties, including the default ones.
+	// TODO: not critical, but we could send only the mandatory attributes and those requested by the caller.
+	// Sending the whole object is compliant with the TMForum specification,
+	// but sending only the mandatory attributes is more efficient.
 	return &Response{
 		StatusCode: http.StatusCreated,
 		Headers:    headers,
@@ -542,11 +568,6 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			slog.Debug("Added missing @type field to update request", slog.String("type", req.ResourceName))
 		}
 
-		// Set the lastUpdate property. We overwrite whatever the user set.
-		now := time.Now()
-		lastUpdate := now.Format(time.RFC3339Nano)
-		incomingObjMap["lastUpdate"] = lastUpdate
-
 		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
 		err = setSellerAndBuyerInfo(incomingObjMap, req.AuthUser.OrganizationIdentifier, req.APIVersion)
 		if err != nil {
@@ -554,6 +575,11 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		}
 
 		sellerDid, sellerOperatorDid, err = getSellerAndBuyerInfo(incomingObjMap, req.APIVersion)
+
+		// Set the lastUpdate property. We overwrite whatever the user set.
+		now := time.Now()
+		lastUpdate := now.Format(time.RFC3339Nano)
+		incomingObjMap["lastUpdate"] = lastUpdate
 
 	}
 
@@ -930,4 +956,12 @@ func ErrorResponsef(err error, statusCode int, format string, args ...any) *Resp
 	slog.Error("error response", slog.String("error", wrappedErr.Error()))
 	apiErr := NewApiError(code, status, wrappedErr.Error(), fmt.Sprintf("%d", statusCode), "")
 	return &Response{StatusCode: statusCode, Body: apiErr}
+}
+
+var LifecycleStatusMandatory = map[string]string{
+	"ProductOffering":       "In Study",
+	"ProductOfferingPrice":  "In Study",
+	"ProductSpecification":  "In Study",
+	"ResourceSpecification": "In Study",
+	"ServiceSpecification":  "In Study",
 }

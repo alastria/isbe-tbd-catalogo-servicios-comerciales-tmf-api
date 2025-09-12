@@ -2,6 +2,7 @@ package notifications
 
 import (
 	"log/slog"
+	"slices"
 	"time"
 )
 
@@ -63,13 +64,7 @@ func (m *Manager) PublishEvent(apiFamily, eventType string, payload any) {
 	}
 	for _, sub := range subs {
 		if len(sub.EventTypes) > 0 {
-			match := false
-			for _, et := range sub.EventTypes {
-				if et == eventType {
-					match = true
-					break
-				}
-			}
+			match := slices.Contains(sub.EventTypes, eventType)
 			if !match {
 				continue
 			}

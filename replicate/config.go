@@ -9,6 +9,9 @@ import (
 
 // Config holds the configuration for the replicate package
 type Config struct {
+	// Version of the TMForum API
+	Version string `json:"version" yaml:"version"`
+
 	// Database configuration
 	DatabaseFile string `json:"database_file" yaml:"database_file"`
 
@@ -37,6 +40,7 @@ type Config struct {
 // DefaultConfig returns a default configuration
 func DefaultConfig() *Config {
 	return &Config{
+		Version:                "v4",
 		DatabaseFile:           "remotecache.db",
 		BaseURL:                "https://tmf.dome-marketplace-sbx.org",
 		Timeout:                30,
@@ -71,6 +75,10 @@ func DefaultObjectTypes() []string {
 
 // LoadConfigFromEnv loads configuration from environment variables
 func (c *Config) LoadConfigFromEnv() {
+	if version := os.Getenv("REPLICATE_VERSION"); version != "" {
+		c.Version = version
+	}
+
 	if databaseFile := os.Getenv("REPLICATE_DATABASE_FILE"); databaseFile != "" {
 		c.DatabaseFile = databaseFile
 	}

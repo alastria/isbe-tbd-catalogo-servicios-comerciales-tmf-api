@@ -6,8 +6,8 @@ import (
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
-// Storage abstracts persistence operations for TMF objects.
-type Storage interface {
+// TMFStorage abstracts persistence operations for TMF objects.
+type TMFStorage interface {
 	CreateObject(obj *repo.TMFObject) error
 	GetObject(id, objectType string) (*repo.TMFObject, error)
 	UpdateObject(obj *repo.TMFObject) error

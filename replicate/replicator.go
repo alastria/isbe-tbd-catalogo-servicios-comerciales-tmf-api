@@ -2,13 +2,11 @@ package replicate
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"log"
 	"time"
 
 	"github.com/hesusruiz/isbetmf/reporting"
-	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 // Replicator orchestrates the replication process from remote TMForum servers to local database
@@ -16,7 +14,8 @@ type Replicator struct {
 	config    *Config
 	database  *Database
 	client    *reporting.Client
-	validator *reporting.Validator
+	validator *Validator
+	converter *Converter
 }
 
 // NewReplicator creates a new replicator instance
@@ -33,6 +32,7 @@ func NewReplicator(config *Config) (*Replicator, error) {
 
 	// Create reporting configuration for client and validator
 	reportingConfig := &reporting.Config{
+		Version:                config.Version,
 		BaseURL:                config.BaseURL,
 		Timeout:                config.Timeout,
 		ObjectTypes:            config.ObjectTypes,
@@ -44,15 +44,17 @@ func NewReplicator(config *Config) (*Replicator, error) {
 		FixValidationErrors:    config.FixValidationErrors,
 	}
 
-	// Create client and validator
+	// Create client, validator, and converter
 	client := reporting.NewClient(reportingConfig)
-	validator := reporting.NewValidator(reportingConfig)
+	validator := NewValidator(config)
+	converter := NewConverter()
 
 	return &Replicator{
 		config:    config,
 		database:  database,
 		client:    client,
 		validator: validator,
+		converter: converter,
 	}, nil
 }
 
@@ -181,8 +183,14 @@ func (r *Replicator) replicateObjectType(ctx context.Context, objectType string)
 
 // processObject processes a single object: validates it and stores it in the database
 func (r *Replicator) processObject(ctx context.Context, obj reporting.TMFObject, objectType string) (int, int, int, int, error) {
-	// Validate the object (using the new ValidateAndFixObject method)
-	result := r.validator.ValidateAndFixObject(&obj, objectType)
+	// Convert reporting.TMFObject to replicate.TMFObject
+	replicateObj, err := r.converter.ReportingTMFObjectToReplicateTMFObject(obj)
+	if err != nil {
+		return 0, 1, 1, 0, fmt.Errorf("failed to convert object: %w", err)
+	}
+
+	// Validate and optionally fix the object
+	result := r.validator.ValidateAndFixObject(replicateObj, objectType)
 
 	// Count validation results
 	valid := 0
@@ -196,16 +204,22 @@ func (r *Replicator) processObject(ctx context.Context, obj reporting.TMFObject,
 		invalid = 1
 	}
 
+	// Log fixing results if any
+	if len(result.ErrorsFixed) > 0 || len(result.WarningsFixed) > 0 {
+		log.Printf("Fixed object %s (%s): %d errors fixed, %d warnings fixed",
+			replicateObj.GetID(), objectType, len(result.ErrorsFixed), len(result.WarningsFixed))
+	}
+
 	// If object is invalid and we're configured to skip invalid objects, return early
 	if !result.Valid && r.config.SkipInvalidObjects {
-		log.Printf("Skipping invalid object %s: %d errors, %d warnings", obj.ID, errors, warnings)
+		log.Printf("Skipping invalid object %s: %d errors, %d warnings", replicateObj.GetID(), errors, warnings)
 		return valid, invalid, errors, warnings, nil
 	}
 
-	// Convert reporting.TMFObject to repository.TMFObject
-	repoObj, err := r.convertToRepositoryObject(obj, objectType)
+	// Convert replicate.TMFObject to repository.TMFObject
+	repoObj, err := r.converter.ReplicateTMFObjectToRepositoryTMFObject(replicateObj, objectType)
 	if err != nil {
-		return valid, invalid, errors, warnings, fmt.Errorf("failed to convert object: %w", err)
+		return valid, invalid, errors, warnings, fmt.Errorf("failed to convert to repository object: %w", err)
 	}
 
 	// Store the object in the database
@@ -213,29 +227,9 @@ func (r *Replicator) processObject(ctx context.Context, obj reporting.TMFObject,
 		return valid, invalid, errors, warnings, fmt.Errorf("failed to store object: %w", err)
 	}
 
-	log.Printf("Stored object %s (%s): valid=%t, errors=%d, warnings=%d", obj.ID, objectType, result.Valid, errors, warnings)
+	log.Printf("Stored object %s (%s): valid=%t, errors=%d, warnings=%d, errors_fixed=%d, warnings_fixed=%d",
+		replicateObj.GetID(), objectType, result.Valid, errors, warnings, len(result.ErrorsFixed), len(result.WarningsFixed))
 	return valid, invalid, errors, warnings, nil
-}
-
-// convertToRepositoryObject converts a reporting.TMFObject to a repository.TMFObject
-func (r *Replicator) convertToRepositoryObject(obj reporting.TMFObject, objectType string) (*repo.TMFObject, error) {
-	// Marshal the object to JSON
-	content, err := json.Marshal(obj)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal object: %w", err)
-	}
-
-	// Create repository object
-	repoObj := repo.NewTMFObject(
-		obj.ID,
-		objectType,
-		obj.Version,
-		"v4", // Default API version
-		obj.LastUpdate,
-		content,
-	)
-
-	return repoObj, nil
 }
 
 // ClearDatabase removes all objects from the database

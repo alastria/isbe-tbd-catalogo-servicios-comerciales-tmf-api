@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcpgo": {
+      "command": "mcp-gopls",
+      "args": []
+    }
+  }
+}

@@ -17,6 +17,7 @@ import (
 func main() {
 	// Parse command line flags
 	var (
+		version              = flag.String("version", "v4", "TMForum API version (v4 or v5)")
 		baseURL              = flag.String("base-url", "", "Base URL of the TMForum server")
 		databaseFile         = flag.String("database", "remotecache.db", "SQLite database file path")
 		timeout              = flag.Int("timeout", 30, "Timeout in seconds for HTTP requests")
@@ -45,6 +46,9 @@ func main() {
 	config := replicate.DefaultConfig()
 
 	// Override with command line flags
+	if *version != "" {
+		config.Version = *version
+	}
 	if *baseURL != "" {
 		config.BaseURL = *baseURL
 	}
@@ -171,6 +175,8 @@ func showHelp() {
 Usage: replicate [options]
 
 Options:
+  -version string
+        TMForum API version (v4 or v5) (default "v4")
   -base-url string
         Base URL of the TMForum server
   -database string
@@ -203,6 +209,7 @@ Options:
         Show this help information
 
 Environment Variables:
+  REPLICATE_VERSION           TMForum API version (v4 or v5)
   REPLICATE_BASE_URL          Base URL of the TMForum server
   REPLICATE_DATABASE_FILE     SQLite database file path
   REPLICATE_TIMEOUT           Timeout in seconds
