@@ -2,9 +2,10 @@ package tmfclient
 
 import (
 	"bytes"
+	"fmt"
+	"log/slog"
 	"net/http"
 	"time"
-	"fmt"
 )
 
 // Client is a client for the TMForum API.
@@ -45,6 +46,7 @@ func (c *Client) Delete(path string, headers map[string]string) (*http.Response,
 
 func (c *Client) do(method, path string, body []byte, headers map[string]string) (*http.Response, error) {
 	url := fmt.Sprintf("%s%s", c.config.BaseURL, path)
+	slog.Debug("sending", slog.String("method", method), "url", url)
 
 	var req *http.Request
 	var err error
@@ -59,8 +61,11 @@ func (c *Client) do(method, path string, body []byte, headers map[string]string)
 		return nil, err
 	}
 
+	// TODO: send the authorization header
 	for key, value := range headers {
-		req.Header.Set(key, value)
+		if key != "Authorization" {
+			req.Header.Set(key, value)
+		}
 	}
 
 	return c.client.Do(req)

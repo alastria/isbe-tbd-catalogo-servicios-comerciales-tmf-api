@@ -97,7 +97,7 @@ func main() {
 	}
 
 	// Create the service
-	s := service.NewService(db, rulesEngine, verifierServer, proxyEnabled)
+	s := service.NewService(db, rulesEngine, verifierServer, proxyEnabled, remoteTMFServer)
 
 	// Create Fiber app with custom configuration
 	app := fiber.New(fiber.Config{
