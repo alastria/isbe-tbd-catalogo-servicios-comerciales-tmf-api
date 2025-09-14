@@ -27,10 +27,12 @@ func main() {
 	// Configure slog logger
 	var debugFlag bool
 	var verifierServer string
+	var remoteTMFServer string
 	var proxyEnabled bool
 
-	flag.BoolVar(&debugFlag, "d", false, "Enable debug logging")
+	flag.BoolVar(&debugFlag, "d", true, "Enable debug logging")
 	flag.StringVar(&verifierServer, "verifier", "", "Full URL of the verifier which signs access tokens")
+	flag.StringVar(&remoteTMFServer, "remote", "", "Full URL of the remote TMForum server to proxy requests to")
 	flag.BoolVar(&proxyEnabled, "proxy", false, "Enable proxy functionality")
 	flag.Parse()
 
@@ -41,6 +43,15 @@ func main() {
 			verifierServer = "https://verifier.dome-marketplace.eu"
 		}
 	}
+	slog.Info("Verifier server", slog.String("verifierServer", verifierServer))
+
+	if remoteTMFServer == "" {
+		remoteTMFServer = os.Getenv("ISBETMF_REMOTE_SERVER")
+		if remoteTMFServer == "" {
+			remoteTMFServer = "https://tmf.dome-marketplace-sbx.eu"
+		}
+	}
+	slog.Info("Remote TMF server", slog.String("TMF server", remoteTMFServer))
 
 	// Get the proxyEnabled from command line (priority) or environment variable
 	if !proxyEnabled { // Only check env if not set by flag
@@ -48,11 +59,7 @@ func main() {
 			proxyEnabled = true
 		}
 	}
-
-	slog.Info("Verifier server", slog.String("verifierServer", verifierServer))
-
-	// Use debug level until production
-	debugFlag = true
+	slog.Info("Proxy", slog.Bool("enabled", proxyEnabled))
 
 	var logLevel slog.Level
 	if debugFlag {
@@ -65,7 +72,7 @@ func main() {
 	slog.SetDefault(slog.New(handler))
 
 	// Connect to the database
-	db, err := sqlx.Connect("sqlite3", "isbetmf.db")
+	db, err := sqlx.Connect("sqlite3", "data/isbetmf.db")
 	if err != nil {
 		slog.Error("failed to connect to database", slog.Any("error", err))
 		os.Exit(1)

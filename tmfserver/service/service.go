@@ -25,6 +25,9 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// The DOME implementation has some non-conformances with the TMF specifications, and this is to bypass them.
+var DOMEHacks = true
+
 // AuthUser represents the authenticated user's information from the JWT mandator object.
 type AuthUser struct {
 	CommonName             string `json:"commonName"`
@@ -291,59 +294,6 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("CreateGenericObject called", slog.String("apiFamily", req.APIfamily), slog.String("resourceName", req.ResourceName))
 
-	if svc.proxyEnabled {
-		// Proxy logic
-		headers := map[string]string{
-			"Content-Type":  "application/json",
-			"Authorization": "Bearer " + req.AccessToken,
-		}
-		path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
-		resp, err := svc.tmfClient.Post(path, req.Body, headers)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
-		}
-		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
-		}
-
-		if resp.StatusCode >= 300 {
-			return &Response{
-				StatusCode: resp.StatusCode,
-				Body:       body,
-			}
-		}
-
-		var incomingObjectMap map[string]any
-		if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
-			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
-		}
-
-		id, _ := incomingObjectMap["id"].(string)
-		version, _ := incomingObjectMap["version"].(string)
-		lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
-
-		incomingContent, err := json.Marshal(incomingObjectMap)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
-		}
-
-		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
-
-		if err := svc.createObject(incomingObject); err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to create object in service: %w")
-		}
-
-		return &Response{
-			StatusCode: resp.StatusCode,
-			Headers:    convertHeaders(resp.Header),
-			Body:       incomingObjectMap,
-		}
-
-	}
-
 	// ************************************************************************************************
 	// Authentication: we require the user to be authenticated
 	// ************************************************************************************************
@@ -370,7 +320,6 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var incomingObjectMap map[string]any
 	var id string
 	var version string
-	var lastUpdate string
 	{
 
 		// Parse the request body
@@ -405,11 +354,14 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 		// Create a new 'id' if the user did not specify it
 		if id == "" {
-			// If the incoming object does not have an 'id', we generate a new one
-			// The format is "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}"
-			id = fmt.Sprintf("urn:ngsi-ld:%s:%s", ToKebabCase(req.ResourceName), uuid.NewString())
-			incomingObjectMap["id"] = id
-			slog.Debug("Generated new ID for object", "id", id)
+			// DOME does not support using an 'id' in the incoming object.
+			if !svc.proxyEnabled || !DOMEHacks {
+				// If the incoming object does not have an 'id', we generate a new one
+				// The format is "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}"
+				id = fmt.Sprintf("urn:ngsi-ld:%s:%s", ToKebabCase(req.ResourceName), uuid.NewString())
+				incomingObjectMap["id"] = id
+				slog.Debug("Generated new ID for object", "id", id)
+			}
 
 			// Set default 'version' if not provided by the user
 			if version == "" {
@@ -422,23 +374,15 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 		// Overwrite href in case it is specified by the caller.
 		// We could be more strict and reject the request, but this is more permissive.
-		incomingObjectMap["href"] = fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, id)
-		slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
-
-		// Check and process '@type' field
-		if typeVal, typeOk := incomingObjectMap["@type"].(string); typeOk {
-			if !strings.EqualFold(typeVal, req.ResourceName) {
-				return ErrorResponsef(nil, http.StatusBadRequest, "@type mismatch: expected %s, got %s", req.ResourceName, typeVal)
-			}
-		} else {
-			// If @type is not specified, add it
-			incomingObjectMap["@type"] = req.ResourceName
-			slog.Debug("Added missing @type field", slog.String("type", req.ResourceName))
+		if !svc.proxyEnabled || !DOMEHacks {
+			incomingObjectMap["href"] = fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, id)
+			slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
 		}
 
 		// If the object requires a lifecycleStatus, add it if not specified by the caller
 		if baseStatus, ok := LifecycleStatusMandatory[req.ResourceName]; ok {
 			if lifecycleStatus, _ := incomingObjectMap["lifecycleStatus"].(string); lifecycleStatus == "" {
+				slog.Debug("adding lifecycleStatus", slog.String("status", baseStatus))
 				incomingObjectMap["lifecycleStatus"] = baseStatus
 			}
 		}
@@ -449,11 +393,6 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		if err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to add Seller and Buyer info: %w")
 		}
-
-		// Set the lastUpdate property. We overwrite whatever the user set.
-		now := time.Now()
-		lastUpdate = now.Format(time.RFC3339Nano)
-		incomingObjectMap["lastUpdate"] = lastUpdate
 
 	}
 
@@ -468,22 +407,95 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	}
 
 	// ************************************************************************************************
-	// Now we can proceed, creating an object in the database.
+	// Now we can proceed, creating an object in the database or the remote server in proxy mode
 	// ************************************************************************************************
 
-	incomingContent, err := json.Marshal(incomingObjectMap)
-	if err != nil {
-		return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
+	if svc.proxyEnabled {
+		// Proxy logic
+		headers := map[string]string{
+			"Content-Type":  "application/json",
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+
+		modifiedIncomingBody, err := json.Marshal(incomingObjectMap)
+		if err != nil {
+		}
+		headers["Content-Length"] = strconv.Itoa(len(modifiedIncomingBody))
+
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
+		resp, err := svc.tmfClient.Post(path, modifiedIncomingBody, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
+
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+		}
+
+		if resp.StatusCode >= 300 {
+			return ErrorResponse(nil, resp.StatusCode)
+		}
+
+		// Put the created objet in a map
+		var remoteObjectMap map[string]any
+		if err := json.Unmarshal(body, &remoteObjectMap); err != nil {
+			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
+		}
+
+		id, _ := remoteObjectMap["id"].(string)
+		version, _ := remoteObjectMap["version"].(string)
+		lastUpdate, _ := remoteObjectMap["lastUpdate"].(string)
+
+		// It is an error if the remote server does not return a 'lastUpdate', but we fixed it and log a warning
+		if lastUpdate == "" {
+			slog.Warn("remote server did not return lastUpdate, fixing it", slog.String("id", id))
+
+			now := time.Now()
+			lastUpdate = now.Format(time.RFC3339Nano)
+			remoteObjectMap["lastUpdate"] = lastUpdate
+		}
+
+		remoteContent, err := json.Marshal(remoteObjectMap)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
+		}
+
+		remoteObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, remoteContent)
+
+		// Create the new object in the local database
+		if err := svc.createObject(remoteObject); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to create object in service: %w")
+		}
+
+		// Replace the incomingObjectMap with the remoteObjectMap for response and notification
+		incomingObjectMap = remoteObjectMap
+
+	} else {
+
+		// Set the lastUpdate property. We overwrite whatever the user sets.
+		now := time.Now()
+		lastUpdate := now.Format(time.RFC3339Nano)
+		incomingObjectMap["lastUpdate"] = lastUpdate
+
+		incomingContent, err := json.Marshal(incomingObjectMap)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
+		}
+
+		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
+
+		// Create the new object in the local database
+		if err := svc.createObject(incomingObject); err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to create object in service: %w")
+		}
+
 	}
 
-	incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
-
-	if err := svc.createObject(incomingObject); err != nil {
-		return ErrorResponsef(err, http.StatusInternalServerError, "failed to create object in service: %w")
-	}
-
+	// Now we have in incomingObjectMap the object as created, either locally or in the remote server in proxy mode
 	headers := make(map[string]string)
-	headers["Location"] = incomingObjectMap["href"].(string)
+	headers["Location"], _ = incomingObjectMap["href"].(string)
 	slog.Info("Object created successfully", slog.String("id", id), slog.String("resourceName", req.ResourceName), slog.String("location", incomingObjectMap["href"].(string)))
 
 	// Send TMForum notification
@@ -512,83 +524,14 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
 	}
 
-	if svc.proxyEnabled {
-		// Try to get the object from the local database first
-		obj, err := svc.getObject(req.ID, req.ResourceName)
-		if err != nil {
-			// If there is an error, log it and proceed to the remote server
-			slog.Error("failed to get object from local cache", slog.Any("error", err))
-		}
-		// If the object is found in the local cache, return it
-		if obj != nil {
-			slog.Debug("object found in cache", "id", req.ID)
-			var responseData map[string]any
-			err = json.Unmarshal(obj.Content, &responseData)
-			if err != nil {
-				return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content: %w")
-			}
-			return &Response{StatusCode: http.StatusOK, Body: responseData}
-		}
-
-		// If the object is not in the cache, get it from the remote server
-		slog.Debug("object not found in cache, getting from remote", slog.String("id", req.ID))
-		headers := map[string]string{
-			"Authorization": "Bearer " + req.AccessToken,
-		}
-		path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
-		resp, err := svc.tmfClient.Get(path, headers)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
-		}
-		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
-		}
-
-		if resp.StatusCode >= 300 {
-			return &Response{
-				StatusCode: resp.StatusCode,
-				Body:       body,
-			}
-		}
-
-		var incomingObjectMap map[string]any
-		if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
-			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
-		}
-
-		id, _ := incomingObjectMap["id"].(string)
-		version, _ := incomingObjectMap["version"].(string)
-		lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
-
-		incomingContent, err := json.Marshal(incomingObjectMap)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
-		}
-
-		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
-
-		if err := svc.createObject(incomingObject); err != nil {
-			slog.Error("failed to cache object", slog.Any("error", err))
-			// Do not return an error to the client, just log it
-		}
-
-		return &Response{
-			StatusCode: resp.StatusCode,
-			Headers:    convertHeaders(resp.Header),
-			Body:       incomingObjectMap,
-		}
-	}
-
-	// Retrieve the object from the database. If it is not found, we return a 404 error.
-	obj, err := svc.getObject(req.ID, req.ResourceName)
+	// Retrieve the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
+	// If th eobject is not found, we return a 404 error.
+	existingObject, err := svc.getLocalOrRemoteObject(req)
 	if err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to get object from service: %w")
 	}
 
-	if obj == nil {
+	if existingObject == nil {
 		return ErrorResponsef(nil, http.StatusNotFound, "object not found")
 	}
 
@@ -597,7 +540,12 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	err = takeDecision(svc.ruleEngine, req, token, obj.ToMap(), obj.ToMap())
+	existingObjectMap, err := existingObject.ToMap()
+	if err != nil {
+		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content: %w")
+	}
+
+	err = takeDecision(svc.ruleEngine, req, token, existingObject.ToMapNoErr(), existingObjectMap)
 	if err != nil {
 		return ErrorResponse(err, http.StatusForbidden)
 	}
@@ -605,12 +553,6 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	// ************************************************************************************************
 	// Now we can proceed.
 	// ************************************************************************************************
-
-	var responseData map[string]any
-	err = json.Unmarshal(obj.Content, &responseData)
-	if err != nil {
-		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content: %w")
-	}
 
 	// Handle partial field selection
 	fieldsParam := req.QueryParams.Get("fields")
@@ -637,81 +579,87 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 		fieldSet["lifecycleStatus"] = true
 
 		filteredItem := make(map[string]any)
-		for key, value := range responseData {
+		for key, value := range existingObjectMap {
 			if fieldSet[key] {
 				filteredItem[key] = value
 			}
 		}
-		responseData = filteredItem
+		existingObjectMap = filteredItem
 	}
 
 	slog.Info("Object retrieved successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
-	return &Response{StatusCode: http.StatusOK, Body: responseData}
+	return &Response{StatusCode: http.StatusOK, Body: existingObjectMap}
+}
+
+func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error) {
+
+	// Retrieve the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
+	// If th eobject is not found, we return a 404 error.
+	obj, err := svc.getObject(req.ID, req.ResourceName)
+	if err != nil {
+		return nil, errl.Errorf("failed to get object from local service: %w", err)
+	}
+
+	// Return the object if found locally
+	if obj != nil {
+		return obj, nil
+	}
+
+	// Return an error if object not found locally and proxy not enabled
+	if !svc.proxyEnabled {
+		return nil, nil
+	}
+
+	// If the object is not in the cache, get it from the remote server
+	slog.Debug("object not found in cache, getting from remote", slog.String("id", req.ID))
+	headers := map[string]string{
+		"Authorization": "Bearer " + req.AccessToken,
+	}
+	path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
+	resp, err := svc.tmfClient.Get(path, headers)
+	if err != nil {
+		return nil, errl.Errorf("failed to proxy request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, errl.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode >= 300 {
+		return nil, errl.Errorf("remote server returned error: %s", string(body))
+	}
+
+	var incomingObjectMap map[string]any
+	if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
+		return nil, errl.Errorf("failed to bind request body: %w", err)
+	}
+
+	id, _ := incomingObjectMap["id"].(string)
+	version, _ := incomingObjectMap["version"].(string)
+	lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
+
+	incomingContent, err := json.Marshal(incomingObjectMap)
+	if err != nil {
+		return nil, errl.Errorf("failed to marshal object content: %w", err)
+	}
+
+	obj = repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
+
+	if err := svc.createObject(obj); err != nil {
+		slog.Error("failed to cache object", slog.Any("error", err))
+		// Do not return an error to the client, just log it
+	}
+
+	slog.Info("Object retrieved from remote and cached successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
+	return obj, nil
 }
 
 // UpdateGenericObject updates an existing TMF object using generalized parameters.
 func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("UpdateGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
-
-	if svc.proxyEnabled {
-		// Proxy logic
-		headers := map[string]string{
-			"Content-Type":  "application/json",
-			"Authorization": "Bearer " + req.AccessToken,
-		}
-		path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
-		resp, err := svc.tmfClient.Patch(path, req.Body, headers)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
-		}
-		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
-		}
-
-		if resp.StatusCode >= 300 {
-			return &Response{
-				StatusCode: resp.StatusCode,
-				Body:       body,
-			}
-		}
-
-		var incomingObjectMap map[string]any
-		if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
-			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
-		}
-
-		id, _ := incomingObjectMap["id"].(string)
-		version, _ := incomingObjectMap["version"].(string)
-		lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
-
-		incomingContent, err := json.Marshal(incomingObjectMap)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content: %w")
-		}
-
-		incomingObject := &repo.TMFObject{
-			ID:         id,
-			Type:       req.ResourceName,
-			Version:    version,
-			APIVersion: req.APIVersion,
-			LastUpdate: lastUpdate,
-			Content:    incomingContent,
-		}
-
-		if err := svc.updateObject(incomingObject); err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to update object in service: %w")
-		}
-
-		return &Response{
-			StatusCode: resp.StatusCode,
-			Headers:    convertHeaders(resp.Header),
-			Body:       incomingObjectMap,
-		}
-	}
 
 	// ************************************************************************************************
 	// Authentication: we require the user to be authenticated
@@ -738,34 +686,20 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 
 	var incomingObjMap map[string]any
 	var incomingVersion string
-	var lastUpdate string
-	var sellerDid string
-	var sellerOperatorDid string
 	{
 		// Parse the request body, which contains the TMForum object being created
 		if err := json.Unmarshal(req.Body, &incomingObjMap); err != nil {
 			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
 		}
 
-		// An update operation specifies the ID of the object to update in the URL.
-		// To facilitate life to applications, we allow the ID to be also in the body.
-		// But if the ID is present in the body, ensure it matches the ID in the URL
-		id, _ := incomingObjMap["id"].(string)
-		if id != "" && id != req.ID {
-			return ErrorResponsef(nil, http.StatusBadRequest, "ID in body must match ID in URL")
-		}
-
-		// TODO: should we do the same for href?
-
-		// Check and process '@type' field
-		if typeVal, typeOk := incomingObjMap["@type"].(string); typeOk {
-			if !strings.EqualFold(typeVal, req.ResourceName) {
-				return ErrorResponsef(nil, http.StatusBadRequest, "@type field in body must match resource name in URL")
+		if !DOMEHacks {
+			// An update operation specifies the ID of the object to update in the URL.
+			// To facilitate life to applications, we allow the ID to be also in the body.
+			// But if the ID is present in the body, ensure it matches the ID in the URL
+			id, _ := incomingObjMap["id"].(string)
+			if id != "" && id != req.ID {
+				return ErrorResponsef(nil, http.StatusBadRequest, "ID in body must match ID in URL")
 			}
-		} else {
-			// If @type is not specified, add it
-			incomingObjMap["@type"] = req.ResourceName
-			slog.Debug("Added missing @type field to update request", slog.String("type", req.ResourceName))
 		}
 
 		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
@@ -773,8 +707,6 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		if err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to add Seller and Buyer info: %w")
 		}
-
-		sellerDid, sellerOperatorDid, err = getSellerAndBuyerInfo(incomingObjMap, req.APIVersion)
 
 		// Set the lastUpdate property. We overwrite whatever the user set.
 		now := time.Now()
@@ -784,33 +716,50 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	}
 
 	// ************************************************************************************************
-	// Retrieve existing object from database to preserve CreatedAt
+	// Retrieve existing object locally or from proxy
 	// ************************************************************************************************
 
 	var existingObj *repo.TMFObject
-	var existingSellerDid string
-	var existingSellerOperatorDid string
-	var existingObjectMap map[string]any
-	{
-		// Retrieve existing object
+
+	if svc.proxyEnabled {
+
+		// Retrieve existing object, locally or remotely
+		existingObj, err = svc.getLocalOrRemoteObject(req)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get existing object for update: %w")
+		}
+
+	} else {
+
+		// Retrieve existing object only locally
 		existingObj, err = svc.getObject(req.ID, req.ResourceName)
 		if err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get existing object for update: %w")
 		}
 
-		if existingObj == nil {
-			return ErrorResponsef(nil, http.StatusNotFound, "object not found")
-		}
+	}
 
-		existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObj.ToMap(), req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
-		}
+	if existingObj == nil {
+		return ErrorResponsef(nil, http.StatusNotFound, "object not found")
+	}
 
-		if err := json.Unmarshal(existingObj.Content, &existingObjectMap); err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content for merge: %w")
-		}
+	existingObjectMap, err := existingObj.ToMap()
+	if err != nil {
+		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content: %w")
+	}
 
+	var existingSellerDid string
+	var existingSellerOperatorDid string
+
+	// We need to check if the calling user is the owner of the object being updated.
+	// For that, we compare the seller and seller operator DIDs of the existing object
+	// with those of the incoming object (which are derived from the caller identity).
+	// If they do not match, the caller is not the owner and we reject the operation.
+	// Note that we do this before merging the incoming object into the existing one,
+	// so the caller can not change the ownership of an object by updating it.
+	existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObjectMap, req.APIVersion)
+	if err != nil {
+		return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
 	}
 
 	// ************************************************************************************************
@@ -818,13 +767,17 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	// Seller and seller operator must match
-	if existingSellerDid != sellerDid || existingSellerOperatorDid != sellerOperatorDid {
-		return ErrorResponsef(nil, http.StatusForbidden, "seller or seller operator mismatch")
+	// We need the SellerOperator to be our operator (the one who operates this server)
+	if existingSellerOperatorDid != config.ServerOperatorDid {
+		return ErrorResponsef(nil, http.StatusForbidden, "object not managed by this operator")
 	}
 
-	// Incoming version must be greater or equal to the existing version
-	// But if existing lifecycleStatus is 'Launched', 'Retired' or 'Obsolete', incoming version must be greater than the existing version
+	// We need that the caller is the owner of the object being updated.
+	if !isDIDForOrganizationIDentifier(existingSellerDid, req.AuthUser.OrganizationIdentifier) {
+		return ErrorResponsef(nil, http.StatusForbidden, "user not owner of the object")
+	}
+
+	// If existing lifecycleStatus is 'Launched', 'Retired' or 'Obsolete', incoming version must be greater than the existing version
 	existingLifecycleStatus, _ := existingObjectMap["lifecycleStatus"].(string)
 	incomingVersion, _ = incomingObjMap["version"].(string)
 
@@ -834,46 +787,72 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			// Only a new version can be created.
 			return ErrorResponsef(nil, http.StatusBadRequest, "for launched objects, incoming version must be greater than existing version")
 		}
-	} else {
-		if incomingVersion == "" {
-			incomingObjMap["version"] = existingObj.Version
-		} else {
-			// incomingVersion must be lexicographically greater than existingVersion
-			if incomingVersion < existingObj.Version {
-				return ErrorResponsef(nil, http.StatusBadRequest, "incoming version must be greater or equal than existing version")
-			}
-		}
 	}
 
 	// ************************************************************************************************
 	// Now we can proceed.
 	// ************************************************************************************************
 
-	// Merge incomingObjMap into existing object using RFC7396 (JSON Merge Patch)
+	if svc.proxyEnabled {
 
-	// RFC7396 merge implementation: modify target in place
-	mergeRFC7396(existingObjectMap, incomingObjMap)
+		// Proxy logic
+		headers := map[string]string{
+			"Content-Type":  "application/json",
+			"Authorization": "Bearer " + req.AccessToken,
+		}
+		path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
+		resp, err := svc.tmfClient.Patch(path, req.Body, headers)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to proxy request: %w")
+		}
+		defer resp.Body.Close()
 
-	// update incomingObjMap to the merged result so response/notification contains the final content
-	incomingObjMap = existingObjectMap
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to read response body: %w")
+		}
 
-	incomingContent, err := json.Marshal(incomingObjMap)
+		if resp.StatusCode >= 300 {
+			return ErrorResponsef(nil, resp.StatusCode, "remote server returned error: %s", string(body))
+		}
+
+		var remoteObjectMap map[string]any
+		if err := json.Unmarshal(body, &remoteObjectMap); err != nil {
+			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
+		}
+
+		// Set the existingObjectMap to the remoteObjectMap, so we store the object as it is in the remote server
+		existingObjectMap = remoteObjectMap
+
+	} else {
+
+		// Merge incomingObjMap into existing object using RFC7396 (JSON Merge Patch)
+
+		// RFC7396 merge implementation: modify target in place
+		mergeRFC7396(existingObjectMap, incomingObjMap)
+
+	}
+
+	existingVersion, _ := existingObjectMap["version"].(string)
+	existingLastUpdate, _ := existingObjectMap["lastUpdate"].(string)
+
+	existingObjectContent, err := json.Marshal(existingObjectMap)
 	if err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to marshal object content for update: %w")
 	}
 
-	obj := &repo.TMFObject{
+	existingObject := &repo.TMFObject{
 		ID:         req.ID,
 		Type:       req.ResourceName,
-		Version:    incomingVersion,
+		Version:    existingVersion,
 		APIVersion: req.APIVersion,
-		LastUpdate: lastUpdate,
-		Content:    incomingContent,
+		LastUpdate: existingLastUpdate,
+		Content:    existingObjectContent,
 		CreatedAt:  existingObj.CreatedAt,
 		UpdatedAt:  time.Now(),
 	}
 
-	if err := svc.updateObject(obj); err != nil {
+	if err := svc.updateObject(existingObject); err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to update object in service: %w")
 	}
 
@@ -881,15 +860,83 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 
 	// Send TMForum notification (AttributeValueChangeEvent)
 	eventType := toEventType(req.ResourceName, "AttributeValueChangeEvent")
-	eventPayload := buildEventPayload(req, eventType, incomingObjMap)
+	eventPayload := buildEventPayload(req, eventType, existingObjectMap)
 	svc.notif.PublishEvent(req.APIfamily, eventType, eventPayload)
 
-	return &Response{StatusCode: http.StatusOK, Body: incomingObjMap}
+	return &Response{StatusCode: http.StatusOK, Body: existingObjectMap}
 }
 
 // DeleteGenericObject deletes a TMF object using generalized parameters.
 func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	slog.Debug("DeleteGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
+
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	token, err := svc.processAccessToken(req)
+	if err != nil {
+		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
+	}
+
+	// Deleting an object can not be done without authentication
+	if len(token) == 0 {
+		return ErrorResponsef(nil, http.StatusUnauthorized, "user not authenticated")
+	}
+
+	// ************************************************************************************************
+	// Retrieve existing object from database
+	// ************************************************************************************************
+
+	var existingObject *repo.TMFObject
+	var existingSellerDid string
+	var existingSellerOperatorDid string
+
+	if svc.proxyEnabled {
+
+		// Retrieve existing object, locally or remotely
+		existingObject, err = svc.getLocalOrRemoteObject(req)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get existing object for update: %w")
+		}
+
+	} else {
+
+		// Retrieve existing object
+		existingObject, err = svc.getObject(req.ID, req.ResourceName)
+		if err != nil {
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get existing object for update: %w")
+		}
+
+	}
+
+	// If nothing to delete, return 404
+	if existingObject == nil {
+		return ErrorResponsef(nil, http.StatusNotFound, "object not found")
+	}
+
+	existingObjectMap, err := existingObject.ToMap()
+	if err != nil {
+		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content: %w")
+	}
+
+	existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObjectMap, req.APIVersion)
+	if err != nil {
+		return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
+	}
+
+	// Normalize organization identifiers to the DID format
+	userDid := req.AuthUser.OrganizationIdentifier
+	if !strings.HasPrefix(userDid, "did:elsi:") {
+		userDid = "did:elsi:" + userDid
+	}
+
+	// We need the SellerOperator to be our operator (the one who operates this server)
+	if existingSellerOperatorDid != config.ServerOperatorDid {
+		return ErrorResponsef(nil, http.StatusForbidden, "object not managed by this operator")
+	}
+
+	// We need that the caller is the owner of the object being updated.
+	if existingSellerDid != userDid {
+		return ErrorResponsef(nil, http.StatusForbidden, "user is not owner of the object")
+	}
 
 	if svc.proxyEnabled {
 		// Proxy logic
@@ -914,63 +961,9 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 			}
 		}
 
-		if err := svc.deleteObject(req.ID, req.ResourceName); err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to delete object in service: %w")
-		}
-
-		return &Response{
-			StatusCode: resp.StatusCode,
-		}
 	}
 
-	// Authentication: process the AccessToken to extract caller info from its claims in the payload
-	token, err := svc.processAccessToken(req)
-	if err != nil {
-		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
-	}
-
-	// Deleting an object can not be done without authentication
-	if len(token) == 0 {
-		return ErrorResponsef(nil, http.StatusUnauthorized, "user not authenticated")
-	}
-
-	// ************************************************************************************************
-	// Retrieve existing object from database
-	// ************************************************************************************************
-
-	var existingObj *repo.TMFObject
-	var existingSellerDid string
-	var existingSellerOperatorDid string
-	{
-		// Retrieve existing object
-		existingObj, err = svc.getObject(req.ID, req.ResourceName)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get existing object for update: %w")
-		}
-
-		if existingObj == nil {
-			return ErrorResponsef(nil, http.StatusNotFound, "object not found")
-		}
-
-		existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObj.ToMap(), req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
-		}
-
-	}
-
-	// Normalize all organization identifiers to the DID format
-	organizationIdentifier := req.AuthUser.OrganizationIdentifier
-	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
-		organizationIdentifier = "did:elsi:" + organizationIdentifier
-	}
-
-	// The user must be either the Seller or the SellerOperator to delete the object
-	if existingSellerDid != organizationIdentifier && existingSellerOperatorDid != organizationIdentifier {
-		return ErrorResponsef(nil, http.StatusForbidden, "user must be either the Seller or the SellerOperator")
-	}
-
-	// Delete the object in the database
+	// Delete the object in the local database
 	if err := svc.deleteObject(req.ID, req.ResourceName); err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to delete object from service: %w")
 	}
@@ -988,11 +981,22 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	svc.notif.PublishEvent(req.APIfamily, eventType, eventPayload)
 
 	return &Response{StatusCode: http.StatusNoContent}
+
 }
 
 // ListGenericObjects retrieves all TMF objects of a given type using generalized parameters.
 func (svc *Service) ListGenericObjects(req *Request) *Response {
 	slog.Debug("ListGenericObjects called", slog.String("resourceName", req.ResourceName))
+
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	_, err := svc.processAccessToken(req)
+	if err != nil {
+		slog.Error("invalid access token", slog.String("error", err.Error()))
+		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
+	}
+
+	var objs []repo.TMFObject
+	var totalCount int
 
 	if svc.proxyEnabled {
 		// Proxy logic
@@ -1021,88 +1025,81 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			}
 		}
 
-		var responseData []map[string]any
+		responseData := make([]map[string]any, 0)
 		if err := json.Unmarshal(body, &responseData); err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content for listing: %w")
 		}
 
-		// TODO: Cache the results
+		responseHeaders := make(map[string]string)
+		responseHeaders["X-Total-Count"] = strconv.Itoa(len(responseData))
 
-		return &Response{
-			StatusCode: resp.StatusCode,
-			Headers:    convertHeaders(resp.Header),
-			Body:       responseData,
-		}
-	}
+		slog.Info("Remote objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
+		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseData}
 
-	// Authentication: process the AccessToken to extract caller info from its claims in the payload
-	_, err := svc.processAccessToken(req)
-	if err != nil {
-		slog.Error("invalid access token", slog.String("error", err.Error()))
-		return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
-	}
+	} else {
 
-	objs, totalCount, err := svc.listObjects(req.ResourceName, req.APIVersion, req.QueryParams)
-	if err != nil {
-		slog.Error("failed to list objects from service", slog.String("error", err.Error()))
-		return ErrorResponsef(err, http.StatusInternalServerError, "failed to list objects from service: %w")
-	}
-
-	headers := make(map[string]string)
-	headers["X-Total-Count"] = strconv.Itoa(totalCount)
-
-	// var responseData []map[string]any
-
-	responseData := make([]map[string]any, 0)
-
-	for _, obj := range objs {
-		var item map[string]any
-		err := json.Unmarshal(obj.Content, &item)
+		objs, totalCount, err = svc.listObjects(req.ResourceName, req.APIVersion, req.QueryParams)
 		if err != nil {
-			slog.Error("failed to unmarshal object content for listing", slog.String("error", err.Error()))
-			return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content for listing: %w")
-		}
-		responseData = append(responseData, item)
-	}
-
-	// Handle partial field selection
-	fieldsParam := req.QueryParams.Get("fields")
-	if fieldsParam != "" {
-		var fields []string
-		if fieldsParam == "none" {
-			fields = []string{"id", "href", "lastUpdate", "version"}
-		} else {
-			fields = strings.Split(fieldsParam, ",")
+			slog.Error("failed to list objects from service", slog.String("error", err.Error()))
+			return ErrorResponsef(err, http.StatusInternalServerError, "failed to list objects from service: %w")
 		}
 
-		// Create a set of fields for quick lookup
-		fieldSet := make(map[string]bool)
-		for _, f := range fields {
-			fieldSet[strings.TrimSpace(f)] = true
-		}
+		responseHeaders := make(map[string]string)
+		responseHeaders["X-Total-Count"] = strconv.Itoa(totalCount)
 
-		// Always include id, href, lastUpdate, version and @type
-		fieldSet["id"] = true
-		fieldSet["href"] = true
-		fieldSet["lastUpdate"] = true
-		fieldSet["version"] = true
-		fieldSet["@type"] = true
+		responseData := make([]map[string]any, 0)
 
-		var filteredResponseData []map[string]any
-		for _, item := range responseData {
-			filteredItem := make(map[string]any)
-			for key, value := range item {
-				if fieldSet[key] {
-					filteredItem[key] = value
-				}
+		for _, obj := range objs {
+			var item map[string]any
+			err := json.Unmarshal(obj.Content, &item)
+			if err != nil {
+				slog.Error("failed to unmarshal object content for listing", slog.String("error", err.Error()))
+				return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal object content for listing: %w")
 			}
-			filteredResponseData = append(filteredResponseData, filteredItem)
+			responseData = append(responseData, item)
 		}
-		responseData = filteredResponseData
+
+		// Handle partial field selection
+		fieldsParam := req.QueryParams.Get("fields")
+		if fieldsParam != "" {
+			var fields []string
+			if fieldsParam == "none" {
+				fields = []string{"id", "href", "lastUpdate", "version"}
+			} else {
+				fields = strings.Split(fieldsParam, ",")
+			}
+
+			// Create a set of fields for quick lookup
+			fieldSet := make(map[string]bool)
+			for _, f := range fields {
+				fieldSet[strings.TrimSpace(f)] = true
+			}
+
+			// Always include id, href, lastUpdate, version and @type
+			fieldSet["id"] = true
+			fieldSet["href"] = true
+			fieldSet["lastUpdate"] = true
+			fieldSet["version"] = true
+			fieldSet["@type"] = true
+
+			var filteredResponseData []map[string]any
+			for _, item := range responseData {
+				filteredItem := make(map[string]any)
+				for key, value := range item {
+					if fieldSet[key] {
+						filteredItem[key] = value
+					}
+				}
+				filteredResponseData = append(filteredResponseData, filteredItem)
+			}
+			responseData = filteredResponseData
+		}
+
+		slog.Info("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
+		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseData}
+
 	}
 
-	slog.Info("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
-	return &Response{StatusCode: http.StatusOK, Headers: headers, Body: responseData}
 }
 
 func convertHeaders(h http.Header) map[string]string {
@@ -1242,9 +1239,16 @@ func ErrorResponsef(err error, statusCode int, format string, args ...any) *Resp
 }
 
 var LifecycleStatusMandatory = map[string]string{
-	"ProductOffering":       "In Study",
-	"ProductOfferingPrice":  "In Study",
-	"ProductSpecification":  "In Study",
-	"ResourceSpecification": "In Study",
-	"ServiceSpecification":  "In Study",
+	"productOffering":       "In Study",
+	"productOfferingPrice":  "In Study",
+	"productSpecification":  "In Study",
+	"resourceSpecification": "In Study",
+	"serviceSpecification":  "In Study",
+}
+
+func isDIDForOrganizationIDentifier(did, orgID string) bool {
+	if !strings.HasPrefix(did, "did:elsi:") {
+		return false
+	}
+	return did == "did:elsi:"+orgID
 }
