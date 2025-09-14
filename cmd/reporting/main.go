@@ -79,7 +79,7 @@ func main() {
 	}
 
 	// Create proxy instance
-	proxyInstance, err := reporting.NewProxy(config)
+	proxyInstance, err := reporting.NewRemoteOrchestrator(config)
 	if err != nil {
 		log.Fatalf("Failed to create proxy: %v", err)
 	}
@@ -113,7 +113,7 @@ func main() {
 }
 
 // runWithProgress runs the validation process with progress reporting
-func runWithProgress(ctx context.Context, proxyInstance *reporting.Proxy) error {
+func runWithProgress(ctx context.Context, proxyInstance *reporting.RemoteOrchestrator) error {
 	progressChan := make(chan reporting.ProgressUpdate)
 
 	// Start validation in goroutine

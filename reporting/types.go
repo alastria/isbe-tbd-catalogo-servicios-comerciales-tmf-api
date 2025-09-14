@@ -42,12 +42,14 @@ type PartyRefOrPartyRole struct {
 
 // ValidationResult represents the result of validating a single object
 type ValidationResult struct {
-	ObjectID   string              `json:"object_id"`
-	ObjectType string              `json:"object_type"`
-	Valid      bool                `json:"valid"`
-	Errors     []ValidationError   `json:"errors,omitempty"`
-	Warnings   []ValidationWarning `json:"warnings,omitempty"`
-	Timestamp  time.Time           `json:"timestamp"`
+	ObjectID      string              `json:"object_id"`
+	ObjectType    string              `json:"object_type"`
+	Valid         bool                `json:"valid"`
+	Errors        []ValidationError   `json:"errors,omitempty"`
+	Warnings      []ValidationWarning `json:"warnings,omitempty"`
+	ErrorsFixed   []ValidationError   `json:"errors_fixed,omitempty"`
+	WarningsFixed []ValidationWarning `json:"warnings_fixed,omitempty"`
+	Timestamp     time.Time           `json:"timestamp"`
 }
 
 // ValidationError represents a validation error
@@ -66,26 +68,32 @@ type ValidationWarning struct {
 
 // Statistics holds the overall statistics of the validation process
 type Statistics struct {
-	TotalObjects   int                  `json:"total_objects"`
-	ValidObjects   int                  `json:"valid_objects"`
-	InvalidObjects int                  `json:"invalid_objects"`
-	TotalErrors    int                  `json:"total_errors"`
-	TotalWarnings  int                  `json:"total_warnings"`
-	ObjectsByType  map[string]TypeStats `json:"objects_by_type"`
-	ErrorsByType   map[string]int       `json:"errors_by_type"`
-	WarningsByType map[string]int       `json:"warnings_by_type"`
-	StartTime      time.Time            `json:"start_time"`
-	EndTime        time.Time            `json:"end_time"`
-	Duration       time.Duration        `json:"duration"`
+	TotalObjects        int                  `json:"total_objects"`
+	ValidObjects        int                  `json:"valid_objects"`
+	InvalidObjects      int                  `json:"invalid_objects"`
+	TotalErrors         int                  `json:"total_errors"`
+	TotalWarnings       int                  `json:"total_warnings"`
+	TotalErrorsFixed    int                  `json:"total_errors_fixed"`
+	TotalWarningsFixed  int                  `json:"total_warnings_fixed"`
+	ObjectsByType       map[string]TypeStats `json:"objects_by_type"`
+	ErrorsByType        map[string]int       `json:"errors_by_type"`
+	WarningsByType      map[string]int       `json:"warnings_by_type"`
+	ErrorsFixedByType   map[string]int       `json:"errors_fixed_by_type"`
+	WarningsFixedByType map[string]int       `json:"warnings_fixed_by_type"`
+	StartTime           time.Time            `json:"start_time"`
+	EndTime             time.Time            `json:"end_time"`
+	Duration            time.Duration        `json:"duration"`
 }
 
 // TypeStats holds statistics for a specific object type
 type TypeStats struct {
-	Count    int `json:"count"`
-	Valid    int `json:"valid"`
-	Invalid  int `json:"invalid"`
-	Errors   int `json:"errors"`
-	Warnings int `json:"warnings"`
+	Count         int `json:"count"`
+	Valid         int `json:"valid"`
+	Invalid       int `json:"invalid"`
+	Errors        int `json:"errors"`
+	Warnings      int `json:"warnings"`
+	ErrorsFixed   int `json:"errors_fixed"`
+	WarningsFixed int `json:"warnings_fixed"`
 }
 
 // ValidationReport represents the complete validation report

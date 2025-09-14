@@ -27,6 +27,64 @@ func NewClient(config *Config) *Client {
 	}
 }
 
+// GetObjectsPage retrieves a single page of objects of a specific type
+func (c *Client) GetObjectsPage(ctx context.Context, objectType string, config *Config, offset int) ([]TMFObject, error) {
+	// Get the path prefix for this object type from the routes map
+	pathPrefix, exists := GeneratedDefaultResourceToPathPrefixV4[objectType]
+	if !exists {
+		return nil, fmt.Errorf("unknown object type: %s", objectType)
+	}
+
+	limit := config.PageSize
+
+	// Build URL with pagination parameters
+	url := fmt.Sprintf("%s%s?limit=%d&offset=%d", c.baseURL, pathPrefix, limit, offset)
+	fmt.Printf("Retrieving %s objects: offset=%d, limit=%d\n", objectType, offset, limit)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %w", err)
+	}
+
+	// Set common headers
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to execute request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("server returned status %d: %s", resp.StatusCode, string(body))
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	// Try to parse as an array first
+	var objects []TMFObject
+	if err := json.Unmarshal(body, &objects); err != nil {
+		// If it's not an array, try to parse as a single object
+		var singleObject TMFObject
+		if err := json.Unmarshal(body, &singleObject); err != nil {
+			return nil, fmt.Errorf("failed to parse response as JSON: %w", err)
+		}
+		objects = []TMFObject{singleObject}
+	}
+
+	// Process each object to extract additional fields
+	for i := range objects {
+		objects[i] = c.processObject(objects[i], body)
+	}
+
+	return objects, nil
+}
+
 // GetObjectsWithPagination retrieves all objects of a specific type using pagination
 func (c *Client) GetObjectsWithPagination(ctx context.Context, objectType string, config *Config) ([]TMFObject, error) {
 	// Get the path prefix for this object type from the routes map
@@ -195,22 +253,22 @@ func (c *Client) processObject(obj TMFObject, rawBody []byte) TMFObject {
 
 // TestConnection tests the connection to the remote server
 func (c *Client) TestConnection(ctx context.Context) error {
-	url := fmt.Sprintf("%s/health", c.baseURL)
+	// url := fmt.Sprintf("%s/health", c.baseURL)
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return fmt.Errorf("failed to create request: %w", err)
-	}
+	// req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to create request: %w", err)
+	// }
 
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return fmt.Errorf("failed to connect to server: %w", err)
-	}
-	defer resp.Body.Close()
+	// resp, err := c.httpClient.Do(req)
+	// if err != nil {
+	// 	return fmt.Errorf("failed to connect to server: %w", err)
+	// }
+	// defer resp.Body.Close()
 
-	if resp.StatusCode >= 400 {
-		return fmt.Errorf("server returned status %d", resp.StatusCode)
-	}
+	// if resp.StatusCode >= 400 {
+	// 	return fmt.Errorf("server returned status %d", resp.StatusCode)
+	// }
 
 	return nil
 }

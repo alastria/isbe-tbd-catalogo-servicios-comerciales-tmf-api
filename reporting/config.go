@@ -30,6 +30,7 @@ type Config struct {
 	// Validation settings
 	ValidateRequiredFields bool `json:"validate_required_fields" yaml:"validate_required_fields"`
 	ValidateRelatedParty   bool `json:"validate_related_party" yaml:"validate_related_party"`
+	FixValidationErrors    bool `json:"fix_validation_errors" yaml:"fix_validation_errors"`
 
 	// Output settings
 	OutputDir  string `json:"output_dir" yaml:"output_dir"`
@@ -48,6 +49,7 @@ func DefaultConfig() *Config {
 		MaxObjects:             10000,
 		ValidateRequiredFields: true,
 		ValidateRelatedParty:   true,
+		FixValidationErrors:    false,
 		OutputDir:              "./reports",
 		ReportFile:             "tmf_validation_report.md",
 	}
@@ -57,7 +59,7 @@ func DefaultConfig() *Config {
 func DefaultObjectTypes() []string {
 
 	objectTypes := []string{}
-	for objectType, _ := range GeneratedDefaultResourceToPathPrefixV4 {
+	for objectType := range GeneratedDefaultResourceToPathPrefixV4 {
 		objectTypes = append(objectTypes, objectType)
 	}
 
@@ -107,6 +109,13 @@ func (c *Config) LoadConfigFromEnv() {
 	if maxObjects := os.Getenv("TMF_MAX_OBJECTS"); maxObjects != "" {
 		if max, err := strconv.Atoi(maxObjects); err == nil && max > 0 {
 			c.MaxObjects = max
+		}
+	}
+
+	// Load validation settings from environment
+	if fixErrors := os.Getenv("TMF_FIX_VALIDATION_ERRORS"); fixErrors != "" {
+		if enabled, err := strconv.ParseBool(fixErrors); err == nil {
+			c.FixValidationErrors = enabled
 		}
 	}
 }

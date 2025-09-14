@@ -37,7 +37,7 @@ func main() {
 
 	// Create proxy instance
 	fmt.Println("\nCreating proxy instance...")
-	proxyInstance, err := reporting.NewProxy(config)
+	proxyInstance, err := reporting.NewRemoteOrchestrator(config)
 	if err != nil {
 		log.Fatalf("Failed to create proxy: %v", err)
 	}
