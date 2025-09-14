@@ -138,7 +138,7 @@ type Service struct {
 }
 
 // NewService creates a new service.
-func NewService(db *sqlx.DB, ruleEngine *pdp.PDP, verifierServer string, proxyEnabled bool) *Service {
+func NewService(db *sqlx.DB, ruleEngine *pdp.PDP, verifierServer string, proxyEnabled bool, remoteTMF string) *Service {
 	svc := &Service{
 		db:             db,
 		ruleEngine:     ruleEngine,
@@ -148,7 +148,7 @@ func NewService(db *sqlx.DB, ruleEngine *pdp.PDP, verifierServer string, proxyEn
 
 	if proxyEnabled {
 		clientCfg := &tmfclient.Config{
-			BaseURL: "https://tmf.dome-marketplace-sbx.org",
+			BaseURL: remoteTMF,
 			Timeout: 20,
 		}
 
@@ -387,6 +387,12 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			}
 		}
 
+		// Set the @type if not specified by the user
+		if resourceType, _ := incomingObjectMap["@type"].(string); resourceType == "" {
+			resourceType = strings.ToUpper(req.ResourceName[0:1]) + req.ResourceName[1:]
+			incomingObjectMap["@type"] = resourceType
+		}
+
 		// TODO: add the Seller and Buyer info only to the objects where it is mandatory.
 		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
 		err = setSellerAndBuyerInfo(incomingObjectMap, req.AuthUser.OrganizationIdentifier, req.APIVersion)
@@ -435,7 +441,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		if resp.StatusCode >= 300 {
-			return ErrorResponse(nil, resp.StatusCode)
+			return ErrorResponsef(nil, resp.StatusCode, "body: %s", string(body))
 		}
 
 		// Put the created objet in a map
@@ -625,6 +631,10 @@ func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, errl.Errorf("failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode == 404 {
+		return nil, nil
 	}
 
 	if resp.StatusCode >= 300 {
@@ -1222,19 +1232,35 @@ func getHTTPStatusInfo(statusCode int) (int, string, string) {
 
 // ErrorResponse creates a standardized error response using only the HTTP status code
 func ErrorResponse(err error, statusCode int) *Response {
-	_, code, status := getHTTPStatusInfo(statusCode)
-	wrappedErr := errl.Error2(err)
-	slog.Error("error response", slog.String("error", wrappedErr.Error()))
-	apiErr := NewApiError(code, status, wrappedErr.Error(), fmt.Sprintf("%d", statusCode), "")
+	_, code, reason := getHTTPStatusInfo(statusCode)
+
+	message := ""
+	if err != nil {
+		wrappedErr := errl.Error2(err)
+		message = fmt.Sprintf("%s %s: %s", code, reason, wrappedErr.Error())
+	} else {
+		message = fmt.Sprintf("%s %s", code, reason)
+	}
+	slog.Error("error response", slog.String("error", message))
+
+	apiErr := NewApiError(code, reason, message, "", "")
 	return &Response{StatusCode: statusCode, Body: apiErr}
 }
 
 // ErrorResponsef creates a standardized error response with formatted error message using only the HTTP status code
 func ErrorResponsef(err error, statusCode int, format string, args ...any) *Response {
-	_, code, status := getHTTPStatusInfo(statusCode)
-	wrappedErr := errl.Errorf2(format, append(args, err)...)
-	slog.Error("error response", slog.String("error", wrappedErr.Error()))
-	apiErr := NewApiError(code, status, wrappedErr.Error(), fmt.Sprintf("%d", statusCode), "")
+	_, code, reason := getHTTPStatusInfo(statusCode)
+
+	var wrappedErr *errl.ErrorWithLocation
+	if err != nil {
+		wrappedErr = errl.Errorf2(format, append(args, err)...)
+	} else {
+		wrappedErr = errl.Errorf2(format, args...)
+	}
+	message := fmt.Sprintf("%s %s: %s", code, reason, wrappedErr.Error())
+	slog.Error("error response", slog.String("error", message))
+
+	apiErr := NewApiError(code, reason, message, "", "")
 	return &Response{StatusCode: statusCode, Body: apiErr}
 }
 

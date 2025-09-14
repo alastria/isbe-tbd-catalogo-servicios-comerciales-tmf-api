@@ -143,6 +143,7 @@ func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
 	req := &svc.Request{
 		Method:       c.Method(),
 		Action:       svc.HttpActions[c.Method()],
+		APIfamily:    c.Params("apiFamily"),
 		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
@@ -165,6 +166,7 @@ func (h *Handler) UpdateGenericObject(c *fiber.Ctx) error {
 	req := &svc.Request{
 		Method:       c.Method(),
 		Action:       svc.HttpActions[c.Method()],
+		APIfamily:    c.Params("apiFamily"),
 		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
@@ -193,6 +195,7 @@ func (h *Handler) DeleteGenericObject(c *fiber.Ctx) error {
 	req := &svc.Request{
 		Method:       c.Method(),
 		Action:       svc.HttpActions[c.Method()],
+		APIfamily:    c.Params("apiFamily"),
 		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
@@ -214,6 +217,7 @@ func (h *Handler) ListGenericObjects(c *fiber.Ctx) error {
 	req := &svc.Request{
 		Method:       c.Method(),
 		Action:       svc.HttpActions["LIST"],
+		APIfamily:    c.Params("apiFamily"),
 		APIVersion:   apiVersion,
 		ResourceName: c.Params("resourceName"),
 		QueryParams:  queryParams,
