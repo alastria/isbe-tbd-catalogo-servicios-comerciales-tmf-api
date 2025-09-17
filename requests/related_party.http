@@ -1,0 +1,29 @@
+POST https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productSpecification HTTP/1.1
+content-type: application/json
+
+{
+    "lifecycleStatus": "In Study",
+    "name": "Cisco Firepower NGFW",
+    "relatedParty": [
+        {
+            "@referredType": "Organization",
+            "href": "urn:ngsi-ld:organization:95fdc12e-6889-4f08-8ff8-296b10e8e781",
+            "id": "urn:ngsi-ld:organization:95fdc12e-6889-4f08-8ff8-296b10e8e781",
+            "name": "did:elsi:VATES-B60645900",
+            "role": "Seller"
+        },
+        {
+            "@referredType": "Organization",
+            "href": "urn:ngsi-ld:organization:95fdc12e-6889-4f08-8ff8-296b10e8e781",
+            "id": "urn:ngsi-ld:organization:95fdc12e-6889-4f08-8ff8-296b10e8e781",
+            "name": "did:elsi:VATES-B60645900",
+            "role": "SellerOperator"
+        }
+    ],
+    "version": "1.0"
+}
+
+
+###
+
+GET https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productSpecification/urn:ngsi-ld:product-specification:8e867c80-2a58-49c7-9502-30f8373802ad HTTP/1.1

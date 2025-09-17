@@ -290,6 +290,38 @@ func (svc *Service) DeleteHubSubscription(req *Request) *Response {
 }
 
 // CreateGenericObject creates a new TMF object using generalized parameters.
+//
+// The function performs the following checks and operations:
+//
+// 1.  **Authentication**:
+//     - It requires an authenticated user, obtained by processing the Access Token.
+//     - If the user is not authenticated, it returns a 401 Unauthorized error.
+//
+// 2.  **Incoming TMF Object Checks**:
+//     - It parses the request body to get the incoming TMF object.
+//     - It checks for mandatory name fields based on the resource type (`givenName` and `familyName` for `Individual`, `tradingName` for `Organization`, and `name` for others).
+//     - If an `id` is provided in the incoming object, it ensures that a `version` is also present.
+//     - If no `id` is provided, a new one is generated in the format "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}".
+//     - It sets a default `version` to "1.0" if not provided.
+//     - It overwrites the `href` field to ensure it is correct.
+//     - It adds a default `lifecycleStatus` if the resource type requires it and it's not present.
+//     - It sets the `@type` field if it's not specified.
+//     - It sets the `seller` and `buyer` information, overwriting any existing values.
+//
+// 3.  **Authorization**:
+//     - It calls the Policy Decision Point (PDP) to check if the user is authorized to create the object.
+//     - If the user is not authorized, it returns a 403 Forbidden error.
+//
+// 4.  **Object Creation**:
+//     - If proxy mode is enabled, it forwards the request to the remote TMF server.
+//       - It checks the remote server's response. If the remote server does not provide a `lastUpdate` field, it adds one and logs a warning.
+//       - It stores the object returned by the remote server in the local database.
+//     - If proxy mode is disabled, it creates the object directly in the local database.
+//       - It sets the `lastUpdate` field to the current time.
+//
+// 5.  **Response and Notification**:
+//     - It returns a 201 Created response with the created object in the body.
+//     - It sends a "CreateEvent" notification to subscribed listeners.
 func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("CreateGenericObject called", slog.String("apiFamily", req.APIfamily), slog.String("resourceName", req.ResourceName))
@@ -521,6 +553,25 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 }
 
 // GetGenericObject retrieves a TMF object using generalized parameters.
+//
+// The function performs the following checks and operations:
+//
+// 1.  **Authentication**:
+//     - It processes the Access Token to get the caller's information. Public (unauthenticated) access is allowed.
+//
+// 2.  **Object Retrieval**:
+//     - It first tries to retrieve the object from the local database.
+//     - If the object is not found and proxy mode is enabled, it tries to fetch it from the remote TMF server.
+//       - If the object is found remotely, it is cached in the local database.
+//     - If the object is not found locally or remotely, it returns a 404 Not Found error.
+//
+// 3.  **Authorization**:
+//     - It calls the Policy Decision Point (PDP) to check if the user is authorized to read the object.
+//     - If the user is not authorized, it returns a 403 Forbidden error.
+//
+// 4.  **Response**:
+//     - It handles partial field selection using the "fields" query parameter.
+//     - It returns a 200 OK response with the (potentially filtered) object in the body.
 func (svc *Service) GetGenericObject(req *Request) *Response {
 	slog.Debug("GetGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
@@ -667,6 +718,38 @@ func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error
 }
 
 // UpdateGenericObject updates an existing TMF object using generalized parameters.
+//
+// The function performs the following checks and operations:
+//
+// 1.  **Authentication**:
+//     - It requires an authenticated user, obtained by processing the Access Token.
+//     - If the user is not authenticated, it returns a 401 Unauthorized error.
+//
+// 2.  **Incoming TMF Object Checks**:
+//     - It parses the request body to get the incoming TMF object patch.
+//     - It ensures that if an `id` is present in the body, it matches the `id` in the URL.
+//     - It sets the `seller` and `buyer` information, overwriting any existing values.
+//     - It sets the `lastUpdate` field to the current time.
+//
+// 3.  **Existing TMF Object Checks**:
+//     - It retrieves the existing object from the local database or the remote server (if in proxy mode).
+//     - If the object is not found, it returns a 404 Not Found error.
+//     - It checks that the object is managed by the current server operator by verifying the `sellerOperator` DID.
+//     - It checks that the authenticated user is the owner of the object by verifying the `seller` DID.
+//     - It checks the `lifecycleStatus` of the existing object. If it is "Launched", "Retired", or "Obsolete", it requires the incoming object to have a higher `version` number.
+//
+// 4.  **Authorization**:
+//     - The ownership and operator checks act as an authorization mechanism.
+//
+// 5.  **Object Update**:
+//     - If proxy mode is enabled, it forwards the PATCH request to the remote TMF server.
+//       - The response from the remote server is then stored in the local database.
+//     - If proxy mode is disabled, it merges the incoming patch with the existing object using JSON Merge Patch (RFC 7396).
+//       - The updated object is then saved to the local database.
+//
+// 6.  **Response and Notification**:
+//     - It returns a 200 OK response with the updated object in the body.
+//     - It sends an "AttributeValueChangeEvent" notification to subscribed listeners.
 func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("UpdateGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
@@ -877,6 +960,29 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 }
 
 // DeleteGenericObject deletes a TMF object using generalized parameters.
+//
+// The function performs the following checks and operations:
+//
+// 1.  **Authentication**:
+//     - It requires an authenticated user, obtained by processing the Access Token.
+//     - If the user is not authenticated, it returns a 401 Unauthorized error.
+//
+// 2.  **Existing TMF Object Checks**:
+//     - It retrieves the existing object from the local database or the remote server (if in proxy mode).
+//     - If the object is not found, it returns a 404 Not Found error.
+//     - It checks that the object is managed by the current server operator by verifying the `sellerOperator` DID.
+//     - It checks that the authenticated user is the owner of the object by verifying the `seller` DID.
+//
+// 3.  **Authorization**:
+//     - The ownership and operator checks act as an authorization mechanism.
+//
+// 4.  **Object Deletion**:
+//     - If proxy mode is enabled, it forwards the DELETE request to the remote TMF server.
+//     - It deletes the object from the local database.
+//
+// 5.  **Response and Notification**:
+//     - It returns a 204 No Content response on successful deletion.
+//     - It sends a "DeleteEvent" notification to subscribed listeners.
 func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	slog.Debug("DeleteGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
