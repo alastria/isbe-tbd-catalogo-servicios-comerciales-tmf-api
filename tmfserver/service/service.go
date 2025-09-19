@@ -1350,7 +1350,12 @@ func ErrorResponse(err error, statusCode int) *Response {
 	} else {
 		message = fmt.Sprintf("%s %s", code, reason)
 	}
-	slog.Error("error response", slog.String("error", message))
+
+	if statusCode >= 500 {
+		slog.Error("server error", slog.String("error", message))
+	} else {
+		slog.Warn("client error", slog.String("error", message))
+	}
 
 	apiErr := NewApiError(code, reason, message, "", "")
 	return &Response{StatusCode: statusCode, Body: apiErr}
@@ -1367,7 +1372,12 @@ func ErrorResponsef(err error, statusCode int, format string, args ...any) *Resp
 		wrappedErr = errl.Errorf2(format, args...)
 	}
 	message := fmt.Sprintf("%s %s: %s", code, reason, wrappedErr.Error())
-	slog.Error("error response", slog.String("error", message))
+
+	if statusCode >= 500 {
+		slog.Error("server error", slog.String("error", message))
+	} else {
+		slog.Warn("client error", slog.String("error", message))
+	}
 
 	apiErr := NewApiError(code, reason, message, "", "")
 	return &Response{StatusCode: statusCode, Body: apiErr}

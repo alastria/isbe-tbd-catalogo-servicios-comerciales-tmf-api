@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/fatih/color"
+	"github.com/gofiber/fiber/v2"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -286,15 +287,18 @@ func (h *SQLogHandler) Handle(c context.Context, r slog.Record) error {
 	level := r.Level.String()
 
 	coloredLevel := level
+	coloredMessage := r.Message
 	switch r.Level {
 	case slog.LevelDebug:
 		coloredLevel = color.MagentaString(level)
 	case slog.LevelInfo:
 		coloredLevel = color.GreenString(level)
 	case slog.LevelWarn:
-		coloredLevel = color.YellowString(level)
+		coloredLevel = color.HiYellowString(level)
+		coloredMessage = color.HiYellowString(r.Message)
 	case slog.LevelError:
 		coloredLevel = color.RedString(level)
+		coloredMessage = color.RedString(r.Message)
 	}
 
 	var undecoratedLocation string
@@ -349,17 +353,20 @@ func (h *SQLogHandler) Handle(c context.Context, r slog.Record) error {
 	// location
 	// *******************************************
 
-	bufColor = append(bufColor, decoratedLocation...)
-	bufColor = append(bufColor, ' ')
+	if !strings.HasPrefix(r.Message, "=>") && !strings.HasPrefix(r.Message, "<=") {
+		bufColor = append(bufColor, decoratedLocation...)
+		bufColor = append(bufColor, ' ')
 
-	bufPlain = append(bufPlain, undecoratedLocation...)
-	bufPlain = append(bufPlain, ' ')
+		bufPlain = append(bufPlain, undecoratedLocation...)
+		bufPlain = append(bufPlain, ' ')
+
+	}
 
 	// *******************************************
 	// message
 	// *******************************************
 
-	bufColor = append(bufColor, r.Message...)
+	bufColor = append(bufColor, coloredMessage...)
 	bufColor = append(bufColor, ' ')
 
 	bufPlain = append(bufPlain, r.Message...)
@@ -523,7 +530,6 @@ func (h *SQLogHandler) Close() {
 		return
 	}
 	h.db.Close()
-	return
 }
 
 func (h *SQLogHandler) appendAttr(buf []byte, a slog.Attr, keyColor *color.Color) []byte {
@@ -568,6 +574,36 @@ func (h *SQLogHandler) appendAttr(buf []byte, a slog.Attr, keyColor *color.Color
 		buf = fmt.Appendf(buf, "%s%s ", keyColor.Sprint(a.Key+"="), a.Value)
 	}
 	return buf
+}
+
+func FiberRequestLogger(c *fiber.Ctx) error {
+	slog.Info("=> "+c.Method()+" "+c.Path(), slog.String("ip", c.IP()), slog.String("request_id", c.Get("X-Request-Id")))
+
+	// Go to next middleware:
+	err := c.Next()
+
+	if err != nil {
+		slog.Error("Error in middleware chain", slog.Any("error", err))
+	} else {
+
+		code := c.Response().StatusCode()
+
+		if code >= 500 {
+			// meth := color.RedString("<= " + c.Method() + " " + c.Path())
+			meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
+			slog.Error(meth, slog.Int("status", code), slog.String("ip", c.IP()))
+		} else if code >= 400 {
+			meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
+			slog.Warn(meth, slog.Int("status", code), slog.String("ip", c.IP()))
+		} else {
+			meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
+			slog.Debug(meth, slog.Int("status", code), slog.String("ip", c.IP()))
+		}
+
+	}
+
+	return err
+
 }
 
 var bufPool = sync.Pool{
