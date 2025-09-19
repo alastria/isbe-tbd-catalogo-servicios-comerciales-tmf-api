@@ -294,34 +294,34 @@ func (svc *Service) DeleteHubSubscription(req *Request) *Response {
 // The function performs the following checks and operations:
 //
 // 1.  **Authentication**:
-//     - It requires an authenticated user, obtained by processing the Access Token.
-//     - If the user is not authenticated, it returns a 401 Unauthorized error.
+//   - It requires an authenticated user, obtained by processing the Access Token.
+//   - If the user is not authenticated, it returns a 401 Unauthorized error.
 //
 // 2.  **Incoming TMF Object Checks**:
-//     - It parses the request body to get the incoming TMF object.
-//     - It checks for mandatory name fields based on the resource type (`givenName` and `familyName` for `Individual`, `tradingName` for `Organization`, and `name` for others).
-//     - If an `id` is provided in the incoming object, it ensures that a `version` is also present.
-//     - If no `id` is provided, a new one is generated in the format "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}".
-//     - It sets a default `version` to "1.0" if not provided.
-//     - It overwrites the `href` field to ensure it is correct.
-//     - It adds a default `lifecycleStatus` if the resource type requires it and it's not present.
-//     - It sets the `@type` field if it's not specified.
-//     - It sets the `seller` and `buyer` information, overwriting any existing values.
+//   - It parses the request body to get the incoming TMF object.
+//   - It checks for mandatory name fields based on the resource type (`givenName` and `familyName` for `Individual`, `tradingName` for `Organization`, and `name` for others).
+//   - If an `id` is provided in the incoming object, it ensures that a `version` is also present.
+//   - If no `id` is provided, a new one is generated in the format "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}".
+//   - It sets a default `version` to "1.0" if not provided.
+//   - It overwrites the `href` field to ensure it is correct.
+//   - It adds a default `lifecycleStatus` if the resource type requires it and it's not present.
+//   - It sets the `@type` field if it's not specified.
+//   - It sets the `seller` and `buyer` information, overwriting any existing values.
 //
 // 3.  **Authorization**:
-//     - It calls the Policy Decision Point (PDP) to check if the user is authorized to create the object.
-//     - If the user is not authorized, it returns a 403 Forbidden error.
+//   - It calls the Policy Decision Point (PDP) to check if the user is authorized to create the object.
+//   - If the user is not authorized, it returns a 403 Forbidden error.
 //
 // 4.  **Object Creation**:
-//     - If proxy mode is enabled, it forwards the request to the remote TMF server.
-//       - It checks the remote server's response. If the remote server does not provide a `lastUpdate` field, it adds one and logs a warning.
-//       - It stores the object returned by the remote server in the local database.
-//     - If proxy mode is disabled, it creates the object directly in the local database.
-//       - It sets the `lastUpdate` field to the current time.
+//   - If proxy mode is enabled, it forwards the request to the remote TMF server.
+//   - It checks the remote server's response. If the remote server does not provide a `lastUpdate` field, it adds one and logs a warning.
+//   - It stores the object returned by the remote server in the local database.
+//   - If proxy mode is disabled, it creates the object directly in the local database.
+//   - It sets the `lastUpdate` field to the current time.
 //
 // 5.  **Response and Notification**:
-//     - It returns a 201 Created response with the created object in the body.
-//     - It sends a "CreateEvent" notification to subscribed listeners.
+//   - It returns a 201 Created response with the created object in the body.
+//   - It sends a "CreateEvent" notification to subscribed listeners.
 func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("CreateGenericObject called", slog.String("apiFamily", req.APIfamily), slog.String("resourceName", req.ResourceName))
@@ -330,15 +330,15 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// Authentication: we require the user to be authenticated
 	// ************************************************************************************************
 
-	var token map[string]any
+	var tokenMap map[string]any
 	{
 		// Process the AccessToken to extract caller info from its claims in the payload
-		if token, err = svc.processAccessToken(req); err != nil {
+		if tokenMap, err = svc.processAccessToken(req); err != nil {
 			return ErrorResponsef(err, http.StatusUnauthorized, "invalid access token: %w")
 		}
 
 		// This operation can not be done without authentication
-		if len(token) == 0 {
+		if len(tokenMap) == 0 {
 			return ErrorResponsef(nil, http.StatusUnauthorized, "user not authenticated")
 		}
 
@@ -349,7 +349,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// We perform some formal verifications and add default values if needed.
 	// ************************************************************************************************
 
-	var incomingObjectMap map[string]any
+	var incomingObjectMap repo.TMFObjectMap
 	var id string
 	var version string
 	{
@@ -375,8 +375,8 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			return ErrorResponsef(nil, http.StatusBadRequest, "name is required")
 		}
 
-		id, _ = incomingObjectMap["id"].(string)
-		version, _ = incomingObjectMap["version"].(string)
+		id = incomingObjectMap.GetID()
+		version = incomingObjectMap.GetVersion()
 
 		// If the incoming object specifies an 'id', this is only possible if it creates a new version.
 		// That means the incoming object must have a 'version' property.
@@ -391,14 +391,14 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 				// If the incoming object does not have an 'id', we generate a new one
 				// The format is "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}"
 				id = fmt.Sprintf("urn:ngsi-ld:%s:%s", ToKebabCase(req.ResourceName), uuid.NewString())
-				incomingObjectMap["id"] = id
+				incomingObjectMap.SetID(id)
 				slog.Debug("Generated new ID for object", "id", id)
 			}
 
 			// Set default 'version' if not provided by the user
 			if version == "" {
 				version = "1.0"
-				incomingObjectMap["version"] = version // Update data map for content marshaling
+				incomingObjectMap.SetVersion(version)
 				slog.Debug("Set default version", slog.String("version", version))
 			}
 
@@ -407,27 +407,27 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		// Overwrite href in case it is specified by the caller.
 		// We could be more strict and reject the request, but this is more permissive.
 		if !svc.proxyEnabled || !DOMEHacks {
-			incomingObjectMap["href"] = fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, id)
+			incomingObjectMap.SetHref(fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, id))
 			slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
 		}
 
 		// If the object requires a lifecycleStatus, add it if not specified by the caller
 		if baseStatus, ok := LifecycleStatusMandatory[req.ResourceName]; ok {
-			if lifecycleStatus, _ := incomingObjectMap["lifecycleStatus"].(string); lifecycleStatus == "" {
+			if lifecycleStatus := incomingObjectMap.GetLifecycleStatus(); lifecycleStatus == "" {
 				slog.Debug("adding lifecycleStatus", slog.String("status", baseStatus))
-				incomingObjectMap["lifecycleStatus"] = baseStatus
+				incomingObjectMap.SetLifecycleStatus(baseStatus)
 			}
 		}
 
 		// Set the @type if not specified by the user
-		if resourceType, _ := incomingObjectMap["@type"].(string); resourceType == "" {
+		if resourceType := incomingObjectMap.GetType(); resourceType == "" {
 			resourceType = strings.ToUpper(req.ResourceName[0:1]) + req.ResourceName[1:]
-			incomingObjectMap["@type"] = resourceType
+			incomingObjectMap.SetType(resourceType)
 		}
 
 		// TODO: add the Seller and Buyer info only to the objects where it is mandatory.
 		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
-		err = setSellerAndBuyerInfo(incomingObjectMap, req.AuthUser.OrganizationIdentifier, req.APIVersion)
+		err = incomingObjectMap.SetSellerAndBuyerInfo(req.AuthUser.OrganizationIdentifier, req.APIVersion)
 		if err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to add Seller and Buyer info: %w")
 		}
@@ -439,7 +439,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	err = takeDecision(svc.ruleEngine, req, token, incomingObjectMap, nil)
+	err = takeDecision(svc.ruleEngine, req, tokenMap, incomingObjectMap, nil)
 	if err != nil {
 		return ErrorResponsef(err, http.StatusForbidden, "user not authorized: %w")
 	}
@@ -477,16 +477,16 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		// Put the created objet in a map
-		var remoteObjectMap map[string]any
+		var remoteObjectMap repo.TMFObjectMap
 		if err := json.Unmarshal(body, &remoteObjectMap); err != nil {
 			return ErrorResponsef(err, http.StatusBadRequest, "failed to bind request body: %w")
 		}
 
-		id, _ := remoteObjectMap["id"].(string)
-		version, _ := remoteObjectMap["version"].(string)
-		lastUpdate, _ := remoteObjectMap["lastUpdate"].(string)
+		id := remoteObjectMap.GetID()
+		version := remoteObjectMap.GetVersion()
+		lastUpdate := remoteObjectMap.GetLastUpdate()
 
-		// It is an error if the remote server does not return a 'lastUpdate', but we fixed it and log a warning
+		// It is an error if the remote server does not return a 'lastUpdate', but we fix it and log a warning
 		if lastUpdate == "" {
 			slog.Warn("remote server did not return lastUpdate, fixing it", slog.String("id", id))
 
@@ -557,21 +557,21 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 // The function performs the following checks and operations:
 //
 // 1.  **Authentication**:
-//     - It processes the Access Token to get the caller's information. Public (unauthenticated) access is allowed.
+//   - It processes the Access Token to get the caller's information. Public (unauthenticated) access is allowed.
 //
 // 2.  **Object Retrieval**:
-//     - It first tries to retrieve the object from the local database.
-//     - If the object is not found and proxy mode is enabled, it tries to fetch it from the remote TMF server.
-//       - If the object is found remotely, it is cached in the local database.
-//     - If the object is not found locally or remotely, it returns a 404 Not Found error.
+//   - It first tries to retrieve the object from the local database.
+//   - If the object is not found and proxy mode is enabled, it tries to fetch it from the remote TMF server.
+//   - If the object is found remotely, it is cached in the local database.
+//   - If the object is not found locally or remotely, it returns a 404 Not Found error.
 //
 // 3.  **Authorization**:
-//     - It calls the Policy Decision Point (PDP) to check if the user is authorized to read the object.
-//     - If the user is not authorized, it returns a 403 Forbidden error.
+//   - It calls the Policy Decision Point (PDP) to check if the user is authorized to read the object.
+//   - If the user is not authorized, it returns a 403 Forbidden error.
 //
 // 4.  **Response**:
-//     - It handles partial field selection using the "fields" query parameter.
-//     - It returns a 200 OK response with the (potentially filtered) object in the body.
+//   - It handles partial field selection using the "fields" query parameter.
+//   - It returns a 200 OK response with the (potentially filtered) object in the body.
 func (svc *Service) GetGenericObject(req *Request) *Response {
 	slog.Debug("GetGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
@@ -648,10 +648,10 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	return &Response{StatusCode: http.StatusOK, Body: existingObjectMap}
 }
 
+// getLocalOrRemoteObject retrieves the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
+// If the object is not found anywhere, it returns a nil object and no error.
 func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error) {
 
-	// Retrieve the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
-	// If th eobject is not found, we return a 404 error.
 	obj, err := svc.getObject(req.ID, req.ResourceName)
 	if err != nil {
 		return nil, errl.Errorf("failed to get object from local service: %w", err)
@@ -662,7 +662,8 @@ func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error
 		return obj, nil
 	}
 
-	// Return an error if object not found locally and proxy not enabled
+	// Return a nil object if object not found locally and proxy not enabled
+	// The caller is responsible for returning a 404 error
 	if !svc.proxyEnabled {
 		return nil, nil
 	}
@@ -722,34 +723,34 @@ func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error
 // The function performs the following checks and operations:
 //
 // 1.  **Authentication**:
-//     - It requires an authenticated user, obtained by processing the Access Token.
-//     - If the user is not authenticated, it returns a 401 Unauthorized error.
+//   - It requires an authenticated user, obtained by processing the Access Token.
+//   - If the user is not authenticated, it returns a 401 Unauthorized error.
 //
 // 2.  **Incoming TMF Object Checks**:
-//     - It parses the request body to get the incoming TMF object patch.
-//     - It ensures that if an `id` is present in the body, it matches the `id` in the URL.
-//     - It sets the `seller` and `buyer` information, overwriting any existing values.
-//     - It sets the `lastUpdate` field to the current time.
+//   - It parses the request body to get the incoming TMF object patch.
+//   - It ensures that if an `id` is present in the body, it matches the `id` in the URL.
+//   - It sets the `seller` and `buyer` information, overwriting any existing values.
+//   - It sets the `lastUpdate` field to the current time.
 //
 // 3.  **Existing TMF Object Checks**:
-//     - It retrieves the existing object from the local database or the remote server (if in proxy mode).
-//     - If the object is not found, it returns a 404 Not Found error.
-//     - It checks that the object is managed by the current server operator by verifying the `sellerOperator` DID.
-//     - It checks that the authenticated user is the owner of the object by verifying the `seller` DID.
-//     - It checks the `lifecycleStatus` of the existing object. If it is "Launched", "Retired", or "Obsolete", it requires the incoming object to have a higher `version` number.
+//   - It retrieves the existing object from the local database or the remote server (if in proxy mode).
+//   - If the object is not found, it returns a 404 Not Found error.
+//   - It checks that the object is managed by the current server operator by verifying the `sellerOperator` DID.
+//   - It checks that the authenticated user is the owner of the object by verifying the `seller` DID.
+//   - It checks the `lifecycleStatus` of the existing object. If it is "Launched", "Retired", or "Obsolete", it requires the incoming object to have a higher `version` number.
 //
 // 4.  **Authorization**:
-//     - The ownership and operator checks act as an authorization mechanism.
+//   - The ownership and operator checks act as an authorization mechanism.
 //
 // 5.  **Object Update**:
-//     - If proxy mode is enabled, it forwards the PATCH request to the remote TMF server.
-//       - The response from the remote server is then stored in the local database.
-//     - If proxy mode is disabled, it merges the incoming patch with the existing object using JSON Merge Patch (RFC 7396).
-//       - The updated object is then saved to the local database.
+//   - If proxy mode is enabled, it forwards the PATCH request to the remote TMF server.
+//   - The response from the remote server is then stored in the local database.
+//   - If proxy mode is disabled, it merges the incoming patch with the existing object using JSON Merge Patch (RFC 7396).
+//   - The updated object is then saved to the local database.
 //
 // 6.  **Response and Notification**:
-//     - It returns a 200 OK response with the updated object in the body.
-//     - It sends an "AttributeValueChangeEvent" notification to subscribed listeners.
+//   - It returns a 200 OK response with the updated object in the body.
+//   - It sends an "AttributeValueChangeEvent" notification to subscribed listeners.
 func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("UpdateGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
@@ -777,7 +778,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// We perform some formal verifications and add default values if needed.
 	// ************************************************************************************************
 
-	var incomingObjMap map[string]any
+	var incomingObjMap repo.TMFObjectMap
 	var incomingVersion string
 	{
 		// Parse the request body, which contains the TMForum object being created
@@ -796,7 +797,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		}
 
 		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
-		err = setSellerAndBuyerInfo(incomingObjMap, req.AuthUser.OrganizationIdentifier, req.APIVersion)
+		err = incomingObjMap.SetSellerAndBuyerInfo(req.AuthUser.OrganizationIdentifier, req.APIVersion)
 		if err != nil {
 			return ErrorResponsef(err, http.StatusInternalServerError, "failed to add Seller and Buyer info: %w")
 		}
@@ -836,10 +837,11 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		return ErrorResponsef(nil, http.StatusNotFound, "object not found")
 	}
 
-	existingObjectMap, err := existingObj.ToMap()
+	om, err := existingObj.ToMap()
 	if err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content: %w")
 	}
+	existingObjectMap := repo.TMFObjectMap(om)
 
 	var existingSellerDid string
 	var existingSellerOperatorDid string
@@ -850,7 +852,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// If they do not match, the caller is not the owner and we reject the operation.
 	// Note that we do this before merging the incoming object into the existing one,
 	// so the caller can not change the ownership of an object by updating it.
-	existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObjectMap, req.APIVersion)
+	existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerAndBuyerInfo(req.APIVersion)
 	if err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
 	}
@@ -964,25 +966,25 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 // The function performs the following checks and operations:
 //
 // 1.  **Authentication**:
-//     - It requires an authenticated user, obtained by processing the Access Token.
-//     - If the user is not authenticated, it returns a 401 Unauthorized error.
+//   - It requires an authenticated user, obtained by processing the Access Token.
+//   - If the user is not authenticated, it returns a 401 Unauthorized error.
 //
 // 2.  **Existing TMF Object Checks**:
-//     - It retrieves the existing object from the local database or the remote server (if in proxy mode).
-//     - If the object is not found, it returns a 404 Not Found error.
-//     - It checks that the object is managed by the current server operator by verifying the `sellerOperator` DID.
-//     - It checks that the authenticated user is the owner of the object by verifying the `seller` DID.
+//   - It retrieves the existing object from the local database or the remote server (if in proxy mode).
+//   - If the object is not found, it returns a 404 Not Found error.
+//   - It checks that the object is managed by the current server operator by verifying the `sellerOperator` DID.
+//   - It checks that the authenticated user is the owner of the object by verifying the `seller` DID.
 //
 // 3.  **Authorization**:
-//     - The ownership and operator checks act as an authorization mechanism.
+//   - The ownership and operator checks act as an authorization mechanism.
 //
 // 4.  **Object Deletion**:
-//     - If proxy mode is enabled, it forwards the DELETE request to the remote TMF server.
-//     - It deletes the object from the local database.
+//   - If proxy mode is enabled, it forwards the DELETE request to the remote TMF server.
+//   - It deletes the object from the local database.
 //
 // 5.  **Response and Notification**:
-//     - It returns a 204 No Content response on successful deletion.
-//     - It sends a "DeleteEvent" notification to subscribed listeners.
+//   - It returns a 204 No Content response on successful deletion.
+//   - It sends a "DeleteEvent" notification to subscribed listeners.
 func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	slog.Debug("DeleteGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
@@ -1028,12 +1030,13 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		return ErrorResponsef(nil, http.StatusNotFound, "object not found")
 	}
 
-	existingObjectMap, err := existingObject.ToMap()
+	om, err := existingObject.ToMap()
 	if err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to unmarshal existing object content: %w")
 	}
+	existingObjectMap := repo.TMFObjectMap(om)
 
-	existingSellerDid, existingSellerOperatorDid, err = getSellerAndBuyerInfo(existingObjectMap, req.APIVersion)
+	existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerAndBuyerInfo(req.APIVersion)
 	if err != nil {
 		return ErrorResponsef(err, http.StatusInternalServerError, "failed to get seller and buyer info: %w")
 	}

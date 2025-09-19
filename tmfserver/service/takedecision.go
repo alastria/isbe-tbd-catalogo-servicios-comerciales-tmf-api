@@ -9,21 +9,22 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
+	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 func takeDecision(
 	ruleEngine *pdp.PDP,
 	r *Request,
 	tokenClaims map[string]any,
-	incomingObjectMap map[string]any,
-	existingObjectMap map[string]any,
+	incomingObjectMap repo.TMFObjectMap,
+	existingObjectMap repo.TMFObjectMap,
 ) (err error) {
 
 	// Some rules are hardcoded because they are always enforced
 	// The rest is delegated to the policy engine
 
 	// The object must have both the seller and sellerOperator identities
-	sellerDid, sellerOperatorDid, err := getSellerAndBuyerInfo(incomingObjectMap, r.APIVersion)
+	sellerDid, sellerOperatorDid, err := incomingObjectMap.GetSellerAndBuyerInfo(r.APIVersion)
 	if err != nil || sellerDid == "" || sellerOperatorDid == "" {
 		err = errl.Errorf("failed to get seller and buyer info: %w", err)
 		return err

@@ -46,7 +46,7 @@ func NewValidator(config *Config) *Validator {
 }
 
 // ValidateAndFixObject validates a single TMF object and optionally fixes validation errors
-func (v *Validator) ValidateAndFixObject(obj TMFObject, objectType string) ValidationResult {
+func (v *Validator) ValidateAndFixObject(obj TMFObjectMap, objectType string) ValidationResult {
 	result := ValidationResult{
 		ObjectID:   obj.GetID(),
 		ObjectType: objectType,
@@ -75,7 +75,7 @@ func (v *Validator) ValidateAndFixObject(obj TMFObject, objectType string) Valid
 }
 
 // validateRequiredFields checks if all required fields are present and optionally fixes them
-func (v *Validator) validateRequiredFields(obj TMFObject, objectType string, result *ValidationResult) {
+func (v *Validator) validateRequiredFields(obj TMFObjectMap, objectType string, result *ValidationResult) {
 	// Required fields for all objects
 	requiredFields := []string{"id", "href", "lastUpdate", "version"}
 
@@ -103,7 +103,7 @@ func (v *Validator) validateRequiredFields(obj TMFObject, objectType string, res
 }
 
 // fixMissingRequiredField attempts to fix a missing required field
-func (v *Validator) fixMissingRequiredField(obj TMFObject, field string) bool {
+func (v *Validator) fixMissingRequiredField(obj TMFObjectMap, field string) bool {
 	switch field {
 	case "lastUpdate":
 		// Set to current timestamp
@@ -118,7 +118,7 @@ func (v *Validator) fixMissingRequiredField(obj TMFObject, field string) bool {
 }
 
 // validateRelatedPartyV4 checks if required related party roles are present and optionally fixes them
-func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, result *ValidationResult) {
+func (v *Validator) validateRelatedPartyV4(obj TMFObjectMap, objectType string, result *ValidationResult) {
 	// Check if object type requires related party
 	if slices.Contains(DoNotRequireRelatedParties, objectType) {
 		return
@@ -158,7 +158,7 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 
 	// Validate individual related party entries
 	for i, rp := range relatedParties {
-		role := strings.ToLower(TMFObject(rp).GetStringField("role"))
+		role := strings.ToLower(TMFObjectMap(rp).GetStringField("role"))
 		if role != "" {
 			foundRoles[role] = true
 		}
@@ -192,7 +192,7 @@ func (v *Validator) validateRelatedPartyV4(obj TMFObject, objectType string, res
 }
 
 // validateRelatedPartyV5 checks if required related party roles are present and optionally fixes them
-func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, result *ValidationResult) {
+func (v *Validator) validateRelatedPartyV5(obj TMFObjectMap, objectType string, result *ValidationResult) {
 	// Check if object type requires related party
 	if slices.Contains(DoNotRequireRelatedParties, objectType) {
 		return
@@ -232,7 +232,7 @@ func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, res
 
 	// Validate individual related party entries
 	for i, rp := range relatedParties {
-		role := TMFObject(rp).GetStringField("role")
+		role := TMFObjectMap(rp).GetStringField("role")
 		if role != "" {
 			foundRoles[role] = true
 		}
@@ -266,17 +266,17 @@ func (v *Validator) validateRelatedPartyV5(obj TMFObject, objectType string, res
 }
 
 // validateRelatedPartyEntryV4 validates a single related party entry for V4
-func (v *Validator) validateRelatedPartyEntryV4(rp TMFObject, index int, result *ValidationResult) {
-	role := strings.ToLower(rp.GetStringField("role"))
+func (v *Validator) validateRelatedPartyEntryV4(rpEntry TMFObjectMap, index int, result *ValidationResult) {
+	role := strings.ToLower(rpEntry.GetStringField("role"))
 
 	// Only validate seller/buyer roles
 	if role == "seller" || role == "selleroperator" || role == "buyer" || role == "buyeroperator" {
 		fields := []string{"id", "href", "name", "@referredType"}
 		for _, field := range fields {
-			if !rp.HasField(field) {
+			if !rpEntry.HasField(field) {
 				if v.config.FixValidationErrors {
 					// Attempt to fix the missing field
-					if v.fixMissingRelatedPartyFieldV4(rp, field, role) {
+					if v.fixMissingRelatedPartyFieldV4(rpEntry, field, role) {
 						result.ErrorsFixed = append(result.ErrorsFixed, ValidationError{
 							Field:   fmt.Sprintf("relatedParty[%d].%s", index, field),
 							Message: fmt.Sprintf("Related party %s %s was missing and has been fixed", role, field),
@@ -297,7 +297,7 @@ func (v *Validator) validateRelatedPartyEntryV4(rp TMFObject, index int, result 
 }
 
 // validateRelatedPartyEntryV5 validates a single related party entry for V5
-func (v *Validator) validateRelatedPartyEntryV5(rp TMFObject, index int, result *ValidationResult) {
+func (v *Validator) validateRelatedPartyEntryV5(rp TMFObjectMap, index int, result *ValidationResult) {
 	// Check role
 	if !rp.HasField("role") {
 		if v.config.FixValidationErrors {
@@ -341,7 +341,7 @@ func (v *Validator) validateRelatedPartyEntryV5(rp TMFObject, index int, result 
 	// Check partyOrPartyRole fields
 	fields := []string{"id", "href"}
 	for _, field := range fields {
-		if !TMFObject(partyOrPartyRole).HasField(field) {
+		if !TMFObjectMap(partyOrPartyRole).HasField(field) {
 			if v.config.FixValidationErrors {
 				if v.fixMissingPartyOrPartyRoleFieldV5(partyOrPartyRole, field) {
 					result.WarningsFixed = append(result.WarningsFixed, ValidationWarning{
@@ -364,9 +364,10 @@ func (v *Validator) validateRelatedPartyEntryV5(rp TMFObject, index int, result 
 
 // Fixing methods for V4
 
-func (v *Validator) fixMissingRelatedPartyV4(obj TMFObject, objectType string) bool {
+// fixMissingRelatedPartyV4 adds a relatedParty structure
+func (v *Validator) fixMissingRelatedPartyV4(obj TMFObjectMap, objectType string) bool {
 	// Add default seller role
-	sellerRP := TMFObject{
+	sellerRP := TMFObjectMap{
 		"role":          "seller",
 		"id":            "urn:ngsi-ld:organization:default-seller",
 		"href":          "urn:ngsi-ld:organization:default-seller",
@@ -377,7 +378,7 @@ func (v *Validator) fixMissingRelatedPartyV4(obj TMFObject, objectType string) b
 
 	// Add buyer role if required
 	if !slices.Contains(DoNotRequireBuyerInfo, objectType) {
-		buyerRP := TMFObject{
+		buyerRP := TMFObjectMap{
 			"role":          "buyer",
 			"id":            "urn:ngsi-ld:organization:default-buyer",
 			"href":          "urn:ngsi-ld:organization:default-buyer",
@@ -390,8 +391,8 @@ func (v *Validator) fixMissingRelatedPartyV4(obj TMFObject, objectType string) b
 	return true
 }
 
-func (v *Validator) fixMissingRoleV4(obj TMFObject, role string) bool {
-	newRP := TMFObject{
+func (v *Validator) fixMissingRoleV4(obj TMFObjectMap, role string) bool {
+	newRP := TMFObjectMap{
 		"role":          role,
 		"id":            fmt.Sprintf("urn:ngsi-ld:organization:default-%s", role),
 		"href":          fmt.Sprintf("urn:ngsi-ld:organization:default-%s", role),
@@ -402,7 +403,7 @@ func (v *Validator) fixMissingRoleV4(obj TMFObject, role string) bool {
 	return true
 }
 
-func (v *Validator) fixMissingRelatedPartyFieldV4(rp TMFObject, field, role string) bool {
+func (v *Validator) fixMissingRelatedPartyFieldV4(rp TMFObjectMap, field, role string) bool {
 	switch field {
 	case "id":
 		rp.SetStringField("id", fmt.Sprintf("urn:ngsi-ld:organization:default-%s", role))
@@ -422,9 +423,9 @@ func (v *Validator) fixMissingRelatedPartyFieldV4(rp TMFObject, field, role stri
 
 // Fixing methods for V5
 
-func (v *Validator) fixMissingRelatedPartyV5(obj TMFObject, objectType string) bool {
+func (v *Validator) fixMissingRelatedPartyV5(obj TMFObjectMap, objectType string) bool {
 	// Add default seller role
-	sellerRP := TMFObject{
+	sellerRP := TMFObjectMap{
 		"@type": "RelatedParty",
 		"role":  "seller",
 		"partyOrPartyRole": map[string]any{
@@ -439,7 +440,7 @@ func (v *Validator) fixMissingRelatedPartyV5(obj TMFObject, objectType string) b
 	// Add buyer role if required
 	requiredRoles := RequiredRelatedPartyRoles[objectType]
 	if len(requiredRoles) > 1 { // Assuming seller is always first
-		buyerRP := TMFObject{
+		buyerRP := TMFObjectMap{
 			"@type": "RelatedParty",
 			"role":  "buyer",
 			"partyOrPartyRole": map[string]any{
@@ -455,8 +456,8 @@ func (v *Validator) fixMissingRelatedPartyV5(obj TMFObject, objectType string) b
 	return true
 }
 
-func (v *Validator) fixMissingRoleV5(obj TMFObject, role string) bool {
-	newRP := TMFObject{
+func (v *Validator) fixMissingRoleV5(obj TMFObjectMap, role string) bool {
+	newRP := TMFObjectMap{
 		"@type": "RelatedParty",
 		"role":  role,
 		"partyOrPartyRole": map[string]any{
@@ -470,12 +471,12 @@ func (v *Validator) fixMissingRoleV5(obj TMFObject, role string) bool {
 	return true
 }
 
-func (v *Validator) fixMissingRoleFieldV5(rp TMFObject) bool {
+func (v *Validator) fixMissingRoleFieldV5(rp TMFObjectMap) bool {
 	rp.SetStringField("role", "unknown")
 	return true
 }
 
-func (v *Validator) fixMissingPartyOrPartyRoleV5(rp TMFObject) bool {
+func (v *Validator) fixMissingPartyOrPartyRoleV5(rp TMFObjectMap) bool {
 	partyOrPartyRole := map[string]any{
 		"id":    "urn:ngsi-ld:organization:default",
 		"href":  "urn:ngsi-ld:organization:default",

@@ -36,6 +36,17 @@ func main() {
 	flag.BoolVar(&proxyEnabled, "proxy", false, "Enable proxy functionality")
 	flag.Parse()
 
+	// Configure the slog logger
+	var logLevel slog.Level
+	if debugFlag {
+		logLevel = slog.LevelDebug
+	} else {
+		logLevel = slog.LevelInfo
+	}
+
+	slogHandler := slogor.NewHandler(os.Stdout, slogor.ShowSource(), slogor.SetLevel(logLevel))
+	slog.SetDefault(slog.New(slogHandler))
+
 	// Get the url of the verifier from command line (priority) or environment variable
 	if verifierServer == "" {
 		verifierServer = os.Getenv("ISBETMF_VERIFIER")
@@ -43,7 +54,7 @@ func main() {
 			verifierServer = "https://verifier.dome-marketplace.eu"
 		}
 	}
-	slog.Info("Verifier server", slog.String("verifierServer", verifierServer))
+	slog.Info("Verifier server", slog.String("url", verifierServer))
 
 	if remoteTMFServer == "" {
 		remoteTMFServer = os.Getenv("ISBETMF_REMOTE_SERVER")
@@ -51,7 +62,7 @@ func main() {
 			remoteTMFServer = "https://tmf.dome-marketplace-sbx.eu"
 		}
 	}
-	slog.Info("Remote TMF server", slog.String("TMF server", remoteTMFServer))
+	slog.Info("Remote TMF server", slog.String("url", remoteTMFServer))
 
 	// Get the proxyEnabled from command line (priority) or environment variable
 	if !proxyEnabled { // Only check env if not set by flag
@@ -60,16 +71,6 @@ func main() {
 		}
 	}
 	slog.Info("Proxy", slog.Bool("enabled", proxyEnabled))
-
-	var logLevel slog.Level
-	if debugFlag {
-		logLevel = slog.LevelDebug
-	} else {
-		logLevel = slog.LevelInfo
-	}
-
-	handler := slogor.NewHandler(os.Stdout, slogor.ShowSource(), slogor.SetLevel(logLevel))
-	slog.SetDefault(slog.New(handler))
 
 	// Connect to the database
 	db, err := sqlx.Connect("sqlite3", "data/isbetmf.db")
