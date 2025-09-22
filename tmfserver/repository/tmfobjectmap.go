@@ -314,21 +314,21 @@ func (obj TMFObjectMap) String() string {
 
 // setSellerAndBuyerInfo adds the required fields to the incoming object argument
 // It calls the appropriate version-specific function based on the API version
-func (tmfObjectMap TMFObjectMap) SetSellerAndBuyerInfo(organizationIdentifier string, apiVersion string) (err error) {
+func (tmfObjectMap TMFObjectMap) SetSellerInfo(organizationIdentifier string, apiVersion string) (err error) {
 	switch apiVersion {
 	case "v4":
-		return setSellerAndBuyerInfoV4(tmfObjectMap, organizationIdentifier)
+		return setSellerInfoV4(tmfObjectMap, organizationIdentifier)
 	case "v5":
-		return setSellerAndBuyerInfoV5(tmfObjectMap, organizationIdentifier)
+		return setSellerInfoV5(tmfObjectMap, organizationIdentifier)
 	default:
 		// Default to V5 for backward compatibility
-		return setSellerAndBuyerInfoV4(tmfObjectMap, organizationIdentifier)
+		return setSellerInfoV4(tmfObjectMap, organizationIdentifier)
 	}
 }
 
-// setSellerAndBuyerInfoV4 adds the required fields to the incoming object argument for V4 API
+// setSellerInfoV4 adds the required fields to the incoming object argument for V4 API
 // Specifically, the Seller and SellerOperator roles are added to the relatedParty list
-func setSellerAndBuyerInfoV4(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
+func setSellerInfoV4(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
 
 	// Normalize the organization identifier to the DID format
 	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
@@ -415,9 +415,9 @@ func setSellerAndBuyerInfoV4(tmfObjectMap map[string]any, organizationIdentifier
 
 }
 
-// setSellerAndBuyerInfoV5 adds the required fields to the incoming object argument
+// setSellerInfoV5 adds the required fields to the incoming object argument
 // Specifically, the Seller and SellerOperator roles are added to the relatedParty list
-func setSellerAndBuyerInfoV5(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
+func setSellerInfoV5(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
 
 	// Normalize all organization identifiers to the DID format
 	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
@@ -512,15 +512,27 @@ func setSellerAndBuyerInfoV5(tmfObjectMap map[string]any, organizationIdentifier
 
 }
 
-func (tmfObjectMap TMFObjectMap) GetSellerAndBuyerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+func (tmfObjectMap TMFObjectMap) GetSellerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
 	switch apiVersion {
 	case "v4":
-		return getSellerAndBuyerInfoV4(tmfObjectMap)
+		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Seller", "SellerOperator")
 	case "v5":
-		return getSellerAndBuyerInfoV5(tmfObjectMap)
+		return getUserAndUserOperatorInfoV5(tmfObjectMap, "Seller", "SellerOperator")
 	default:
 		// Default to V5 for backward compatibility
-		return getSellerAndBuyerInfoV4(tmfObjectMap)
+		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Seller", "SellerOperator")
+	}
+}
+
+func (tmfObjectMap TMFObjectMap) GetBuyerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+	switch apiVersion {
+	case "v4":
+		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Buyer", "BuyerOperator")
+	case "v5":
+		return getUserAndUserOperatorInfoV5(tmfObjectMap, "Buyer", "BuyerOperator")
+	default:
+		// Default to V5 for backward compatibility
+		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Buyer", "BuyerOperator")
 	}
 }
 
@@ -626,6 +638,121 @@ func getSellerAndBuyerInfoV5(tmfObjectMap map[string]any) (sellerDid string, sel
 	}
 	if sellerOperatorDid == "" {
 		err = errl.Errorf("no seller operator")
+		return
+	}
+
+	return
+
+}
+
+func getUserAndUserOperatorInfoV4(tmfObjectMap map[string]any, userRole string, userOperatorRole string) (sellerDid string, sellerOperatorDid string, err error) {
+	// In V4, relatedParty is a list of maps with fields like "role", "id", "href", "name", "@referredType"
+	// We need to extract the "name" for the "Seller" and "SellerOperator" roles
+
+	userRole = strings.ToLower(userRole)
+	userOperatorRole = strings.ToLower(userOperatorRole)
+
+	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
+
+	if len(relatedParties) == 0 {
+		err = errl.Errorf("no relatedParty")
+		return "", "", err
+	}
+
+	for _, rp := range relatedParties {
+		rpMap, _ := rp.(map[string]any)
+		if len(rpMap) == 0 {
+			return "", "", errl.Errorf("invalid relatedParty entry")
+		}
+
+		rpRole, _ := rpMap["role"].(string)
+		rpRole = strings.ToLower(rpRole)
+
+		if rpRole != userRole && rpRole != userOperatorRole {
+			continue
+		}
+
+		if rpRole == userRole {
+			sellerDid, _ = rpMap["name"].(string)
+			continue
+		}
+		if rpRole == userOperatorRole {
+			sellerOperatorDid, _ = rpMap["name"].(string)
+			continue
+		}
+	}
+
+	if sellerDid == "" && sellerOperatorDid == "" {
+		err = errl.Errorf("no %s or %s", userRole, userOperatorRole)
+		return "", "", err
+	}
+
+	if sellerDid == "" {
+		err = errl.Errorf("no %s", userRole)
+		return "", "", err
+	}
+	if sellerOperatorDid == "" {
+		err = errl.Errorf("no %s", userOperatorRole)
+		return "", "", err
+	}
+
+	return
+
+}
+
+func getUserAndUserOperatorInfoV5(tmfObjectMap map[string]any, userRole string, userOperatorRole string) (sellerDid string, sellerOperatorDid string, err error) {
+
+	userRole = strings.ToLower(userRole)
+	userOperatorRole = strings.ToLower(userOperatorRole)
+
+	// Look for the "Seller", "SellerOperator", "Buyer" and "BuyerOperator" roles
+	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
+
+	if len(relatedParties) == 0 {
+		err = errl.Errorf("no relatedParty")
+		return
+	}
+
+	for _, rp := range relatedParties {
+
+		// Convert entry to a map
+		rpMap, _ := rp.(map[string]any)
+		if len(rpMap) == 0 {
+			return "", "", errl.Errorf("invalid relatedParty entry")
+		}
+
+		rpRole, _ := rpMap["role"].(string)
+		rpRole = strings.ToLower(rpRole)
+
+		if rpRole != userRole && rpRole != userOperatorRole {
+			// Go to next entry
+			continue
+		}
+
+		if rpRole == userRole {
+			party, _ := rpMap["partyOrPartyRole"].(map[string]any)
+			sellerDid, _ = party["name"].(string)
+			continue
+		}
+		if rpRole == userOperatorRole {
+			party, _ := rpMap["partyOrPartyRole"].(map[string]any)
+			sellerOperatorDid, _ = party["name"].(string)
+			continue
+		}
+
+	}
+
+	if sellerDid == "" && sellerOperatorDid == "" {
+		err = errl.Errorf("no %s or %s", userRole, userOperatorRole)
+		return
+	}
+
+	if sellerDid == "" {
+		err = errl.Errorf("no %s", userRole)
+		return
+	}
+	if sellerOperatorDid == "" {
+		err = errl.Errorf("no %s", userOperatorRole)
 		return
 	}
 

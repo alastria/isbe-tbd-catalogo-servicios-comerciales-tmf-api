@@ -29,7 +29,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 	if len(r.AccessToken) == 0 {
 		// The user did not provide an access token.
 		// Normally this is forbidden, but for testing we can provide a fake one, and do not verify signature
-		if AllowFakeClaims {
+		if AllowFakeClaims && r.Method != "GET" {
 			slog.Debug("PDP: using fake claims for testing")
 			r.AccessToken = FakeAT
 			verify = false
@@ -104,7 +104,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 	}
 
 	// Update the request with the authenticated user info
-	r.AuthUser = authUser
+	r.AuthUser = *authUser
 
 	// If the user has an organization identifier, create a new organization object.
 	// If it is created, we just receive an error which we ignore

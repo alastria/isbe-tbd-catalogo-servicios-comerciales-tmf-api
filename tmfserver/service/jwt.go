@@ -13,13 +13,9 @@ import (
 
 // ExtractJWTToken extracts the JWT token from the Authorization header.
 // It handles both "Bearer <token>" and raw token formats.
+// If the token is not found, it returns an empty string.
 func ExtractJWTToken(authHeader string) string {
-	tokenString := ""
-	if after, ok := strings.CutPrefix(authHeader, "Bearer "); ok {
-		tokenString = after
-	} else if authHeader != "" {
-		tokenString = authHeader
-	}
+	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 	return tokenString
 }
 

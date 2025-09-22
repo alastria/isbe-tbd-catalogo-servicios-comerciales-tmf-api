@@ -3,4 +3,5 @@
    "go.languageServerFlags": [
       "-mcp.listen=localhost:6969"
    ],
+   "geminicodeassist.enable": false,
 }

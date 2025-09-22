@@ -9,6 +9,7 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
+	"reflect"
 	"strconv"
 	"strings"
 
@@ -254,6 +255,13 @@ func getValueFromList(l StarTMFList, pathComponent string, pathSoFar []string) (
 
 // anyToValue converts a Go value to a Starlark value
 func anyToValue(value any) st.Value {
+
+	// Special case for strings
+	vvvv := reflect.ValueOf(value)
+	if vvvv.Kind() == reflect.String {
+		return st.String(vvvv.String())
+	}
+
 	switch v := value.(type) {
 	case StarTMFMap:
 		return StarTMFMap(v)
