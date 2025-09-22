@@ -148,7 +148,7 @@ func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
 		ResourceName: c.Params("resourceName"),
 		ID:           idParam,
 		QueryParams:  queryParams,
-		AccessToken:  jwtToken, // Store the raw JWT token
+		AccessToken:  jwtToken,
 	}
 
 	resp := h.service.GetGenericObject(req)

@@ -15,6 +15,19 @@
     "produces": [
         "application/json;charset=utf-8"
     ],
+    "securityDefinitions": {
+        "bearerAuth": {
+            "name": "Authorization",
+            "in": "header",
+            "type": "apiKey",
+            "description": "JWT Authorization header"
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
     "tags": [
         {
             "name": "serviceCatalog"

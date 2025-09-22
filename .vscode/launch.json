@@ -9,7 +9,7 @@
             "type": "go",
             "request": "launch",
             "mode": "debug",
-            "program": "cmd/replicate/main.go"
+            "program": "cmd/fixprodspec/main.go"
         },
         {
             "name": "Report",
@@ -25,8 +25,7 @@
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "cmd/isbetmf/main.go",
-            "args": ["-d"],
+            "program": "main.go",
             "cwd": "${workspaceFolder}"
         }
     ]

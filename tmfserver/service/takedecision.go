@@ -9,37 +9,76 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
+	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 func takeDecision(
 	ruleEngine *pdp.PDP,
-	r *Request,
+	req *Request,
 	tokenClaims map[string]any,
-	incomingObjectMap map[string]any,
-	existingObjectMap map[string]any,
+	objectMap repo.TMFObjectMap,
 ) (err error) {
 
-	// Some rules are hardcoded because they are always enforced
-	// The rest is delegated to the policy engine
+	var buyerDid, buyerOperatorDid string
+	var sellerDid, sellerOperatorDid string
+	var userDid string
 
-	// The object must have both the seller and sellerOperator identities
-	sellerDid, sellerOperatorDid, err := getSellerAndBuyerInfo(incomingObjectMap, r.APIVersion)
-	if err != nil || sellerDid == "" || sellerOperatorDid == "" {
-		err = errl.Errorf("failed to get seller and buyer info: %w", err)
-		return err
+	// Pre-calculate some useful values
+	if req.AuthUser.isAuthenticated {
+
+		// The user DID must be in the format did:elsi:xxxx
+		userDid = req.AuthUser.OrganizationIdentifier
+		if !strings.HasPrefix(userDid, "did:elsi:") {
+			userDid = "did:elsi:" + userDid
+		}
+
+		// The object must have both the seller and sellerOperator identities
+		sellerDid, sellerOperatorDid, err = objectMap.GetSellerInfo(req.APIVersion)
+		if err != nil || sellerDid == "" || sellerOperatorDid == "" {
+			err = errl.Errorf("failed to get seller and buyer info: %w", err)
+			return err
+		}
+
+		// Optionally, the object may have Buyer and BuyerOperator roles defined
+		buyerDid, buyerOperatorDid, _ = objectMap.GetBuyerInfo(req.APIVersion)
+
+		// The user is the 'owner' if it is Seller, SellerOperator, Buyer or BuyerOperator
+		req.AuthUser.isOwner = (userDid == sellerDid) || (userDid == sellerOperatorDid) || (userDid == buyerDid) || (userDid == buyerOperatorDid)
+
 	}
 
-	userDid := r.AuthUser.OrganizationIdentifier
-	if !strings.HasPrefix(userDid, "did:elsi:") {
-		userDid = "did:elsi:" + userDid
+	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
+	if req.Method == "GET" && isPublicResource(req.ResourceName) {
+		// Check the user-defined rules in the PDP engine
+		return callPDP(ruleEngine, req, tokenClaims, objectMap)
 	}
 
-	// The user is the 'owner' of the object if it is the seller or seller operator
-	r.AuthUser.isOwner = (userDid == sellerDid) || (userDid == sellerOperatorDid)
+	// GET operations to non-public resources, or any other method (POST, PUT, DELETE) to any object
+	// are only allowed to authenticated users, and the user must be the owner of the object.
 
-	userArgument := pdp.StarTMFMap(r.AuthUser.ToMap())
-	incomingObjectArgument := pdp.StarTMFMap(incomingObjectMap)
-	requestArgument := pdp.StarTMFMap(r.ToMap())
+	if !req.AuthUser.isAuthenticated {
+		return errl.Errorf("user not authenticated")
+	}
+
+	if !req.AuthUser.isOwner {
+		return errl.Errorf("user not authorized: not seller, sellerOperator, buyer or buyerOperator")
+	}
+
+	err = callPDP(ruleEngine, req, tokenClaims, objectMap)
+	return err
+
+}
+
+func callPDP(
+	ruleEngine *pdp.PDP,
+	req *Request,
+	tokenClaims map[string]any,
+	objectMap repo.TMFObjectMap,
+) (err error) {
+
+	userArgument := pdp.StarTMFMap(req.AuthUser.ToMap())
+	incomingObjectArgument := pdp.StarTMFMap(objectMap)
+	requestArgument := pdp.StarTMFMap(req.ToMap())
 	tokenArgument := pdp.StarTMFMap(tokenClaims)
 
 	// Assemble all data in a single "input" argument, to the style of OPA.
@@ -78,4 +117,38 @@ func takeDecision(
 	// The rules engine accepted the request, add the object to the final list
 	slog.Info("PDP: request authorised")
 	return nil
+}
+
+// Public TMF resources are accessible by all users, even unauthenticated ones
+// The public objects are the following:
+var publicResources = map[string]bool{
+	// TMF620 Product Catalog Management
+	"category":             true,
+	"catalog":              true,
+	"productOffering":      true,
+	"productOfferingPrice": true,
+	"productSpecification": true,
+
+	// TMF633 Service Catalog Management
+	"serviceCatalog":       true,
+	"serviceCategory":      true,
+	"serviceCandidate":     true,
+	"serviceSpecification": true,
+
+	// TMF634 Resource Catalog Management
+	"resourceCatalog":       true,
+	"resourceCategory":      true,
+	"resourceCandidate":     true,
+	"resourceSpecification": true,
+
+	// Organization from TMF632 Party Management. But Individual is private.
+	"organization": true,
+
+	// TMF669 Party Rola Management
+	"partyRole": true,
+}
+
+func isPublicResource(resourceName string) bool {
+	_, ok := publicResources[resourceName]
+	return ok
 }

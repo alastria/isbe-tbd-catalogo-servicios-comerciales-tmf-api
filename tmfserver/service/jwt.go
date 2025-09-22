@@ -13,22 +13,15 @@ import (
 
 // ExtractJWTToken extracts the JWT token from the Authorization header.
 // It handles both "Bearer <token>" and raw token formats.
+// If the token is not found, it returns an empty string.
 func ExtractJWTToken(authHeader string) string {
-	jwtToken := ""
-	if after, ok := strings.CutPrefix(authHeader, "Bearer "); ok {
-		jwtToken = after
-	} else if authHeader != "" {
-		jwtToken = authHeader
-	}
-	return jwtToken
+	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
+	return tokenString
 }
 
 // ParseJWT parses a JWT string, extracts the mandator information, and returns an AuthUser.
 // It does NOT verify the JWT signature.
-func ParseJWT(svc *Service, tokenString string, verify bool) (tokString map[string]any, u *AuthUser, err error) {
-
-	//**********************************************
-	//**********************************************
+func ParseJWT(svc *Service, tokenString string, verify bool) (tokenClaims map[string]any, u *AuthUser, err error) {
 
 	var token *jwt.Token
 	var theClaims = jwt.MapClaims{}

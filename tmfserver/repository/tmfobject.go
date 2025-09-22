@@ -11,20 +11,22 @@ import (
 // TMFObject represents a generic TMForum object.
 // It is used to store and retrieve objects from the database.
 type TMFObject struct {
-	ID         string    `db:"id"`
-	Type       string    `db:"type"`
-	Version    string    `db:"version"`
-	APIVersion string    `db:"api_version"`
-	LastUpdate string    `db:"last_update"`
-	Content    []byte    `db:"content"`
-	CreatedAt  time.Time `db:"created_at"`
-	UpdatedAt  time.Time `db:"updated_at"`
+	ID         string       `db:"id"`
+	Type       string       `db:"type"`
+	Version    string       `db:"version"`
+	APIVersion string       `db:"api_version"`
+	LastUpdate string       `db:"last_update"`
+	Content    []byte       `db:"content"`
+	ContentMap TMFObjectMap `db:"-"`
+	CreatedAt  time.Time    `db:"created_at"`
+	UpdatedAt  time.Time    `db:"updated_at"`
 }
 
 // NewTMFObject creates a new TMFObject.
 func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, content []byte) *TMFObject {
 	now := time.Now()
-	return &TMFObject{
+
+	o := &TMFObject{
 		ID:         id,
 		Type:       objectType,
 		Version:    version,
@@ -34,6 +36,22 @@ func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, conten
 		CreatedAt:  now,
 		UpdatedAt:  now,
 	}
+
+	return o
+
+}
+
+func (o *TMFObject) GetMap() TMFObjectMap {
+	if o.ContentMap == nil {
+
+		err := json.Unmarshal(o.Content, &o.ContentMap)
+		if err != nil {
+			err = errl.Errorf("failed to unmarshal object content: %w", err)
+			slog.Error("Failed to unmarshal object content", slog.Any("error", err))
+			return nil
+		}
+	}
+	return o.ContentMap
 }
 
 // ToMapNoErr converts the TMFObject to a map[string]any.
