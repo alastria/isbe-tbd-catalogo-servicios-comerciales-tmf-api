@@ -2,6 +2,7 @@ package repository
 
 import (
 	"encoding/json"
+	"strings"
 	"time"
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
@@ -15,7 +16,10 @@ type TMFObject struct {
 	Type       string       `db:"type"`
 	Version    string       `db:"version"`
 	APIVersion string       `db:"api_version"`
+	Seller     string       `db:"seller"`
+	Buyer      string       `db:"buyer"`
 	LastUpdate string       `db:"last_update"`
+	Random     int          `db:"random"`
 	Content    []byte       `db:"content"`
 	ContentMap TMFObjectMap `db:"-"`
 	CreatedAt  time.Time    `db:"created_at"`
@@ -39,6 +43,20 @@ func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, conten
 
 	return o
 
+}
+
+func (o *TMFObject) SetBuyerID(buyerID string) {
+	if !strings.HasPrefix(buyerID, "did:elsi:") {
+		buyerID = "did:elsi:" + buyerID
+	}
+	o.Buyer = buyerID
+}
+
+func (o *TMFObject) SetSellerID(sellerID string) {
+	if !strings.HasPrefix(sellerID, "did:elsi:") {
+		sellerID = "did:elsi:" + sellerID
+	}
+	o.Seller = sellerID
 }
 
 func (o *TMFObject) GetMap() TMFObjectMap {

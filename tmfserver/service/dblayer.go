@@ -11,6 +11,7 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
+	sqlb "github.com/huandu/go-sqlbuilder"
 	"github.com/mattn/go-sqlite3"
 )
 
@@ -20,8 +21,8 @@ func (svc *Service) createObject(obj *repo.TMFObject) error {
 	if svc.storage != nil {
 		return svc.storage.CreateObject(obj)
 	}
-	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, last_update, content, created_at, updated_at)
-		VALUES (:id, :type, :version, :api_version, :last_update, :content, :created_at, :updated_at)`, obj)
+	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, seller, buyer, last_update, content, created_at, updated_at)
+		VALUES (:id, :type, :version, :api_version, :seller, :buyer, :last_update, :content, :created_at, :updated_at)`, obj)
 	if err != nil {
 		var sqliteErr sqlite3.Error
 		if errors.As(err, &sqliteErr) {
@@ -85,8 +86,11 @@ func (svc *Service) deleteObject(id, objectType string) error {
 
 // listObjects retrieves all TMF objects of a given type, returning only the latest version for each unique ID.
 // It supports pagination, filtering, and sorting according to TMF630 guidelines.
-func (svc *Service) listObjects(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error) {
+func (svc *Service) listObjectsOld(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error) {
 	slog.Debug("dbLayer: Listing objects", "type", objectType, "queryParams", queryParams)
+	q, a := BuildSelectFromParms(objectType, queryParams)
+	fmt.Printf("SQL: %s\nARGS: %v\n", q, a)
+
 	if svc.storage != nil {
 		return svc.storage.ListObjects(objectType, apiVersion, queryParams)
 	}
@@ -192,4 +196,186 @@ func (svc *Service) listObjects(objectType string, apiVersion string, queryParam
 	// Currently, this is done at a higher level in th eimplementation
 
 	return objs, totalCount, err
+}
+
+func (svc *Service) listObjects(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error) {
+	slog.Debug("dbLayer: Listing objects", "type", objectType, "queryParams", queryParams)
+	baseQuery, args := BuildSelectFromParms(objectType, queryParams)
+	fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
+
+	if svc.storage != nil {
+		return svc.storage.ListObjects(objectType, apiVersion, queryParams)
+	}
+	var objs []repo.TMFObject
+	var totalCount int
+
+	err := svc.db.Select(&objs, baseQuery, args...)
+	if err != nil {
+		err = errl.Errorf("failed to list objects for %s, params: %v: %w", objectType, queryParams, err)
+		return nil, 0, err
+	}
+
+	// TODO: Implement partial field selection based on "fields" query parameter.
+	// This would involve unmarshalling and then selectively marshalling the content.
+	// Currently, this is done at a higher level in th eimplementation
+
+	return objs, totalCount, err
+}
+
+// BuildSelectFromParms creates a SELECT statement based on the query values.
+// For objects with same id, selects the one with the latest version.
+func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, []any) {
+
+	// Default values if the user did not specify them. -1 is equivalent to no values provided.
+	var limit = -1
+	var offset = -1
+
+	bu := sqlb.SQLite.NewSelectBuilder()
+
+	// SELECT: for each object with a given id, select the latest version.
+	// We use the 'max(version)' function, and will GROUP by id.
+	bu.Select(
+		"id",
+		"type",
+		"max(version) AS version",
+		"api_version",
+		"seller",
+		"buyer",
+		"last_update",
+		"content",
+		"created_at",
+		"updated_at",
+	).From("tmf_object")
+
+	// WHERE: normally we expect the resource name of object to be specified, but we support a query for all object types
+	if len(tmfResource) > 0 {
+		bu.Where(bu.Equal("type", tmfResource))
+	}
+
+	// Build the WHERE by processing the query values specified by the user
+	whereClause := sqlb.NewWhereClause()
+	cond := sqlb.NewCond()
+
+	for key, values := range queryValues {
+
+		if key == "sort" || key == "fields" {
+			// TODO: implement processing for these parameters
+			continue
+		}
+
+		switch key {
+		case "limit":
+			limitStr := queryValues.Get("limit")
+			if limitStr != "" {
+				if l, err := strconv.Atoi(limitStr); err == nil {
+					limit = l
+				}
+			}
+		case "offset":
+			offsetStr := queryValues.Get("offset")
+			if offsetStr != "" {
+				if l, err := strconv.Atoi(offsetStr); err == nil {
+					offset = l
+				}
+			}
+		// case "lifecycleStatus":
+		// 	// Special processing because TMForum allows to specify multiple values
+		// 	// in the form 'lifecycleStatus=Launched,Active'
+		// 	var vals = []string{}
+		// 	// Allow several instances of 'lifecycleStatus' parameter in the query string
+		// 	for _, v := range values {
+		// 		parts := strings.Split(v, ",")
+		// 		// Allow for whitespace surrounding the elements
+		// 		for i := range parts {
+		// 			parts[i] = strings.TrimSpace(parts[i])
+		// 		}
+		// 		vals = append(vals, parts...)
+		// 	}
+
+		// 	// Use either an equality or an inclusion expression
+		// 	if len(vals) == 1 {
+		// 		whereClause.AddWhereExpr(
+		// 			cond.Args,
+		// 			cond.Equal(key, sqlb.List(vals)),
+		// 		)
+		// 	} else {
+		// 		whereClause.AddWhereExpr(
+		// 			cond.Args,
+		// 			cond.In(key, sqlb.List(vals)),
+		// 		)
+		// 	}
+
+		case "seller", "buyer":
+			// A shortcut for DOME, to simplify life to applications (but can be also done in a TMF-compliant way).
+			// Special processing to allow specifying multiple values in the form 'seller=id1,id2,id3'.
+			// We also support the standard HTTP query strings like 'seller=id1,id2&seller=id3'
+			var vals = []string{}
+			// Allow several instances of the key in the query string (as in standard HTTP query strings)
+			for _, v := range values {
+				// Process each for several comma-separated values in the same key instance
+				parts := strings.Split(v, ",")
+				// Allow for whitespace surrounding the elements
+				for i := range parts {
+					parts[i] = strings.TrimSpace(parts[i])
+				}
+				vals = append(vals, parts...)
+			}
+
+			// Use either an equality (when one element) or an inclusion expression (when several)
+			if len(vals) == 1 {
+				whereClause.AddWhereExpr(
+					cond.Args,
+					cond.Equal(key, sqlb.List(vals)),
+				)
+			} else {
+				whereClause.AddWhereExpr(
+					cond.Args,
+					cond.In(key, sqlb.List(vals)),
+				)
+			}
+
+		default:
+
+			// We assume that the rest of the parameters are not in the fields of the SQL database.
+			// We have to use SQLite JSON expressions to search.
+			if len(values) == 1 {
+				whereClause.AddWhereExpr(
+					cond.Args,
+					cond.Equal("content->>'$."+key+"'", values[0]),
+				)
+			} else {
+				whereClause.AddWhereExpr(
+					cond.Args,
+					cond.In("content->>'$."+key+"'", sqlb.List(values)),
+				)
+
+			}
+
+		}
+	}
+
+	// Add the WHERE to the SELECT
+	bu.AddWhereClause(whereClause)
+
+	// We need to GROUP by id, so we can SELECT the record with the latest version from each group
+	bu.GroupBy("id")
+
+	// // For fairness of presenting results to customers, we want a random ordering, which is consistent and fair with the providers.
+	// // Ordering by the hash of the content of the TMF object complies with the requirements, as it is consistent across paginations
+	// // and nobody can predict the final ordering a-priory.
+	// // For a stable catalog, the ordering is the same for all users and at any time.
+	// // When a provider creates or modifies a product, it will be inserted at an unpredictable position in the catalog.
+	// //
+	// // TODO: we can consider a more advanced variation, where we add to the hash a random number which is
+	// // generated each day or week, and keeps the same until a new one is generated.
+	// // In this way, ordering is efficient, random, and changes every week (or whatever period is chosen)
+	// bu.OrderBy("hash")
+
+	// Pagination support
+	bu.Limit(limit).Offset(offset)
+
+	// Build the query, with the statement and the arguments to be used
+	sql, args := bu.Build()
+
+	return sql, args
 }

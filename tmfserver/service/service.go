@@ -504,6 +504,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		remoteObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, remoteContent)
+		remoteObject.SetSellerID(req.AuthUser.OrganizationIdentifier)
 
 		// Create the new object in the local database
 		if err := svc.createObject(remoteObject); err != nil {
@@ -526,6 +527,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
+		incomingObject.SetSellerID(req.AuthUser.OrganizationIdentifier)
 
 		// Create the new object in the local database
 		if err := svc.createObject(incomingObject); err != nil {

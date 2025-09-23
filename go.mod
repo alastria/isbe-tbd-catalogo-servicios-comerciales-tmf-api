@@ -20,10 +20,16 @@ require (
 )
 
 require (
+	github.com/huandu/go-clone v1.7.3 // indirect
+	github.com/huandu/xstrings v1.4.0 // indirect
+)
+
+require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/gofiber/template v1.8.3 // indirect
 	github.com/gofiber/utils v1.1.0 // indirect
+	github.com/huandu/go-sqlbuilder v1.37.0
 	github.com/klauspost/compress v1.17.9 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
