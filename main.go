@@ -47,6 +47,11 @@ func main() {
 	logOptions := &sqlogger.Options{
 		Level: &logLevel,
 	}
+	// Check if the logs should be colored
+	if os.Getenv("ISBETMF_LOGS_NOCOLOR") == "true" {
+		logOptions.NoColor = true
+	}
+
 	sqlog, err := sqlogger.NewSQLogHandler(logOptions)
 	if err != nil {
 		slog.Error("failed to initialize SQLogHandler", slog.Any("error", err))
