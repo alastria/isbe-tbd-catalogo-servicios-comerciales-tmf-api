@@ -91,6 +91,7 @@ func main() {
 	}
 	defer db.Close()
 
+	slog.Info("About to create tables if they do not exist")
 	err = repository.CreateTables(db)
 	if err != nil {
 		slog.Error("failed to create tables", slog.Any("error", err))
