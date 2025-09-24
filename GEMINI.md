@@ -138,3 +138,17 @@ The `Service.ListGenericObjects` function performs the following processing.
 **Retrieve the objects from the local database**: if the proxy functionality is not enabled, the objects are retrieved using the `Service.listObjects` function. Otherwise, the request is forwarded to the remote TMF server if it is enabled. It is not an error if no objects are found, and in this case an empty list is returned to the caller.
 
 **Filter each of the objects as requested by the caller**: if the caller specified a `queryParams` with `fields` attribute, we filter each of the objects and return only the first-level attributes specified by the user. In any case, the fields `id`, `href`, `lastUpdate`, `version`, `lifecycleStatus` are always returned.
+
+#### Create a resource
+
+The caller must be authenticated, with a valid access token. The signature of the token must correspond to a Verifier which is configured in the TMF server to be trusted.
+
+This usually means that the Verifier is operated by the same organization that operates the TM Forum APIs, database and the PEP/PDP. The Verifier, when issuing the access token, verifies the identity of the caller organization and makes sure that it is one which has been onboarded by the entity operating the TM Forum APIs.
+
+If the signature of the access token is verified, that means that the caller is a machine or user belonging to an organization that is onboarded by the organization operating the system (the joint composition of PEP/PDP and TM Forum APIs and database).
+
+Only those organizations can create TMF objects in the database protected by the PEP/PDP. The database MAY contain objects created by other organizations, but those objects have arrived using a specific synchronization process which is described in another place.
+
+That means that our TMF database consists of objects which have been created by organizations onboarded by ourselves (as checked by the Verifier when issuing access tokens), and also objects which have been created by other organizations in other systems.
+
+Our API only allows creating objects to organizations that we have onboarded, and for this we trust on the Verifier, which is the component (not described here) that issues and signs the access tokens that camo in `Authorization` header of the APIs.

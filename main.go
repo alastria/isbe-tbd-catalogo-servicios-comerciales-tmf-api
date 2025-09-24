@@ -91,10 +91,9 @@ func main() {
 	}
 	defer db.Close()
 
-	// Create the table if it doesn't exist
-	_, err = db.Exec(repository.CreateTMFTableSQL)
+	err = repository.CreateTables(db)
 	if err != nil {
-		slog.Error("failed to create table", slog.Any("error", err))
+		slog.Error("failed to create tables", slog.Any("error", err))
 		os.Exit(1)
 	}
 
