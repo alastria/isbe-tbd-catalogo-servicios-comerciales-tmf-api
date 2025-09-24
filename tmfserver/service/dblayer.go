@@ -13,6 +13,7 @@ import (
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 	sqlb "github.com/huandu/go-sqlbuilder"
 	"github.com/mattn/go-sqlite3"
+	"gitlab.com/greyxor/slogor"
 )
 
 // createObject creates a new TMF object.
@@ -378,4 +379,22 @@ func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, [
 	sql, args := bu.Build()
 
 	return sql, args
+}
+
+// deleteTables drops the table and performs a VACUUM to reclaim space
+func (svc *Service) DeleteTables() error {
+
+	_, err := svc.db.Exec(repo.DeleteTMFTableSQL)
+	if err != nil {
+		slog.Error("deleteTables: drop table", slogor.Err(err))
+		return errl.Errorf("deleteTables: drop table: %w", err)
+	}
+
+	_, err = svc.db.Exec(repo.VacuumTMFTableSQL)
+	if err != nil {
+		slog.Error("deleteTables: vacuum", slogor.Err(err))
+		return errl.Errorf("deleteTables: vacuum: %w", err)
+	}
+
+	return nil
 }
