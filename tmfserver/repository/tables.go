@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/jmoiron/sqlx"
@@ -65,11 +66,14 @@ func CreateTables(db *sqlx.DB) error {
 		return errl.Errorf("failed to parse current version: %w", err)
 	}
 
+	slog.Info("Database version", slog.String("current", currentVersion), slog.String("our", ourVersionStr))
+
 	// Delete the database in case of a major version change
 	if CurrentMajor < DBVersionMajor {
 		if _, err := db.Exec(DeleteTMFTableSQL); err != nil {
 			return errl.Errorf("failed to delete tmf_object table: %w", err)
 		}
+		slog.Info("Database major version change detected, tmf_object table deleted")
 
 		if _, err := db.Exec(VacuumTMFTableSQL); err != nil {
 			return errl.Errorf("failed to vacuum database: %w", err)
