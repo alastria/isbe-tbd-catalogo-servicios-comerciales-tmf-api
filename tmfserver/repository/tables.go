@@ -8,11 +8,11 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-const DBVersionMajor = 0
+const DBVersionMajor = 1
 const DBVersionMinor = 1
 
 const CreateConfigTableSQL = `CREATE TABLE IF NOT EXISTS tmf_config (
-	"version" TEXT DEFAULT '0.1',
+	"version" TEXT DEFAULT '0.0',
 	"api_version" TEXT DEFAULT 'v4',
 	"created_at" DATETIME NOT NULL,
 	"updated_at" DATETIME NOT NULL
