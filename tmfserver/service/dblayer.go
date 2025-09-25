@@ -337,17 +337,30 @@ func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, [
 
 		default:
 
+			// Special processing because TMForum allows to specify multiple values
+			// in the form 'lifecycleStatus=Launched,Active'
+			var vals = []string{}
+			// Allow several instances of 'lifecycleStatus' parameter in the query string
+			for _, v := range values {
+				parts := strings.Split(v, ",")
+				// Allow for whitespace surrounding the elements
+				for i := range parts {
+					parts[i] = strings.TrimSpace(parts[i])
+				}
+				vals = append(vals, parts...)
+			}
+
 			// We assume that the rest of the parameters are not in the fields of the SQL database.
 			// We have to use SQLite JSON expressions to search.
-			if len(values) == 1 {
+			if len(vals) == 1 {
 				whereClause.AddWhereExpr(
 					cond.Args,
-					cond.Equal("content->>'$."+key+"'", values[0]),
+					cond.Equal("content->>'$."+key+"'", vals[0]),
 				)
 			} else {
 				whereClause.AddWhereExpr(
 					cond.Args,
-					cond.In("content->>'$."+key+"'", sqlb.List(values)),
+					cond.In("content->>'$."+key+"'", sqlb.List(vals)),
 				)
 
 			}
