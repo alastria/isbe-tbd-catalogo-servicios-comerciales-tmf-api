@@ -11,7 +11,6 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
-	sqlb "github.com/huandu/go-sqlbuilder"
 	"github.com/mattn/go-sqlite3"
 	"gitlab.com/greyxor/slogor"
 )
@@ -201,12 +200,14 @@ func (svc *Service) listObjectsOld(objectType string, apiVersion string, queryPa
 
 func (svc *Service) listObjects(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error) {
 	slog.Debug("dbLayer: Listing objects", "type", objectType, "queryParams", queryParams)
-	baseQuery, args := BuildSelectFromParms(objectType, queryParams)
-	fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
 
 	if svc.storage != nil {
 		return svc.storage.ListObjects(objectType, apiVersion, queryParams)
 	}
+
+	baseQuery, args := BuildSelectFromParms(objectType, queryParams)
+	fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
+
 	var objs []repo.TMFObject
 	var totalCount int
 
@@ -223,176 +224,176 @@ func (svc *Service) listObjects(objectType string, apiVersion string, queryParam
 	return objs, totalCount, err
 }
 
-// BuildSelectFromParms creates a SELECT statement based on the query values.
-// For objects with same id, selects the one with the latest version.
-func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, []any) {
+// // BuildSelectFromParms creates a SELECT statement based on the query values.
+// // For objects with same id, selects the one with the latest version.
+// func BuildSelectFromParmsOld(tmfResource string, queryValues url.Values) (string, []any) {
 
-	// Default values if the user did not specify them. -1 is equivalent to no values provided.
-	var limit = -1
-	var offset = -1
+// 	// Default values if the user did not specify them. -1 is equivalent to no values provided.
+// 	var limit = -1
+// 	var offset = -1
 
-	bu := sqlb.SQLite.NewSelectBuilder()
+// 	bu := sqlb.SQLite.NewSelectBuilder()
 
-	// SELECT: for each object with a given id, select the latest version.
-	// We use the 'max(version)' function, and will GROUP by id.
-	bu.Select(
-		"id",
-		"type",
-		"max(version) AS version",
-		"api_version",
-		"seller",
-		"buyer",
-		"last_update",
-		"content",
-		"created_at",
-		"updated_at",
-	).From("tmf_object")
+// 	// SELECT: for each object with a given id, select the latest version.
+// 	// We use the 'max(version)' function, and will GROUP by id.
+// 	bu.Select(
+// 		"id",
+// 		"type",
+// 		"max(version) AS version",
+// 		"api_version",
+// 		"seller",
+// 		"buyer",
+// 		"last_update",
+// 		"content",
+// 		"created_at",
+// 		"updated_at",
+// 	).From("tmf_object")
 
-	// WHERE: normally we expect the resource name of object to be specified, but we support a query for all object types
-	if len(tmfResource) > 0 {
-		bu.Where(bu.Equal("type", tmfResource))
-	}
+// 	// WHERE: normally we expect the resource name of object to be specified, but we support a query for all object types
+// 	if len(tmfResource) > 0 {
+// 		bu.Where(bu.Equal("type", tmfResource))
+// 	}
 
-	// Build the WHERE by processing the query values specified by the user
-	whereClause := sqlb.NewWhereClause()
-	cond := sqlb.NewCond()
+// 	// Build the WHERE by processing the query values specified by the user
+// 	whereClause := sqlb.NewWhereClause()
+// 	cond := sqlb.NewCond()
 
-	for key, values := range queryValues {
+// 	for key, values := range queryValues {
 
-		if key == "sort" || key == "fields" {
-			// TODO: implement processing for these parameters
-			continue
-		}
+// 		if key == "sort" || key == "fields" {
+// 			// TODO: implement processing for these parameters
+// 			continue
+// 		}
 
-		switch key {
-		case "limit":
-			limitStr := queryValues.Get("limit")
-			if limitStr != "" {
-				if l, err := strconv.Atoi(limitStr); err == nil {
-					limit = l
-				}
-			}
-		case "offset":
-			offsetStr := queryValues.Get("offset")
-			if offsetStr != "" {
-				if l, err := strconv.Atoi(offsetStr); err == nil {
-					offset = l
-				}
-			}
-		// case "lifecycleStatus":
-		// 	// Special processing because TMForum allows to specify multiple values
-		// 	// in the form 'lifecycleStatus=Launched,Active'
-		// 	var vals = []string{}
-		// 	// Allow several instances of 'lifecycleStatus' parameter in the query string
-		// 	for _, v := range values {
-		// 		parts := strings.Split(v, ",")
-		// 		// Allow for whitespace surrounding the elements
-		// 		for i := range parts {
-		// 			parts[i] = strings.TrimSpace(parts[i])
-		// 		}
-		// 		vals = append(vals, parts...)
-		// 	}
+// 		switch key {
+// 		case "limit":
+// 			limitStr := queryValues.Get("limit")
+// 			if limitStr != "" {
+// 				if l, err := strconv.Atoi(limitStr); err == nil {
+// 					limit = l
+// 				}
+// 			}
+// 		case "offset":
+// 			offsetStr := queryValues.Get("offset")
+// 			if offsetStr != "" {
+// 				if l, err := strconv.Atoi(offsetStr); err == nil {
+// 					offset = l
+// 				}
+// 			}
+// 		// case "lifecycleStatus":
+// 		// 	// Special processing because TMForum allows to specify multiple values
+// 		// 	// in the form 'lifecycleStatus=Launched,Active'
+// 		// 	var vals = []string{}
+// 		// 	// Allow several instances of 'lifecycleStatus' parameter in the query string
+// 		// 	for _, v := range values {
+// 		// 		parts := strings.Split(v, ",")
+// 		// 		// Allow for whitespace surrounding the elements
+// 		// 		for i := range parts {
+// 		// 			parts[i] = strings.TrimSpace(parts[i])
+// 		// 		}
+// 		// 		vals = append(vals, parts...)
+// 		// 	}
 
-		// 	// Use either an equality or an inclusion expression
-		// 	if len(vals) == 1 {
-		// 		whereClause.AddWhereExpr(
-		// 			cond.Args,
-		// 			cond.Equal(key, sqlb.List(vals)),
-		// 		)
-		// 	} else {
-		// 		whereClause.AddWhereExpr(
-		// 			cond.Args,
-		// 			cond.In(key, sqlb.List(vals)),
-		// 		)
-		// 	}
+// 		// 	// Use either an equality or an inclusion expression
+// 		// 	if len(vals) == 1 {
+// 		// 		whereClause.AddWhereExpr(
+// 		// 			cond.Args,
+// 		// 			cond.Equal(key, sqlb.List(vals)),
+// 		// 		)
+// 		// 	} else {
+// 		// 		whereClause.AddWhereExpr(
+// 		// 			cond.Args,
+// 		// 			cond.In(key, sqlb.List(vals)),
+// 		// 		)
+// 		// 	}
 
-		case "seller", "buyer":
-			// A shortcut for DOME, to simplify life to applications (but can be also done in a TMF-compliant way).
-			// Special processing to allow specifying multiple values in the form 'seller=id1,id2,id3'.
-			// We also support the standard HTTP query strings like 'seller=id1,id2&seller=id3'
-			var vals = []string{}
-			// Allow several instances of the key in the query string (as in standard HTTP query strings)
-			for _, v := range values {
-				// Process each for several comma-separated values in the same key instance
-				parts := strings.Split(v, ",")
-				// Allow for whitespace surrounding the elements
-				for i := range parts {
-					parts[i] = strings.TrimSpace(parts[i])
-				}
-				vals = append(vals, parts...)
-			}
+// 		case "seller", "buyer":
+// 			// A shortcut for DOME, to simplify life to applications (but can be also done in a TMF-compliant way).
+// 			// Special processing to allow specifying multiple values in the form 'seller=id1,id2,id3'.
+// 			// We also support the standard HTTP query strings like 'seller=id1,id2&seller=id3'
+// 			var vals = []string{}
+// 			// Allow several instances of the key in the query string (as in standard HTTP query strings)
+// 			for _, v := range values {
+// 				// Process each for several comma-separated values in the same key instance
+// 				parts := strings.Split(v, ",")
+// 				// Allow for whitespace surrounding the elements
+// 				for i := range parts {
+// 					parts[i] = strings.TrimSpace(parts[i])
+// 				}
+// 				vals = append(vals, parts...)
+// 			}
 
-			// Use either an equality (when one element) or an inclusion expression (when several)
-			if len(vals) == 1 {
-				whereClause.AddWhereExpr(
-					cond.Args,
-					cond.Equal(key, sqlb.List(vals)),
-				)
-			} else {
-				whereClause.AddWhereExpr(
-					cond.Args,
-					cond.In(key, sqlb.List(vals)),
-				)
-			}
+// 			// Use either an equality (when one element) or an inclusion expression (when several)
+// 			if len(vals) == 1 {
+// 				whereClause.AddWhereExpr(
+// 					cond.Args,
+// 					cond.Equal(key, vals[0]),
+// 				)
+// 			} else {
+// 				whereClause.AddWhereExpr(
+// 					cond.Args,
+// 					cond.In(key, sqlb.List(vals)),
+// 				)
+// 			}
 
-		default:
+// 		default:
 
-			// Special processing because TMForum allows to specify multiple values
-			// in the form 'lifecycleStatus=Launched,Active'
-			var vals = []string{}
-			// Allow several instances of 'lifecycleStatus' parameter in the query string
-			for _, v := range values {
-				parts := strings.Split(v, ",")
-				// Allow for whitespace surrounding the elements
-				for i := range parts {
-					parts[i] = strings.TrimSpace(parts[i])
-				}
-				vals = append(vals, parts...)
-			}
+// 			// Special processing because TMForum allows to specify multiple values
+// 			// in the form 'lifecycleStatus=Launched,Active'
+// 			var vals = []string{}
+// 			// Allow several instances of 'lifecycleStatus' parameter in the query string
+// 			for _, v := range values {
+// 				parts := strings.Split(v, ",")
+// 				// Allow for whitespace surrounding the elements
+// 				for i := range parts {
+// 					parts[i] = strings.TrimSpace(parts[i])
+// 				}
+// 				vals = append(vals, parts...)
+// 			}
 
-			// We assume that the rest of the parameters are not in the fields of the SQL database.
-			// We have to use SQLite JSON expressions to search.
-			if len(vals) == 1 {
-				whereClause.AddWhereExpr(
-					cond.Args,
-					cond.Equal("content->>'$."+key+"'", vals[0]),
-				)
-			} else {
-				whereClause.AddWhereExpr(
-					cond.Args,
-					cond.In("content->>'$."+key+"'", sqlb.List(vals)),
-				)
+// 			// We assume that the rest of the parameters are not in the fields of the SQL database.
+// 			// We have to use SQLite JSON expressions to search.
+// 			if len(vals) == 1 {
+// 				whereClause.AddWhereExpr(
+// 					cond.Args,
+// 					cond.Equal("content->>'$."+key+"'", vals[0]),
+// 				)
+// 			} else {
+// 				whereClause.AddWhereExpr(
+// 					cond.Args,
+// 					cond.In("content->>'$."+key+"'", sqlb.List(vals)),
+// 				)
 
-			}
+// 			}
 
-		}
-	}
+// 		}
+// 	}
 
-	// Add the WHERE to the SELECT
-	bu.AddWhereClause(whereClause)
+// 	// Add the WHERE to the SELECT
+// 	bu.AddWhereClause(whereClause)
 
-	// We need to GROUP by id, so we can SELECT the record with the latest version from each group
-	bu.GroupBy("id")
+// 	// We need to GROUP by id, so we can SELECT the record with the latest version from each group
+// 	bu.GroupBy("id")
 
-	// // For fairness of presenting results to customers, we want a random ordering, which is consistent and fair with the providers.
-	// // Ordering by the hash of the content of the TMF object complies with the requirements, as it is consistent across paginations
-	// // and nobody can predict the final ordering a-priory.
-	// // For a stable catalog, the ordering is the same for all users and at any time.
-	// // When a provider creates or modifies a product, it will be inserted at an unpredictable position in the catalog.
-	// //
-	// // TODO: we can consider a more advanced variation, where we add to the hash a random number which is
-	// // generated each day or week, and keeps the same until a new one is generated.
-	// // In this way, ordering is efficient, random, and changes every week (or whatever period is chosen)
-	// bu.OrderBy("hash")
+// 	// // For fairness of presenting results to customers, we want a random ordering, which is consistent and fair with the providers.
+// 	// // Ordering by the hash of the content of the TMF object complies with the requirements, as it is consistent across paginations
+// 	// // and nobody can predict the final ordering a-priory.
+// 	// // For a stable catalog, the ordering is the same for all users and at any time.
+// 	// // When a provider creates or modifies a product, it will be inserted at an unpredictable position in the catalog.
+// 	// //
+// 	// // TODO: we can consider a more advanced variation, where we add to the hash a random number which is
+// 	// // generated each day or week, and keeps the same until a new one is generated.
+// 	// // In this way, ordering is efficient, random, and changes every week (or whatever period is chosen)
+// 	// bu.OrderBy("hash")
 
-	// Pagination support
-	bu.Limit(limit).Offset(offset)
+// 	// Pagination support
+// 	bu.Limit(limit).Offset(offset)
 
-	// Build the query, with the statement and the arguments to be used
-	sql, args := bu.Build()
+// 	// Build the query, with the statement and the arguments to be used
+// 	sql, args := bu.Build()
 
-	return sql, args
-}
+// 	return sql, args
+// }
 
 // deleteTables drops the table and performs a VACUUM to reclaim space
 func (svc *Service) DeleteTables() error {
@@ -410,4 +411,184 @@ func (svc *Service) DeleteTables() error {
 	}
 
 	return nil
+}
+
+func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, []any) {
+
+	// Default values if the user did not specify them. -1 is equivalent to no values provided.
+	var limit = -1
+	var offset = -1
+
+	var buf StringRenderer
+	var args []any
+
+	// The main select
+	buf.Render(
+		`SELECT id, type, max(version) AS version, api_version, seller, buyer, last_update, content, created_at, updated_at FROM tmf_object`,
+	)
+
+	// WHERE: normally we expect the resource name of object to be specified, but we support a query for all object types
+	if len(tmfResource) > 0 {
+		buf.Render(" WHERE type = ?")
+		args = append(args, tmfResource)
+	}
+
+	// Build the WHERE by processing the query values specified by the user
+	for key, values := range queryValues {
+
+		if key == "sort" || key == "fields" {
+			// TODO: implement processing for these parameters
+			continue
+		}
+
+		switch key {
+		case "limit":
+			limitStr := queryValues.Get("limit")
+			if limitStr != "" {
+				if l, err := strconv.Atoi(limitStr); err == nil {
+					limit = l
+				}
+			}
+
+		case "offset":
+			offsetStr := queryValues.Get("offset")
+			if offsetStr != "" {
+				if l, err := strconv.Atoi(offsetStr); err == nil {
+					offset = l
+				}
+			}
+
+		case "seller", "buyer":
+			// A shortcut for DOME, to simplify life to applications (but can be also done in a TMF-compliant way).
+			// Special processing to allow specifying multiple values in the form 'seller=id1,id2,id3'.
+			// We also support the standard HTTP query strings like 'seller=id1,id2&seller=id3'
+			vals := processValues(values)
+
+			// Use either an equality (when one element) or an inclusion expression (when several)
+			if len(vals) == 1 {
+				buf.Render(" AND ", key, " = ?")
+			} else if len(vals) > 1 {
+				buf.Render(" AND ", key, " IN ").RenderList(vals...)
+			}
+			args = append(args, vals...)
+
+		case "category.id", "productSpecification.id":
+			// Simplification of the query in the category array.
+			// TODO: try to generalize for all search in arrays.
+
+			object := strings.TrimSuffix(key, ".id")
+
+			// Special processing because TMForum allows to specify multiple values
+			// in the form 'lifecycleStatus=Launched,Active'
+			vals := processValues(values)
+
+			if len(vals) == 1 {
+				buf.Render(
+					" AND EXISTS (SELECT 1 FROM json_each(tmf_object.content, '$.", object, "') WHERE json_extract(value, '$.id') = ?)",
+				)
+			} else if len(vals) > 1 {
+				buf.Render(
+					" AND EXISTS (SELECT 1 FROM json_each(tmf_object.content, '$.", object, "') WHERE json_extract(value, '$.id') IN ").RenderList(vals...).Render(")")
+			}
+			args = append(args, vals...)
+
+		default:
+
+			// Special processing because TMForum allows to specify multiple values
+			// in the form 'lifecycleStatus=Launched,Active'
+			vals := processValues(values)
+
+			// We assume that the rest of the parameters are not in the fields of the SQL database.
+			// We have to use SQLite JSON expressions to search.
+			if len(vals) == 1 {
+				buf.Render(" AND content->>'$.", key, "' = ?")
+			} else {
+				buf.Render(" AND content->>'$.", key, "' IN ").RenderList(vals...)
+			}
+			args = append(args, vals...)
+
+		}
+	}
+
+	// We need to GROUP by id, so we can SELECT the record with the latest version from each group
+	buf.Render(" GROUP BY id")
+
+	// // For fairness of presenting results to customers, we want a random ordering, which is consistent and fair with the providers.
+	// // Ordering by the hash of the content of the TMF object complies with the requirements, as it is consistent across paginations
+	// // and nobody can predict the final ordering a-priory.
+	// // For a stable catalog, the ordering is the same for all users and at any time.
+	// // When a provider creates or modifies a product, it will be inserted at an unpredictable position in the catalog.
+	// //
+	// // TODO: we can consider a more advanced variation, where we add to the hash a random number which is
+	// // generated each day or week, and keeps the same until a new one is generated.
+	// // In this way, ordering is efficient, random, and changes every week (or whatever period is chosen)
+	// bu.OrderBy("hash")
+
+	// Pagination support
+	buf.Render(" LIMIT ", limit, " OFFSET ", offset)
+
+	// Build the query, with the statement and the arguments to be used
+	sql := buf.String()
+
+	return sql, args
+}
+
+type StringRenderer struct {
+	strings.Builder
+}
+
+func (r *StringRenderer) Render(inputs ...any) *StringRenderer {
+	for _, s := range inputs {
+		switch v := s.(type) {
+		case string:
+			r.WriteString(v)
+		case []byte:
+			r.Write(v)
+		case int:
+			r.WriteString(strconv.FormatInt(int64(v), 10))
+		case byte:
+			r.WriteByte(v)
+		case rune:
+			r.WriteRune(v)
+		default:
+			slog.Error("attemping to write something not a string, int, rune, []byte or byte: %T", s)
+		}
+	}
+	return r
+}
+
+func (r *StringRenderer) Renderln(inputs ...any) *StringRenderer {
+	r.Render(inputs...)
+	r.Render('\n')
+	return r
+}
+
+// RenderList renders the arguments as a comma separated list inside parenthesis
+func (r *StringRenderer) RenderList(inputs ...any) *StringRenderer {
+	r.Render("(")
+	for i := range inputs {
+		if i > 0 {
+			r.Render(",")
+		}
+		r.Render("?")
+	}
+	r.Render(")")
+	return r
+}
+
+func processValues(values []string) []any {
+	// Special processing because TMForum allows to specify multiple values
+	// in the form 'lifecycleStatus=Launched,Active'
+	var vals []any
+	// Allow several instances of 'lifecycleStatus' parameter in the query string
+	for _, v := range values {
+		parts := strings.Split(v, ",")
+		// Allow for whitespace surrounding the elements
+		for i := range parts {
+			parts[i] = strings.TrimSpace(parts[i])
+			vals = append(vals, parts[i])
+		}
+	}
+
+	return vals
 }
