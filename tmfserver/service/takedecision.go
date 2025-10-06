@@ -129,27 +129,27 @@ var publicResources = map[string]bool{
 	// TMF620 Product Catalog Management
 	"category":             true,
 	"catalog":              true,
-	"productOffering":      true,
-	"productOfferingPrice": true,
-	"productSpecification": true,
+	"productoffering":      true,
+	"productofferingprice": true,
+	"productspecification": true,
 
 	// TMF633 Service Catalog Management
-	"serviceCatalog":       true,
-	"serviceCategory":      true,
-	"serviceCandidate":     true,
-	"serviceSpecification": true,
+	"servicecatalog":       true,
+	"servicecategory":      true,
+	"servicecandidate":     true,
+	"servicespecification": true,
 
 	// TMF634 Resource Catalog Management
-	"resourceCatalog":       true,
-	"resourceCategory":      true,
-	"resourceCandidate":     true,
-	"resourceSpecification": true,
+	"resourcecatalog":       true,
+	"resourcecategory":      true,
+	"resourcecandidate":     true,
+	"resourcespecification": true,
 
 	// Organization from TMF632 Party Management. But Individual is private.
 	"organization": true,
 
 	// TMF669 Party Rola Management
-	"partyRole": true,
+	"partyrole": true,
 }
 
 func isPublicResource(resourceName string) bool {
