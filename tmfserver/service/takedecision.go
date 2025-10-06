@@ -32,18 +32,22 @@ func takeDecision(
 			userDid = "did:elsi:" + userDid
 		}
 
-		// The object must have both the seller and sellerOperator identities
-		sellerDid, sellerOperatorDid, err = objectMap.GetSellerInfo(req.APIVersion)
-		if err != nil || sellerDid == "" || sellerOperatorDid == "" {
-			err = errl.Errorf("failed to get seller and buyer info: %w", err)
-			return err
+		resource := strings.ToLower(req.ResourceName)
+		if resource != "organization" && resource != "individual" && resource != "category" {
+			// The object must have both the seller and sellerOperator identities
+			sellerDid, sellerOperatorDid, err = objectMap.GetSellerInfo(req.APIVersion)
+			if err != nil || sellerDid == "" || sellerOperatorDid == "" {
+				err = errl.Errorf("failed to get seller and buyer info: %w", err)
+				return err
+			}
+
+			// Optionally, the object may have Buyer and BuyerOperator roles defined
+			buyerDid, buyerOperatorDid, _ = objectMap.GetBuyerInfo(req.APIVersion)
+
+			// The user is the 'owner' if it is Seller, SellerOperator, Buyer or BuyerOperator
+			req.AuthUser.isOwner = (userDid == sellerDid) || (userDid == sellerOperatorDid) || (userDid == buyerDid) || (userDid == buyerOperatorDid)
+
 		}
-
-		// Optionally, the object may have Buyer and BuyerOperator roles defined
-		buyerDid, buyerOperatorDid, _ = objectMap.GetBuyerInfo(req.APIVersion)
-
-		// The user is the 'owner' if it is Seller, SellerOperator, Buyer or BuyerOperator
-		req.AuthUser.isOwner = (userDid == sellerDid) || (userDid == sellerOperatorDid) || (userDid == buyerDid) || (userDid == buyerOperatorDid)
 
 	}
 
