@@ -149,6 +149,7 @@ var publicResources = map[string]bool{
 }
 
 func isPublicResource(resourceName string) bool {
+	resourceName = strings.ToLower(resourceName)
 	_, ok := publicResources[resourceName]
 	return ok
 }
