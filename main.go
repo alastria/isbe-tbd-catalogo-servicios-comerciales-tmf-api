@@ -164,7 +164,7 @@ func main() {
 
 	// 5. Rate limiting middleware - prevent abuse
 	app.Use(limiter.New(limiter.Config{
-		Max:        100,             // Maximum number of requests
+		Max:        10000000,        // Maximum number of requests
 		Expiration: 1 * time.Minute, // Time window
 		KeyGenerator: func(c *fiber.Ctx) string {
 			// Use client IP for rate limiting
