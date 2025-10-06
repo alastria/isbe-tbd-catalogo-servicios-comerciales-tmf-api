@@ -583,14 +583,14 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
 	token, err := svc.processAccessToken(req)
 	if err != nil {
-		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", err)
+		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
 	}
 
 	// Retrieve the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
 	// If th eobject is not found, we return a 404 error.
 	existingObject, err := svc.getLocalOrRemoteObject(req)
 	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to get object from service: %w", err)
+		return ErrorResponsef(http.StatusInternalServerError, "failed to get object from service: %w", errl.Error(err))
 	}
 
 	if existingObject == nil {
@@ -599,7 +599,7 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 
 	em, err := existingObject.ToMap()
 	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", err)
+		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", errl.Error(err))
 	}
 	existingObjectMap := repo.TMFObjectMap(em)
 
@@ -610,7 +610,7 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 
 	err = takeDecision(svc.ruleEngine, req, token, existingObjectMap)
 	if err != nil {
-		return ErrorResponse(err, http.StatusForbidden)
+		return ErrorResponse(errl.Error(err), http.StatusForbidden)
 	}
 
 	// ************************************************************************************************
