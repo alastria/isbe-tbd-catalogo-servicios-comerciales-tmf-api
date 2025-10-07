@@ -9,6 +9,8 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+
+	"github.com/hesusruiz/isbetmf/internal/errl"
 )
 
 // GetMap returns a map[string]any according to a dotted path or default or map[string]any.
@@ -249,7 +251,21 @@ func Get(src any, path string) (any, error) {
 		switch c := src.(type) {
 
 		case []any:
-			// If data is an array, the path component must be an integer (base 10) to index the array
+			// If data is an array, the path component must be an integer (base 10) to index the array,
+			// or an asterisk '*'.
+			// The asterisk means that we have to iterate the array to find the element
+
+			// First, process the '*'
+			if pathComponent == "*" {
+				for _, el := range c {
+					v, err := Get(el, strings.Join(parts[pos+1:], "."))
+					if err == nil {
+						return v, nil
+					}
+				}
+				return nil, errl.Errorf("error searching array")
+			}
+
 			index, err := strconv.ParseInt(pathComponent, 10, 0)
 			if err != nil {
 				return nil, fmt.Errorf("jpath.Get: invalid list index at %q",

@@ -19,37 +19,8 @@ func takeDecision(
 	objectMap repo.TMFObjectMap,
 ) (err error) {
 
-	var buyerDid, buyerOperatorDid string
-	var sellerDid, sellerOperatorDid string
-	var userDid string
-
-	// Pre-calculate some useful values
-	if req.AuthUser.isAuthenticated {
-
-		// The user DID must be in the format did:elsi:xxxx
-		userDid = req.AuthUser.OrganizationIdentifier
-		if !strings.HasPrefix(userDid, "did:elsi:") {
-			userDid = "did:elsi:" + userDid
-		}
-
-		resource := strings.ToLower(req.ResourceName)
-		if resource != "organization" && resource != "individual" && resource != "category" {
-			// The object must have both the seller and sellerOperator identities
-			sellerDid, sellerOperatorDid, err = objectMap.GetSellerInfo(req.APIVersion)
-			if err != nil || sellerDid == "" || sellerOperatorDid == "" {
-				err = errl.Errorf("failed to get seller and buyer info: %w", err)
-				return err
-			}
-
-			// Optionally, the object may have Buyer and BuyerOperator roles defined
-			buyerDid, buyerOperatorDid, _ = objectMap.GetBuyerInfo(req.APIVersion)
-
-			// The user is the 'owner' if it is Seller, SellerOperator, Buyer or BuyerOperator
-			req.AuthUser.isOwner = (userDid == sellerDid) || (userDid == sellerOperatorDid) || (userDid == buyerDid) || (userDid == buyerOperatorDid)
-
-		}
-
-	}
+	// Pre-calculate the owner value
+	req.AuthUser.isOwner = objectMap.IsOwner(req.AuthUser.OrganizationIdentifier)
 
 	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
 	if req.Method == "GET" && isPublicResource(req.ResourceName) {
