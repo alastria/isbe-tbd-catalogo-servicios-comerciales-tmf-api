@@ -354,9 +354,9 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var version string
 	{
 
-		// Parse the request body
-		if err := json.Unmarshal(req.Body, &incomingObjectMap); err != nil {
-			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", err)
+		incomingObjectMap, err = repo.NewTMFObjectMapFromRequest(req.ResourceName, req.Body)
+		if err != nil {
+			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
 		}
 
 		// Check for the different required name fields depending on the object type
@@ -480,9 +480,10 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		// Put the created objet in a map
-		var remoteObjectMap repo.TMFObjectMap
-		if err := json.Unmarshal(body, &remoteObjectMap); err != nil {
-			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", err)
+
+		remoteObjectMap, err := repo.NewTMFObjectMapFromRequest(req.ResourceName, body)
+		if err != nil {
+			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
 		}
 
 		id := remoteObjectMap.GetID()
@@ -767,7 +768,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	{
 		// Process the AccessToken to extract caller info from its claims in the payload
 		if token, err = svc.processAccessToken(req); err != nil {
-			return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", err)
+			return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
 		}
 
 		// This operation can not be done without authentication
@@ -782,12 +783,14 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// We perform some formal verifications and add default values if needed.
 	// ************************************************************************************************
 
+	resource := strings.ToLower(req.ResourceName)
+
 	var incomingObjMap repo.TMFObjectMap
 	var incomingVersion string
 	{
 		// Parse the request body, which contains the TMForum object being created
 		if err := json.Unmarshal(req.Body, &incomingObjMap); err != nil {
-			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", err)
+			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
 		}
 
 		if !DOMEHacks {
@@ -796,14 +799,20 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			// But if the ID is present in the body, ensure it matches the ID in the URL
 			id, _ := incomingObjMap["id"].(string)
 			if id != "" && id != req.ID {
-				return ErrorResponsef(http.StatusBadRequest, "ID in body must match ID in URL")
+				err := errl.Errorf("ID in body must match ID in URL")
+				return ErrorResponsef(http.StatusBadRequest, "invalid object: %w", err)
 			}
 		}
 
-		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
-		err = incomingObjMap.SetSellerInfo(req.AuthUser.OrganizationIdentifier, req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to add Seller and Buyer info: %w", err)
+		// For all objects except Organization, Individual or Catalog, set Seller info
+		if resource != "organization" && resource != "individual" && resource != "category" {
+
+			// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
+			err = incomingObjMap.SetSellerInfo(req.AuthUser.OrganizationIdentifier, req.APIVersion)
+			if err != nil {
+				return ErrorResponsef(http.StatusInternalServerError, "failed to add Seller and Buyer info: %w", errl.Error(err))
+			}
+
 		}
 
 		// Set the lastUpdate property. We overwrite whatever the user set.
@@ -856,36 +865,47 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// If they do not match, the caller is not the owner and we reject the operation.
 	// Note that we do this before merging the incoming object into the existing one,
 	// so the caller can not change the ownership of an object by updating it.
-	existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerInfo(req.APIVersion)
-	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to get seller and buyer info: %w", err)
-	}
 
-	// ************************************************************************************************
-	// Before performing the action, check if the user can perform the operation on the object,
-	// based on the rules defined by the user in the policy engine.
-	// ************************************************************************************************
-
-	// We need the SellerOperator to be our operator (the one who operates this server)
-	if existingSellerOperatorDid != config.ServerOperatorDid {
-		return ErrorResponsef(http.StatusForbidden, "object not managed by this operator")
-	}
-
-	// We need that the caller is the owner of the object being updated.
-	if !isDIDForOrganizationIDentifier(existingSellerDid, req.AuthUser.OrganizationIdentifier) {
-		return ErrorResponsef(http.StatusForbidden, "user not owner of the object")
-	}
-
-	// If existing lifecycleStatus is 'Launched', 'Retired' or 'Obsolete', incoming version must be greater than the existing version
-	existingLifecycleStatus, _ := existingObjectMap["lifecycleStatus"].(string)
-	incomingVersion, _ = incomingObjMap["version"].(string)
-
-	if existingLifecycleStatus == "Launched" || existingLifecycleStatus == "Retired" || existingLifecycleStatus == "Obsolete" {
-		if incomingVersion == "" || incomingVersion <= existingObj.Version {
-			// It is forbidden to update an object which is already launched, using the same or previous version.
-			// Only a new version can be created.
-			return ErrorResponsef(http.StatusBadRequest, "for launched objects, incoming version must be greater than existing version")
+	switch resource {
+	case "organization", "individual":
+		_ = resource
+	case "category":
+		if !sameOrganizations(req.AuthUser.OrganizationIdentifier, config.ServerOperatorDid) {
+			return ErrorResponsef(http.StatusForbidden, "user not owner of the object")
 		}
+	default:
+		existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerInfo(req.APIVersion)
+		if err != nil {
+			return ErrorResponsef(http.StatusInternalServerError, "failed to get seller and buyer info: %w", err)
+		}
+
+		// ************************************************************************************************
+		// Before performing the action, check if the user can perform the operation on the object,
+		// based on the rules defined by the user in the policy engine.
+		// ************************************************************************************************
+
+		// We need the SellerOperator to be our operator (the one who operates this server)
+		if existingSellerOperatorDid != config.ServerOperatorDid {
+			return ErrorResponsef(http.StatusForbidden, "object not managed by this operator")
+		}
+
+		// We need that the caller is the owner of the object being updated.
+		if !sameOrganizations(existingSellerDid, req.AuthUser.OrganizationIdentifier) {
+			return ErrorResponsef(http.StatusForbidden, "user not owner of the object")
+		}
+
+		// If existing lifecycleStatus is 'Launched', 'Retired' or 'Obsolete', incoming version must be greater than the existing version
+		existingLifecycleStatus, _ := existingObjectMap["lifecycleStatus"].(string)
+		incomingVersion, _ = incomingObjMap["version"].(string)
+
+		if existingLifecycleStatus == "Launched" || existingLifecycleStatus == "Retired" || existingLifecycleStatus == "Obsolete" {
+			if incomingVersion == "" || incomingVersion <= existingObj.Version {
+				// It is forbidden to update an object which is already launched, using the same or previous version.
+				// Only a new version can be created.
+				return ErrorResponsef(http.StatusBadRequest, "for launched objects, incoming version must be greater than existing version")
+			}
+		}
+
 	}
 
 	// ************************************************************************************************
@@ -1420,9 +1440,10 @@ func isLifecycleStatusMandatory(resourceName string) bool {
 	return true
 }
 
-func isDIDForOrganizationIDentifier(did, orgID string) bool {
-	if !strings.HasPrefix(did, "did:elsi:") {
-		return false
-	}
-	return did == "did:elsi:"+orgID
+func sameOrganizations(did, orgID string) bool {
+
+	did = strings.TrimPrefix(did, "did:elsi:")
+	orgID = strings.TrimPrefix(orgID, "did:elsi:")
+
+	return did == orgID
 }

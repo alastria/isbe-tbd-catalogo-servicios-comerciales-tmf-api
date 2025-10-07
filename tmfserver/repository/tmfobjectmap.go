@@ -27,6 +27,30 @@ func NewTMFObjectMap(data []byte) (TMFObjectMap, error) {
 	return obj, nil
 }
 
+func NewTMFObjectMapFromRequest(resourceName string, data []byte) (TMFObjectMap, error) {
+	var obj TMFObjectMap
+	err := json.Unmarshal(data, &obj)
+	if err != nil {
+		return nil, fmt.Errorf("failed to unmarshal TMF object: %w", errl.Error(err))
+	}
+
+	// Check that the object matches the resourceName
+	objType, _ := obj["@type"].(string)
+	if objType != "" {
+		// If the object type is specified, it must match the resourceName passed by the caller
+		if !strings.EqualFold(resourceName, objType) {
+			return nil, errl.Errorf("invalid object type, expected %s but received %s", resourceName, objType)
+		}
+
+	} else {
+		// No object type in the object, set it to the resourceName
+		obj["@type"] = resourceName
+	}
+
+	return obj, nil
+
+}
+
 // NewTMFObjectFromMap creates a new TMFObject from an existing map
 func NewTMFObjectFromMap(data map[string]any) TMFObjectMap {
 	obj := TMFObjectMap(maps.Clone(data))
@@ -69,6 +93,67 @@ func (obj TMFObjectMap) GetHref() string {
 // SetHref sets the object href
 func (obj TMFObjectMap) SetHref(href string) {
 	obj["href"] = href
+}
+
+func (obj TMFObjectMap) IsOwner(organizationId string) bool {
+	// Ownership of an object depends on the type of object
+	objType, _ := obj["@type"].(string)
+	objType = strings.ToLower(objType)
+
+	switch objType {
+	case "organization":
+
+		// The user must be either the operator or the same organization as the Organization object
+		if sameOrganizations(organizationId, config.ServerOperatorDid) {
+			return true
+		}
+
+		objOrganizationId := jpath.GetString(obj, "organizationIdentification.*.identificationId")
+		if sameOrganizations(objOrganizationId, organizationId) {
+			return true
+		}
+
+	case "individual":
+
+		// TODO: revise this policy to be restrictive
+		return true
+
+	case "category":
+
+		// The owner is the server operator
+		if sameOrganizations(organizationId, config.ServerOperatorDid) {
+			return true
+		}
+
+	default:
+
+		// For any other objects, we need the object to include the Seller info, and then
+		// the user must be either the server operator or the seller
+
+		objSellerDid, objSellerOperatorDid, err := getUserAndUserOperatorInfoV4(obj, "Seller", "SellerOperator")
+		if err != nil {
+			objSellerDid, objSellerOperatorDid, err = getUserAndUserOperatorInfoV5(obj, "Seller", "SellerOperator")
+		}
+		if err != nil {
+			return false
+		}
+
+		// We need the SellerOperator to be our operator (the one who operates this server)
+		if objSellerOperatorDid != config.ServerOperatorDid {
+			return false
+		}
+
+		// The ownwer is either the same organization as the object or the server operator
+		if sameOrganizations(objSellerDid, organizationId) && !sameOrganizations(objSellerDid, config.ServerOperatorDid) {
+			return true
+		}
+
+		return false
+
+	}
+
+	return false
+
 }
 
 // GetVersion returns the object version
@@ -758,4 +843,12 @@ func getUserAndUserOperatorInfoV5(tmfObjectMap map[string]any, userRole string, 
 
 	return
 
+}
+
+func sameOrganizations(did, orgID string) bool {
+
+	did = strings.TrimPrefix(did, "did:elsi:")
+	orgID = strings.TrimPrefix(orgID, "did:elsi:")
+
+	return did == orgID
 }
