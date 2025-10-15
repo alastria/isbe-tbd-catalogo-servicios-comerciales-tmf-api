@@ -30,3 +30,4 @@ go.work.sum
 # SQLite databases
 isbetmf.db*
 data/
+.sqlite*
