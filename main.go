@@ -1,18 +1,24 @@
 package main
 
 import (
+	"context"
 	"flag" // Added
+	"fmt"
+	"log"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	"log/slog"
 
+	"github.com/cloudflare/tableflip"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/sqlogger"
 	"github.com/hesusruiz/isbetmf/pdp"
 	fiberhandler "github.com/hesusruiz/isbetmf/tmfserver/handler/fiber"
@@ -23,16 +29,20 @@ import (
 )
 
 func main() {
-	// Configure slog logger
 	var debugFlag bool
 	var verifierServer string
 	var remoteTMFServer string
 	var proxyEnabled bool
+	var restartHour, restartMinute int
+
+	// Parse command-line flags
 
 	flag.BoolVar(&debugFlag, "d", true, "Enable debug logging")
 	flag.StringVar(&verifierServer, "verifier", "", "Full URL of the verifier which signs access tokens")
 	flag.StringVar(&remoteTMFServer, "remote", "", "Full URL of the remote TMForum server to proxy requests to")
 	flag.BoolVar(&proxyEnabled, "proxy", false, "Enable proxy functionality")
+	flag.IntVar(&restartHour, "rh", 3, "Restart program every day at this hour")
+	flag.IntVar(&restartMinute, "rm", 0, "Restart program every day at this minute")
 	flag.Parse()
 
 	// Configure the slog logger
@@ -60,8 +70,8 @@ func main() {
 	defer sqlog.Close()
 	slog.SetDefault(slog.New(sqlog))
 
-	// slogHandler := slogor.NewHandler(os.Stdout, slogor.ShowSource(), slogor.SetLevel(logLevel))
-	// slog.SetDefault(slog.New(slogHandler))
+	pid := os.Getpid()
+	slog.Info("Process started", "PID", pid)
 
 	// Get the url of the verifier from command line (priority) or environment variable
 	if verifierServer == "" {
@@ -162,22 +172,22 @@ func main() {
 		Level: compress.LevelBestSpeed,
 	}))
 
-	// 5. Rate limiting middleware - prevent abuse
-	app.Use(limiter.New(limiter.Config{
-		Max:        10000000,        // Maximum number of requests
-		Expiration: 1 * time.Minute, // Time window
-		KeyGenerator: func(c *fiber.Ctx) string {
-			// Use client IP for rate limiting
-			return c.IP()
-		},
-		LimitReached: func(c *fiber.Ctx) error {
-			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-				"error": "Rate limit exceeded",
-			})
-		},
-	}))
+	// // 5. Rate limiting middleware - prevent abuse
+	// app.Use(limiter.New(limiter.Config{
+	// 	Max:        10000000,        // Maximum number of requests
+	// 	Expiration: 1 * time.Minute, // Time window
+	// 	KeyGenerator: func(c *fiber.Ctx) string {
+	// 		// Use client IP for rate limiting
+	// 		return c.IP()
+	// 	},
+	// 	LimitReached: func(c *fiber.Ctx) error {
+	// 		return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+	// 			"error": "Rate limit exceeded",
+	// 		})
+	// 	},
+	// }))
 
-	// 6. Logger middleware - log requests
+	// 6. Logger middleware - log requests and replies
 	app.Use(sqlogger.FiberRequestLogger)
 
 	// Note: Timeout middleware removed due to API changes in Fiber v2.52.9
@@ -191,8 +201,96 @@ func main() {
 	h := fiberhandler.NewHandler(s)
 	h.RegisterRoutes(app)
 
-	// And start the server
-	slog.Info("TMF API server starting", slog.String("port", ":9991"))
-	app.Listen("0.0.0.0:9991")
+	// TABLEFLIP for seamless restarts and upgrades
+	upg, _ := tableflip.New(tableflip.Options{
+		PIDFile: "isbetmf.pid",
+	})
+	defer upg.Stop()
+
+	// Listen for the process signal to trigger the tableflip upgrade.
+	go func() {
+		sig := make(chan os.Signal, 1)
+		signal.Notify(sig, syscall.SIGHUP)
+		for range sig {
+			fmt.Println("Received SIGHUP, upgrading...")
+			upg.Upgrade()
+		}
+	}()
+
+	// Schedule restarts/upgrades every night, the exact time does not matter
+	targetHour := restartHour
+	targetMinute := restartMinute
+	targetSecond := 0
+
+	go func() {
+		for {
+			now := time.Now()
+
+			// Calculate the next scheduled time
+			nextRun := time.Date(
+				now.Year(), now.Month(), now.Day(),
+				targetHour, targetMinute, targetSecond, 0, now.Location(),
+			)
+
+			// If the next run time is in the past, schedule it for the next day
+			if nextRun.Before(now) {
+				nextRun = nextRun.Add(24 * time.Hour)
+			}
+
+			fmt.Printf("Time now: %v\n", now)
+
+			// Calculate the duration until the next run
+			duration := time.Until(nextRun)
+			fmt.Printf("Next restart/upgrade scheduled at: %v\n", nextRun)
+
+			// Wait until the next run time
+			time.Sleep(duration)
+
+			// Execute the function
+			fmt.Println("Executing scheduled restart...")
+			upg.Upgrade()
+		}
+	}()
+
+	// Listen must be called before Ready
+	ln, err := upg.Listen("tcp", "0.0.0.0:9991")
+	if err != nil {
+		panic(errl.Error(err))
+	}
+	defer ln.Close()
+
+	// Start the server in a separate goroutine
+	go func() {
+		slog.Info("TMF API server starting", slog.String("port", ":9991"))
+		err := app.Listener(ln)
+		if err != nil {
+			slog.Error("Error starting TMF API server", "error", errl.Error(err))
+			panic(err)
+		}
+	}()
+
+	// tableflip ready
+	slog.Info("Tableflip ready")
+	if err := upg.Ready(); err != nil {
+		panic(errl.Error(err))
+	}
+
+	<-upg.Exit()
+
+	// Make sure to set a deadline on exiting the process
+	// after upg.Exit() is closed. No new upgrades can be
+	// performed if the parent doesn't exit.
+	time.AfterFunc(30*time.Second, func() {
+		log.Println("Graceful shutdown timed out")
+		os.Exit(1)
+	})
+
+	// Wait for connections to drain.
+	err = app.ShutdownWithContext(context.Background())
+	if err != nil {
+		fmt.Println("Exiting with error:", errl.Error(err).Error())
+	} else {
+		fmt.Println("Exiting without error")
+	}
 
 }
