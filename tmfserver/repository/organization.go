@@ -104,6 +104,12 @@ func TMFOrganizationFromToken(accessToken map[string]any, user *Organization) (*
 				"name":                  user.OrganizationIdentifier,
 			},
 		},
+		"partyCharacteristic": []any{
+			map[string]any{
+				"name":  "country",
+				"value": user.Country,
+			},
+		},
 	}
 
 	content, err := json.Marshal(orgMap)
