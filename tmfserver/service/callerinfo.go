@@ -130,6 +130,24 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 				return nil, err
 			}
 		}
+
+		// Now create the associated Individual object
+
+		individual, err := repository.TMFIndividualFromCredential(verifiableCredential, org)
+		if err != nil {
+			slog.Error("error creating individual object", slogor.Err(err))
+		} else {
+			if err := svc.createObject(individual); err != nil {
+				if errors.Is(err, &ErrObjectExists{}) {
+					slog.Debug("individual already exists", "id", individual.ID)
+				} else {
+					err = errl.Error(err)
+					return nil, err
+				}
+			}
+
+		}
+
 	}
 
 	return tokenClaims, nil
