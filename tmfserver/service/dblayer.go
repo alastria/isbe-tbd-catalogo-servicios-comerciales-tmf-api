@@ -88,7 +88,11 @@ func (svc *Service) deleteObject(id, objectType string) error {
 // It supports pagination, filtering, and sorting according to TMF630 guidelines.
 func (svc *Service) listObjectsOld(objectType string, apiVersion string, queryParams url.Values) ([]repo.TMFObject, int, error) {
 	slog.Debug("dbLayer: Listing objects", "type", objectType, "queryParams", queryParams)
-	q, a := BuildSelectFromParms(objectType, queryParams)
+	q, a, err := BuildSelectFromParms(objectType, queryParams)
+	if err != nil {
+		return nil, 0, errl.Errorf("failed to build select query: %w", err)
+	}
+
 	fmt.Printf("SQL: %s\nARGS: %v\n", q, a)
 
 	if svc.storage != nil {
@@ -146,8 +150,7 @@ func (svc *Service) listObjectsOld(objectType string, apiVersion string, queryPa
 	}
 
 	// Get total count before pagination
-	err := svc.db.Get(&totalCount, countQuery, countArgs...)
-	if err != nil {
+	if err := svc.db.Get(&totalCount, countQuery, countArgs...); err != nil {
 		err = errl.Errorf("failed to get total count for %s, params: %v: %w", objectType, queryParams, err)
 		return nil, 0, err
 	}
@@ -205,14 +208,16 @@ func (svc *Service) listObjects(objectType string, apiVersion string, queryParam
 		return svc.storage.ListObjects(objectType, apiVersion, queryParams)
 	}
 
-	baseQuery, args := BuildSelectFromParms(objectType, queryParams)
+	baseQuery, args, err := BuildSelectFromParms(objectType, queryParams)
+	if err != nil {
+		return nil, 0, errl.Errorf("failed to build select query: %w", err)
+	}
 	fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
 
 	var objs []repo.TMFObject
 	var totalCount int
 
-	err := svc.db.Select(&objs, baseQuery, args...)
-	if err != nil {
+	if err := svc.db.Select(&objs, baseQuery, args...); err != nil {
 		err = errl.Errorf("failed to list objects for %s, params: %v: %w", objectType, queryParams, err)
 		return nil, 0, err
 	}
@@ -413,7 +418,7 @@ func (svc *Service) DeleteTables() error {
 	return nil
 }
 
-func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, []any) {
+func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, []any, error) {
 
 	// Default values if the user did not specify them. -1 is equivalent to no values provided.
 	var limit = -1
@@ -439,6 +444,39 @@ func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, [
 		if key == "sort" || key == "fields" {
 			// TODO: implement processing for these parameters
 			continue
+		}
+
+		selector := "[*]."
+		index := strings.Index(key, "[*].")
+		if index == 0 {
+			err := errl.Errorf("array name in array selector is empty")
+			return "", nil, err
+		}
+		if index > 0 {
+
+			arrayName := key[:index]
+			keyName := key[index+len(selector):]
+			slog.Debug("array selector", "arrayName", arrayName, "keyName", keyName)
+
+			if len(keyName) == 0 {
+				err := errl.Errorf("key name in array selector is empty")
+				return "", nil, err
+			}
+
+			vals := processValues(values)
+
+			if len(vals) == 1 {
+				buf.Render(
+					" AND EXISTS (SELECT 1 FROM json_each(tmf_object.content, '$.", arrayName, "') WHERE json_extract(value, '$.", keyName, "') = ?)",
+				)
+			} else if len(vals) > 1 {
+				buf.Render(
+					" AND EXISTS (SELECT 1 FROM json_each(tmf_object.content, '$.", arrayName, "') WHERE json_extract(value, '$", keyName, "') IN ").RenderList(vals...).Render(")")
+			}
+			args = append(args, vals...)
+
+			continue
+
 		}
 
 		switch key {
@@ -492,9 +530,9 @@ func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, [
 			}
 			args = append(args, vals...)
 
-		case "individualIdentification.id":
+		case "individualIdentification.id", "individualIdentification[*].identificationId":
 			// Simplification of the query in the category array.
-			object := strings.TrimSuffix(key, ".id")
+			object := "individualIdentification"
 
 			// Special processing because TMForum allows to specify multiple values
 			// in the form 'lifecycleStatus=Launched,Active'
@@ -548,7 +586,7 @@ func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, [
 	// Build the query, with the statement and the arguments to be used
 	sql := buf.String()
 
-	return sql, args
+	return sql, args, nil
 }
 
 type StringRenderer struct {

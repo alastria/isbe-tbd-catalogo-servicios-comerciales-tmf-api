@@ -32,7 +32,7 @@ func containsAllInOrder(got []string, want []string) bool {
 }
 
 func TestBuildSelectFromParms_NoParams(t *testing.T) {
-	sql, args := BuildSelectFromParms("", url.Values{})
+	sql, args, _ := BuildSelectFromParms("", url.Values{})
 	if !strings.Contains(sql, "FROM tmf_object") {
 		t.Fatalf("expected SQL to contain FROM tmf_object, got: %s", sql)
 	}
@@ -45,7 +45,7 @@ func TestBuildSelectFromParms_NoParams(t *testing.T) {
 }
 
 func TestBuildSelectFromParms_ResourceFilter(t *testing.T) {
-	sql, args := BuildSelectFromParms("Product", url.Values{})
+	sql, args, _ := BuildSelectFromParms("Product", url.Values{})
 	if !strings.Contains(strings.ToLower(sql), "where") {
 		t.Fatalf("expected SQL to contain WHERE when resource provided, got: %s", sql)
 	}
@@ -59,7 +59,7 @@ func TestBuildSelectFromParms_LimitOffset(t *testing.T) {
 	v := url.Values{}
 	v.Set("limit", "5")
 	v.Set("offset", "10")
-	sql, args := BuildSelectFromParms("", v)
+	sql, args, _ := BuildSelectFromParms("", v)
 
 	if !strings.Contains(strings.ToUpper(sql), "LIMIT") {
 		t.Fatalf("expected SQL to contain LIMIT, got: %s", sql)
@@ -76,7 +76,7 @@ func TestBuildSelectFromParms_SellerMultipleValues(t *testing.T) {
 	// multiple comma-separated values and multiple instances
 	v.Add("seller", "a,b")
 	v.Add("seller", "c")
-	sql, args := BuildSelectFromParms("", v)
+	sql, args, _ := BuildSelectFromParms("", v)
 
 	if !strings.Contains(sql, "seller") {
 		t.Fatalf("expected SQL to reference seller, got: %s", sql)
@@ -91,7 +91,7 @@ func TestBuildSelectFromParms_SellerMultipleValues(t *testing.T) {
 func TestBuildSelectFromParms_JSONFieldMultiValues(t *testing.T) {
 	v := url.Values{}
 	v.Add("status", "Active,Launched")
-	sql, args := BuildSelectFromParms("", v)
+	sql, args, _ := BuildSelectFromParms("", v)
 
 	if !strings.Contains(sql, "content->>'$.status'") {
 		t.Fatalf("expected SQL to reference JSON path for status, got: %s", sql)
@@ -106,7 +106,7 @@ func TestBuildSelectFromParms_JSONFieldMultiValues(t *testing.T) {
 func TestBuildSelectFromParms_TopLevelField(t *testing.T) {
 	v := url.Values{}
 	v.Set("lifecycleStatus", "Launched")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "content->>'$.lifecycleStatus'") {
 		t.Fatalf("expected SQL to reference JSON path for lifecycleStatus, got: %s", sql)
 	}
@@ -118,7 +118,7 @@ func TestBuildSelectFromParms_TopLevelField(t *testing.T) {
 func TestBuildSelectFromParms_MultiValueTopLevelField(t *testing.T) {
 	v := url.Values{}
 	v.Set("lifecycleStatus", "Launched,Active")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "content->>'$.lifecycleStatus'") {
 		t.Fatalf("expected SQL to reference JSON path for lifecycleStatus, got: %s", sql)
 	}
@@ -133,7 +133,7 @@ func TestBuildSelectFromParms_NestedField(t *testing.T) {
 	v := url.Values{}
 	// Simulate filtering by productSpecification.id
 	v.Set("productSpecification.id", "urn:ngsi-ld:product-specification:19f7f34a-1777-4553-b47b-6ad466d8a0ea")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "json_each(tmf_object.content, '$.productSpecification')") {
 		t.Fatalf("expected SQL to reference JSON path for productSpecification.id, got: %s", sql)
 	}
@@ -146,7 +146,7 @@ func TestBuildSelectFromParms_ArrayOfObjectsField(t *testing.T) {
 	v := url.Values{}
 	// Simulate filtering by category.id (array of objects)
 	v.Set("category.id", "urn:ngsi-ld:category:31a1d8a8-56e8-49c3-aabb-6b0306bc0316")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "json_each(tmf_object.content, '$.category')") {
 		t.Fatalf("expected SQL to reference JSON path for category.id, got: %s", sql)
 	}
@@ -159,7 +159,7 @@ func TestBuildSelectFromParms_ArrayOfObjectsMultiValue(t *testing.T) {
 	v := url.Values{}
 	// Simulate filtering by relatedParty.role with multiple values
 	v.Set("relatedParty.role", "Seller,SellerOperator")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "content->>'$.relatedParty.role'") {
 		t.Fatalf("expected SQL to reference JSON path for relatedParty.role, got: %s", sql)
 	}
@@ -174,7 +174,7 @@ func TestBuildSelectFromParms_MultipleFilters(t *testing.T) {
 	v := url.Values{}
 	v.Set("lifecycleStatus", "Launched")
 	v.Set("name", "Product Offer Example")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "content->>'$.lifecycleStatus'") || !strings.Contains(sql, "content->>'$.name'") {
 		t.Fatalf("expected SQL to reference both lifecycleStatus and name, got: %s", sql)
 	}
@@ -189,7 +189,7 @@ func TestBuildSelectFromParms_LimitOffsetAndType(t *testing.T) {
 	v := url.Values{}
 	v.Set("limit", "2")
 	v.Set("offset", "1")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(strings.ToUpper(sql), "LIMIT") {
 		t.Fatalf("expected SQL to contain LIMIT, got: %s", sql)
 	}
@@ -207,7 +207,7 @@ func TestBuildSelectFromParms_LimitOffsetAndType(t *testing.T) {
 func TestBuildSelectFromParms_SellerShortcut(t *testing.T) {
 	v := url.Values{}
 	v.Set("seller", "did:elsi:VATES-B60645900,did:elsi:VATES-11111111K")
-	sql, args := BuildSelectFromParms("ProductOffering", v)
+	sql, args, _ := BuildSelectFromParms("ProductOffering", v)
 	if !strings.Contains(sql, "seller") {
 		t.Fatalf("expected SQL to reference seller, got: %s", sql)
 	}
