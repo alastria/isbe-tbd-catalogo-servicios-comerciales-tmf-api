@@ -492,6 +492,24 @@ func BuildSelectFromParms(tmfResource string, queryValues url.Values) (string, [
 			}
 			args = append(args, vals...)
 
+		case "individualIdentification.id":
+			// Simplification of the query in the category array.
+			object := strings.TrimSuffix(key, ".id")
+
+			// Special processing because TMForum allows to specify multiple values
+			// in the form 'lifecycleStatus=Launched,Active'
+			vals := processValues(values)
+
+			if len(vals) == 1 {
+				buf.Render(
+					" AND EXISTS (SELECT 1 FROM json_each(tmf_object.content, '$.", object, "') WHERE json_extract(value, '$.identificationId') = ?)",
+				)
+			} else if len(vals) > 1 {
+				buf.Render(
+					" AND EXISTS (SELECT 1 FROM json_each(tmf_object.content, '$.", object, "') WHERE json_extract(value, '$.identificationId') IN ").RenderList(vals...).Render(")")
+			}
+			args = append(args, vals...)
+
 		default:
 
 			// Special processing because TMForum allows to specify multiple values

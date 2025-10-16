@@ -31,3 +31,6 @@ go.work.sum
 isbetmf.db*
 data/
 .sqlite*
+
+# The pid file
+isbetmf.pid

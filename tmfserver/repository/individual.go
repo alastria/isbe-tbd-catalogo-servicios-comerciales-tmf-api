@@ -150,12 +150,14 @@ func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Orga
 		"relatedParty": relatedParty,
 	}
 
-	// theIdentification := map[string]any{
-	// 	"@type":              "organizationIdentification",
-	// 	"identificationId":   did,
-	// 	"identificationType": elsiIdentificationType,
-	// 	"issuingAuthority":   eIDASAuthority,
-	// }
+	theIdentification := map[string]any{
+		"@type":              "individualIdentification",
+		"identificationId":   lc.CredentialSubject.Mandate.Mandatee.Id,
+		"identificationType": "learcredentialemployee",
+		"issuingAuthority":   lc.CredentialSubject.Mandate.Mandator.OrganizationIdentifier,
+	}
+
+	indMap["individualIdentification"] = []any{theIdentification}
 
 	content, err := json.Marshal(indMap)
 	if err != nil {
