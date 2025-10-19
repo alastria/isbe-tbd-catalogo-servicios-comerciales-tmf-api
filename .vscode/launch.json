@@ -26,6 +26,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "main.go",
+            "args": ["init"],
             "cwd": "${workspaceFolder}"
         }
     ]
