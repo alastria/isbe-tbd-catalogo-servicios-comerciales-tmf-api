@@ -51,7 +51,6 @@ func main() {
 	// Detect if we are running as PID=1 (most probably as init process in a container),
 	// and act accordingly.
 	ourPid := os.Getpid()
-	parentPid := os.Getppid()
 
 	// Get the name fo our executable
 	ourExecPath, err := os.Executable()
@@ -59,12 +58,15 @@ func main() {
 		panic(err)
 	}
 
+	args := os.Args[1:]
+
 	runAsInit := false
-	if parentPid == 0 {
+	if ourPid == 1 {
 		runAsInit = true
 	} else {
-		if len(os.Args) > 1 && os.Args[1] == "init" {
+		if len(args) > 0 && args[0] == "init" {
 			runAsInit = true
+			args = args[1:]
 		}
 	}
 
@@ -73,7 +75,7 @@ func main() {
 		fmt.Println("We are the init process! PID:", ourPid)
 
 		// Pass to child all arguments following the "init" entry (first argument after program name)
-		cmd := exec.Command(ourExecPath, os.Args[2:]...)
+		cmd := exec.Command(ourExecPath, args...)
 
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
@@ -124,6 +126,7 @@ func main() {
 		}()
 
 		// Start the child (a fork of ourselves) without waiting for termination
+		fmt.Println("Starting child process")
 		if err := cmd.Start(); err != nil {
 			log.Fatalf("Failed to start child process: %v", err)
 		}
