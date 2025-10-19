@@ -51,6 +51,7 @@ func main() {
 	// Detect if we are running as PID=1 (most probably as init process in a container),
 	// and act accordingly.
 	ourPid := os.Getpid()
+	parentPid := os.Getppid()
 
 	// Get the name fo our executable
 	ourExecPath, err := os.Executable()
@@ -59,7 +60,7 @@ func main() {
 	}
 
 	runAsInit := false
-	if ourPid == 1 {
+	if parentPid == 0 {
 		runAsInit = true
 	} else {
 		if len(os.Args) > 1 && os.Args[1] == "init" {
