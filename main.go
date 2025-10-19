@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"os/signal"
 	"syscall"
 	"time"
@@ -36,14 +37,105 @@ func main() {
 	var restartHour, restartMinute int
 
 	// Parse command-line flags
-
 	flag.BoolVar(&debugFlag, "d", true, "Enable debug logging")
+
 	flag.StringVar(&verifierServer, "verifier", "", "Full URL of the verifier which signs access tokens")
 	flag.StringVar(&remoteTMFServer, "remote", "", "Full URL of the remote TMForum server to proxy requests to")
 	flag.BoolVar(&proxyEnabled, "proxy", false, "Enable proxy functionality")
 	flag.IntVar(&restartHour, "rh", 3, "Restart program every day at this hour")
 	flag.IntVar(&restartMinute, "rm", 0, "Restart program every day at this minute")
 	flag.Parse()
+
+	// ******************************************************
+	// ******************************************************
+	// Detect if we are running as PID=1 (most probably as init process in a container),
+	// and act accordingly.
+	ourPid := os.Getpid()
+
+	// Get the name fo our executable
+	ourExecPath, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+
+	runAsInit := false
+	if ourPid == 1 {
+		runAsInit = true
+	} else {
+		if len(os.Args) > 1 && os.Args[1] == "init" {
+			runAsInit = true
+		}
+	}
+
+	if runAsInit {
+		// We are the init process in a container, or testing the functionality
+		fmt.Println("We are the init process! PID:", ourPid)
+
+		// Pass to child all arguments following the "init" entry (first argument after program name)
+		cmd := exec.Command(ourExecPath, os.Args[2:]...)
+
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		// Set ProcessGroupID for child process as init process. Both will be under same process group
+		cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+
+		// We need notification of all relevant signals
+		sigs := make(chan os.Signal, 1)
+		signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
+
+		done := make(chan bool, 1)
+
+		// Forward all signals to the child in a goroutine
+		go func() {
+			for sig := range sigs {
+
+				if sig == syscall.SIGHUP {
+					fmt.Println("init process received SIGHUP")
+				} else {
+					fmt.Printf("init process received %v signal\n", sig)
+				}
+
+				if cmd.Process != nil {
+					fmt.Printf("received %v signal for PID %v\n", sig, cmd.Process.Pid)
+					_ = cmd.Process.Signal(sig)
+				}
+
+				if sig == syscall.SIGTERM || sig == syscall.SIGINT {
+					// We are done, and the init process will terminate
+					fmt.Println("using DONE channel to terminate init process")
+					done <- true
+				}
+			}
+		}()
+
+		// Enter in a goroutine an infinite loop reaping the zombie children
+		go func() {
+			for {
+				var ws syscall.WaitStatus
+				pid, err := syscall.Wait4(-1, &ws, syscall.WNOHANG, nil)
+				if pid <= 0 || err != nil {
+					time.Sleep(1 * time.Second)
+				} else {
+					fmt.Printf("reaped zombie %v\n", pid)
+				}
+			}
+
+		}()
+
+		// Start the child (a fork of ourselves) without waiting for termination
+		if err := cmd.Start(); err != nil {
+			log.Fatalf("Failed to start child process: %v", err)
+		}
+
+		fmt.Println("awaiting signal to terminate init process")
+		<-done
+		fmt.Println("exiting init process")
+		return
+
+	}
+	// ******************************************************
+	// ******************************************************
+	// ******************************************************
 
 	// Configure the slog logger
 	var logLevel slog.Level
@@ -293,4 +385,29 @@ func main() {
 		fmt.Println("Exiting without error")
 	}
 
+}
+
+func reapZombies() {
+	for {
+		var wstatus syscall.WaitStatus
+
+		fmt.Println("Looping for zombies")
+
+		// Wait for zombie/<defunc> process and reap them
+		pid, err := syscall.Wait4(-1, &wstatus, syscall.WNOHANG, nil)
+
+		// Below block is required for busy systems.If we receive an error during interrupt we attempt
+		// to call wait again. I was not able to test this case.
+		for syscall.EINTR == err {
+			pid, err = syscall.Wait4(pid, &wstatus, syscall.WNOHANG, nil)
+		}
+
+		// If pid is less than 0, we do nothing as it's not a zombie. We wait for 1s and then continue
+		if pid <= 0 {
+			time.Sleep(1 * time.Second)
+		} else {
+			fmt.Printf("[minit] reaping zombie %v\n", pid)
+			continue
+		}
+	}
 }
