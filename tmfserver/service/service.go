@@ -22,38 +22,12 @@ import (
 	"github.com/hesusruiz/isbetmf/tmfserver/notifications"
 	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
+	"github.com/hesusruiz/isbetmf/types"
 	"github.com/jmoiron/sqlx"
 )
 
 // The DOME implementation has some non-conformances with the TMF specifications, and this is to bypass them.
 var DOMEHacks = true
-
-// AuthUser represents the authenticated user's information from the JWT mandator object.
-type AuthUser struct {
-	CommonName             string `json:"commonName"`
-	Country                string `json:"country"`
-	EmailAddress           string `json:"emailAddress"`
-	Organization           string `json:"organization"`
-	OrganizationIdentifier string `json:"organizationIdentifier"`
-	SerialNumber           string `json:"serialNumber"`
-	isAuthenticated        bool
-	isLEAR                 bool
-	isOwner                bool
-}
-
-func (u *AuthUser) ToMap() map[string]any {
-	return map[string]any{
-		"commonName":             u.CommonName,
-		"country":                u.Country,
-		"emailAddress":           u.EmailAddress,
-		"organization":           u.Organization,
-		"organizationIdentifier": u.OrganizationIdentifier,
-		"serialNumber":           u.SerialNumber,
-		"isAuthenticated":        u.isAuthenticated,
-		"isLEAR":                 u.isLEAR,
-		"isOwner":                u.isOwner,
-	}
-}
 
 // Request represents a generic HTTP request. Handlers must convert to this representation.
 // In this way, we support easily any HTTP framework (currently Fiber and Echo), but also other
@@ -67,7 +41,7 @@ type Request struct {
 	ID           string
 	QueryParams  url.Values
 	Body         []byte
-	AuthUser     AuthUser
+	AuthUser     types.AuthUser
 	AccessToken  string
 }
 
@@ -1018,7 +992,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", err)
 	}
 
-	// Deleting an object can not be done without authentication
+	// Deleting an object always requires authentication
 	if len(token) == 0 {
 		return ErrorResponsef(http.StatusUnauthorized, "user not authenticated")
 	}
@@ -1036,7 +1010,8 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		// Retrieve existing object, locally or remotely
 		existingObject, err = svc.getLocalOrRemoteObject(req)
 		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object for update: %w", err)
+			// TODO: check the return code from remote server and reply accordingly
+			return ErrorResponsef(http.StatusBadRequest, "failed to get existing object for update: %w", err)
 		}
 
 	} else {
@@ -1044,6 +1019,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		// Retrieve existing object
 		existingObject, err = svc.getObject(req.ID, req.ResourceName)
 		if err != nil {
+			// We should not get this error, we are the culprit so return a Server error
 			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object for update: %w", err)
 		}
 
@@ -1054,35 +1030,62 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusNotFound, "object not found")
 	}
 
-	om, err := existingObject.ToMap()
+	// Convert to a type-safe map representation to facilitate manipulation
+	existingObjectMap, err := existingObject.ToMap()
 	if err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", err)
 	}
-	existingObjectMap := repo.TMFObjectMap(om)
 
-	existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerInfo(req.APIVersion)
-	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to get seller and buyer info: %w", err)
+	// ##########################################################
+	// ##########################################################
+	// ##########################################################
+
+	// We need to check if the calling user is the owner of the object being updated.
+	// For that, we compare the seller and seller operator DIDs of the existing object
+	// with those of the incoming object (which are derived from the caller identity).
+	// If they do not match, the caller is not the owner and we reject the operation.
+	// Note that we do this before merging the incoming object into the existing one,
+	// so the caller can not change the ownership of an object by updating it.
+
+	// Convert to lowercase to facilitate comparisons
+	resource := strings.ToLower(req.ResourceName)
+
+	switch resource {
+	case "organization", "individual":
+		_ = resource
+		if !existingObjectMap.IsOwner(req.AuthUser) {
+			return ErrorResponsef(http.StatusForbidden, "caller not owner of object: %s", req.ID)
+		}
+	case "category":
+		// Category objects are owned by the Catalog operator
+		if !sameOrganizations(req.AuthUser.OrganizationIdentifier, config.ServerOperatorDid) {
+			return ErrorResponsef(http.StatusForbidden, "caller not owner of object: %s", req.ID)
+		}
+	default:
+		existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerInfo(req.APIVersion)
+		if err != nil {
+			return ErrorResponsef(http.StatusBadRequest, "failed to get seller and buyer info for %s: %w", req.ID, err)
+		}
+
+		// We need the SellerOperator to be our operator (the one who operates this server)
+		if existingSellerOperatorDid != config.ServerOperatorDid {
+			return ErrorResponsef(http.StatusForbidden, "object %s not managed by this operator", req.ID)
+		}
+
+		// We need that the caller is the owner of the object being updated.
+		if !sameOrganizations(existingSellerDid, req.AuthUser.OrganizationIdentifier) {
+			return ErrorResponsef(http.StatusForbidden, "valler not owner of the object %s", req.ID)
+		}
+
 	}
 
-	// Normalize organization identifiers to the DID format
-	userDid := req.AuthUser.OrganizationIdentifier
-	if !strings.HasPrefix(userDid, "did:elsi:") {
-		userDid = "did:elsi:" + userDid
-	}
+	// ##########################################################
+	// ##########################################################
+	// ##########################################################
 
-	// We need the SellerOperator to be our operator (the one who operates this server)
-	if existingSellerOperatorDid != config.ServerOperatorDid {
-		return ErrorResponsef(http.StatusForbidden, "object not managed by this operator")
-	}
-
-	// We need that the caller is the owner of the object being updated.
-	if existingSellerDid != userDid {
-		return ErrorResponsef(http.StatusForbidden, "user is not owner of the object")
-	}
-
+	// Delete the object in the remote server, if the proxy is enabled
 	if svc.proxyEnabled {
-		// Proxy logic
+		// Send the authentication header
 		headers := map[string]string{
 			"Authorization": "Bearer " + req.AccessToken,
 		}
@@ -1104,11 +1107,13 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 			}
 		}
 
+		slog.Info("Object deleted from remote server successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
+
 	}
 
 	// Delete the object in the local database
 	if err := svc.deleteObject(req.ID, req.ResourceName); err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to delete object from service: %w", err)
+		return ErrorResponsef(http.StatusInternalServerError, "failed to delete object %s from service: %w", req.ID, err)
 	}
 
 	slog.Info("Object deleted successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))

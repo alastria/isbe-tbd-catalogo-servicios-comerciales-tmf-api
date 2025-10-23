@@ -90,7 +90,7 @@ func (o *TMFObject) ToMapNoErr() map[string]any {
 }
 
 // ToMap converts the TMFObject to a map[string]any.
-func (o *TMFObject) ToMap() (map[string]any, error) {
+func (o *TMFObject) ToMap() (TMFObjectMap, error) {
 	var data map[string]any
 
 	if o == nil {

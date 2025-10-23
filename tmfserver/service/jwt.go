@@ -9,6 +9,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/hesusruiz/isbetmf/internal/errl"
+	"github.com/hesusruiz/isbetmf/types"
 )
 
 // ExtractJWTToken extracts the JWT token from the Authorization header.
@@ -21,7 +22,7 @@ func ExtractJWTToken(authHeader string) string {
 
 // ParseJWT parses a JWT string, extracts the mandator information, and returns an AuthUser.
 // It does NOT verify the JWT signature.
-func ParseJWT(svc *Service, tokenString string, verify bool) (tokenClaims map[string]any, u *AuthUser, err error) {
+func ParseJWT(svc *Service, tokenString string, verify bool) (tokenClaims map[string]any, u *types.AuthUser, err error) {
 
 	var token *jwt.Token
 	var theClaims = jwt.MapClaims{}
@@ -96,7 +97,7 @@ func ParseJWT(svc *Service, tokenString string, verify bool) (tokenClaims map[st
 		return nil, nil, fmt.Errorf("failed to process mandator data: %w", err)
 	}
 
-	var authUser AuthUser
+	var authUser types.AuthUser
 	if err := json.Unmarshal(mandatorJSON, &authUser); err != nil {
 		slog.Error("Failed to unmarshal mandator data to AuthUser", slog.Any("error", err))
 		return nil, nil, fmt.Errorf("failed to process mandator data: %w", err)

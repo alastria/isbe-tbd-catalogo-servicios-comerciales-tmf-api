@@ -10,6 +10,7 @@ import (
 	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/jpath"
+	"github.com/hesusruiz/isbetmf/types"
 	"golang.org/x/exp/slog"
 )
 
@@ -95,7 +96,10 @@ func (obj TMFObjectMap) SetHref(href string) {
 	obj["href"] = href
 }
 
-func (obj TMFObjectMap) IsOwner(organizationId string) bool {
+func (obj TMFObjectMap) IsOwner(caller types.AuthUser) bool {
+
+	organizationId := caller.OrganizationIdentifier
+
 	// Ownership of an object depends on the type of object
 	objType, _ := obj["@type"].(string)
 	objType = strings.ToLower(objType)
@@ -116,6 +120,12 @@ func (obj TMFObjectMap) IsOwner(organizationId string) bool {
 	case "individual":
 
 		// TODO: revise this policy to be restrictive
+
+		// The user must be either the operator or the same organization as the Organization object
+		if sameOrganizations(organizationId, config.ServerOperatorDid) {
+			return true
+		}
+
 		return true
 
 	case "category":

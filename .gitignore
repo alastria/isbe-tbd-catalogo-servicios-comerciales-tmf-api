@@ -32,5 +32,5 @@ isbetmf.db*
 data/
 .sqlite*
 
-# The pid file
-isbetmf.pid
+# The pid files
+*.pid
