@@ -36,7 +36,7 @@ func takeDecision(
 	}
 
 	if !req.AuthUser.IsOwner {
-		return errl.Errorf("user not authorized: not seller, sellerOperator, buyer or buyerOperator")
+		return errl.Errorf("user not authorized")
 	}
 
 	err = callPDP(ruleEngine, req, tokenClaims, objectMap)

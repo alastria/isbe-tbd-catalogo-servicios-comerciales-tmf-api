@@ -358,7 +358,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		// If the incoming object specifies an 'id', this is only possible if it creates a new version.
 		// That means the incoming object must have a 'version' property.
 		if id != "" && version == "" {
-			return ErrorResponsef(http.StatusBadRequest, "id specified but version is missing")
+			return ErrorResponsef(http.StatusBadRequest, "id specified but version is missing, id: %s", id)
 		}
 
 		// Create a new 'id' if the user did not specify it
@@ -418,7 +418,14 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 	err = takeDecision(svc.ruleEngine, req, tokenMap, incomingObjectMap)
 	if err != nil {
-		return ErrorResponsef(http.StatusForbidden, "user not authorized: %w", err)
+		relParty := incomingObjectMap.GetRelatedParty()
+		out, _ := json.Marshal(relParty)
+		return ErrorResponsef(http.StatusForbidden,
+			"user %s is not authorized, relatedParties: %s, error: %w",
+			req.AuthUser.OrganizationIdentifier,
+			string(out),
+			err,
+		)
 	}
 
 	// ************************************************************************************************

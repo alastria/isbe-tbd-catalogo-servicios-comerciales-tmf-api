@@ -154,7 +154,7 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser) bool {
 		}
 
 		// The ownwer is either the same organization as the object or the server operator
-		if sameOrganizations(objSellerDid, organizationId) && !sameOrganizations(objSellerDid, config.ServerOperatorDid) {
+		if sameOrganizations(objSellerDid, organizationId) || sameOrganizations(objSellerDid, config.ServerOperatorDid) {
 			return true
 		}
 
