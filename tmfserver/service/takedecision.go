@@ -20,7 +20,7 @@ func takeDecision(
 ) (err error) {
 
 	// Pre-calculate the owner value
-	req.AuthUser.isOwner = objectMap.IsOwner(req.AuthUser.OrganizationIdentifier)
+	req.AuthUser.IsOwner = objectMap.IsOwner(req.AuthUser)
 
 	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
 	if req.Method == "GET" && isPublicResource(req.ResourceName) {
@@ -31,11 +31,11 @@ func takeDecision(
 	// GET operations to non-public resources, or any other method (POST, PUT, DELETE) to any object
 	// are only allowed to authenticated users, and the user must be the owner of the object.
 
-	if !req.AuthUser.isAuthenticated {
+	if !req.AuthUser.IsAuthenticated {
 		return errl.Errorf("user not authenticated")
 	}
 
-	if !req.AuthUser.isOwner {
+	if !req.AuthUser.IsOwner {
 		return errl.Errorf("user not authorized: not seller, sellerOperator, buyer or buyerOperator")
 	}
 

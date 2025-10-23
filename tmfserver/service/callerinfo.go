@@ -8,6 +8,7 @@ import (
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/jpath"
 	"github.com/hesusruiz/isbetmf/tmfserver/repository"
+	"github.com/hesusruiz/isbetmf/types"
 	"gitlab.com/greyxor/slogor"
 )
 
@@ -21,7 +22,7 @@ const VerifyTokenSignature = false
 // For convenience of the policies, some calculated fields are created and returned in the 'user' object.
 func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, err error) {
 
-	var authUser *AuthUser
+	var authUser *types.AuthUser
 
 	// This is to support testing
 	verify := true
@@ -59,7 +60,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 	verifiableCredential := jpath.GetMap(tokenClaims, "vc")
 
 	if len(verifiableCredential) > 0 {
-		authUser.isAuthenticated = true
+		authUser.IsAuthenticated = true
 
 		powers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
 		for _, p := range powers {
@@ -76,7 +77,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 				strings.EqualFold(pfunction, "Onboarding") &&
 				strings.EqualFold(paction, "execute") {
 
-				authUser.isLEAR = true
+				authUser.IsLEAR = true
 
 			}
 
@@ -91,7 +92,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 				strings.EqualFold(pfunction, "Onboarding") &&
 				strings.EqualFold(paction, "execute") {
 
-				authUser.isLEAR = true
+				authUser.IsLEAR = true
 			}
 
 		}

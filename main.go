@@ -390,28 +390,3 @@ func main() {
 	}
 
 }
-
-func reapZombies() {
-	for {
-		var wstatus syscall.WaitStatus
-
-		fmt.Println("Looping for zombies")
-
-		// Wait for zombie/<defunc> process and reap them
-		pid, err := syscall.Wait4(-1, &wstatus, syscall.WNOHANG, nil)
-
-		// Below block is required for busy systems.If we receive an error during interrupt we attempt
-		// to call wait again. I was not able to test this case.
-		for syscall.EINTR == err {
-			pid, err = syscall.Wait4(pid, &wstatus, syscall.WNOHANG, nil)
-		}
-
-		// If pid is less than 0, we do nothing as it's not a zombie. We wait for 1s and then continue
-		if pid <= 0 {
-			time.Sleep(1 * time.Second)
-		} else {
-			fmt.Printf("[minit] reaping zombie %v\n", pid)
-			continue
-		}
-	}
-}
