@@ -337,19 +337,19 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		if strings.EqualFold(req.ResourceName, "Individual") {
 			// Individual requires givenName and familyName
 			if givenName, _ := incomingObjectMap["givenName"].(string); givenName == "" {
-				return ErrorResponsef(http.StatusBadRequest, "givenName is required")
+				return ErrorResponsef(http.StatusBadRequest, "givenName is required in individual object: %s", incomingObjectMap)
 			}
 			if familyName, _ := incomingObjectMap["familyName"].(string); familyName == "" {
-				return ErrorResponsef(http.StatusBadRequest, "familyName is required")
+				return ErrorResponsef(http.StatusBadRequest, "familyName is required in individual object: %s", incomingObjectMap)
 			}
 		} else if strings.EqualFold(req.ResourceName, "Organization") {
 			// Organization requires tradingName
 			if tradingName, _ := incomingObjectMap["tradingName"].(string); tradingName == "" {
-				return ErrorResponsef(http.StatusBadRequest, "tradingName is required")
+				return ErrorResponsef(http.StatusBadRequest, "tradingName is required in organization object: %s", incomingObjectMap)
 			}
 		} else if name, _ := incomingObjectMap["name"].(string); name == "" {
 			// Other objects require name
-			return ErrorResponsef(http.StatusBadRequest, "name is required")
+			return ErrorResponsef(http.StatusBadRequest, "name is required: %s", incomingObjectMap)
 		}
 
 		id = incomingObjectMap.GetID()
@@ -358,7 +358,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		// If the incoming object specifies an 'id', this is only possible if it creates a new version.
 		// That means the incoming object must have a 'version' property.
 		if id != "" && version == "" {
-			return ErrorResponsef(http.StatusBadRequest, "id specified but version is missing, id: %s", id)
+			return ErrorResponsef(http.StatusBadRequest, "id specified but version is missing: %s", incomingObjectMap)
 		}
 
 		// Create a new 'id' if the user did not specify it
@@ -367,7 +367,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			if !svc.proxyEnabled || !DOMEHacks {
 				// If the incoming object does not have an 'id', we generate a new one
 				// The format is "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}"
-				id = fmt.Sprintf("urn:ngsi-ld:%s:%s", ToKebabCase(req.ResourceName), uuid.NewString())
+				id = fmt.Sprintf("urn:ngsi-ld:%s:%s:%s", ToKebabCase(req.ResourceName), req.AuthUser.OrganizationIdentifier, uuid.NewString())
 				incomingObjectMap.SetID(id)
 				slog.Debug("Generated new ID for object", "id", id)
 			}
@@ -418,12 +418,10 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 	err = takeDecision(svc.ruleEngine, req, tokenMap, incomingObjectMap)
 	if err != nil {
-		relParty := incomingObjectMap.GetRelatedParty()
-		out, _ := json.Marshal(relParty)
 		return ErrorResponsef(http.StatusForbidden,
-			"user %s is not authorized, relatedParties: %s, error: %w",
+			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,
-			string(out),
+			incomingObjectMap,
 			err,
 		)
 	}
@@ -513,7 +511,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 		// Create the new object in the local database
 		if err := svc.createObject(incomingObject); err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to create object in service: %w", err)
+			return ErrorResponsef(http.StatusInternalServerError, "failed to create object locally: %w", err)
 		}
 
 	}
@@ -776,12 +774,17 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 
 		if !DOMEHacks {
 			// An update operation specifies the ID of the object to update in the URL.
-			// To facilitate life to applications, we allow the ID to be also in the body.
-			// But if the ID is present in the body, ensure it matches the ID in the URL
+			// To facilitate life to applications, we allow the 'id' to be also in the body.
+			// But if the 'id' is present in the body, ensure it matches the 'id' in the URL
 			id, _ := incomingObjMap["id"].(string)
 			if id != "" && id != req.ID {
 				err := errl.Errorf("ID in body must match ID in URL")
-				return ErrorResponsef(http.StatusBadRequest, "invalid object: %w", err)
+				return ErrorResponsef(http.StatusBadRequest,
+					"invalid object, request id: %s, id in body: %s, error: %w",
+					req.ID,
+					id,
+					err,
+				)
 			}
 		}
 
@@ -814,7 +817,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		// Retrieve existing object, locally or remotely
 		existingObj, err = svc.getLocalOrRemoteObject(req)
 		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object for update: %w", err)
+			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object %s for update: %w", req.ID, err)
 		}
 
 	} else {
@@ -822,13 +825,13 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		// Retrieve existing object only locally
 		existingObj, err = svc.getObject(req.ID, req.ResourceName)
 		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object for update: %w", err)
+			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object %s for update: %w", req.ID, err)
 		}
 
 	}
 
 	if existingObj == nil {
-		return ErrorResponsef(http.StatusNotFound, "object not found")
+		return ErrorResponsef(http.StatusNotFound, "object %s not found", req.ID)
 	}
 
 	om, err := existingObj.ToMap()

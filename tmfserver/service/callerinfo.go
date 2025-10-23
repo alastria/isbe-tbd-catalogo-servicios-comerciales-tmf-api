@@ -54,7 +54,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 	tokenClaims, authUser, err = ParseJWT(svc, r.AccessToken, verify)
 	if err != nil {
 		slog.Error("invalid access token", slogor.Err(err), "token", r.AccessToken)
-		return nil, errl.Errorf("invalid access token: %w", err)
+		return nil, errl.Errorf("invalid access token: %w, token: %s", err, r.AccessToken)
 	}
 
 	verifiableCredential := jpath.GetMap(tokenClaims, "vc")
@@ -127,7 +127,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 			if errors.Is(err, &ErrObjectExists{}) {
 				slog.Debug("organization already exists", "organizationIdentifier", authUser.OrganizationIdentifier)
 			} else {
-				err = errl.Error(err)
+				err = errl.Errorf("error creating organization object %s: %w", authUser.OrganizationIdentifier, err)
 				return nil, err
 			}
 		}
@@ -136,13 +136,13 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 
 		individual, err := repository.TMFIndividualFromCredential(verifiableCredential, org)
 		if err != nil {
-			slog.Error("error creating individual object", slogor.Err(err))
+			slog.Error("error parsing individual object", slogor.Err(err))
 		} else {
 			if err := svc.createObject(individual); err != nil {
 				if errors.Is(err, &ErrObjectExists{}) {
 					slog.Debug("individual already exists", "id", individual.ID)
 				} else {
-					err = errl.Error(err)
+					err = errl.Errorf("error creating individual object %s: %w", individual.ID, err)
 					return nil, err
 				}
 			}
