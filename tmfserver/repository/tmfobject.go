@@ -72,34 +72,21 @@ func (o *TMFObject) GetMap() TMFObjectMap {
 	return o.ContentMap
 }
 
-// ToMapNoErr converts the TMFObject to a map[string]any.
-func (o *TMFObject) ToMapNoErr() map[string]any {
-	var data map[string]any
-
-	if o == nil {
-		return nil
-	}
-
-	err := json.Unmarshal(o.Content, &data)
-	if err != nil {
-		err = errl.Errorf("failed to unmarshal object content: %w", err)
-		slog.Error("Failed to unmarshal object content", slog.Any("error", err))
-		return nil
-	}
-	return data
-}
-
 // ToMap converts the TMFObject to a map[string]any.
 func (o *TMFObject) ToMap() (TMFObjectMap, error) {
-	var data map[string]any
-
 	if o == nil {
 		return nil, errl.Errorf("object is nil")
 	}
 
-	err := json.Unmarshal(o.Content, &data)
-	if err != nil {
-		return nil, errl.Errorf("failed to unmarshal object content: %w", err)
+	if o.ContentMap == nil {
+
+		err := json.Unmarshal(o.Content, &o.ContentMap)
+		if err != nil {
+			err = errl.Errorf("failed to unmarshal object content: %w", err)
+			slog.Error("Failed to unmarshal object content", slog.Any("error", err))
+			return nil, err
+		}
 	}
-	return data, nil
+
+	return o.ContentMap, nil
 }

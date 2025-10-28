@@ -112,7 +112,7 @@ func TestRoutesMapCompleteness(t *testing.T) {
 	}
 
 	for _, objType := range coreTypesWithRelatedParty {
-		if _, exists := RequiredRelatedPartyRoles[objType]; !exists {
+		if _, exists := RequiredRelatedPartyRolesV5[objType]; !exists {
 			t.Errorf("Core object type %s missing from RequiredRelatedPartyRoles map", objType)
 		}
 	}

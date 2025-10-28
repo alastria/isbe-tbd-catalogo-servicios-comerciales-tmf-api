@@ -7,7 +7,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/jpath"
 	"github.com/hesusruiz/isbetmf/types"
@@ -28,6 +27,8 @@ func NewTMFObjectMap(data []byte) (TMFObjectMap, error) {
 	return obj, nil
 }
 
+// NewTMFObjectMapFromRequest creates a new TMFObject from a JSON byte slice.
+// It is intended to be used with data received from a remote TMF server.
 func NewTMFObjectMapFromRequest(resourceName string, data []byte) (TMFObjectMap, error) {
 	var obj TMFObjectMap
 	err := json.Unmarshal(data, &obj)
@@ -56,6 +57,31 @@ func NewTMFObjectMapFromRequest(resourceName string, data []byte) (TMFObjectMap,
 func NewTMFObjectFromMap(data map[string]any) TMFObjectMap {
 	obj := TMFObjectMap(maps.Clone(data))
 	return obj
+}
+
+func (obj TMFObjectMap) ToTMFObject() *TMFObject {
+
+	id := obj.GetID()
+	objectType := obj.GetType()
+	version := obj.GetVersion()
+	// TODO: support for v5 API
+	apiVersion := "v4"
+	lastUpdate := obj.GetLastUpdate()
+	content, _ := obj.ToJSON()
+
+	now := time.Now()
+
+	o := &TMFObject{
+		ID:         id,
+		Type:       objectType,
+		Version:    version,
+		APIVersion: apiVersion,
+		LastUpdate: lastUpdate,
+		Content:    content,
+		CreatedAt:  now,
+		UpdatedAt:  now,
+	}
+	return o
 }
 
 // ToJSON converts the TMFObject to JSON bytes
@@ -94,76 +120,6 @@ func (obj TMFObjectMap) GetHref() string {
 // SetHref sets the object href
 func (obj TMFObjectMap) SetHref(href string) {
 	obj["href"] = href
-}
-
-func (obj TMFObjectMap) IsOwner(caller types.AuthUser) bool {
-
-	organizationId := caller.OrganizationIdentifier
-
-	// Ownership of an object depends on the type of object
-	objType, _ := obj["@type"].(string)
-	objType = strings.ToLower(objType)
-
-	switch objType {
-	case "organization":
-
-		// The user must be either the operator or the same organization as the Organization object
-		if sameOrganizations(organizationId, config.ServerOperatorDid) {
-			return true
-		}
-
-		objOrganizationId := jpath.GetString(obj, "organizationIdentification.*.identificationId")
-		if sameOrganizations(objOrganizationId, organizationId) {
-			return true
-		}
-
-	case "individual":
-
-		// TODO: revise this policy to be restrictive
-
-		// The user must be either the operator or the same organization as the Organization object
-		if sameOrganizations(organizationId, config.ServerOperatorDid) {
-			return true
-		}
-
-		return true
-
-	case "category":
-
-		// The owner is the server operator
-		if sameOrganizations(organizationId, config.ServerOperatorDid) {
-			return true
-		}
-
-	default:
-
-		// For any other objects, we need the object to include the Seller info, and then
-		// the user must be either the server operator or the seller
-
-		objSellerDid, objSellerOperatorDid, err := getUserAndUserOperatorInfoV4(obj, "Seller", "SellerOperator")
-		if err != nil {
-			objSellerDid, objSellerOperatorDid, err = getUserAndUserOperatorInfoV5(obj, "Seller", "SellerOperator")
-		}
-		if err != nil {
-			return false
-		}
-
-		// We need the SellerOperator to be our operator (the one who operates this server)
-		if objSellerOperatorDid != config.ServerOperatorDid {
-			return false
-		}
-
-		// The ownwer is either the same organization as the object or the server operator
-		if sameOrganizations(objSellerDid, organizationId) || sameOrganizations(objSellerDid, config.ServerOperatorDid) {
-			return true
-		}
-
-		return false
-
-	}
-
-	return false
-
 }
 
 // GetVersion returns the object version
@@ -407,23 +363,129 @@ func (obj TMFObjectMap) String() string {
 	return string(data)
 }
 
+func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string) (isOwner bool, reason string) {
+
+	// Ownership of an object depends on the type of object
+	objType, _ := obj["@type"].(string)
+	objType = strings.ToLower(objType)
+
+	switch objType {
+	case "organization":
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
+		}
+
+		// If the organization of the caller and object are the same, then the caller can read/write/update/delete
+		objectOrganizationId := jpath.GetString(obj, "organizationIdentification.*.identificationId")
+		if sameOrganizations(objectOrganizationId, caller.OrganizationIdentifier) {
+			return true, fmt.Sprintf("caller %s is same as in object %s", caller.OrganizationIdentifier, objectOrganizationId)
+		}
+
+		return false, fmt.Sprintf("caller (%s) is neither the same as in object (%s) or the server operator", caller.OrganizationIdentifier, objectOrganizationId)
+
+	case "individual":
+
+		// TODO: revise this policy to be restrictive
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
+		}
+
+		// If the caller is the Organization that is the mandator is the LEARCredential of the employee
+		// then the caller can read/write/update/delete
+		individualIdentificationArray := jpath.GetList(obj, "individualIdentification")
+
+		// Look for an entry with 'identificationType=learcredentialemployee'
+		for _, individualIdentification := range individualIdentificationArray {
+			individualIdentificationMap, _ := individualIdentification.(map[string]any)
+			if individualIdentificationMap["identificationType"] == "learcredentialemployee" {
+				// The 'issuingAuthority' must be equal to the caller organizationIdentifier
+				issuingAuthority := individualIdentificationMap["issuingAuthority"].(string)
+				if sameOrganizations(issuingAuthority, caller.OrganizationIdentifier) {
+					return true, fmt.Sprintf("caller %s is same as mandator in Individual object %s", caller.OrganizationIdentifier, issuingAuthority)
+				} else {
+					return false, fmt.Sprintf("caller (%s) is neither the mandator in Individual object (%s) or the server operator", caller.OrganizationIdentifier, issuingAuthority)
+				}
+			}
+		}
+
+		return false, fmt.Sprintf("caller (%s) is neither the mandator in Individual object or the server operator", caller.OrganizationIdentifier)
+
+	case "category":
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
+		}
+
+		return false, fmt.Sprintf("caller %s is not the server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
+
+	default:
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
+		}
+
+		// For any other objects, we require that the object includes the Seller info, and then
+		// the user must be either the server operator or the seller
+
+		// Try to retrieve the Seller info
+		objSellerDid, objSellerOperatorDid, err := obj.GetSellerInfo("v4")
+		if err != nil {
+			return false, fmt.Sprintf("object (%s) does not contain seller information", obj.GetID())
+		}
+
+		// If the caller is the same as the object SellerOperator or the Seller, then is the owner
+		if sameOrganizations(caller.OrganizationIdentifier, objSellerDid) || sameOrganizations(caller.OrganizationIdentifier, objSellerOperatorDid) {
+			return true, fmt.Sprintf("caller %s is seller %s or seller operator %s", caller.OrganizationIdentifier, objSellerDid, objSellerOperatorDid)
+		}
+
+		// Try to retrieve the Buyer info, which may not exist.
+		// We already checked for Seller info, so if Buyer info does not exist, caller is not the owner
+		objBuyerDid, objBuyerOperatorDid, err := obj.GetBuyerInfo("v4")
+		if err != nil {
+			return false, fmt.Sprintf("object (%s) does not contain buyer information and caller (%s) is not the seller or seller operator", obj.GetID(), caller.OrganizationIdentifier)
+		}
+
+		// If the caller is the same as the object BuyerOperator or the Buyer, then is the owner
+		if sameOrganizations(caller.OrganizationIdentifier, objBuyerDid) || sameOrganizations(caller.OrganizationIdentifier, objBuyerOperatorDid) {
+			return true, fmt.Sprintf("caller %s is buyer %s or buyer operator %s", caller.OrganizationIdentifier, objBuyerDid, objBuyerOperatorDid)
+		}
+
+		return false, fmt.Sprintf("caller %s is not seller or buyer in object %s", caller.OrganizationIdentifier, obj.GetID())
+
+	}
+
+}
+
 // setSellerAndBuyerInfo adds the required fields to the incoming object argument
 // It calls the appropriate version-specific function based on the API version
-func (tmfObjectMap TMFObjectMap) SetSellerInfo(organizationIdentifier string, apiVersion string) (err error) {
+func (obj TMFObjectMap) SetSellerInfo(serverOperatorDid string, organizationIdentifier string, apiVersion string) (err error) {
+	// We do nothing for Individual or Organization objects, which are special and do not have Seller info
+	objType := obj.GetType()
+	objType = strings.ToLower(objType)
+	if objType == "individual" || objType == "organization" {
+		return nil
+	}
+
 	switch apiVersion {
 	case "v4":
-		return setSellerInfoV4(tmfObjectMap, organizationIdentifier)
+		return setSellerInfoV4(obj, serverOperatorDid, organizationIdentifier)
 	case "v5":
-		return setSellerInfoV5(tmfObjectMap, organizationIdentifier)
+		return setSellerInfoV5(obj, serverOperatorDid, organizationIdentifier)
 	default:
 		// Default to V5 for backward compatibility
-		return setSellerInfoV4(tmfObjectMap, organizationIdentifier)
+		return setSellerInfoV4(obj, serverOperatorDid, organizationIdentifier)
 	}
 }
 
 // setSellerInfoV4 adds the required fields to the incoming object argument for V4 API
 // Specifically, the Seller and SellerOperator roles are added to the relatedParty list
-func setSellerInfoV4(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
+func setSellerInfoV4(tmfObjectMap map[string]any, serverOperatorDid string, organizationIdentifier string) (err error) {
 
 	// Normalize the organization identifier to the DID format
 	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
@@ -443,17 +505,21 @@ func setSellerInfoV4(tmfObjectMap map[string]any, organizationIdentifier string)
 	}
 	sellerOperator := map[string]any{
 		"role":          "SellerOperator",
-		"id":            "urn:ngsi-ld:organization:" + config.ServerOperatorDid,
-		"href":          "urn:ngsi-ld:organization:" + config.ServerOperatorDid,
-		"name":          config.ServerOperatorDid,
+		"id":            "urn:ngsi-ld:organization:" + serverOperatorDid,
+		"href":          "urn:ngsi-ld:organization:" + serverOperatorDid,
+		"name":          serverOperatorDid,
 		"@referredType": "Organization",
 	}
 
+	// If the object does not have a 'relatedParty' array, create one with Seller=caller and SelletOperator=server_operator
 	if len(relatedParties) == 0 {
 		slog.Debug("setSellerAndBuyerInfoV4: no relatedParty, adding seller and sellerOperator")
 		tmfObjectMap["relatedParty"] = []any{sellerEntry, sellerOperator}
 		return nil
 	}
+
+	// We now search for Seller and SellerOperator entries and overwrite them or add them.
+	// The relatedParty array may contain entries which are not these, and we should not touch them.
 
 	foundSeller := false
 	foundSellerOperator := false
@@ -512,7 +578,7 @@ func setSellerInfoV4(tmfObjectMap map[string]any, organizationIdentifier string)
 
 // setSellerInfoV5 adds the required fields to the incoming object argument
 // Specifically, the Seller and SellerOperator roles are added to the relatedParty list
-func setSellerInfoV5(tmfObjectMap map[string]any, organizationIdentifier string) (err error) {
+func setSellerInfoV5(tmfObjectMap map[string]any, serverOperatorDid string, organizationIdentifier string) (err error) {
 
 	// Normalize all organization identifiers to the DID format
 	if !strings.HasPrefix(organizationIdentifier, "did:elsi:") {
@@ -539,9 +605,9 @@ func setSellerInfoV5(tmfObjectMap map[string]any, organizationIdentifier string)
 		"@type": "RelatedPartyRefOrPartyRoleRef",
 		"partyOrPartyRole": map[string]any{
 			"@type":         "PartyRef",
-			"href":          "urn:ngsi-ld:organization:" + config.ServerOperatorDid,
-			"id":            "urn:ngsi-ld:organization:" + config.ServerOperatorDid,
-			"name":          config.ServerOperatorDid,
+			"href":          "urn:ngsi-ld:organization:" + serverOperatorDid,
+			"id":            "urn:ngsi-ld:organization:" + serverOperatorDid,
+			"name":          serverOperatorDid,
 			"@referredType": "Organization",
 		},
 	}
@@ -607,27 +673,27 @@ func setSellerInfoV5(tmfObjectMap map[string]any, organizationIdentifier string)
 
 }
 
-func (tmfObjectMap TMFObjectMap) GetSellerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+func (obj TMFObjectMap) GetSellerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
 	switch apiVersion {
 	case "v4":
-		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Seller", "SellerOperator")
+		return getUserAndUserOperatorInfoV4(obj, "Seller", "SellerOperator")
 	case "v5":
-		return getUserAndUserOperatorInfoV5(tmfObjectMap, "Seller", "SellerOperator")
+		return getUserAndUserOperatorInfoV5(obj, "Seller", "SellerOperator")
 	default:
-		// Default to V5 for backward compatibility
-		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Seller", "SellerOperator")
+		// Default to V4 for backward compatibility
+		return getUserAndUserOperatorInfoV4(obj, "Seller", "SellerOperator")
 	}
 }
 
-func (tmfObjectMap TMFObjectMap) GetBuyerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+func (obj TMFObjectMap) GetBuyerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
 	switch apiVersion {
 	case "v4":
-		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Buyer", "BuyerOperator")
+		return getUserAndUserOperatorInfoV4(obj, "Buyer", "BuyerOperator")
 	case "v5":
-		return getUserAndUserOperatorInfoV5(tmfObjectMap, "Buyer", "BuyerOperator")
+		return getUserAndUserOperatorInfoV5(obj, "Buyer", "BuyerOperator")
 	default:
-		// Default to V5 for backward compatibility
-		return getUserAndUserOperatorInfoV4(tmfObjectMap, "Buyer", "BuyerOperator")
+		// Default to V4 for backward compatibility
+		return getUserAndUserOperatorInfoV4(obj, "Buyer", "BuyerOperator")
 	}
 }
 

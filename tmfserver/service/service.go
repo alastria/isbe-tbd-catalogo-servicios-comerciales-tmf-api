@@ -30,7 +30,7 @@ import (
 var DOMEHacks = true
 
 // Request represents a generic HTTP request. Handlers must convert to this representation.
-// In this way, we support easily any HTTP framework (currently Fiber and Echo), but also other
+// In this way, we support easily any HTTP framework (currently Fiber), but also other
 // future channels like JSON-RPC or even non-HTTP channels like GRPC.
 type Request struct {
 	Method       string
@@ -88,10 +88,10 @@ type Service struct {
 	// The SQL layer on top of the actual storage engine
 	db *sqlx.DB
 
-	// Pluggable storage backend (optional). When nil, falls back to built-in SQLite via db
+	// Pluggable storage backend. When nil, falls back to built-in SQLite via db
 	storage TMFStorage
 
-	// The rules engine in Starlark
+	// The rules engine implemented using Starlark
 	ruleEngine *pdp.PDP
 
 	// The Verifier server which signs the Access Tokens,
@@ -107,26 +107,41 @@ type Service struct {
 	// TMF Client for proxying requests
 	tmfClient *tmfclient.Client
 
+	// Fressness for local objects when proxy enabled
+	fressness time.Duration
+
 	// Flag to enable/disable proxy functionality
 	proxyEnabled bool
+
+	// Information about us (the server operator)
+	ServerOperatorOrganizationIdentifier string
+	ServerOperatorDid                    string
+	ServerOperatorName                   string
+	ServerOperatorCountry                string
 }
 
 // NewService creates a new service.
-func NewService(db *sqlx.DB, ruleEngine *pdp.PDP, verifierServer string, proxyEnabled bool, remoteTMF string) *Service {
+func NewService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) *Service {
 	svc := &Service{
 		db:             db,
 		ruleEngine:     ruleEngine,
-		verifierServer: verifierServer,
-		proxyEnabled:   proxyEnabled,
+		verifierServer: cnf.VerifierServer,
+		proxyEnabled:   cnf.ProxyEnabled,
 	}
 
-	if proxyEnabled {
+	svc.ServerOperatorOrganizationIdentifier = cnf.ServerOperatorOrganizationIdentifier
+	svc.ServerOperatorDid = cnf.ServerOperatorDid
+	svc.ServerOperatorName = cnf.ServerOperatorName
+	svc.ServerOperatorCountry = cnf.ServerOperatorCountry
+
+	if svc.proxyEnabled {
 		clientCfg := &tmfclient.Config{
-			BaseURL: remoteTMF,
+			BaseURL: cnf.RemoteTMFServer,
 			Timeout: 20,
 		}
 
 		svc.tmfClient = tmfclient.NewClient(clientCfg)
+		svc.fressness = 10 * time.Minute
 	}
 
 	err := svc.initializeService()
@@ -146,18 +161,18 @@ func (svc *Service) initializeService() error {
 
 	// Create the server operator identity, in case it is not yet in the database
 	org := &repository.Organization{
-		CommonName:             config.ServerOperatorName,
-		Country:                config.ServerOperatorCountry,
+		CommonName:             svc.ServerOperatorName,
+		Country:                svc.ServerOperatorCountry,
 		EmailAddress:           "",
-		Organization:           config.ServerOperatorName,
-		OrganizationIdentifier: config.ServerOperatorOrganizationIdentifier,
+		Organization:           svc.ServerOperatorName,
+		OrganizationIdentifier: svc.ServerOperatorOrganizationIdentifier,
 	}
 
 	obj, _ := repository.TMFOrganizationFromToken(nil, org)
 
 	if err := svc.createObject(obj); err != nil {
 		if errors.Is(err, &ErrObjectExists{}) {
-			slog.Debug("server operator organization already exists", "organizationIdentifier", config.ServerOperatorOrganizationIdentifier)
+			slog.Debug("server operator organization already exists", "organizationIdentifier", svc.ServerOperatorOrganizationIdentifier)
 		} else {
 			err = errl.Errorf("error creating server operator organization: %w", err)
 			panic(err)
@@ -300,11 +315,11 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	var err error
 	slog.Debug("CreateGenericObject called", slog.String("apiFamily", req.APIfamily), slog.String("resourceName", req.ResourceName))
 
+	var tokenMap map[string]any
+
 	// ************************************************************************************************
 	// Authentication: we require the user to be authenticated
 	// ************************************************************************************************
-
-	var tokenMap map[string]any
 	{
 		// Process the AccessToken to extract caller info from its claims in the payload
 		if tokenMap, err = svc.processAccessToken(req); err != nil {
@@ -318,14 +333,29 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 	}
 
-	// ************************************************************************************************
-	// Parse the request body, which contains the TMForum object being created.
-	// We perform some formal verifications and add default values if needed.
-	// ************************************************************************************************
-
 	var incomingObjectMap repo.TMFObjectMap
 	var id string
 	var version string
+
+	// ************************************************************************************************
+	// Parse the request body, which contains the TMForum object being created.
+	// We perform some formal verifications and add default values if needed:
+	// - Check for compulsory 'name' field (or equivalent fields for Individual or Organization)
+	// - If the incoming object specifies an 'id', this is only possible if it creates a new version.
+	//     That means the incoming object must include a 'version' property.
+	// - Create a new 'id' if the user did not specify it
+	// - Overwrite href in case it is specified by the caller.
+	// - Set a proper lifecycleStatus, if it was not specified by the caller
+	// - Set the '@type' based on the 'resource' name, if not specified by the user
+	// - Add Seller and Buyer info. We overwrite whatever is in the incoming object.
+	//     At this moment we set the Seller to the caller, and SellerOperator to us (the server operator).
+	//     This is good when we are a single server, but if we replicate with other marketplaces, we need
+	//     to have a trusted list of marketplaces. It the request comes from one of them, we trust it for
+	//     the content of the Seller object, as long as the SellerOperator field is one of the marketplaces.
+	//     In other words: if the organizationIdentifier of the caller is the same as the SellerOperator atribute,
+	//     and it is different from our identifier, then we do not check the Seller attribute.
+	// TODO: revise the Seller and SellerOperator logic when the trusted list of marketplaces is implemented
+	// ************************************************************************************************
 	{
 
 		incomingObjectMap, err = repo.NewTMFObjectMapFromRequest(req.ResourceName, req.Body)
@@ -388,6 +418,11 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
 		}
 
+		if incomingObjectMap.GetLastUpdate() != "" {
+			// Set the lastUpdate property. We overwrite whatever the user sets.
+			incomingObjectMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
+		}
+
 		// If the object requires a lifecycleStatus, add it if not specified by the caller
 		if baseStatus, ok := LifecycleStatusMandatory[req.ResourceName]; ok {
 			if lifecycleStatus := incomingObjectMap.GetLifecycleStatus(); lifecycleStatus == "" {
@@ -402,9 +437,8 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			incomingObjectMap.SetType(resourceType)
 		}
 
-		// TODO: add the Seller and Buyer info only to the objects where it is mandatory.
-		// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
-		err = incomingObjectMap.SetSellerInfo(req.AuthUser.OrganizationIdentifier, req.APIVersion)
+		// Add Seller info. We overwrite whatever is in the incoming object
+		err = incomingObjectMap.SetSellerInfo(svc.ServerOperatorDid, req.AuthUser.OrganizationIdentifier, req.APIVersion)
 		if err != nil {
 			return ErrorResponsef(http.StatusInternalServerError, "failed to add Seller and Buyer info: %w", err)
 		}
@@ -416,125 +450,35 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	err = takeDecision(svc.ruleEngine, req, tokenMap, incomingObjectMap)
-	if err != nil {
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, incomingObjectMap); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,
 			incomingObjectMap,
 			err,
 		)
+	} else {
+		slog.Debug("caller is authorized to create object", "reason", err)
 	}
 
 	// ************************************************************************************************
 	// Now we can proceed, creating an object in the database or the remote server in proxy mode
 	// ************************************************************************************************
 
-	if svc.proxyEnabled {
-		// Proxy logic
-		headers := map[string]string{
-			"Content-Type":  "application/json",
-			"Authorization": "Bearer " + req.AccessToken,
-		}
+	respSt := svc.createLocalOrRemoteObject(req, incomingObjectMap)
 
-		modifiedIncomingBody, err := json.Marshal(incomingObjectMap)
-		if err != nil {
-		}
-		headers["Content-Length"] = strconv.Itoa(len(modifiedIncomingBody))
-
-		path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
-		resp, err := svc.tmfClient.Post(path, modifiedIncomingBody, headers)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", err)
-		}
-		defer resp.Body.Close()
-
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to read response body: %w", err)
-		}
-
-		if resp.StatusCode >= 300 {
-			return ErrorResponsef(resp.StatusCode, "body: %s", string(body))
-		}
-
-		// Put the created objet in a map
-
-		remoteObjectMap, err := repo.NewTMFObjectMapFromRequest(req.ResourceName, body)
-		if err != nil {
-			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
-		}
-
-		id := remoteObjectMap.GetID()
-		version := remoteObjectMap.GetVersion()
-		lastUpdate := remoteObjectMap.GetLastUpdate()
-
-		// It is an error if the remote server does not return a 'lastUpdate', but we fix it and log a warning
-		if lastUpdate == "" {
-			slog.Warn("remote server did not return lastUpdate, fixing it", slog.String("id", id))
-
-			now := time.Now()
-			lastUpdate = now.Format(time.RFC3339Nano)
-			remoteObjectMap["lastUpdate"] = lastUpdate
-		}
-
-		remoteContent, err := json.Marshal(remoteObjectMap)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object content: %w", err)
-		}
-
-		remoteObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, remoteContent)
-		remoteObject.SetSellerID(req.AuthUser.OrganizationIdentifier)
-
-		// Create the new object in the local database
-		if err := svc.createObject(remoteObject); err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to create object in service: %w", err)
-		}
-
-		// Replace the incomingObjectMap with the remoteObjectMap for response and notification
-		incomingObjectMap = remoteObjectMap
-
-	} else {
-
-		// Set the lastUpdate property. We overwrite whatever the user sets.
-		now := time.Now()
-		lastUpdate := now.Format(time.RFC3339Nano)
-		incomingObjectMap["lastUpdate"] = lastUpdate
-
-		incomingContent, err := json.Marshal(incomingObjectMap)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object content: %w", err)
-		}
-
-		incomingObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
-		incomingObject.SetSellerID(req.AuthUser.OrganizationIdentifier)
-
-		// Create the new object in the local database
-		if err := svc.createObject(incomingObject); err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to create object locally: %w", err)
-		}
-
+	if respSt.StatusCode == http.StatusCreated {
+		// Send TMForum notification
+		eventType := toEventType(req.ResourceName, "CreateEvent")
+		eventPayload := buildEventPayload(req, eventType, respSt.Body)
+		svc.notif.PublishEvent(req.APIfamily, eventType, eventPayload)
 	}
 
-	// Now we have in incomingObjectMap the object as created, either locally or in the remote server in proxy mode
-	headers := make(map[string]string)
-	headers["Location"], _ = incomingObjectMap["href"].(string)
-	slog.Info("Object created successfully", slog.String("id", id), slog.String("resourceName", req.ResourceName), slog.String("location", incomingObjectMap["href"].(string)))
-
-	// Send TMForum notification
-	eventType := toEventType(req.ResourceName, "CreateEvent")
-	eventPayload := buildEventPayload(req, eventType, incomingObjectMap)
-	svc.notif.PublishEvent(req.APIfamily, eventType, eventPayload)
-
-	// We respond with the created object withh all the properties, including the default ones.
+	// We respond with the created object with all the properties, including the default ones.
 	// TODO: not critical, but we could send only the mandatory attributes and those requested by the caller.
 	// Sending the whole object is compliant with the TMForum specification,
 	// but sending only the mandatory attributes is more efficient.
-	return &Response{
-		StatusCode: http.StatusCreated,
-		Headers:    headers,
-		Body:       incomingObjectMap,
-	}
+	return respSt
 }
 
 // GetGenericObject retrieves a TMF object using generalized parameters.
@@ -561,15 +505,17 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	slog.Debug("GetGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
-	token, err := svc.processAccessToken(req)
+	// Anonymous access is allowed, so the tokenMap may be nil
+	tokenMap, err := svc.processAccessToken(req)
 	if err != nil {
 		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
 	}
 
 	// Retrieve the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
-	// If th eobject is not found, we return a 404 error.
+	// If the object is not found, we return a 404 error.
 	existingObject, err := svc.getLocalOrRemoteObject(req)
 	if err != nil {
+		// This is an unexpected error, so we return a server error
 		return ErrorResponsef(http.StatusInternalServerError, "failed to get object from service: %w", errl.Error(err))
 	}
 
@@ -577,20 +523,25 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusNotFound, "object not found")
 	}
 
-	em, err := existingObject.ToMap()
+	existingObjectMap, err := existingObject.ToMap()
 	if err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", errl.Error(err))
 	}
-	existingObjectMap := repo.TMFObjectMap(em)
 
 	// ************************************************************************************************
 	// Before performing the action, check if the user can perform the operation on the object,
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	err = takeDecision(svc.ruleEngine, req, token, existingObjectMap)
-	if err != nil {
-		return ErrorResponse(errl.Error(err), http.StatusForbidden)
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, existingObjectMap); !authorized {
+		return ErrorResponsef(http.StatusForbidden,
+			"user %s is not authorized, object: %s, error: %w",
+			req.AuthUser.OrganizationIdentifier,
+			existingObjectMap,
+			err,
+		)
+	} else {
+		slog.Debug("caller is authorized to read object", "reason", err)
 	}
 
 	// ************************************************************************************************
@@ -630,76 +581,6 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 
 	slog.Info("Object retrieved successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 	return &Response{StatusCode: http.StatusOK, Body: existingObjectMap}
-}
-
-// getLocalOrRemoteObject retrieves the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
-// If the object is not found anywhere, it returns a nil object and no error.
-func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error) {
-
-	obj, err := svc.getObject(req.ID, req.ResourceName)
-	if err != nil {
-		return nil, errl.Errorf("failed to get object from local service: %w", err)
-	}
-
-	// Return the object if found locally
-	if obj != nil {
-		return obj, nil
-	}
-
-	// Return a nil object if object not found locally and proxy not enabled
-	// The caller is responsible for returning a 404 error
-	if !svc.proxyEnabled {
-		return nil, nil
-	}
-
-	// If the object is not in the cache, get it from the remote server
-	slog.Debug("object not found in cache, getting from remote", slog.String("id", req.ID))
-	headers := map[string]string{
-		"Authorization": "Bearer " + req.AccessToken,
-	}
-	path := fmt.Sprintf("/tmf-api/%s/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName, req.ID)
-	resp, err := svc.tmfClient.Get(path, headers)
-	if err != nil {
-		return nil, errl.Errorf("failed to proxy request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, errl.Errorf("failed to read response body: %w", err)
-	}
-
-	if resp.StatusCode == 404 {
-		return nil, nil
-	}
-
-	if resp.StatusCode >= 300 {
-		return nil, errl.Errorf("remote server returned error: %s", string(body))
-	}
-
-	var incomingObjectMap map[string]any
-	if err := json.Unmarshal(body, &incomingObjectMap); err != nil {
-		return nil, errl.Errorf("failed to bind request body: %w", err)
-	}
-
-	id, _ := incomingObjectMap["id"].(string)
-	version, _ := incomingObjectMap["version"].(string)
-	lastUpdate, _ := incomingObjectMap["lastUpdate"].(string)
-
-	incomingContent, err := json.Marshal(incomingObjectMap)
-	if err != nil {
-		return nil, errl.Errorf("failed to marshal object content: %w", err)
-	}
-
-	obj = repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, incomingContent)
-
-	if err := svc.createObject(obj); err != nil {
-		slog.Error("failed to cache object", slog.Any("error", err))
-		// Do not return an error to the client, just log it
-	}
-
-	slog.Info("Object retrieved from remote and cached successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
-	return obj, nil
 }
 
 // UpdateGenericObject updates an existing TMF object using generalized parameters.
@@ -743,39 +624,37 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// Authentication: we require the user to be authenticated
 	// ************************************************************************************************
 
-	var token map[string]any
+	var tokenMap map[string]any
 	{
 		// Process the AccessToken to extract caller info from its claims in the payload
-		if token, err = svc.processAccessToken(req); err != nil {
+		if tokenMap, err = svc.processAccessToken(req); err != nil {
 			return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
 		}
 
 		// This operation can not be done without authentication
-		if len(token) == 0 {
+		if len(tokenMap) == 0 {
 			return ErrorResponsef(http.StatusUnauthorized, "user not authenticated")
 		}
 
 	}
 
+	var incomingObjMap repo.TMFObjectMap
+
 	// ************************************************************************************************
 	// Parse the request body, which contains the TMForum object being updated.
 	// We perform some formal verifications and add default values if needed.
 	// ************************************************************************************************
-
-	resource := strings.ToLower(req.ResourceName)
-
-	var incomingObjMap repo.TMFObjectMap
-	var incomingVersion string
 	{
-		// Parse the request body, which contains the TMForum object being created
-		if err := json.Unmarshal(req.Body, &incomingObjMap); err != nil {
+
+		incomingObjMap, err = repo.NewTMFObjectMapFromRequest(req.ResourceName, req.Body)
+		if err != nil {
 			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
 		}
 
+		// An update operation specifies the ID of the object to update in the URL.
+		// To facilitate life to applications, we allow the 'id' to be also in the body.
+		// But if the 'id' is present in the body, ensure it matches the 'id' in the URL
 		if !DOMEHacks {
-			// An update operation specifies the ID of the object to update in the URL.
-			// To facilitate life to applications, we allow the 'id' to be also in the body.
-			// But if the 'id' is present in the body, ensure it matches the 'id' in the URL
 			id, _ := incomingObjMap["id"].(string)
 			if id != "" && id != req.ID {
 				err := errl.Errorf("ID in body must match ID in URL")
@@ -788,16 +667,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			}
 		}
 
-		// For all objects except Organization, Individual or Catalog, set Seller info
-		if resource != "organization" && resource != "individual" && resource != "category" {
-
-			// Add Seller and Buyer info. We overwrite whatever is in the incoming object, if any
-			err = incomingObjMap.SetSellerInfo(req.AuthUser.OrganizationIdentifier, req.APIVersion)
-			if err != nil {
-				return ErrorResponsef(http.StatusInternalServerError, "failed to add Seller and Buyer info: %w", errl.Error(err))
-			}
-
-		}
+		// TODO: check if we could set some information for the Individual and Organization objects
 
 		// Set the lastUpdate property. We overwrite whatever the user set.
 		now := time.Now()
@@ -812,84 +682,35 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 
 	var existingObj *repo.TMFObject
 
-	if svc.proxyEnabled {
-
-		// Retrieve existing object, locally or remotely
-		existingObj, err = svc.getLocalOrRemoteObject(req)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object %s for update: %w", req.ID, err)
-		}
-
-	} else {
-
-		// Retrieve existing object only locally
-		existingObj, err = svc.getObject(req.ID, req.ResourceName)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object %s for update: %w", req.ID, err)
-		}
-
+	// Retrieve existing object, locally or remotely
+	existingObj, err = svc.getLocalOrRemoteObject(req)
+	if err != nil {
+		return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object %s for update: %w", req.ID, err)
 	}
 
 	if existingObj == nil {
 		return ErrorResponsef(http.StatusNotFound, "object %s not found", req.ID)
 	}
 
-	om, err := existingObj.ToMap()
+	existingObjectMap, err := existingObj.ToMap()
 	if err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", err)
 	}
-	existingObjectMap := repo.TMFObjectMap(om)
 
-	var existingSellerDid string
-	var existingSellerOperatorDid string
+	// ************************************************************************************************
+	// Before performing the action, check if the user can perform the operation on the object,
+	// based on the rules defined by the user in the policy engine.
+	// ************************************************************************************************
 
-	// We need to check if the calling user is the owner of the object being updated.
-	// For that, we compare the seller and seller operator DIDs of the existing object
-	// with those of the incoming object (which are derived from the caller identity).
-	// If they do not match, the caller is not the owner and we reject the operation.
-	// Note that we do this before merging the incoming object into the existing one,
-	// so the caller can not change the ownership of an object by updating it.
-
-	switch resource {
-	case "organization", "individual":
-		_ = resource
-	case "category":
-		if !sameOrganizations(req.AuthUser.OrganizationIdentifier, config.ServerOperatorDid) {
-			return ErrorResponsef(http.StatusForbidden, "user not owner of the object")
-		}
-	default:
-		existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerInfo(req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get seller and buyer info: %w", err)
-		}
-
-		// ************************************************************************************************
-		// Before performing the action, check if the user can perform the operation on the object,
-		// based on the rules defined by the user in the policy engine.
-		// ************************************************************************************************
-
-		// We need the SellerOperator to be our operator (the one who operates this server)
-		if existingSellerOperatorDid != config.ServerOperatorDid {
-			return ErrorResponsef(http.StatusForbidden, "object not managed by this operator")
-		}
-
-		// We need that the caller is the owner of the object being updated.
-		if !sameOrganizations(existingSellerDid, req.AuthUser.OrganizationIdentifier) {
-			return ErrorResponsef(http.StatusForbidden, "user not owner of the object")
-		}
-
-		// If existing lifecycleStatus is 'Launched', 'Retired' or 'Obsolete', incoming version must be greater than the existing version
-		existingLifecycleStatus, _ := existingObjectMap["lifecycleStatus"].(string)
-		incomingVersion, _ = incomingObjMap["version"].(string)
-
-		if existingLifecycleStatus == "Launched" || existingLifecycleStatus == "Retired" || existingLifecycleStatus == "Obsolete" {
-			if incomingVersion == "" || incomingVersion <= existingObj.Version {
-				// It is forbidden to update an object which is already launched, using the same or previous version.
-				// Only a new version can be created.
-				return ErrorResponsef(http.StatusBadRequest, "for launched objects, incoming version must be greater than existing version")
-			}
-		}
-
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, existingObjectMap); !authorized {
+		return ErrorResponsef(http.StatusForbidden,
+			"user %s is not authorized, object: %s, error: %w",
+			req.AuthUser.OrganizationIdentifier,
+			existingObjectMap,
+			err,
+		)
+	} else {
+		slog.Debug("caller is authorized to update object", "reason", err)
 	}
 
 	// ************************************************************************************************
@@ -994,17 +815,25 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 //   - It returns a 204 No Content response on successful deletion.
 //   - It sends a "DeleteEvent" notification to subscribed listeners.
 func (svc *Service) DeleteGenericObject(req *Request) *Response {
+	var err error
 	slog.Debug("DeleteGenericObject called", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
-	// Authentication: process the AccessToken to extract caller info from its claims in the payload
-	token, err := svc.processAccessToken(req)
-	if err != nil {
-		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", err)
-	}
+	// ************************************************************************************************
+	// Authentication: we require the user to be authenticated
+	// ************************************************************************************************
 
-	// Deleting an object always requires authentication
-	if len(token) == 0 {
-		return ErrorResponsef(http.StatusUnauthorized, "user not authenticated")
+	var tokenMap map[string]any
+	{
+		// Process the AccessToken to extract caller info from its claims in the payload
+		if tokenMap, err = svc.processAccessToken(req); err != nil {
+			return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+		}
+
+		// This operation can not be done without authentication
+		if len(tokenMap) == 0 {
+			return ErrorResponsef(http.StatusUnauthorized, "user not authenticated")
+		}
+
 	}
 
 	// ************************************************************************************************
@@ -1012,32 +841,17 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	// ************************************************************************************************
 
 	var existingObject *repo.TMFObject
-	var existingSellerDid string
-	var existingSellerOperatorDid string
 
-	if svc.proxyEnabled {
-
-		// Retrieve existing object, locally or remotely
-		existingObject, err = svc.getLocalOrRemoteObject(req)
-		if err != nil {
-			// TODO: check the return code from remote server and reply accordingly
-			return ErrorResponsef(http.StatusBadRequest, "failed to get existing object for update: %w", err)
-		}
-
-	} else {
-
-		// Retrieve existing object
-		existingObject, err = svc.getObject(req.ID, req.ResourceName)
-		if err != nil {
-			// We should not get this error, we are the culprit so return a Server error
-			return ErrorResponsef(http.StatusInternalServerError, "failed to get existing object for update: %w", err)
-		}
-
+	// Retrieve existing object, locally or remotely
+	existingObject, err = svc.getLocalOrRemoteObject(req)
+	if err != nil {
+		// TODO: check the return code from remote server and reply accordingly
+		return ErrorResponsef(http.StatusBadRequest, "failed to get existing object for update: %w", err)
 	}
 
 	// If nothing to delete, return 404
 	if existingObject == nil {
-		return ErrorResponsef(http.StatusNotFound, "object not found")
+		return ErrorResponsef(http.StatusNotFound, "object %s not found", req.ID)
 	}
 
 	// Convert to a type-safe map representation to facilitate manipulation
@@ -1046,51 +860,24 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", err)
 	}
 
-	// ##########################################################
-	// ##########################################################
-	// ##########################################################
+	// ************************************************************************************************
+	// Before performing the action, check if the user can perform the operation on the object,
+	// based on the rules defined by the user in the policy engine.
+	// ************************************************************************************************
 
-	// We need to check if the calling user is the owner of the object being updated.
-	// For that, we compare the seller and seller operator DIDs of the existing object
-	// with those of the incoming object (which are derived from the caller identity).
-	// If they do not match, the caller is not the owner and we reject the operation.
-	// Note that we do this before merging the incoming object into the existing one,
-	// so the caller can not change the ownership of an object by updating it.
-
-	// Convert to lowercase to facilitate comparisons
-	resource := strings.ToLower(req.ResourceName)
-
-	switch resource {
-	case "organization", "individual":
-		_ = resource
-		if !existingObjectMap.IsOwner(req.AuthUser) {
-			return ErrorResponsef(http.StatusForbidden, "caller not owner of object: %s", req.ID)
-		}
-	case "category":
-		// Category objects are owned by the Catalog operator
-		if !sameOrganizations(req.AuthUser.OrganizationIdentifier, config.ServerOperatorDid) {
-			return ErrorResponsef(http.StatusForbidden, "caller not owner of object: %s", req.ID)
-		}
-	default:
-		existingSellerDid, existingSellerOperatorDid, err = existingObjectMap.GetSellerInfo(req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(http.StatusBadRequest, "failed to get seller and buyer info for %s: %w", req.ID, err)
-		}
-
-		// We need the SellerOperator to be our operator (the one who operates this server)
-		if existingSellerOperatorDid != config.ServerOperatorDid {
-			return ErrorResponsef(http.StatusForbidden, "object %s not managed by this operator", req.ID)
-		}
-
-		// We need that the caller is the owner of the object being updated.
-		if !sameOrganizations(existingSellerDid, req.AuthUser.OrganizationIdentifier) {
-			return ErrorResponsef(http.StatusForbidden, "valler not owner of the object %s", req.ID)
-		}
-
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, existingObjectMap); !authorized {
+		return ErrorResponsef(http.StatusForbidden,
+			"user %s is not authorized, object: %s, error: %w",
+			req.AuthUser.OrganizationIdentifier,
+			existingObjectMap,
+			err,
+		)
+	} else {
+		slog.Debug("caller is authorized to delete object", "reason", err)
 	}
 
 	// ##########################################################
-	// ##########################################################
+	// Delete the object
 	// ##########################################################
 
 	// Delete the object in the remote server, if the proxy is enabled
@@ -1126,7 +913,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to delete object %s from service: %w", req.ID, err)
 	}
 
-	slog.Info("Object deleted successfully", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
+	slog.Info("Object deleted successfully from local database", slog.String("id", req.ID), slog.String("resourceName", req.ResourceName))
 
 	// Send TMForum notification
 	eventType := toEventType(req.ResourceName, "DeleteEvent")
@@ -1147,56 +934,141 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 	slog.Debug("ListGenericObjects called", slog.String("resourceName", req.ResourceName))
 
 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
-	_, err := svc.processAccessToken(req)
+	// Anonymous access is allowed, so the tokenMap may be nil
+	tokenMap, err := svc.processAccessToken(req)
 	if err != nil {
-		slog.Error("invalid access token", slog.String("error", err.Error()))
-		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", err)
+		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
 	}
 
-	var objs []repo.TMFObject
-	var totalCount int
+	// Process the query values: extract 'limit' and 'offset'
+	var limit = -1
+	var offset = -1
+
+	for key, values := range req.QueryParams {
+
+		if key == "limit" {
+			limitStr := values[0]
+			if limitStr != "" {
+				if l, err := strconv.Atoi(limitStr); err == nil {
+					limit = l
+				}
+				req.QueryParams.Del(key)
+			}
+			continue
+		}
+
+		if key == "offset" {
+			offsetStr := values[0]
+			if offsetStr != "" {
+				if l, err := strconv.Atoi(offsetStr); err == nil {
+					offset = l
+				}
+				req.QueryParams.Del(key)
+			}
+			continue
+		}
+
+	}
 
 	if svc.proxyEnabled {
-		// Proxy logic
+
+		// Will send the authorization header
 		headers := map[string]string{
 			"Authorization": "Bearer " + req.AccessToken,
 		}
-		path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
-		if len(req.QueryParams) > 0 {
-			path += "?" + req.QueryParams.Encode()
-		}
-		resp, err := svc.tmfClient.Get(path, headers)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", err)
-		}
-		defer resp.Body.Close()
 
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to read response body: %w", err)
-		}
+		var objs []repo.TMFObjectMap
+		var offsetCounter int
 
-		if resp.StatusCode >= 300 {
-			return &Response{
-				StatusCode: resp.StatusCode,
-				Body:       body,
+		// The page size
+		pageSize := 100
+		pageOffset := 0
+
+		for {
+
+			// Retrieve the page from the remote server
+			path := fmt.Sprintf("/tmf-api/%s/%s/%s?limit=%d&offset=%d", req.APIfamily, req.APIVersion, req.ResourceName, pageSize, pageOffset)
+			slog.Debug("sending request to remote", "path", path)
+
+			resp, err := svc.tmfClient.Get(path, headers)
+			if err != nil {
+				return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", err)
 			}
-		}
+			defer resp.Body.Close()
 
-		responseData := make([]map[string]any, 0)
-		if err := json.Unmarshal(body, &responseData); err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
+			body, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return ErrorResponsef(http.StatusInternalServerError, "failed to read response body: %w", err)
+			}
+
+			if resp.StatusCode >= 300 {
+				return &Response{
+					StatusCode: resp.StatusCode,
+					Body:       body,
+				}
+			}
+
+			responseData := make([]map[string]any, 0)
+			if err := json.Unmarshal(body, &responseData); err != nil {
+				return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
+			}
+
+			// Process the list of response objects to filter depending on the user
+			for _, obj := range responseData {
+				objectMap := repo.TMFObjectMap(obj)
+
+				// TODO: Perform verifications
+
+				// Check if the object can be read by the user
+				authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, objectMap)
+				if !authorized {
+					slog.Info("object %s not authorized: %w", objectMap.GetID(), errl.Error(err))
+					continue
+				}
+
+				// We have to discard the first 'offset' objects, as specified by the user
+				if offsetCounter < offset {
+					offsetCounter++
+					continue
+				}
+
+				// Now we add the object to the result array and check if we reached the limit as specified by the user
+				objs = append(objs, objectMap)
+
+				if len(objs) >= limit {
+					break
+				}
+
+			}
+
+			// Exit from the outer loop if we already have the number of objects that the user requested
+			if len(objs) >= limit {
+				break
+			}
+
+			// Exit the loop if the number of retrieved objects is less than the page size requested.
+			// That means that there are no more objects
+			if len(responseData) < pageSize {
+				break
+			}
+
+			// Retrieve next page
+			pageOffset += pageSize
+
 		}
 
 		responseHeaders := make(map[string]string)
-		responseHeaders["X-Total-Count"] = strconv.Itoa(len(responseData))
+		responseHeaders["X-Total-Count"] = strconv.Itoa(len(objs))
 
-		slog.Info("Remote objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
-		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseData}
+		slog.Info("Remote objects listed successfully", slog.Int("count", len(objs)), slog.String("resourceName", req.ResourceName))
+		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: objs}
 
 	} else {
 
-		objs, totalCount, err = svc.listObjects(req.ResourceName, req.APIVersion, req.QueryParams)
+		var objs []repo.TMFObject
+		var totalCount int
+
+		objs, totalCount, err = svc.listObjects(req, tokenMap, req.ResourceName, req.APIVersion, req.QueryParams)
 		if err != nil {
 			slog.Error("failed to list objects from service", slog.String("error", err.Error()))
 			return ErrorResponsef(http.StatusInternalServerError, "failed to list objects from service: %w", err)
@@ -1208,8 +1080,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		responseData := make([]map[string]any, 0)
 
 		for _, obj := range objs {
-			var item map[string]any
-			err := json.Unmarshal(obj.Content, &item)
+			item, err := obj.ToMap()
 			if err != nil {
 				slog.Error("failed to unmarshal object content for listing", slog.String("error", err.Error()))
 				return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
@@ -1255,7 +1126,6 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 		slog.Info("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
 		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseData}
-
 	}
 
 }

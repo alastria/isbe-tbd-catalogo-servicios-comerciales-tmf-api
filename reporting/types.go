@@ -105,7 +105,11 @@ type ValidationReport struct {
 }
 
 var RequiredFieldsForAllObjects = []string{
-	"id", "href", "lastUpdate", "version",
+	"id", "href", "lastUpdate",
+}
+
+var RecommendedFieldsForAllObjects = []string{
+	"name", "version",
 }
 
 var DoNotRequireRelatedParties = []string{
@@ -157,8 +161,8 @@ var RequiredFields = map[string][]string{
 	},
 }
 
-// RequiredRelatedPartyRoles defines the required related party roles for each object type
-var RequiredRelatedPartyRoles = map[string][]string{
+// RequiredRelatedPartyRolesV4 defines the required related party roles for each object type in V4 API
+var RequiredRelatedPartyRolesV4 = map[string][]string{
 	"productOffering": {
 		"Seller", "SellerOperator",
 	},
@@ -191,8 +195,8 @@ var RequiredRelatedPartyRoles = map[string][]string{
 	},
 }
 
-// RequiredRelatedPartyRolesV4 defines the required related party roles for each object type in V4 API
-var RequiredRelatedPartyRolesV4 = map[string][]string{
+// RequiredRelatedPartyRolesV5 defines the required related party roles for each object type
+var RequiredRelatedPartyRolesV5 = map[string][]string{
 	"productOffering": {
 		"Seller", "SellerOperator",
 	},

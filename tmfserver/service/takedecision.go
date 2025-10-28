@@ -8,43 +8,154 @@ import (
 	"strings"
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
+	"github.com/hesusruiz/isbetmf/internal/jpath"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
-func takeDecision(
+func (svc *Service) takeDecision(
 	ruleEngine *pdp.PDP,
 	req *Request,
 	tokenClaims map[string]any,
 	objectMap repo.TMFObjectMap,
-) (err error) {
+) (authorized bool, err error) {
 
-	// Pre-calculate the owner value
-	req.AuthUser.IsOwner = objectMap.IsOwner(req.AuthUser)
-
-	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
-	if req.Method == "GET" && isPublicResource(req.ResourceName) {
-		// Check the user-defined rules in the PDP engine
-		return callPDP(ruleEngine, req, tokenClaims, objectMap)
+	// Evaluate the hardcoded policies, if they fail return immediately.
+	// Otherwise, continue to see if the user policies allow access
+	decision, reason := svc.hardcodedPolicy(req, objectMap)
+	if !decision {
+		return false, reason
 	}
 
-	// GET operations to non-public resources, or any other method (POST, PUT, DELETE) to any object
-	// are only allowed to authenticated users, and the user must be the owner of the object.
+	// The caller is the owner, at least according to hardcoded policies.
+	// The user policies will determine the final decision.
+	req.AuthUser.IsOwner = decision
 
-	if !req.AuthUser.IsAuthenticated {
-		return errl.Errorf("user not authenticated")
+	if err := svc.callPDP(ruleEngine, req, tokenClaims, objectMap); err != nil {
+		return false, errl.Errorf("user policies in PDP engine: %w", err)
 	}
 
-	if !req.AuthUser.IsOwner {
-		return errl.Errorf("user not authorized")
-	}
-
-	err = callPDP(ruleEngine, req, tokenClaims, objectMap)
-	return err
+	return true, nil
 
 }
 
-func callPDP(
+func (svc *Service) hardcodedPolicy(
+	req *Request,
+	obj repo.TMFObjectMap,
+) (decision bool, reason error) {
+
+	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
+	// Method GET includes actions READ and LIST
+	if req.Method == "GET" && isPublicResource(req.ResourceName) {
+		return true, errl.Errorf("GET request to a public resource %s", req.ResourceName)
+	}
+
+	// GET operations to non-public resources, or any other method (POST, PUT, DELETE) to any object
+	// are only allowed to authenticated users.
+	if !req.AuthUser.IsAuthenticated {
+		return false, errl.Errorf("user not authenticated")
+	}
+
+	// Ownership of an object depends on the type of object
+	objType, _ := obj["@type"].(string)
+	objType = strings.ToLower(objType)
+
+	caller := req.AuthUser
+
+	switch objType {
+	case "organization":
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+			return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+		}
+
+		// If the organization of the caller and object are the same, then the caller can read/write/update/delete
+		objectOrganizationId := jpath.GetString(obj, "organizationIdentification.*.identificationId")
+		if sameOrganizations(objectOrganizationId, caller.OrganizationIdentifier) {
+			return true, errl.Errorf("caller %s is same as in object %s", caller.OrganizationIdentifier, objectOrganizationId)
+		}
+
+		return false, errl.Errorf("caller (%s) is neither the same as in object (%s) or the server operator", caller.OrganizationIdentifier, objectOrganizationId)
+
+	case "individual":
+
+		// TODO: revise this policy to be restrictive
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+			return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+		}
+
+		// If the caller is the Organization that is the mandator is the LEARCredential of the employee
+		// then the caller can read/write/update/delete
+		individualIdentificationArray := jpath.GetList(obj, "individualIdentification")
+
+		// Look for an entry with 'identificationType=learcredentialemployee'
+		for _, individualIdentification := range individualIdentificationArray {
+			individualIdentificationMap, _ := individualIdentification.(map[string]any)
+			if individualIdentificationMap["identificationType"] == "learcredentialemployee" {
+				// The 'issuingAuthority' must be equal to the caller organizationIdentifier
+				issuingAuthority := individualIdentificationMap["issuingAuthority"].(string)
+				if sameOrganizations(issuingAuthority, caller.OrganizationIdentifier) {
+					return true, errl.Errorf("caller %s is same as mandator in Individual object %s", caller.OrganizationIdentifier, issuingAuthority)
+				} else {
+					return false, errl.Errorf("caller (%s) is neither the mandator in Individual object (%s) or the server operator", caller.OrganizationIdentifier, issuingAuthority)
+				}
+			}
+		}
+
+		return false, errl.Errorf("caller (%s) is neither the mandator in Individual object or the server operator", caller.OrganizationIdentifier)
+
+	case "category":
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+			return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+		}
+
+		return false, errl.Errorf("caller %s is not the server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+
+	default:
+
+		// If the caller is us (the server operator), then we can read/write/update/delete
+		if sameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+			return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+		}
+
+		// For any other objects, we require that the object includes the Seller info, and then
+		// the user must be either the server operator or the seller
+
+		// Try to retrieve the Seller info
+		objSellerDid, objSellerOperatorDid, err := obj.GetSellerInfo("v4")
+		if err != nil {
+			return false, errl.Errorf("object (%s) does not contain seller information", obj.GetID())
+		}
+
+		// If the caller is the same as the object SellerOperator or the Seller, then is the owner
+		if sameOrganizations(caller.OrganizationIdentifier, objSellerDid) || sameOrganizations(caller.OrganizationIdentifier, objSellerOperatorDid) {
+			return true, errl.Errorf("caller %s is seller %s or seller operator %s", caller.OrganizationIdentifier, objSellerDid, objSellerOperatorDid)
+		}
+
+		// Try to retrieve the Buyer info, which may not exist.
+		// We already checked for Seller info, so if Buyer info does not exist, caller is not the owner
+		objBuyerDid, objBuyerOperatorDid, err := obj.GetBuyerInfo("v4")
+		if err != nil {
+			return false, errl.Errorf("object (%s) does not contain buyer information and caller (%s) is not the seller or seller operator", obj.GetID(), caller.OrganizationIdentifier)
+		}
+
+		// If the caller is the same as the object BuyerOperator or the Buyer, then is the owner
+		if sameOrganizations(caller.OrganizationIdentifier, objBuyerDid) || sameOrganizations(caller.OrganizationIdentifier, objBuyerOperatorDid) {
+			return true, errl.Errorf("caller %s is buyer %s or buyer operator %s", caller.OrganizationIdentifier, objBuyerDid, objBuyerOperatorDid)
+		}
+
+		return false, errl.Errorf("caller %s is not seller or buyer in object %s", caller.OrganizationIdentifier, obj.GetID())
+
+	}
+
+}
+
+func (svc *Service) callPDP(
 	ruleEngine *pdp.PDP,
 	req *Request,
 	tokenClaims map[string]any,

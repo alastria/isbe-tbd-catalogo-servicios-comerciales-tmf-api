@@ -218,7 +218,7 @@ func TestRequiredRelatedPartyRoles(t *testing.T) {
 	}
 
 	for _, objType := range coreTypes {
-		if roles, exists := RequiredRelatedPartyRoles[objType]; !exists {
+		if roles, exists := RequiredRelatedPartyRolesV5[objType]; !exists {
 			t.Errorf("Required related party roles not defined for object type: %s", objType)
 		} else if len(roles) == 0 {
 			t.Errorf("Required related party roles list is empty for object type: %s", objType)

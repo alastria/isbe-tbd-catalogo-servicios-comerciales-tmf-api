@@ -45,6 +45,8 @@ type CredentialIssuer struct {
 	CommonName             string `json:"commonName,omitempty"`
 }
 
+// Example of credentialStatus
+//
 //	"credentialStatus": {
 //		"id": "https://issuer.dome-marketplace-sbx.org/backoffice/v1/credentials/status/1#SYC908RIQQqeUXR19nh3EQ",
 //		"statusListCredential": "https://issuer.dome-marketplace-sbx.org/backoffice/v1/credentials/status/1",

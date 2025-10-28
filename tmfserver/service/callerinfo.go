@@ -32,7 +32,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 		// Normally this is forbidden, but for testing we can provide a fake one, and do not verify signature
 		if AllowFakeClaims && r.Method != "GET" {
 			slog.Debug("PDP: using fake claims for testing")
-			r.AccessToken = FakeAT
+			r.AccessToken = FakeATold
 			verify = false
 		}
 	}
@@ -59,49 +59,32 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 
 	verifiableCredential := jpath.GetMap(tokenClaims, "vc")
 
-	if len(verifiableCredential) > 0 {
-		authUser.IsAuthenticated = true
-
-		powers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
-		for _, p := range powers {
-
-			// This is to support old version of the Verifiable Credential
-			ptype := jpath.GetString(p, "type")
-			pdomain := jpath.GetString(p, "domain")
-			pfunction := jpath.GetString(p, "function")
-			paction := jpath.GetString(p, "action")
-
-			// Check fields without regards to case
-			if strings.EqualFold(ptype, "Domain") &&
-				strings.EqualFold(pdomain, "DOME") &&
-				strings.EqualFold(pfunction, "Onboarding") &&
-				strings.EqualFold(paction, "execute") {
-
-				authUser.IsLEAR = true
-
-			}
-
-			// And this for the new version of the Verifiable Credential
-			ptype = jpath.GetString(p, "tmf_type")
-			pdomain = jpath.GetString(p, "tmf_domain")
-			pfunction = jpath.GetString(p, "tmf_function")
-			paction = jpath.GetString(p, "tmf_action")
-
-			if strings.EqualFold(ptype, "Domain") &&
-				strings.EqualFold(pdomain, "DOME") &&
-				strings.EqualFold(pfunction, "Onboarding") &&
-				strings.EqualFold(paction, "execute") {
-
-				authUser.IsLEAR = true
-			}
-
-		}
-
-	} else {
-
+	if len(verifiableCredential) == 0 {
 		// There is not a Verifiable Credential inside the token
 		return nil, errl.Errorf("access token without verifiable credential: %s", r.AccessToken)
+	}
 
+	authUser.IsAuthenticated = true
+
+	powers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
+	for _, p := range powers {
+
+		// This is to support old version of the Verifiable Credential
+		ptype := jpath.GetString(p, "type")
+		pdomain := jpath.GetString(p, "domain")
+		pfunction := jpath.GetString(p, "function")
+		pactions := jpath.GetListString(p, "action")
+
+		// Check fields without regards to case
+		if strings.EqualFold(ptype, "Domain") &&
+			strings.EqualFold(pdomain, "DOME") &&
+			strings.EqualFold(pfunction, "Onboarding") {
+			for _, action := range pactions {
+				if strings.EqualFold(action, "execute") {
+					authUser.IsLEAR = true
+				}
+			}
+		}
 	}
 
 	// Update the request with the authenticated user info
@@ -133,6 +116,7 @@ func (svc *Service) processAccessToken(r *Request) (tokenClaims map[string]any, 
 		}
 
 		// Now create the associated Individual object
+		// TODO: do not do that if the caller is a machine (LEARCredentialMachine)
 
 		individual, err := repository.TMFIndividualFromCredential(verifiableCredential, org)
 		if err != nil {

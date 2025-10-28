@@ -61,6 +61,7 @@ const exampleIndividualObject = `
 
 func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Organization) (*TMFObject, error) {
 
+	// TODO: what happens if we receive a LEARCredentialMachine?
 	lc, err := types.LEARCredentialFromMap(verifiableCredential)
 	if err != nil {
 		return nil, errl.Errorf("error creating LEARCredentialEmployee struct: %w", err)
@@ -69,13 +70,13 @@ func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Orga
 	now := time.Now()
 	lastUpdate := now.Format(time.RFC3339Nano)
 
-	uid := lc.CredentialSubject.Mandate.Mandatee.Id
-	if uid == "" {
+	userId := lc.CredentialSubject.Mandate.Mandatee.Id
+	if userId == "" {
 		return nil, errl.Errorf("id field for mandatee is empty")
 	}
 
 	// The format is "urn:ngsi-ld:individual:{organizationIdentifier}:{uuid}"
-	id := fmt.Sprintf("urn:ngsi-ld:individual:%s:%s", user.OrganizationIdentifier, uid)
+	id := fmt.Sprintf("urn:ngsi-ld:individual:%s:%s", user.OrganizationIdentifier, userId)
 
 	objectType := config.Individual
 	version := "1.0"

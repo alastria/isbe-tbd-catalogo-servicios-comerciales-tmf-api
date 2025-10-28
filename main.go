@@ -19,6 +19,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/sqlogger"
 	"github.com/hesusruiz/isbetmf/pdp"
@@ -31,25 +32,23 @@ import (
 
 func main() {
 	var debugFlag bool
-	var verifierServer string
-	var remoteTMFServer string
-	var proxyEnabled bool
+	var environment string
 	var restartHour, restartMinute int
 
 	// Parse command-line flags
 	flag.BoolVar(&debugFlag, "d", true, "Enable debug logging")
 
-	flag.StringVar(&verifierServer, "verifier", "", "Full URL of the verifier which signs access tokens")
-	flag.StringVar(&remoteTMFServer, "remote", "", "Full URL of the remote TMForum server to proxy requests to")
-	flag.BoolVar(&proxyEnabled, "proxy", false, "Enable proxy functionality")
+	flag.StringVar(&environment, "run", "mycredential", "Environment where run: mycredential, evidenceledger, sbx, dev2, pro")
+
 	flag.IntVar(&restartHour, "rh", 3, "Restart program every day at this hour")
 	flag.IntVar(&restartMinute, "rm", 0, "Restart program every day at this minute")
 	flag.Parse()
 
-	// ******************************************************
-	// ******************************************************
-	// Detect if we are running as PID=1 (most probably as init process in a container),
-	// and act accordingly.
+	configuration, err := config.LoadConfig(environment, debugFlag)
+	if err != nil {
+		panic(err)
+	}
+
 	ourPid := os.Getpid()
 
 	// Get the name fo our executable
@@ -60,12 +59,19 @@ func main() {
 
 	args := os.Args[1:]
 
+	// ******************************************************
+	// ******************************************************
+	// The initial section if for init process in a container
+	// Detect if we are running as PID=1 (most probably as init process in a container),
+	// and act accordingly.
 	runAsInit := false
 	if ourPid == 1 {
 		runAsInit = true
 	} else {
+		// For testing, 'init' must be passed as th efirst argument in the command line
 		if len(args) > 0 && args[0] == "init" {
 			runAsInit = true
+			// Remove 'init' from the arguments, to prepare for executing our child processes
 			args = args[1:]
 		}
 	}
@@ -93,19 +99,19 @@ func main() {
 			for sig := range sigs {
 
 				if sig == syscall.SIGHUP {
-					fmt.Println("init process received SIGHUP")
+					fmt.Println("INIT: process received SIGHUP")
 				} else {
-					fmt.Printf("init process received %v signal\n", sig)
+					fmt.Printf("INIT: process received %v signal\n", sig)
 				}
 
 				if cmd.Process != nil {
-					fmt.Printf("received %v signal for PID %v\n", sig, cmd.Process.Pid)
+					fmt.Printf("INIT: received %v signal for PID %v\n", sig, cmd.Process.Pid)
 					_ = cmd.Process.Signal(sig)
 				}
 
 				if sig == syscall.SIGTERM || sig == syscall.SIGINT {
 					// We are done, and the init process will terminate
-					fmt.Println("using DONE channel to terminate init process")
+					fmt.Println("INIT: using DONE channel to terminate init process")
 					done <- true
 				}
 			}
@@ -119,83 +125,32 @@ func main() {
 				if pid <= 0 || err != nil {
 					time.Sleep(1 * time.Second)
 				} else {
-					fmt.Printf("reaped zombie %v\n", pid)
+					fmt.Printf("INIT: reaped zombie child with PID: %v\n", pid)
 				}
 			}
 
 		}()
 
 		// Start the child (a fork of ourselves) without waiting for termination
-		fmt.Println("Starting child process")
+		fmt.Println("INIT: starting child process")
 		if err := cmd.Start(); err != nil {
-			log.Fatalf("Failed to start child process: %v", err)
+			log.Fatalf("INIT: failed to start child process: %v", err)
 		}
 
-		fmt.Println("awaiting signal to terminate init process")
+		fmt.Println("INIT: awaiting signal to terminate init process")
 		<-done
-		fmt.Println("exiting init process")
+		fmt.Println("INIT: exiting init process")
 		return
 
 	}
 	// ******************************************************
 	// ******************************************************
-	// ******************************************************
+	// We are now executing the normal process
 
-	// Configure the slog logger
-	var logLevel slog.Level
-	if debugFlag {
-		logLevel = slog.LevelDebug
-	} else {
-		logLevel = slog.LevelInfo
-	}
-
-	// Initialize the custom SQLogHandler
-	logOptions := &sqlogger.Options{
-		Level: &logLevel,
-	}
-	// Check if the logs should be colored
-	if os.Getenv("ISBETMF_LOGS_NOCOLOR") == "true" {
-		logOptions.NoColor = true
-	}
-
-	sqlog, err := sqlogger.NewSQLogHandler(logOptions)
-	if err != nil {
-		slog.Error("failed to initialize SQLogHandler", slog.Any("error", err))
-		os.Exit(1)
-	}
-	defer sqlog.Close()
-	slog.SetDefault(slog.New(sqlog))
-
-	pid := os.Getpid()
-	slog.Info("Process started", "PID", pid)
-
-	// Get the url of the verifier from command line (priority) or environment variable
-	if verifierServer == "" {
-		verifierServer = os.Getenv("ISBETMF_VERIFIER")
-		if verifierServer == "" {
-			verifierServer = "https://verifier.dome-marketplace.eu"
-		}
-	}
-	slog.Info("Verifier server", slog.String("url", verifierServer))
-
-	if remoteTMFServer == "" {
-		remoteTMFServer = os.Getenv("ISBETMF_REMOTE_SERVER")
-		if remoteTMFServer == "" {
-			remoteTMFServer = "https://tmf.dome-marketplace-sbx.eu"
-		}
-	}
-	slog.Info("Remote TMF server", slog.String("url", remoteTMFServer))
-
-	// Get the proxyEnabled from command line (priority) or environment variable
-	if !proxyEnabled { // Only check env if not set by flag
-		if os.Getenv("ISBETMF_PROXY_ENABLED") == "true" {
-			proxyEnabled = true
-		}
-	}
-	slog.Info("Proxy", slog.Bool("enabled", proxyEnabled))
+	slog.Info("Process started", "PID", ourPid, "executable", ourExecPath, "args", args)
 
 	// Connect to the database
-	db, err := sqlx.Connect("sqlite3", "data/isbetmf.db")
+	db, err := sqlx.Connect("sqlite3", configuration.Dbname)
 	if err != nil {
 		slog.Error("failed to connect to database", slog.Any("error", err))
 		os.Exit(1)
@@ -211,7 +166,7 @@ func main() {
 
 	// Create the PDP (aka rules engine)
 	rulesEngine, err := pdp.NewPDP(&pdp.Config{
-		PolicyFileName: "auth_policies.star",
+		PolicyFileName: configuration.PolicyFileName,
 		Debug:          debugFlag,
 	})
 	if err != nil {
@@ -220,12 +175,12 @@ func main() {
 	}
 
 	// Create the service
-	s := service.NewService(db, rulesEngine, verifierServer, proxyEnabled, remoteTMFServer)
+	s := service.NewService(configuration, db, rulesEngine)
 
 	// Create Fiber app with custom configuration
 	app := fiber.New(fiber.Config{
-		AppName:      "ISBE-TMF API Server",
-		ServerHeader: "ISBE-TMF",
+		AppName:      "TMForum API Server",
+		ServerHeader: "TMForum",
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 			code := fiber.StatusInternalServerError
 			if e, ok := err.(*fiber.Error); ok {
@@ -268,28 +223,12 @@ func main() {
 		Level: compress.LevelBestSpeed,
 	}))
 
-	// // 5. Rate limiting middleware - prevent abuse
-	// app.Use(limiter.New(limiter.Config{
-	// 	Max:        10000000,        // Maximum number of requests
-	// 	Expiration: 1 * time.Minute, // Time window
-	// 	KeyGenerator: func(c *fiber.Ctx) string {
-	// 		// Use client IP for rate limiting
-	// 		return c.IP()
-	// 	},
-	// 	LimitReached: func(c *fiber.Ctx) error {
-	// 		return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
-	// 			"error": "Rate limit exceeded",
-	// 		})
-	// 	},
-	// }))
-
-	// 6. Logger middleware - log requests and replies
+	// 5. Logger middleware - log requests and replies
 	app.Use(sqlogger.FiberRequestLogger)
 
-	// Note: Timeout middleware removed due to API changes in Fiber v2.52.9
-	// Consider implementing request timeouts at the handler level if needed
+	// TODO: Implement request timeout
 
-	// Serve the OpenAPI UI
+	// Serve the OpenAPI UI. We support V4 and V5
 	app.Static("/oapiv5", "./www/oapiv5")
 	app.Static("/oapiv4", "./www/oapiv4")
 
@@ -298,9 +237,13 @@ func main() {
 	h.RegisterRoutes(app)
 
 	// TABLEFLIP for seamless restarts and upgrades
-	upg, _ := tableflip.New(tableflip.Options{
+	upg, err := tableflip.New(tableflip.Options{
 		PIDFile: "isbetmf.pid",
 	})
+	if err != nil {
+		slog.Error("failed to create tableflip upgrader, exiting", slog.Any("error", err))
+		os.Exit(1)
+	}
 	defer upg.Stop()
 
 	// Listen for the process signal to trigger the tableflip upgrade.
@@ -366,7 +309,7 @@ func main() {
 	}()
 
 	// tableflip ready
-	slog.Info("Tableflip ready")
+	slog.Info("Server is ready")
 	if err := upg.Ready(); err != nil {
 		panic(errl.Error(err))
 	}
