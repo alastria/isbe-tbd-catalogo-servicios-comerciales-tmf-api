@@ -48,12 +48,69 @@ func (svc *Service) createObject(obj *repo.TMFObject) error {
 	return err
 }
 
+func (svc *Service) createObjectIfNotExist(obj *repo.TMFObject) error {
+	slog.Debug("dbLayer: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
+
+	// Direct to another storage system if defined
+	if svc.storage != nil {
+		return svc.storage.CreateObject(obj)
+	}
+
+	// Make sure timestamps are correct
+	now := time.Now()
+	obj.CreatedAt = now
+	obj.UpdatedAt = now
+
+	// Execute the SQL
+	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, seller, buyer, last_update, content, created_at, updated_at)
+		VALUES (:id, :type, :version, :api_version, :seller, :buyer, :last_update, :content, :created_at, :updated_at) ON CONFLICT DO NOTHING`, obj)
+	if err != nil {
+		var sqliteErr sqlite3.Error
+		if errors.As(err, &sqliteErr) {
+			if sqliteErr.Code == sqlite3.ErrConstraint && sqliteErr.ExtendedCode == sqlite3.ErrConstraintPrimaryKey {
+				return &ErrObjectExists{ID: obj.ID, Type: obj.Type}
+			}
+		}
+		err = errl.Errorf("failed to create object id=%s type=%s: %w", obj.ID, obj.Type, err)
+	}
+	return err
+}
+
+func (svc *Service) upsertObject(obj *repo.TMFObject) error {
+	slog.Debug("dbLayer: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
+
+	// Direct to another storage system if defined
+	if svc.storage != nil {
+		return svc.storage.CreateObject(obj)
+	}
+
+	// Make sure timestamps are correct
+	now := time.Now()
+	obj.CreatedAt = now
+	obj.UpdatedAt = now
+
+	// Execute the SQL
+	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, seller, buyer, last_update, content, created_at, updated_at)
+		VALUES (:id, :type, :version, :api_version, :seller, :buyer, :last_update, :content, :created_at, :updated_at) ON CONFLICT DO
+		UPDATE SET version = :version, seller = :seller, buyer = :buyer, last_update = :last_update, content = :content, updated_at = :updated_at`, obj)
+	if err != nil {
+		var sqliteErr sqlite3.Error
+		if errors.As(err, &sqliteErr) {
+			if sqliteErr.Code == sqlite3.ErrConstraint && sqliteErr.ExtendedCode == sqlite3.ErrConstraintPrimaryKey {
+				return &ErrObjectExists{ID: obj.ID, Type: obj.Type}
+			}
+		}
+		err = errl.Errorf("failed to create object id=%s type=%s: %w", obj.ID, obj.Type, err)
+	}
+	return err
+}
+
 func (svc *Service) createLocalOrRemoteObject(req *Request, objMap repo.TMFObjectMap) *Response {
 
 	// Set the lastUpdate attribute
 	objMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
 
-	obj := objMap.ToTMFObject()
+	obj := objMap.ToTMFObject(req.ResourceName)
 
 	if !svc.proxyEnabled {
 		// Create the new object in the local database
@@ -371,7 +428,13 @@ func (svc *Service) listObjects(req *Request, tokenMap map[string]any, objectTyp
 		}
 
 		// Check if the object can be read by the user
-		authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, obj.GetMap())
+		objMap, err := obj.ToMap()
+		if err != nil {
+			slog.Info("object %s is invalid: %w", obj.ID, errl.Error(err))
+			continue
+		}
+
+		authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, objMap)
 		if !authorized {
 			slog.Info("object %s not authorized: %w", obj.ID, errl.Error(err))
 			continue

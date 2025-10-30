@@ -5,14 +5,18 @@ import (
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/hesusruiz/isbetmf/tmfserver/repository"
+	"github.com/hesusruiz/isbetmf/tmfserver/service"
 )
 
 // RemoteOrchestrator orchestrates the validation process
 type RemoteOrchestrator struct {
 	config    *Config
-	client    *Client
+	client    *ClientPaging
 	validator *Validator
 	reporter  *Reporter
+	pager     *service.ClientWithPaging
 }
 
 // NewRemoteOrchestrator creates a new proxy instance
@@ -21,11 +25,15 @@ func NewRemoteOrchestrator(config *Config) (*RemoteOrchestrator, error) {
 		return nil, fmt.Errorf("invalid configuration: %w", err)
 	}
 
+	pagingConfig := service.DefaultPagingConfig()
+	paging := service.NewClientWithPaging(pagingConfig)
+
 	return &RemoteOrchestrator{
 		config:    config,
-		client:    NewClient(config),
+		client:    NewClientPaging(config),
 		validator: NewValidator(config),
 		reporter:  NewReporter(config),
+		pager:     paging,
 	}, nil
 }
 
@@ -37,7 +45,8 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 
 	// Process each object type
 	var allResults []ValidationResult
-	var allObjects []TMFObject
+	// var allObjects []TMFObject
+	var allObjects []repository.TMFObjectMap
 
 	for _, objectType := range p.config.ObjectTypes {
 		log.Printf("Processing object type: %s", objectType)
@@ -51,7 +60,9 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 
 		for {
 			// Get a single page of objects
-			objects, err := p.client.GetObjectsPage(ctx, objectType, p.config, offset)
+			objects, err := p.pager.GetPageOfObjects(ctx, objectType, offset, nil)
+
+			// objects, err := p.client.GetObjectsPage(ctx, objectType, p.config, offset)
 			if err != nil {
 				log.Printf("Warning: Failed to retrieve %s objects at offset %d: %v", objectType, offset, err)
 				break
@@ -176,7 +187,9 @@ func (p *RemoteOrchestrator) RunWithProgress(ctx context.Context, progressChan c
 
 		for {
 			// Get a single page of objects
-			objects, err := p.client.GetObjectsPage(ctx, objectType, p.config, offset)
+			objects, err := p.pager.GetPageOfObjects(ctx, objectType, offset, nil)
+
+			// objects, err := p.client.GetObjectsPage(ctx, objectType, p.config, offset)
 			if err != nil {
 				log.Printf("Warning: Failed to retrieve %s objects at offset %d: %v", objectType, offset, err)
 				break

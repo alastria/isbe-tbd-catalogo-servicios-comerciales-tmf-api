@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -113,6 +114,9 @@ type Service struct {
 	// Flag to enable/disable proxy functionality
 	proxyEnabled bool
 
+	// The paging service to help process remote TMForum objects
+	paging *ClientWithPaging
+
 	// Information about us (the server operator)
 	ServerOperatorOrganizationIdentifier string
 	ServerOperatorDid                    string
@@ -149,6 +153,20 @@ func NewService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) *Service {
 		panic(err)
 	}
 
+	// Create the paging service
+	pagingConfig := DefaultPagingConfig()
+	pagingConfig.PageSize = 10
+	paging := NewClientWithPaging(pagingConfig)
+	svc.paging = paging
+
+	// // Test the initial paging
+	// counter := 0
+	// _, err = svc.paging.GetAllObjectsOfType(context.Background(), "productOffering", func(objType string, obj repo.TMFObjectMap) (repo.TMFObjectMap, bool, error) {
+	// 	counter++
+	// 	fmt.Println("==>", counter, obj.GetID())
+	// 	return obj, true, nil
+	// })
+
 	// Initialize notifications with in-memory store and HTTP delivery
 	store := notifications.NewMemoryStore()
 	deliver := notifications.NewHTTPDelivery(5 * time.Second)
@@ -170,7 +188,7 @@ func (svc *Service) initializeService() error {
 
 	obj, _ := repository.TMFOrganizationFromToken(nil, org)
 
-	if err := svc.createObject(obj); err != nil {
+	if err := svc.upsertObject(obj); err != nil {
 		if errors.Is(err, &ErrObjectExists{}) {
 			slog.Debug("server operator organization already exists", "organizationIdentifier", svc.ServerOperatorOrganizationIdentifier)
 		} else {
@@ -940,7 +958,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
 	}
 
-	// Process the query values: extract 'limit' and 'offset'
+	// Process the query values: extract 'limit' and 'offset' and leave the rest of query parameters
 	var limit = -1
 	var offset = -1
 
@@ -970,6 +988,11 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 	}
 
+	if limit == 0 {
+		var objs []repo.TMFObject
+		return &Response{StatusCode: http.StatusOK, Body: objs}
+	}
+
 	if svc.proxyEnabled {
 
 		// Will send the authorization header
@@ -979,6 +1002,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 		var objs []repo.TMFObjectMap
 		var offsetCounter int
+		invalidObjects := 0
 
 		// The page size
 		pageSize := 100
@@ -1016,12 +1040,31 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			// Process the list of response objects to filter depending on the user
 			for _, obj := range responseData {
 				objectMap := repo.TMFObjectMap(obj)
+				validations := objectMap.Validate(req.ResourceName)
+				if len(validations.Errors) > 0 {
+					invalidObjects++
+					fmt.Println(validations.String())
+					continue
+				}
 
-				// TODO: Perform verifications
+				theObject := objectMap.ToTMFObject(req.ResourceName)
+
+				// Store locally for further usage
+				if err := svc.upsertObject(theObject); err != nil {
+					if errors.Is(err, &ErrObjectExists{}) {
+						slog.Debug("object already exists", "id", theObject.ID)
+					} else {
+						invalidObjects++
+						err = errl.Errorf("error saving object %s in local database: %w", theObject.ID, err)
+						slog.Error("error saving object in local database", "error", err)
+						continue
+					}
+				}
 
 				// Check if the object can be read by the user
 				authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, objectMap)
 				if !authorized {
+					invalidObjects++
 					slog.Info("object %s not authorized: %w", objectMap.GetID(), errl.Error(err))
 					continue
 				}
@@ -1035,14 +1078,14 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 				// Now we add the object to the result array and check if we reached the limit as specified by the user
 				objs = append(objs, objectMap)
 
-				if len(objs) >= limit {
+				if limit >= 0 && len(objs) >= limit {
 					break
 				}
 
 			}
 
 			// Exit from the outer loop if we already have the number of objects that the user requested
-			if len(objs) >= limit {
+			if limit >= 0 && len(objs) >= limit {
 				break
 			}
 
@@ -1060,7 +1103,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		responseHeaders := make(map[string]string)
 		responseHeaders["X-Total-Count"] = strconv.Itoa(len(objs))
 
-		slog.Info("Remote objects listed successfully", slog.Int("count", len(objs)), slog.String("resourceName", req.ResourceName))
+		slog.Info("Remote objects listed", slog.Int("valid", len(objs)), slog.Int("invalid", invalidObjects), slog.String("resourceName", req.ResourceName))
 		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: objs}
 
 	} else {
@@ -1088,7 +1131,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			responseData = append(responseData, item)
 		}
 
-		// Handle partial field selection
+		// Handle partial field selection (filtering)
 		fieldsParam := req.QueryParams.Get("fields")
 		if fieldsParam != "" {
 			var fields []string
@@ -1130,15 +1173,227 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 }
 
-func convertHeaders(h http.Header) map[string]string {
-	headers := make(map[string]string)
-	for key, values := range h {
-		if len(values) > 0 {
-			headers[key] = values[0]
-		}
+func (svc *Service) ListPublicRemoteObjects(req *Request, limit, offset int) ([]repo.TMFObjectMap, error) {
+
+	counter := 0
+	objects, err := svc.paging.GetAllObjectsOfType(context.Background(), req.ResourceName, func(objType string, obj repo.TMFObjectMap) (repo.TMFObjectMap, bool, error) {
+		counter++
+		fmt.Println("==>", counter, obj.GetID())
+		return obj, true, nil
+	})
+
+	if err != nil {
+		return nil, errl.Errorf("retrieving remote objects")
 	}
-	return headers
+
+	return objects, nil
+
 }
+
+// func (svc *Service) ListGenericObjectsOld(req *Request) *Response {
+// 	slog.Debug("ListGenericObjects called", slog.String("resourceName", req.ResourceName))
+
+// 	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+// 	// Anonymous access is allowed, so the tokenMap may be nil
+// 	tokenMap, err := svc.processAccessToken(req)
+// 	if err != nil {
+// 		return ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+// 	}
+
+// 	// Process the query values: extract 'limit' and 'offset' and leave the rest of query parameters
+// 	var limit = -1
+// 	var offset = -1
+
+// 	for key, values := range req.QueryParams {
+
+// 		if key == "limit" {
+// 			limitStr := values[0]
+// 			if limitStr != "" {
+// 				if l, err := strconv.Atoi(limitStr); err == nil {
+// 					limit = l
+// 				}
+// 				req.QueryParams.Del(key)
+// 			}
+// 			continue
+// 		}
+
+// 		if key == "offset" {
+// 			offsetStr := values[0]
+// 			if offsetStr != "" {
+// 				if l, err := strconv.Atoi(offsetStr); err == nil {
+// 					offset = l
+// 				}
+// 				req.QueryParams.Del(key)
+// 			}
+// 			continue
+// 		}
+
+// 	}
+
+// 	if limit == 0 {
+// 		var objs []repo.TMFObject
+// 		return &Response{StatusCode: http.StatusOK, Body: objs}
+// 	}
+
+// 	if svc.proxyEnabled {
+
+// 		// Will send the authorization header
+// 		headers := map[string]string{
+// 			"Authorization": "Bearer " + req.AccessToken,
+// 		}
+
+// 		var objs []repo.TMFObjectMap
+// 		var offsetCounter int
+
+// 		// The page size
+// 		pageSize := 100
+// 		pageOffset := 0
+
+// 		for {
+
+// 			// Retrieve the page from the remote server
+// 			path := fmt.Sprintf("/tmf-api/%s/%s/%s?limit=%d&offset=%d", req.APIfamily, req.APIVersion, req.ResourceName, pageSize, pageOffset)
+// 			slog.Debug("sending request to remote", "path", path)
+
+// 			resp, err := svc.tmfClient.Get(path, headers)
+// 			if err != nil {
+// 				return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", err)
+// 			}
+// 			defer resp.Body.Close()
+
+// 			body, err := io.ReadAll(resp.Body)
+// 			if err != nil {
+// 				return ErrorResponsef(http.StatusInternalServerError, "failed to read response body: %w", err)
+// 			}
+
+// 			if resp.StatusCode >= 300 {
+// 				return &Response{
+// 					StatusCode: resp.StatusCode,
+// 					Body:       body,
+// 				}
+// 			}
+
+// 			responseData := make([]map[string]any, 0)
+// 			if err := json.Unmarshal(body, &responseData); err != nil {
+// 				return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
+// 			}
+
+// 			// Process the list of response objects to filter depending on the user
+// 			for _, obj := range responseData {
+// 				objectMap := repo.TMFObjectMap(obj)
+
+// 				// TODO: Perform verifications
+
+// 				// Check if the object can be read by the user
+// 				authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, objectMap)
+// 				if !authorized {
+// 					slog.Info("object %s not authorized: %w", objectMap.GetID(), errl.Error(err))
+// 					continue
+// 				}
+
+// 				// We have to discard the first 'offset' objects, as specified by the user
+// 				if offsetCounter < offset {
+// 					offsetCounter++
+// 					continue
+// 				}
+
+// 				// Now we add the object to the result array and check if we reached the limit as specified by the user
+// 				objs = append(objs, objectMap)
+
+// 				if len(objs) >= limit {
+// 					break
+// 				}
+
+// 			}
+
+// 			// Exit from the outer loop if we already have the number of objects that the user requested
+// 			if len(objs) >= limit {
+// 				break
+// 			}
+
+// 			// Exit the loop if the number of retrieved objects is less than the page size requested.
+// 			// That means that there are no more objects
+// 			if len(responseData) < pageSize {
+// 				break
+// 			}
+
+// 			// Retrieve next page
+// 			pageOffset += pageSize
+
+// 		}
+
+// 		responseHeaders := make(map[string]string)
+// 		responseHeaders["X-Total-Count"] = strconv.Itoa(len(objs))
+
+// 		slog.Info("Remote objects listed successfully", slog.Int("count", len(objs)), slog.String("resourceName", req.ResourceName))
+// 		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: objs}
+
+// 	} else {
+
+// 		var objs []repo.TMFObject
+// 		var totalCount int
+
+// 		objs, totalCount, err = svc.listObjects(req, tokenMap, req.ResourceName, req.APIVersion, req.QueryParams)
+// 		if err != nil {
+// 			slog.Error("failed to list objects from service", slog.String("error", err.Error()))
+// 			return ErrorResponsef(http.StatusInternalServerError, "failed to list objects from service: %w", err)
+// 		}
+
+// 		responseHeaders := make(map[string]string)
+// 		responseHeaders["X-Total-Count"] = strconv.Itoa(totalCount)
+
+// 		responseData := make([]map[string]any, 0)
+
+// 		for _, obj := range objs {
+// 			item, err := obj.ToMap()
+// 			if err != nil {
+// 				slog.Error("failed to unmarshal object content for listing", slog.String("error", err.Error()))
+// 				return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
+// 			}
+// 			responseData = append(responseData, item)
+// 		}
+
+// 		// Handle partial field selection (filtering)
+// 		fieldsParam := req.QueryParams.Get("fields")
+// 		if fieldsParam != "" {
+// 			var fields []string
+// 			if fieldsParam == "none" {
+// 				fields = []string{"id", "href", "lastUpdate", "version"}
+// 			} else {
+// 				fields = strings.Split(fieldsParam, ",")
+// 			}
+
+// 			// Create a set of fields for quick lookup
+// 			fieldSet := make(map[string]bool)
+// 			for _, f := range fields {
+// 				fieldSet[strings.TrimSpace(f)] = true
+// 			}
+
+// 			// Always include id, href, lastUpdate, version and @type
+// 			fieldSet["id"] = true
+// 			fieldSet["href"] = true
+// 			fieldSet["lastUpdate"] = true
+// 			fieldSet["version"] = true
+// 			fieldSet["@type"] = true
+
+// 			var filteredResponseData []map[string]any
+// 			for _, item := range responseData {
+// 				filteredItem := make(map[string]any)
+// 				for key, value := range item {
+// 					if fieldSet[key] {
+// 						filteredItem[key] = value
+// 					}
+// 				}
+// 				filteredResponseData = append(filteredResponseData, filteredItem)
+// 			}
+// 			responseData = filteredResponseData
+// 		}
+
+// 		slog.Info("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
+// 		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseData}
+// 	}
+
+// }
 
 // mergeRFC7396 implements JSON Merge Patch (RFC 7396) to merge a patch object into a target object.
 // The function modifies the target object in place according to RFC 7396 rules:
@@ -1318,11 +1573,6 @@ var LifecycleStatusMandatory = map[string]string{
 
 	// TMF651
 	"AgreementSpecification": "In Study",
-}
-
-func isLifecycleStatusMandatory(resourceName string) bool {
-
-	return true
 }
 
 func sameOrganizations(did, orgID string) bool {

@@ -594,3 +594,35 @@ const Organization = "organization"
 const Individual = "individual"
 
 const SchemaLocationRelatedParty = "https://raw.githubusercontent.com/DOME-Marketplace/dome-odrl-profile/refs/heads/main/schemas/simplified/RelatedPartyRef.schema.json"
+
+var GeneratedDefaultResourceToBAEPathPrefix = map[string]string{
+	"billFormat":                "/billing/billFormat",
+	"billPresentationMedia":     "/billing/billPresentationMedia",
+	"billingAccount":            "/billing/billingAccount",
+	"billingCycleSpecification": "/billing/billingCycleSpecification",
+	"cancelProductOrder":        "/ordering/cancelProductOrder",
+	"catalog":                   "/catalog/catalog",
+	"category":                  "/catalog/category",
+	"customer":                  "/customer/customer",
+	"financialAccount":          "/billing/financialAccount",
+	"individual":                "/party/individual",
+	"organization":              "/party/organization",
+	"partyAccount":              "/billing/partyAccount",
+	"product":                   "/inventory/product",
+	"productOffering":           "/catalog/productOffering",
+	"productOfferingPrice":      "/catalog/productOfferingPrice",
+	"productOrder":              "/ordering/productOrder",
+	"productSpecification":      "/catalog/productSpecification",
+	"resource":                  "/resourceInventory/resource",
+	"resourceCandidate":         "/resources/resourceCandidate",
+	"resourceCatalog":           "/resources/resourceCatalog",
+	"resourceCategory":          "/resources/resourceCategory",
+	"resourceSpecification":     "/resources/resourceSpecification",
+	"serviceCandidate":          "/services/serviceCandidate",
+	"serviceCatalog":            "/services/serviceCatalog",
+	"serviceCategory":           "/services/serviceCategory",
+	"serviceSpecification":      "/services/serviceSpecification",
+	"settlementAccount":         "/billing/settlementAccount",
+	"usage":                     "/usage/usage",
+	"usageSpecification":        "/usage/usageSpecification",
+}

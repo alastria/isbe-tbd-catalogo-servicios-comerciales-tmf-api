@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"maps"
+	"slices"
 	"strings"
 	"time"
 
@@ -59,15 +60,128 @@ func NewTMFObjectFromMap(data map[string]any) TMFObjectMap {
 	return obj
 }
 
-func (obj TMFObjectMap) ToTMFObject() *TMFObject {
+func (obj TMFObjectMap) Validate(objectType string) ValidationResult {
+	result := ValidationResult{
+		ObjectID:   obj.GetID(),
+		ObjectType: objectType,
+		Valid:      true,
+		Timestamp:  time.Now(),
+	}
+
+	// Validate required fields
+	obj.validateRequiredFields(objectType, &result)
+
+	// Validate related party requirements
+	obj.validateRelatedParty(objectType, &result)
+
+	// Determine overall validity (object is valid if it has zero validation errors)
+	result.Valid = len(result.Errors) == 0
+
+	return result
+}
+
+// validateRequiredFields checks if all required fields are present and optionally fixes them
+func (obj TMFObjectMap) validateRequiredFields(objectType string, result *ValidationResult) {
+
+	// This checks the fields that are required for all objects
+	for _, field := range RequiredFieldsForAllObjects {
+		if !obj.HasField(field) {
+			// TODO: Implement fixing logic for missing required fields
+			// If v.config.FixValidationErrors is true, attempt to fix the missing field
+			// and move the error to result.ErrorsFixed if successfully fixed
+
+			result.Errors = append(result.Errors, ValidationError{
+				Field:   field,
+				Message: fmt.Sprintf("Required field '%s' is missing", field),
+				Code:    "MISSING_REQUIRED_FIELD",
+			})
+		}
+	}
+
+	for _, field := range RecommendedFieldsForAllObjects {
+		if !obj.HasField(field) {
+			// TODO: Implement fixing logic for missing required fields
+			// If v.config.FixValidationErrors is true, attempt to fix the missing field
+			// and move the error to result.ErrorsFixed if successfully fixed
+
+			result.Warnings = append(result.Warnings, ValidationWarning{
+				Field:   field,
+				Message: fmt.Sprintf("Recommended field '%s' is missing", field),
+				Code:    "MISSING_RECOMMENDED_FIELD",
+			})
+		}
+	}
+
+}
+
+func (obj TMFObjectMap) validateRelatedParty(objectType string, result *ValidationResult) {
+
+	// We just return if the object does not require any Related Party
+	if slices.Contains(DoNotRequireRelatedParties, objectType) {
+		return
+	}
+
+	seller, sellerOperator, err := obj.GetSellerInfo("v4")
+	if err != nil {
+		var msg string
+		if seller == "" && sellerOperator == "" {
+			msg = "Missing Seller and SellerOperator fields"
+		} else {
+			if seller == "" {
+				msg = "Missing Seller field"
+			} else {
+				msg = "Missing SellerOperator field"
+			}
+		}
+
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: msg,
+			Code:    "MISSING_SELLER_INFO",
+		})
+		return
+	}
+
+	if !slices.Contains(DoNotRequireBuyerInfo, objectType) {
+		buyer, buyerOperator, err := obj.GetBuyerInfo("v4")
+		if err != nil {
+			var msg string
+			if buyer == "" && buyerOperator == "" {
+				msg = "Missing Buyer and BuyerOperator fields"
+			} else {
+				if buyer == "" {
+					msg = "Missing Buyer field"
+				} else {
+					msg = "Missing BuyerOperator field"
+				}
+			}
+
+			result.Errors = append(result.Errors, ValidationError{
+				Field:   "relatedParty",
+				Message: msg,
+				Code:    "MISSING_BUYER_INFO",
+			})
+			return
+		}
+	}
+
+}
+
+func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFObject {
 
 	id := obj.GetID()
 	objectType := obj.GetType()
+	if objectType == "" {
+		objectType = resourceName
+	}
 	version := obj.GetVersion()
 	// TODO: support for v5 API
 	apiVersion := "v4"
 	lastUpdate := obj.GetLastUpdate()
 	content, _ := obj.ToJSON()
+
+	seller, _, _ := obj.GetSellerInfo("v4")
+	buyer, _, _ := obj.GetBuyerInfo("v4")
 
 	now := time.Now()
 
@@ -76,6 +190,8 @@ func (obj TMFObjectMap) ToTMFObject() *TMFObject {
 		Type:       objectType,
 		Version:    version,
 		APIVersion: apiVersion,
+		Seller:     seller,
+		Buyer:      buyer,
 		LastUpdate: lastUpdate,
 		Content:    content,
 		CreatedAt:  now,
@@ -317,7 +433,7 @@ func (obj TMFObjectMap) SetMapField(field string, value map[string]any) {
 	obj[field] = value
 }
 
-// Clone creates a deep copy of the TMFObject
+// Clone creates a deep copy of the TMFObjectMap
 func (obj TMFObjectMap) Clone() TMFObjectMap {
 	// Use JSON marshaling/unmarshaling for deep copy
 	data, err := obj.ToJSON()

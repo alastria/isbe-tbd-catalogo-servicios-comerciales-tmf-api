@@ -91,8 +91,8 @@ var sbxConfig = &Config{
 	Environment:  DOME_SBX,
 	ProxyEnabled: true,
 
-	ServerOperatorOrganizationIdentifier: "VATES-11111111K",
-	ServerOperatorDid:                    "did:elsi:VATES-11111111K",
+	ServerOperatorOrganizationIdentifier: "VATSB-12345678J",
+	ServerOperatorDid:                    "did:elsi:VATSB-12345678J",
 	ServerOperatorName:                   "DOME Foundation SBX",
 	ServerOperatorCountry:                "ES",
 

@@ -7,6 +7,7 @@ import (
 	"log/slog"
 	"strings"
 
+	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/jpath"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
@@ -46,7 +47,7 @@ func (svc *Service) hardcodedPolicy(
 
 	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
 	// Method GET includes actions READ and LIST
-	if req.Method == "GET" && isPublicResource(req.ResourceName) {
+	if req.Method == "GET" && config.IsPublicResource(req.ResourceName) {
 		return true, errl.Errorf("GET request to a public resource %s", req.ResourceName)
 	}
 
@@ -203,39 +204,4 @@ func (svc *Service) callPDP(
 	// The rules engine accepted the request, add the object to the final list
 	slog.Info("PDP: request authorised")
 	return nil
-}
-
-// Public TMF resources are accessible by all users, even unauthenticated ones
-// The public objects are the following:
-var publicResources = map[string]bool{
-	// TMF620 Product Catalog Management
-	"category":             true,
-	"catalog":              true,
-	"productoffering":      true,
-	"productofferingprice": true,
-	"productspecification": true,
-
-	// TMF633 Service Catalog Management
-	"servicecatalog":       true,
-	"servicecategory":      true,
-	"servicecandidate":     true,
-	"servicespecification": true,
-
-	// TMF634 Resource Catalog Management
-	"resourcecatalog":       true,
-	"resourcecategory":      true,
-	"resourcecandidate":     true,
-	"resourcespecification": true,
-
-	// Organization from TMF632 Party Management. But Individual is private.
-	"organization": true,
-
-	// TMF669 Party Rola Management
-	"partyrole": true,
-}
-
-func isPublicResource(resourceName string) bool {
-	resourceName = strings.ToLower(resourceName)
-	_, ok := publicResources[resourceName]
-	return ok
 }
