@@ -119,7 +119,7 @@ func (c *ClientWithPaging) GetAllObjectsOfType(ctx context.Context, objectType s
 			for i := range objects {
 				objects[i], cont, err = processObject(objectType, objects[i])
 				if err != nil {
-					return nil, errl.Errorf("processing object %s", objects[i].GetID())
+					return nil, errl.Errorf("processing object %s", objects[i].ID())
 				}
 				if !cont {
 					// Add objects processed from this page to the total collection
@@ -208,7 +208,7 @@ func (c *ClientWithPaging) GetPageOfObjects(ctx context.Context, objectType stri
 		for i := range objects {
 			objects[i], cont, err = processObject(objectType, objects[i])
 			if err != nil {
-				return nil, errl.Errorf("processing object %s", objects[i].GetID())
+				return nil, errl.Errorf("processing object %s", objects[i].ID())
 			}
 			if !cont {
 				return objects, nil

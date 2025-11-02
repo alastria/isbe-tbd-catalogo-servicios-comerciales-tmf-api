@@ -1,6 +1,7 @@
 package fiber
 
 import (
+	"net/http"
 	"net/url"
 	"strings"
 
@@ -8,6 +9,7 @@ import (
 	"log/slog"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/hesusruiz/isbetmf/internal/errl"
 	svc "github.com/hesusruiz/isbetmf/tmfserver/service"
 )
 
@@ -32,6 +34,14 @@ func extractAPIVersion(path string) string {
 	return "v5"
 }
 
+// ExtractJWTToken extracts the JWT token from the Authorization header.
+// It handles both "Bearer <token>" and raw token formats.
+// If the token is not found, it returns an empty string.
+func ExtractJWTToken(authHeader string) string {
+	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
+	return tokenString
+}
+
 // NewHandler creates a new handler.
 func NewHandler(s *svc.Service) *Handler {
 	return &Handler{service: s}
@@ -48,7 +58,7 @@ func (h *Handler) Health(c *fiber.Ctx) error {
 
 // CreateHubSubscription creates a new notification subscription (hub)
 func (h *Handler) CreateHubSubscription(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	// Extract API version from the URL path
 	apiVersion := extractAPIVersion(c.Path())
@@ -68,7 +78,7 @@ func (h *Handler) CreateHubSubscription(c *fiber.Ctx) error {
 
 // DeleteHubSubscription deletes an existing notification subscription (hub)
 func (h *Handler) DeleteHubSubscription(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	// Extract API version from the URL path
 	apiVersion := extractAPIVersion(c.Path())
@@ -106,7 +116,7 @@ func (h *Handler) MockListener(c *fiber.Ctx) error {
 
 // CreateGenericObject creates a new TMF object using generalized parameters.
 func (h *Handler) CreateGenericObject(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	resourceName := c.Params("resourceName")
 	if resourceName == "hub" {
@@ -122,10 +132,21 @@ func (h *Handler) CreateGenericObject(c *fiber.Ctx) error {
 		Action:       svc.HttpActions[c.Method()],
 		APIfamily:    c.Params("apiFamily"),
 		APIVersion:   apiVersion,
-		ResourceName: c.Params("resourceName"),
+		ResourceName: resourceName,
 		Body:         c.Body(),
 		AccessToken:  jwtToken, // Store the raw JWT token
 	}
+
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	// The tokenMap may be nil, which means that the user did not send any authorization header, and
+	// this will be checked in the service downstream.
+	tokenMap, err := h.service.ProcessAccessToken(req)
+	if err != nil {
+		resp := svc.ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+		return SendResponse(c, resp)
+	}
+
+	req.TokenMap = tokenMap
 
 	resp := h.service.CreateGenericObject(req)
 	return SendResponse(c, resp)
@@ -133,7 +154,7 @@ func (h *Handler) CreateGenericObject(c *fiber.Ctx) error {
 
 // GetGenericObject retrieves a TMF object using generalized parameters.
 func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	// Extract API version from the URL path
 	apiVersion := extractAPIVersion(c.Path())
@@ -151,13 +172,24 @@ func (h *Handler) GetGenericObject(c *fiber.Ctx) error {
 		AccessToken:  jwtToken,
 	}
 
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	// The tokenMap may be nil, which means that the user did not send any authorization header, and
+	// this will be checked in the service downstream.
+	tokenMap, err := h.service.ProcessAccessToken(req)
+	if err != nil {
+		resp := svc.ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+		return SendResponse(c, resp)
+	}
+
+	req.TokenMap = tokenMap
+
 	resp := h.service.GetGenericObject(req)
 	return SendResponse(c, resp)
 }
 
 // UpdateGenericObject updates an existing TMF object using generalized parameters.
 func (h *Handler) UpdateGenericObject(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	// Extract API version from the URL path
 	apiVersion := extractAPIVersion(c.Path())
@@ -174,13 +206,24 @@ func (h *Handler) UpdateGenericObject(c *fiber.Ctx) error {
 		AccessToken:  jwtToken, // Store the raw JWT token
 	}
 
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	// The tokenMap may be nil, which means that the user did not send any authorization header, and
+	// this will be checked in the service downstream.
+	tokenMap, err := h.service.ProcessAccessToken(req)
+	if err != nil {
+		resp := svc.ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+		return SendResponse(c, resp)
+	}
+
+	req.TokenMap = tokenMap
+
 	resp := h.service.UpdateGenericObject(req)
 	return SendResponse(c, resp)
 }
 
 // DeleteGenericObject deletes a TMF object using generalized parameters.
 func (h *Handler) DeleteGenericObject(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	resourceName := c.Params("resourceName")
 	if resourceName == "hub" {
@@ -202,13 +245,24 @@ func (h *Handler) DeleteGenericObject(c *fiber.Ctx) error {
 		AccessToken:  jwtToken, // Store the raw JWT token
 	}
 
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	// The tokenMap may be nil, which means that the user did not send any authorization header, and
+	// this will be checked in the service downstream.
+	tokenMap, err := h.service.ProcessAccessToken(req)
+	if err != nil {
+		resp := svc.ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+		return SendResponse(c, resp)
+	}
+
+	req.TokenMap = tokenMap
+
 	resp := h.service.DeleteGenericObject(req)
 	return SendResponse(c, resp)
 }
 
 // ListGenericObjects retrieves all TMF objects of a given type using generalized parameters.
 func (h *Handler) ListGenericObjects(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	// Extract API version from the URL path
 	apiVersion := extractAPIVersion(c.Path())
@@ -223,6 +277,17 @@ func (h *Handler) ListGenericObjects(c *fiber.Ctx) error {
 		QueryParams:  queryParams,
 		AccessToken:  jwtToken, // Store the raw JWT token
 	}
+
+	// Authentication: process the AccessToken to extract caller info from its claims in the payload
+	// The tokenMap may be nil, which means that the user did not send any authorization header, and
+	// this will be checked in the service downstream.
+	tokenMap, err := h.service.ProcessAccessToken(req)
+	if err != nil {
+		resp := svc.ErrorResponsef(http.StatusUnauthorized, "invalid access token: %w", errl.Error(err))
+		return SendResponse(c, resp)
+	}
+
+	req.TokenMap = tokenMap
 
 	resp := h.service.ListGenericObjects(req)
 	return SendResponse(c, resp)

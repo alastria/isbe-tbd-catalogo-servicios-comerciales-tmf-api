@@ -10,19 +10,21 @@ import (
 // TMFObject represents a generic TMForum object.
 // It is used to store and retrieve objects from the database.
 type TMFObject struct {
-	ID          string           `db:"id"`
-	Type        string           `db:"type"`
-	Version     string           `db:"version"`
-	APIVersion  string           `db:"api_version"`
-	Seller      string           `db:"seller"`
-	Buyer       string           `db:"buyer"`
-	LastUpdate  string           `db:"last_update"`
-	Random      int              `db:"random"`
-	Content     []byte           `db:"content"`
-	ContentMap  TMFObjectMap     `db:"-"`
-	Validations ValidationResult `db:"-"`
-	CreatedAt   time.Time        `db:"created_at"`
-	UpdatedAt   time.Time        `db:"updated_at"`
+	ID             string           `db:"id"`
+	Type           string           `db:"type"`
+	Version        string           `db:"version"`
+	APIVersion     string           `db:"api_version"`
+	Seller         string           `db:"seller"`
+	SellerOperator string           `db:"seller_operator"`
+	Buyer          string           `db:"buyer"`
+	BuyerOperator  string           `db:"buyer_operator"`
+	LastUpdate     string           `db:"last_update"`
+	Random         int              `db:"random"`
+	Content        []byte           `db:"content"`
+	ContentMap     TMFObjectMap     `db:"-"`
+	Validations    ValidationResult `db:"-"`
+	CreatedAt      time.Time        `db:"created_at"`
+	UpdatedAt      time.Time        `db:"updated_at"`
 }
 
 // NewTMFObject creates a new TMFObject.
@@ -67,7 +69,8 @@ func (o *TMFObject) Validate() error {
 	return err
 }
 
-// ToMap converts the TMFObject to a map[string]any.
+// ToMap returns a TMFObjectMap reusing any previous marshalling and validation.
+// To force to always marshal of o.Content and running validations, use o.MustToMap
 func (o *TMFObject) ToMap() (TMFObjectMap, error) {
 	if o == nil {
 		return nil, errl.Errorf("object is nil")
@@ -75,6 +78,12 @@ func (o *TMFObject) ToMap() (TMFObjectMap, error) {
 	if o.ContentMap != nil {
 		return o.ContentMap, nil
 	}
+
+	return o.MustToMap()
+}
+
+// MustToMap returns a TMFObjectMap after running validations
+func (o *TMFObject) MustToMap() (TMFObjectMap, error) {
 
 	omap, err := NewTMFObjectMap(o.Content)
 	if err != nil {

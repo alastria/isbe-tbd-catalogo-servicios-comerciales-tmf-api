@@ -47,6 +47,7 @@ func NewOpenIDConfig(verifierServer string) (*OpenIDConfig, error) {
 
 	verifierWellKnownURL := verifierServer + "/.well-known/openid-configuration"
 
+	// Retrieve the configuration of the Verifier
 	res, err := http.Get(verifierWellKnownURL)
 	if err != nil {
 		return nil, errl.Errorf("failed to retrieve OpenID configuration: %w", err)
@@ -60,12 +61,14 @@ func NewOpenIDConfig(verifierServer string) (*OpenIDConfig, error) {
 		return nil, errl.Errorf("reading response body: %w", err)
 	}
 
+	// Parse the response
 	oid := &OpenIDConfig{}
 	err = json.Unmarshal(body, oid)
 	if err != nil {
 		return nil, errl.Errorf("unmarshalling OpenID configuration: %w", err)
 	}
 
+	// We need the URI for the public keys of the Verifier
 	if oid.JwksUri == "" {
 		return nil, errl.Errorf("no JwksUri")
 	}
@@ -75,7 +78,7 @@ func NewOpenIDConfig(verifierServer string) (*OpenIDConfig, error) {
 	// Set default refresh period
 	oid.freshness = time.Hour
 
-	// Load for key, to detect possible errors
+	// Load the key, to detect possible errors on startup
 	_, err = oid.VerificationJWK()
 	if err != nil {
 		return nil, errl.Error(err)
@@ -84,18 +87,21 @@ func NewOpenIDConfig(verifierServer string) (*OpenIDConfig, error) {
 	return oid, nil
 }
 
+// VerificationJWK retrieves the key from the Verifier
 func (oid *OpenIDConfig) VerificationJWK() (*jose.JSONWebKey, error) {
 
+	// Sanity check, should not happen
 	if oid.JwksUri == "" {
 		return nil, fmt.Errorf("no JwksUri")
 	}
 
-	// Check if we have a valid cached key
+	// Check if we have a valid and fresh cached key
 	if oid.cachedJWK != nil && time.Since(oid.lastRefresh) < oid.freshness {
 		slog.Debug("returning cached JWK")
 		return oid.cachedJWK, nil
 	}
 
+	// Get the key from the Verifier
 	res, err := http.Get(oid.JwksUri)
 	if err != nil {
 		slog.Error(err.Error())
@@ -111,6 +117,7 @@ func (oid *OpenIDConfig) VerificationJWK() (*jose.JSONWebKey, error) {
 		return nil, err
 	}
 
+	// Parse the response
 	var jwks = &jose.JSONWebKeySet{}
 	err = json.Unmarshal(body, jwks)
 	if err != nil {
@@ -123,7 +130,9 @@ func (oid *OpenIDConfig) VerificationJWK() (*jose.JSONWebKey, error) {
 		return nil, err
 	}
 
+	// We use only the first key of the keyset
 	slog.Debug("retrieved JWK")
+
 	oid.cachedJWK = &jwks.Keys[0]
 	oid.lastRefresh = time.Now()
 

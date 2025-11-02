@@ -61,9 +61,9 @@ var DoNotRequireRelatedParties = []string{
 
 var DoNotRequireBuyerInfo = []string{
 	"catalog",
-	"productOffering",
-	"productSpecification",
-	"productOfferingPrice",
-	"resourceSpecification",
-	"serviceSpecification",
+	"productoffering",
+	"productspecification",
+	"productofferingprice",
+	"resourcespecification",
+	"servicespecification",
 }

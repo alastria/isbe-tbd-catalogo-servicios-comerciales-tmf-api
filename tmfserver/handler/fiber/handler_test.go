@@ -26,7 +26,7 @@ type testHandler struct {
 }
 
 func (h *testHandler) ListGenericObjects(c *fiber.Ctx) error {
-	jwtToken := svc.ExtractJWTToken(c.Get("Authorization"))
+	jwtToken := ExtractJWTToken(c.Get("Authorization"))
 
 	queryParams, _ := url.ParseQuery(string(c.Request().URI().QueryString()))
 	req := &svc.Request{

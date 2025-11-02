@@ -7,6 +7,7 @@ import (
 )
 
 // TMFStorage abstracts persistence operations for TMF objects.
+// It is used for plugging-in different persistence systems
 type TMFStorage interface {
 	CreateObject(obj *repo.TMFObject) error
 	GetObject(id, objectType string) (*repo.TMFObject, error)

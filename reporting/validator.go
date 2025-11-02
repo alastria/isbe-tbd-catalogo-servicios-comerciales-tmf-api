@@ -29,7 +29,7 @@ func (v *Validator) ValidateObject(obj repository.TMFObjectMap, objectType strin
 // ValidateAndFixObject validates a single TMF object and optionally fixes validation errors
 func (v *Validator) ValidateAndFixObject(obj *repository.TMFObjectMap, objectType string) ValidationResult {
 	result := ValidationResult{
-		ObjectID:   obj.GetID(),
+		ObjectID:   obj.ID(),
 		ObjectType: objectType,
 		Valid:      true,
 		Timestamp:  time.Now(),
@@ -58,7 +58,7 @@ func (v *Validator) ValidateAndFixObject(obj *repository.TMFObjectMap, objectTyp
 // validateRequiredFields checks if all required fields are present and optionally fixes them
 func (v *Validator) validateRequiredFields(obj *repository.TMFObjectMap, objectType string, result *ValidationResult) {
 
-	if obj.GetID() == "urn:ngsi-ld:organization:5ca475ec-52d3-4a0c-a1d5-0071ef09b59d" {
+	if obj.ID() == "urn:ngsi-ld:organization:5ca475ec-52d3-4a0c-a1d5-0071ef09b59d" {
 		fmt.Println("Found")
 	}
 

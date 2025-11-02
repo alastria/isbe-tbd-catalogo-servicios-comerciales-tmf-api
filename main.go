@@ -37,13 +37,14 @@ func main() {
 
 	// Parse command-line flags
 	flag.BoolVar(&debugFlag, "d", true, "Enable debug logging")
-
 	flag.StringVar(&environment, "run", "mycredential", "Environment where run: mycredential, evidenceledger, sbx, dev2, pro")
-
 	flag.IntVar(&restartHour, "rh", 3, "Restart program every day at this hour")
 	flag.IntVar(&restartMinute, "rm", 0, "Restart program every day at this minute")
 	flag.Parse()
 
+	// Generate a default configuration suitable for the environment
+	// The approach is that instead of many configurable parameters, we have a set of profiles, with "hardcoded"
+	// parameters for each environment, but that can be easity extended for other purposes.
 	configuration, err := config.LoadConfig(environment, debugFlag)
 	if err != nil {
 		panic(err)
@@ -61,14 +62,14 @@ func main() {
 
 	// ******************************************************
 	// ******************************************************
-	// The initial section if for init process in a container
+	// The initial section is for when we are the init process in a container
 	// Detect if we are running as PID=1 (most probably as init process in a container),
 	// and act accordingly.
 	runAsInit := false
 	if ourPid == 1 {
 		runAsInit = true
 	} else {
-		// For testing, 'init' must be passed as th efirst argument in the command line
+		// For testing, 'init' must be passed as the first argument in the command line
 		if len(args) > 0 && args[0] == "init" {
 			runAsInit = true
 			// Remove 'init' from the arguments, to prepare for executing our child processes
@@ -117,7 +118,7 @@ func main() {
 			}
 		}()
 
-		// Enter in a goroutine an infinite loop reaping the zombie children
+		// Enter in a goroutine an infinite loop reaping periodically the zombie children
 		go func() {
 			for {
 				var ws syscall.WaitStatus
@@ -150,11 +151,7 @@ func main() {
 	slog.Info("Process started", "PID", ourPid, "executable", ourExecPath, "args", args)
 
 	// Connect to the database
-	db, err := sqlx.Connect("sqlite3", configuration.Dbname)
-	if err != nil {
-		slog.Error("failed to connect to database", slog.Any("error", err))
-		os.Exit(1)
-	}
+	db := sqlx.MustConnect("sqlite3", configuration.Dbname)
 	defer db.Close()
 
 	slog.Info("About to create tables if they do not exist")

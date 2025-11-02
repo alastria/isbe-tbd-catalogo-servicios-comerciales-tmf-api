@@ -62,7 +62,7 @@ func NewTMFObjectFromMap(data map[string]any) TMFObjectMap {
 
 func (obj TMFObjectMap) Validate(objectType string) ValidationResult {
 	result := ValidationResult{
-		ObjectID:   obj.GetID(),
+		ObjectID:   obj.ID(),
 		ObjectType: objectType,
 		Valid:      true,
 		Timestamp:  time.Now(),
@@ -116,8 +116,8 @@ func (obj TMFObjectMap) validateRequiredFields(objectType string, result *Valida
 
 func (obj TMFObjectMap) validateRelatedParty(objectType string, result *ValidationResult) {
 
-	// We just return if the object does not require any Related Party
-	if slices.Contains(DoNotRequireRelatedParties, objectType) {
+	// We just return if the object does not require Seller nor Buyer info
+	if !obj.RequiresSellerInfo() {
 		return
 	}
 
@@ -142,42 +142,44 @@ func (obj TMFObjectMap) validateRelatedParty(objectType string, result *Validati
 		return
 	}
 
-	if !slices.Contains(DoNotRequireBuyerInfo, objectType) {
-		buyer, buyerOperator, err := obj.GetBuyerInfo("v4")
-		if err != nil {
-			var msg string
-			if buyer == "" && buyerOperator == "" {
-				msg = "Missing Buyer and BuyerOperator fields"
-			} else {
-				if buyer == "" {
-					msg = "Missing Buyer field"
-				} else {
-					msg = "Missing BuyerOperator field"
-				}
-			}
+	if !obj.RequiresBuyerInfo() {
+		return
+	}
 
-			result.Errors = append(result.Errors, ValidationError{
-				Field:   "relatedParty",
-				Message: msg,
-				Code:    "MISSING_BUYER_INFO",
-			})
-			return
+	buyer, buyerOperator, err := obj.GetBuyerInfo("v4")
+	if err != nil {
+		var msg string
+		if buyer == "" && buyerOperator == "" {
+			msg = "Missing Buyer and BuyerOperator fields"
+		} else {
+			if buyer == "" {
+				msg = "Missing Buyer field"
+			} else {
+				msg = "Missing BuyerOperator field"
+			}
 		}
+
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: msg,
+			Code:    "MISSING_BUYER_INFO",
+		})
+		return
 	}
 
 }
 
 func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFObject {
 
-	id := obj.GetID()
+	id := obj.ID()
 	objectType := obj.GetType()
 	if objectType == "" {
 		objectType = resourceName
 	}
-	version := obj.GetVersion()
+	version := obj.Version()
 	// TODO: support for v5 API
 	apiVersion := "v4"
-	lastUpdate := obj.GetLastUpdate()
+	lastUpdate := obj.LastUpdate()
 	content, _ := obj.ToJSON()
 
 	seller, _, _ := obj.GetSellerInfo("v4")
@@ -212,8 +214,8 @@ func (obj TMFObjectMap) ToMap() map[string]any {
 
 // Utility methods for well-known top-level attributes
 
-// GetID returns the object ID
-func (obj TMFObjectMap) GetID() string {
+// ID returns the object ID
+func (obj TMFObjectMap) ID() string {
 	if id, ok := obj["id"].(string); ok {
 		return id
 	}
@@ -225,8 +227,8 @@ func (obj TMFObjectMap) SetID(id string) {
 	obj["id"] = id
 }
 
-// GetHref returns the object href
-func (obj TMFObjectMap) GetHref() string {
+// Href returns the object href
+func (obj TMFObjectMap) Href() string {
 	if href, ok := obj["href"].(string); ok {
 		return href
 	}
@@ -238,8 +240,8 @@ func (obj TMFObjectMap) SetHref(href string) {
 	obj["href"] = href
 }
 
-// GetVersion returns the object version
-func (obj TMFObjectMap) GetVersion() string {
+// Version returns the object version
+func (obj TMFObjectMap) Version() string {
 	if version, ok := obj["version"].(string); ok {
 		return version
 	}
@@ -251,8 +253,8 @@ func (obj TMFObjectMap) SetVersion(version string) {
 	obj["version"] = version
 }
 
-// GetLastUpdate returns the object lastUpdate
-func (obj TMFObjectMap) GetLastUpdate() string {
+// LastUpdate returns the object lastUpdate
+func (obj TMFObjectMap) LastUpdate() string {
 	if lastUpdate, ok := obj["lastUpdate"].(string); ok {
 		return lastUpdate
 	}
@@ -282,8 +284,8 @@ func (obj TMFObjectMap) SetType(objType string) {
 	obj["@type"] = objType
 }
 
-// GetLifecycleStatus returns the object lifecycleStatus
-func (obj TMFObjectMap) GetLifecycleStatus() string {
+// LifecycleStatus returns the object lifecycleStatus
+func (obj TMFObjectMap) LifecycleStatus() string {
 	if lifecycleStatus, ok := obj["lifecycleStatus"].(string); ok {
 		return lifecycleStatus
 	}
@@ -295,8 +297,8 @@ func (obj TMFObjectMap) SetLifecycleStatus(lifecycleStatus string) {
 	obj["lifecycleStatus"] = lifecycleStatus
 }
 
-// GetName returns the object name
-func (obj TMFObjectMap) GetName() string {
+// Name returns the object name
+func (obj TMFObjectMap) Name() string {
 	if name, ok := obj["name"].(string); ok {
 		return name
 	}
@@ -308,8 +310,8 @@ func (obj TMFObjectMap) SetName(name string) {
 	obj["name"] = name
 }
 
-// GetDescription returns the object description
-func (obj TMFObjectMap) GetDescription() string {
+// Description returns the object description
+func (obj TMFObjectMap) Description() string {
 	if description, ok := obj["description"].(string); ok {
 		return description
 	}
@@ -323,8 +325,8 @@ func (obj TMFObjectMap) SetDescription(description string) {
 
 // RelatedParty methods
 
-// GetRelatedParty returns the relatedParty array
-func (obj TMFObjectMap) GetRelatedParty() []map[string]any {
+// RelatedParty returns the relatedParty array
+func (obj TMFObjectMap) RelatedParty() []map[string]any {
 	if relatedParty, ok := obj["relatedParty"].([]any); ok {
 		result := make([]map[string]any, 0, len(relatedParty))
 		for _, item := range relatedParty {
@@ -349,7 +351,7 @@ func (obj TMFObjectMap) SetRelatedParty(relatedParty []map[string]any) {
 
 // AddRelatedParty adds a related party entry
 func (obj TMFObjectMap) AddRelatedParty(relatedParty map[string]any) {
-	current := obj.GetRelatedParty()
+	current := obj.RelatedParty()
 	if current == nil {
 		current = make([]map[string]any, 0)
 	}
@@ -359,7 +361,7 @@ func (obj TMFObjectMap) AddRelatedParty(relatedParty map[string]any) {
 
 // HasRelatedParty returns true if the object has related party information
 func (obj TMFObjectMap) HasRelatedParty() bool {
-	relatedParty := obj.GetRelatedParty()
+	relatedParty := obj.RelatedParty()
 	return len(relatedParty) > 0
 }
 
@@ -489,13 +491,13 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 	case "organization":
 
 		// If the caller is us (the server operator), then we can read/write/update/delete
-		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+		if SameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
 			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
 		}
 
 		// If the organization of the caller and object are the same, then the caller can read/write/update/delete
 		objectOrganizationId := jpath.GetString(obj, "organizationIdentification.*.identificationId")
-		if sameOrganizations(objectOrganizationId, caller.OrganizationIdentifier) {
+		if SameOrganizations(objectOrganizationId, caller.OrganizationIdentifier) {
 			return true, fmt.Sprintf("caller %s is same as in object %s", caller.OrganizationIdentifier, objectOrganizationId)
 		}
 
@@ -506,7 +508,7 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 		// TODO: revise this policy to be restrictive
 
 		// If the caller is us (the server operator), then we can read/write/update/delete
-		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+		if SameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
 			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
 		}
 
@@ -520,7 +522,7 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 			if individualIdentificationMap["identificationType"] == "learcredentialemployee" {
 				// The 'issuingAuthority' must be equal to the caller organizationIdentifier
 				issuingAuthority := individualIdentificationMap["issuingAuthority"].(string)
-				if sameOrganizations(issuingAuthority, caller.OrganizationIdentifier) {
+				if SameOrganizations(issuingAuthority, caller.OrganizationIdentifier) {
 					return true, fmt.Sprintf("caller %s is same as mandator in Individual object %s", caller.OrganizationIdentifier, issuingAuthority)
 				} else {
 					return false, fmt.Sprintf("caller (%s) is neither the mandator in Individual object (%s) or the server operator", caller.OrganizationIdentifier, issuingAuthority)
@@ -533,7 +535,7 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 	case "category":
 
 		// If the caller is us (the server operator), then we can read/write/update/delete
-		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+		if SameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
 			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
 		}
 
@@ -542,7 +544,7 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 	default:
 
 		// If the caller is us (the server operator), then we can read/write/update/delete
-		if sameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
+		if SameOrganizations(caller.OrganizationIdentifier, serverOperatorDid) {
 			return true, fmt.Sprintf("caller %s is server operator %s", caller.OrganizationIdentifier, serverOperatorDid)
 		}
 
@@ -552,11 +554,11 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 		// Try to retrieve the Seller info
 		objSellerDid, objSellerOperatorDid, err := obj.GetSellerInfo("v4")
 		if err != nil {
-			return false, fmt.Sprintf("object (%s) does not contain seller information", obj.GetID())
+			return false, fmt.Sprintf("object (%s) does not contain seller information", obj.ID())
 		}
 
 		// If the caller is the same as the object SellerOperator or the Seller, then is the owner
-		if sameOrganizations(caller.OrganizationIdentifier, objSellerDid) || sameOrganizations(caller.OrganizationIdentifier, objSellerOperatorDid) {
+		if SameOrganizations(caller.OrganizationIdentifier, objSellerDid) || SameOrganizations(caller.OrganizationIdentifier, objSellerOperatorDid) {
 			return true, fmt.Sprintf("caller %s is seller %s or seller operator %s", caller.OrganizationIdentifier, objSellerDid, objSellerOperatorDid)
 		}
 
@@ -564,15 +566,15 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 		// We already checked for Seller info, so if Buyer info does not exist, caller is not the owner
 		objBuyerDid, objBuyerOperatorDid, err := obj.GetBuyerInfo("v4")
 		if err != nil {
-			return false, fmt.Sprintf("object (%s) does not contain buyer information and caller (%s) is not the seller or seller operator", obj.GetID(), caller.OrganizationIdentifier)
+			return false, fmt.Sprintf("object (%s) does not contain buyer information and caller (%s) is not the seller or seller operator", obj.ID(), caller.OrganizationIdentifier)
 		}
 
 		// If the caller is the same as the object BuyerOperator or the Buyer, then is the owner
-		if sameOrganizations(caller.OrganizationIdentifier, objBuyerDid) || sameOrganizations(caller.OrganizationIdentifier, objBuyerOperatorDid) {
+		if SameOrganizations(caller.OrganizationIdentifier, objBuyerDid) || SameOrganizations(caller.OrganizationIdentifier, objBuyerOperatorDid) {
 			return true, fmt.Sprintf("caller %s is buyer %s or buyer operator %s", caller.OrganizationIdentifier, objBuyerDid, objBuyerOperatorDid)
 		}
 
-		return false, fmt.Sprintf("caller %s is not seller or buyer in object %s", caller.OrganizationIdentifier, obj.GetID())
+		return false, fmt.Sprintf("caller %s is not seller or buyer in object %s", caller.OrganizationIdentifier, obj.ID())
 
 	}
 
@@ -789,7 +791,26 @@ func setSellerInfoV5(tmfObjectMap map[string]any, serverOperatorDid string, orga
 
 }
 
+func (obj TMFObjectMap) RequiresSellerInfo() bool {
+	objType := obj.GetType()
+	objType = strings.ToLower(objType)
+	return !slices.Contains(DoNotRequireRelatedParties, objType)
+}
+
+func (obj TMFObjectMap) RequiresBuyerInfo() bool {
+	objType := obj.GetType()
+	objType = strings.ToLower(objType)
+	relp := slices.Contains(DoNotRequireRelatedParties, objType)
+	buyp := slices.Contains(DoNotRequireBuyerInfo, objType)
+	rr := relp || buyp
+	return !rr
+}
+
 func (obj TMFObjectMap) GetSellerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+	if !obj.RequiresSellerInfo() {
+		return
+	}
+
 	switch apiVersion {
 	case "v4":
 		return getUserAndUserOperatorInfoV4(obj, "Seller", "SellerOperator")
@@ -802,6 +823,10 @@ func (obj TMFObjectMap) GetSellerInfo(apiVersion string) (sellerDid string, sell
 }
 
 func (obj TMFObjectMap) GetBuyerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
+	if !obj.RequiresBuyerInfo() {
+		return
+	}
+
 	switch apiVersion {
 	case "v4":
 		return getUserAndUserOperatorInfoV4(obj, "Buyer", "BuyerOperator")
@@ -1035,12 +1060,4 @@ func getUserAndUserOperatorInfoV5(tmfObjectMap map[string]any, userRole string, 
 
 	return
 
-}
-
-func sameOrganizations(did, orgID string) bool {
-
-	did = strings.TrimPrefix(did, "did:elsi:")
-	orgID = strings.TrimPrefix(orgID, "did:elsi:")
-
-	return did == orgID
 }

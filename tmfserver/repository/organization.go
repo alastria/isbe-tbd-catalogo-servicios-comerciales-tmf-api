@@ -130,3 +130,11 @@ func TMFOrganizationFromToken(accessToken map[string]any, user *Organization) (*
 
 	return org, nil
 }
+
+func SameOrganizations(did, orgID string) bool {
+
+	did = strings.TrimPrefix(did, "did:elsi:")
+	orgID = strings.TrimPrefix(orgID, "did:elsi:")
+
+	return did == orgID
+}
