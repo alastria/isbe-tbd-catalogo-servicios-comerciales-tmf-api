@@ -45,6 +45,14 @@ type CredentialIssuer struct {
 	CommonName             string `json:"commonName,omitempty"`
 }
 
+type OnePower struct {
+	Id           string   `json:"id,omitempty"`
+	Tmf_type     string   `json:"type,omitempty"`
+	Tmf_domain   string   `json:"domain,omitempty"`
+	Tmf_function string   `json:"function,omitempty"`
+	Tmf_action   []string `json:"action,omitempty"`
+}
+
 // Example of credentialStatus
 //
 //	"credentialStatus": {

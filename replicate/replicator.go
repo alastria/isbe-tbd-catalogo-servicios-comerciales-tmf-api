@@ -13,7 +13,7 @@ import (
 type Replicator struct {
 	config    *Config
 	database  *Database
-	client    *reporting.Client
+	client    *reporting.ClientPaging
 	validator *Validator
 	converter *Converter
 }
@@ -45,7 +45,7 @@ func NewReplicator(config *Config) (*Replicator, error) {
 	}
 
 	// Create client, validator, and converter
-	client := reporting.NewClient(reportingConfig)
+	client := reporting.NewClientPaging(reportingConfig)
 	validator := NewValidator(config)
 	converter := NewConverter()
 

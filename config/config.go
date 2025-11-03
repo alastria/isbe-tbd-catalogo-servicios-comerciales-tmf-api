@@ -8,6 +8,7 @@ import (
 
 	"github.com/hesusruiz/isbetmf/internal/sqlogger"
 	"github.com/hesusruiz/isbetmf/tmfclient"
+	"github.com/hesusruiz/isbetmf/types"
 )
 
 // Indicates the environment (SBX, DEV2, PRO, LCL) where the server is running.
@@ -33,6 +34,7 @@ type Config struct {
 	ServerOperatorDid                    string
 	ServerOperatorName                   string
 	ServerOperatorCountry                string
+	ServerEmailAddress                   string
 
 	// VerifierServer is the URL of the verifier server, which is used to verify the access tokens.
 	VerifierServer string
@@ -43,6 +45,9 @@ type Config struct {
 	// Dbname is the name of the database file where the TMForum cached data is stored
 	// It is used to store the data in a local SQLite database, the best SQL database for this purpose.
 	Dbname string
+
+	// The power required by a caller to be considered LEAR
+	LEARPower types.OnePower
 
 	// PolicyFileName is the name of the file where the policies are stored.
 	// It can specify a local file or a remote URL.
@@ -91,10 +96,17 @@ var sbxConfig = &Config{
 	Environment:  DOME_SBX,
 	ProxyEnabled: true,
 
-	ServerOperatorOrganizationIdentifier: "VATES-11111111K",
-	ServerOperatorDid:                    "did:elsi:VATES-11111111K",
+	ServerOperatorOrganizationIdentifier: "VATSB-12345678J",
+	ServerOperatorDid:                    "did:elsi:VATSB-12345678J",
 	ServerOperatorName:                   "DOME Foundation SBX",
 	ServerOperatorCountry:                "ES",
+
+	LEARPower: types.OnePower{
+		Tmf_type:     "Domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "Onboarding",
+		Tmf_action:   []string{"execute"},
+	},
 
 	PolicyFileName:  "auth_policies.star",
 	RemoteTMFServer: "https://tmf.dome-marketplace-sbx.org",
@@ -107,10 +119,17 @@ var isbeEvidenceConfig = &Config{
 	Environment:  ISBE_EVIDENCE,
 	ProxyEnabled: false,
 
-	ServerOperatorOrganizationIdentifier: "VATES-11111111K",
-	ServerOperatorDid:                    "did:elsi:VATES-11111111K",
-	ServerOperatorName:                   "ISBE Foundation",
+	ServerOperatorOrganizationIdentifier: "VATES-G87936159",
+	ServerOperatorDid:                    "did:elsi:VATES-G87936159",
+	ServerOperatorName:                   "Alastria",
 	ServerOperatorCountry:                "ES",
+
+	LEARPower: types.OnePower{
+		Tmf_type:     "Domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "Onboarding",
+		Tmf_action:   []string{"execute"},
+	},
 
 	PolicyFileName: "auth_policies.star",
 	VerifierServer: "https://verifier.dome-marketplace.eu",
@@ -122,10 +141,17 @@ var isbeMycredentialConfig = &Config{
 	Environment:  ISBE_MYCRED,
 	ProxyEnabled: false,
 
-	ServerOperatorOrganizationIdentifier: "VATES-11111111K",
-	ServerOperatorDid:                    "did:elsi:VATES-11111111K",
-	ServerOperatorName:                   "ISBE Foundation",
+	ServerOperatorOrganizationIdentifier: "VATES-G87936159",
+	ServerOperatorDid:                    "did:elsi:VATES-G87936159",
+	ServerOperatorName:                   "Alastria",
 	ServerOperatorCountry:                "ES",
+
+	LEARPower: types.OnePower{
+		Tmf_type:     "Domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "Onboarding",
+		Tmf_action:   []string{"execute"},
+	},
 
 	PolicyFileName: "auth_policies.star",
 	VerifierServer: "https://verifier.dome-marketplace.eu",
@@ -134,8 +160,16 @@ var isbeMycredentialConfig = &Config{
 }
 
 var proConfig = &Config{
-	Environment:     DOME_PRO,
-	ProxyEnabled:    true,
+	Environment:  DOME_PRO,
+	ProxyEnabled: true,
+
+	LEARPower: types.OnePower{
+		Tmf_type:     "Domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "Onboarding",
+		Tmf_action:   []string{"execute"},
+	},
+
 	PolicyFileName:  "auth_policies.star",
 	RemoteTMFServer: "https://tmf.dome-marketplace.eu",
 	VerifierServer:  "https://verifier.dome-marketplace.eu",
@@ -144,8 +178,16 @@ var proConfig = &Config{
 }
 
 var dev2Config = &Config{
-	Environment:     DOME_DEV2,
-	ProxyEnabled:    true,
+	Environment:  DOME_DEV2,
+	ProxyEnabled: true,
+
+	LEARPower: types.OnePower{
+		Tmf_type:     "Domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "Onboarding",
+		Tmf_action:   []string{"execute"},
+	},
+
 	PolicyFileName:  "auth_policies.star",
 	RemoteTMFServer: "https://tmf.dome-marketplace-dev2.org",
 	VerifierServer:  "https://verifier.dome-marketplace-dev2.org",
@@ -154,8 +196,16 @@ var dev2Config = &Config{
 }
 
 var lclConfig = &Config{
-	Environment:     DOME_LCL,
-	ProxyEnabled:    true,
+	Environment:  DOME_LCL,
+	ProxyEnabled: true,
+
+	LEARPower: types.OnePower{
+		Tmf_type:     "Domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "Onboarding",
+		Tmf_action:   []string{"execute"},
+	},
+
 	PolicyFileName:  "auth_policies.star",
 	RemoteTMFServer: "https://tmf.dome-marketplace-lcl.org",
 	VerifierServer:  "https://verifier.dome-marketplace-lcl.org",

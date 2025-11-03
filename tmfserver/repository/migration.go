@@ -1,0 +1,177 @@
+package repository
+
+import (
+	"crypto/rand"
+	"database/sql"
+	"log/slog"
+	"sort"
+
+	"github.com/hesusruiz/isbetmf/internal/errl"
+	"github.com/jmoiron/sqlx"
+)
+
+const createMigrationsTableSQL = `CREATE TABLE IF NOT EXISTS migrations (
+    version TEXT NOT NULL,
+	"created_at" INTEGER DEFAULT CURRENT_TIMESTAMP
+);`
+
+type migrationfun func(db *sqlx.DB) error
+
+type oneMigration struct {
+	version string
+	up      migrationfun
+	down    migrationfun
+}
+
+var migrations = map[string]oneMigration{}
+
+// RegisterMigration is called by the migration functions in their init() to register a migration.
+// version must be a timestamp in the format YYYYMMDDTHHMMSS (YearMonthDayTHoursMinutesSeconds),
+// like '20251102T203201'.
+// The migrations are ordered by timestamp before being applied. This guarantees that migrations are
+// applied in the correct order, independent from the order in which the init() functions have run.
+// Both an UP migration and a DOWN migration can be registered, with nil if no action has to be taken.
+// If a registered migration function returns an error, the migration is cancelled.
+// Each migration function is run inside a SQLite SAVEPOINT, which allows nesting in case that the
+// migration function needs nested savepoints.
+func RegisterMigration(version string, up migrationfun, down migrationfun) {
+	migrations[version] = oneMigration{
+		version: version,
+		up:      up,
+		down:    down,
+	}
+}
+
+// RunMigrationsUp ensures the database migrations table exists and applies any pending migrations.
+//
+// RunMigrationsUp performs the following steps:
+//  1. Logs the start of the migration run and defers a completion log.
+//  2. Ensures the migrations table exists by executing createMigrationsTableSQL.
+//  3. Reads the version of the last applied migration from the migrations table
+//     using "SELECT version FROM migrations ORDER BY version DESC LIMIT 1".
+//     If the table is empty, no rows is treated as no previously applied migrations.
+//  4. Collects available migrations from the global `migrations` map, sorts their
+//     keys lexicographically, and iterates them in that order.
+//  5. Skips any migration whose version is less than or equal to the last applied version.
+//  6. For each pending migration, calls applyMigration(db, migration) to apply it,
+//     logs successful application, and stops on the first error returned by applyMigration.
+//
+// Notes and expectations:
+//   - Version comparison is lexicographical string comparison; migration version keys must be
+//     chosen so that lexicographical order corresponds to the intended application order.
+func RunMigrationsUp(db *sqlx.DB) error {
+
+	slog.Info("Running migrations")
+	defer slog.Info("Migrations done")
+
+	// Create the migrations table if it doesn't exist
+	if _, err := db.Exec(createMigrationsTableSQL); err != nil {
+		return errl.Errorf("failed to create migrations table: %w", err)
+	}
+
+	// Read the version of the last applied migration
+	var lastAppliedVersion string
+	err := db.QueryRow("SELECT version FROM migrations ORDER BY version DESC LIMIT 1").Scan(&lastAppliedVersion)
+	if err != nil && err != sql.ErrNoRows {
+		return errl.Errorf("failed to read last applied migration version: %w", err)
+	}
+	slog.Debug("Last applied migration version", slog.String("version", lastAppliedVersion))
+
+	// Order migrations to apply by version lexicographycally
+	keys := make([]string, 0, len(migrations))
+	for k := range migrations {
+		keys = append(keys, k)
+	}
+
+	if len(keys) == 0 {
+		slog.Info("No migrations to apply")
+		return nil
+	}
+
+	sort.Strings(keys)
+
+	// Loop the keys for applying the migration or not
+	for _, currentMigration := range keys {
+		if currentMigration <= lastAppliedVersion {
+			slog.Debug("Skipping migration", slog.String("version", currentMigration))
+			continue
+		}
+		migration := migrations[currentMigration]
+
+		err := applyMigration(db, migration)
+		if err != nil {
+			return err
+		}
+
+		slog.Info("Migration applied", slog.String("version", currentMigration))
+
+	}
+
+	return nil
+
+}
+
+// applyMigration runs a single migration inside a SQLite savepoint and records it
+// in the migrations table. It creates a random, unguessable SAVEPOINT so user
+// migration code can create nested savepoints safely. The function defers a plain
+// ROLLBACK so that if any step fails before the savepoint is released, changes are
+// undone; releasing the savepoint makes the deferred rollback a no-op.
+//
+// The function performs these steps in order:
+//  1. Generate a random savepoint name and execute "SAVEPOINT <name>".
+//  2. Execute migration.up(db). If that returns an error, the error is logged
+//     and returned (the deferred rollback will undo any partial changes).
+//  3. Insert the migration version into the migrations table.
+//  4. Execute "RELEASE <name>" to commit the savepoint and persist changes.
+//
+// Parameters:
+//
+//	db        - a *sqlx.DB connected to the SQLite database to operate on.
+//	migration - a oneMigration describing the migration to execute (provides up
+//	            and the version to record).
+//
+// Errors:
+//
+//	Any error encountered while starting the savepoint, running the migration,
+//	recording the version, or releasing the savepoint is returned to the caller.
+//	The function ensures uncommitted changes are rolled back on error.
+func applyMigration(db *sqlx.DB, migration oneMigration) error {
+
+	// Generate a random string
+	savepointName := rand.Text()
+
+	// Start a SQLite SAVEPOINT with an unguessable name
+	// This is instead of a normal transaction so that user migration code
+	// can nest SAVEPOINTS if they wish
+	_, err := db.Exec("SAVEPOINT " + savepointName)
+	if err != nil {
+		return errl.Error(err)
+	}
+	// Defer a plain rollback, which will cancel the transaction if it is not commited, and be a no-op otherwise
+	defer db.Exec("ROLLBACK")
+
+	slog.Debug("Savepoint started", slog.String("name", savepointName))
+
+	// Run the migration
+	err = migration.up(db)
+	if err != nil {
+		err = errl.Error(err)
+		slog.Error("Error in migration", "error", err)
+		return err
+	}
+
+	// Mark the migration as applied
+	_, err = db.Exec("INSERT INTO migrations (version) VALUES (?)", migration.version)
+	if err != nil {
+		return errl.Error(err)
+	}
+
+	// Commit the SAVEPOINT
+	_, err = db.Exec("RELEASE " + savepointName)
+	if err != nil {
+		return errl.Error(err)
+	}
+
+	return nil
+
+}

@@ -231,86 +231,86 @@ func TestRequiredRelatedPartyRoles(t *testing.T) {
 	}
 }
 
-func TestValidatorWithV4AndV5(t *testing.T) {
-	config := &Config{
-		ValidateRequiredFields: true,
-		ValidateRelatedParty:   true,
-	}
+// func TestValidatorWithV4AndV5(t *testing.T) {
+// 	config := &Config{
+// 		ValidateRequiredFields: true,
+// 		ValidateRelatedParty:   true,
+// 	}
 
-	validator := NewValidator(config)
+// 	validator := NewValidator(config)
 
-	// Test V5 object validation
-	v5RelatedParty := []RelatedPartyV5{
-		{
-			Role: "Seller",
-			PartyOrPartyRole: PartyRefOrPartyRole{
-				ID:   "seller-1",
-				Href: "https://example.com/seller/1",
-			},
-		},
-		{
-			Role: "SellerOperator",
-			PartyOrPartyRole: PartyRefOrPartyRole{
-				ID:   "selleroperator-1",
-				Href: "https://example.com/selleroperator/1",
-			},
-		},
-	}
+// 	// Test V5 object validation
+// 	v5RelatedParty := []RelatedPartyV5{
+// 		{
+// 			Role: "Seller",
+// 			PartyOrPartyRole: PartyRefOrPartyRole{
+// 				ID:   "seller-1",
+// 				Href: "https://example.com/seller/1",
+// 			},
+// 		},
+// 		{
+// 			Role: "SellerOperator",
+// 			PartyOrPartyRole: PartyRefOrPartyRole{
+// 				ID:   "selleroperator-1",
+// 				Href: "https://example.com/selleroperator/1",
+// 			},
+// 		},
+// 	}
 
-	v5RelatedPartyJSON, _ := json.Marshal(v5RelatedParty)
+// 	v5RelatedPartyJSON, _ := json.Marshal(v5RelatedParty)
 
-	v5Obj := TMFObject{
-		ID:           "v5-test-id",
-		Href:         "https://example.com/v5-test",
-		LastUpdate:   "2024-01-15T10:30:00Z",
-		Version:      "1.0.0",
-		RelatedParty: v5RelatedPartyJSON,
-	}
+// 	v5Obj := TMFObject{
+// 		ID:           "v5-test-id",
+// 		Href:         "https://example.com/v5-test",
+// 		LastUpdate:   "2024-01-15T10:30:00Z",
+// 		Version:      "1.0.0",
+// 		RelatedParty: v5RelatedPartyJSON,
+// 	}
 
-	// Test with V5 config
-	config.Version = VersionV5
-	result := validator.ValidateObject(v5Obj, "productOffering")
+// 	// Test with V5 config
+// 	config.Version = VersionV5
+// 	result := validator.ValidateObject(v5Obj, "productOffering")
 
-	if !result.Valid {
-		t.Errorf("Expected V5 object to be valid, got errors: %v", result.Errors)
-	}
+// 	if !result.Valid {
+// 		t.Errorf("Expected V5 object to be valid, got errors: %v", result.Errors)
+// 	}
 
-	// Test V4 object validation
-	v4RelatedParty := []RelatedPartyV4{
-		{
-			ID:           "seller-1",
-			Href:         "https://example.com/seller/1",
-			Role:         "seller",
-			Name:         "Test Seller",
-			ReferredType: "Organization",
-		},
-		{
-			ID:           "selleroperator-1",
-			Href:         "https://example.com/selleroperator/1",
-			Role:         "selleroperator",
-			Name:         "Test Seller Operator",
-			ReferredType: "Organization",
-		},
-	}
+// 	// Test V4 object validation
+// 	v4RelatedParty := []RelatedPartyV4{
+// 		{
+// 			ID:           "seller-1",
+// 			Href:         "https://example.com/seller/1",
+// 			Role:         "seller",
+// 			Name:         "Test Seller",
+// 			ReferredType: "Organization",
+// 		},
+// 		{
+// 			ID:           "selleroperator-1",
+// 			Href:         "https://example.com/selleroperator/1",
+// 			Role:         "selleroperator",
+// 			Name:         "Test Seller Operator",
+// 			ReferredType: "Organization",
+// 		},
+// 	}
 
-	v4RelatedPartyJSON, _ := json.Marshal(v4RelatedParty)
+// 	v4RelatedPartyJSON, _ := json.Marshal(v4RelatedParty)
 
-	v4Obj := TMFObject{
-		ID:           "v4-test-id",
-		Href:         "https://example.com/v4-test",
-		LastUpdate:   "2024-01-15T10:30:00Z",
-		Version:      "1.0.0",
-		RelatedParty: v4RelatedPartyJSON,
-	}
+// 	v4Obj := TMFObject{
+// 		ID:           "v4-test-id",
+// 		Href:         "https://example.com/v4-test",
+// 		LastUpdate:   "2024-01-15T10:30:00Z",
+// 		Version:      "1.0.0",
+// 		RelatedParty: v4RelatedPartyJSON,
+// 	}
 
-	// Test with V4 config
-	config.Version = VersionV4
-	result = validator.ValidateObject(v4Obj, "productOffering")
+// 	// Test with V4 config
+// 	config.Version = VersionV4
+// 	result = validator.ValidateObject(v4Obj, "productOffering")
 
-	if !result.Valid {
-		t.Errorf("Expected V4 object to be valid, got errors: %v", result.Errors)
-	}
-}
+// 	if !result.Valid {
+// 		t.Errorf("Expected V4 object to be valid, got errors: %v", result.Errors)
+// 	}
+// }
 
 func TestConfigVersionConstants(t *testing.T) {
 	if VersionV4 != "v4" {

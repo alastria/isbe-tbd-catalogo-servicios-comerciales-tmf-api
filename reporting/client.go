@@ -9,16 +9,16 @@ import (
 	"time"
 )
 
-// Client represents an HTTP client for connecting to TMForum servers
-type Client struct {
+// ClientPaging represents an HTTP client for connecting to TMForum servers
+type ClientPaging struct {
 	httpClient *http.Client
 	baseURL    string
 	timeout    time.Duration
 }
 
-// NewClient creates a new TMForum client
-func NewClient(config *Config) *Client {
-	return &Client{
+// NewClientPaging creates a new TMForum client
+func NewClientPaging(config *Config) *ClientPaging {
+	return &ClientPaging{
 		httpClient: &http.Client{
 			Timeout: time.Duration(config.Timeout) * time.Second,
 		},
@@ -28,7 +28,7 @@ func NewClient(config *Config) *Client {
 }
 
 // GetObjectsPage retrieves a single page of objects of a specific type
-func (c *Client) GetObjectsPage(ctx context.Context, objectType string, config *Config, offset int) ([]TMFObject, error) {
+func (c *ClientPaging) GetObjectsPage(ctx context.Context, objectType string, config *Config, offset int) ([]TMFObject, error) {
 	// Get the path prefix for this object type from the routes map
 	pathPrefix, exists := GeneratedDefaultResourceToPathPrefixV4[objectType]
 	if !exists {
@@ -86,7 +86,7 @@ func (c *Client) GetObjectsPage(ctx context.Context, objectType string, config *
 }
 
 // GetObjectsWithPagination retrieves all objects of a specific type using pagination
-func (c *Client) GetObjectsWithPagination(ctx context.Context, objectType string, config *Config) ([]TMFObject, error) {
+func (c *ClientPaging) GetObjectsWithPagination(ctx context.Context, objectType string, config *Config) ([]TMFObject, error) {
 	// Get the path prefix for this object type from the routes map
 	pathPrefix, exists := GeneratedDefaultResourceToPathPrefixV4[objectType]
 	if !exists {
@@ -166,7 +166,7 @@ func (c *Client) GetObjectsWithPagination(ctx context.Context, objectType string
 }
 
 // GetObjects retrieves all objects of a specific type, using pagination if enabled
-func (c *Client) GetObjects(ctx context.Context, objectType string, config *Config) ([]TMFObject, error) {
+func (c *ClientPaging) GetObjects(ctx context.Context, objectType string, config *Config) ([]TMFObject, error) {
 	if config.PaginationEnabled {
 		return c.GetObjectsWithPagination(ctx, objectType, config)
 	}
@@ -174,7 +174,7 @@ func (c *Client) GetObjects(ctx context.Context, objectType string, config *Conf
 }
 
 // GetObjectsWithoutPagination retrieves objects without pagination (legacy method)
-func (c *Client) GetObjectsWithoutPagination(ctx context.Context, objectType string) ([]TMFObject, error) {
+func (c *ClientPaging) GetObjectsWithoutPagination(ctx context.Context, objectType string) ([]TMFObject, error) {
 	// Get the path prefix for this object type from the routes map
 	pathPrefix, exists := GeneratedDefaultResourceToPathPrefixV4[objectType]
 	if !exists {
@@ -229,7 +229,7 @@ func (c *Client) GetObjectsWithoutPagination(ctx context.Context, objectType str
 }
 
 // processObject processes a TMF object and extracts additional fields
-func (c *Client) processObject(obj TMFObject, rawBody []byte) TMFObject {
+func (c *ClientPaging) processObject(obj TMFObject, rawBody []byte) TMFObject {
 	// Parse the raw JSON to get all fields
 	var rawObj map[string]any
 	if err := json.Unmarshal(rawBody, &rawObj); err != nil {
@@ -252,7 +252,7 @@ func (c *Client) processObject(obj TMFObject, rawBody []byte) TMFObject {
 }
 
 // TestConnection tests the connection to the remote server
-func (c *Client) TestConnection(ctx context.Context) error {
+func (c *ClientPaging) TestConnection(ctx context.Context) error {
 	// url := fmt.Sprintf("%s/health", c.baseURL)
 
 	// req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -271,38 +271,4 @@ func (c *Client) TestConnection(ctx context.Context) error {
 	// }
 
 	return nil
-}
-
-// GetServerInfo retrieves basic information about the server
-func (c *Client) GetServerInfo(ctx context.Context) (map[string]any, error) {
-	url := fmt.Sprintf("%s/", c.baseURL)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %w", err)
-	}
-
-	req.Header.Set("Accept", "application/json")
-
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("failed to execute request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("server returned status %d", resp.StatusCode)
-	}
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read response body: %w", err)
-	}
-
-	var info map[string]any
-	if err := json.Unmarshal(body, &info); err != nil {
-		return nil, fmt.Errorf("failed to parse response as JSON: %w", err)
-	}
-
-	return info, nil
 }

@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"slices"
-	"strings"
 	"time"
+
+	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 // Validator validates TMF objects against requirements
@@ -21,14 +22,14 @@ func NewValidator(config *Config) *Validator {
 }
 
 // ValidateObject validates a single TMF object (legacy method for backward compatibility)
-func (v *Validator) ValidateObject(obj TMFObject, objectType string) ValidationResult {
+func (v *Validator) ValidateObject(obj repository.TMFObjectMap, objectType string) ValidationResult {
 	return v.ValidateAndFixObject(&obj, objectType)
 }
 
 // ValidateAndFixObject validates a single TMF object and optionally fixes validation errors
-func (v *Validator) ValidateAndFixObject(obj *TMFObject, objectType string) ValidationResult {
+func (v *Validator) ValidateAndFixObject(obj *repository.TMFObjectMap, objectType string) ValidationResult {
 	result := ValidationResult{
-		ObjectID:   obj.ID,
+		ObjectID:   obj.ID(),
 		ObjectType: objectType,
 		Valid:      true,
 		Timestamp:  time.Now(),
@@ -43,8 +44,8 @@ func (v *Validator) ValidateAndFixObject(obj *TMFObject, objectType string) Vali
 	if v.config.ValidateRelatedParty {
 		if v.config.Version == VersionV4 {
 			v.validateRelatedPartyV4(obj, objectType, &result)
-		} else {
-			v.validateRelatedPartyV5(obj, objectType, &result)
+			// } else {
+			// 	v.validateRelatedPartyV5(obj, objectType, &result)
 		}
 	}
 
@@ -55,11 +56,15 @@ func (v *Validator) ValidateAndFixObject(obj *TMFObject, objectType string) Vali
 }
 
 // validateRequiredFields checks if all required fields are present and optionally fixes them
-func (v *Validator) validateRequiredFields(obj *TMFObject, objectType string, result *ValidationResult) {
+func (v *Validator) validateRequiredFields(obj *repository.TMFObjectMap, objectType string, result *ValidationResult) {
+
+	if obj.ID() == "urn:ngsi-ld:organization:5ca475ec-52d3-4a0c-a1d5-0071ef09b59d" {
+		fmt.Println("Found")
+	}
 
 	// This checks the fields that are required for all objects
 	for _, field := range RequiredFieldsForAllObjects {
-		if !v.hasField(obj, field) {
+		if !obj.HasField(field) {
 			// TODO: Implement fixing logic for missing required fields
 			// If v.config.FixValidationErrors is true, attempt to fix the missing field
 			// and move the error to result.ErrorsFixed if successfully fixed
@@ -73,7 +78,7 @@ func (v *Validator) validateRequiredFields(obj *TMFObject, objectType string, re
 	}
 
 	for _, field := range RecommendedFieldsForAllObjects {
-		if !v.hasField(obj, field) {
+		if !obj.HasField(field) {
 			// TODO: Implement fixing logic for missing required fields
 			// If v.config.FixValidationErrors is true, attempt to fix the missing field
 			// and move the error to result.ErrorsFixed if successfully fixed
@@ -88,110 +93,54 @@ func (v *Validator) validateRequiredFields(obj *TMFObject, objectType string, re
 
 }
 
-func (v *Validator) validateRelatedPartyV4(obj *TMFObject, objectType string, result *ValidationResult) {
+func (v *Validator) validateRelatedPartyV4(obj *repository.TMFObjectMap, objectType string, result *ValidationResult) {
 
 	// We just return if the object does not require any Related Party
 	if slices.Contains(DoNotRequireRelatedParties, objectType) {
 		return
 	}
 
-	// Unmarshall the raw messages into RelatedPartyV4
-	var relatedParties = []RelatedPartyV4{}
-	json.Unmarshal(obj.RelatedParty, &relatedParties)
-
-	// The object requires some related party.
-	if len(relatedParties) == 0 {
-		// TODO: Implement fixing logic for missing related party information (V4)
-		// If v.config.FixValidationErrors is true, attempt to add default related party information
-		// and move the error to result.ErrorsFixed if successfully fixed
+	seller, sellerOperator, err := obj.GetSellerInfo("v4")
+	if err != nil {
+		var msg string
+		if seller == "" && sellerOperator == "" {
+			msg = "Missing Seller and SellerOperator fields"
+		} else {
+			if seller == "" {
+				msg = "Missing Seller field"
+			} else {
+				msg = "Missing SellerOperator field"
+			}
+		}
 
 		result.Errors = append(result.Errors, ValidationError{
 			Field:   "relatedParty",
-			Message: "Related party information is required but missing",
-			Code:    "MISSING_RELATED_PARTY",
+			Message: msg,
+			Code:    "MISSING_SELLER_INFO",
 		})
 		return
 	}
 
-	// Check for required roles
-	foundRoles := make(map[string]bool)
-	// Validate individual related party entries
-	for _, rp := range relatedParties {
-		// Normalize the role to lowercase for comparison
-		rp.Role = strings.ToLower(rp.Role)
-
-		// Process each type of role found
-		if rp.Role == "seller" || rp.Role == "selleroperator" || rp.Role == "buyer" || rp.Role == "buyeroperator" {
-			foundRoles[rp.Role] = true
-			if rp.ID == "" {
-				// TODO: Implement fixing logic for missing party ID (V4)
-				// If v.config.FixValidationErrors is true, attempt to generate or set a default ID
-				// and move the error to result.ErrorsFixed if successfully fixed
-
-				result.Errors = append(result.Errors, ValidationError{
-					Field:   fmt.Sprintf("relatedParty %s.id", spelled[rp.Role]),
-					Message: "Related party ID is missing",
-					Code:    "MISSING_PARTY_ID",
-				})
+	if !slices.Contains(DoNotRequireBuyerInfo, objectType) {
+		buyer, buyerOperator, err := obj.GetBuyerInfo("v4")
+		if err != nil {
+			var msg string
+			if buyer == "" && buyerOperator == "" {
+				msg = "Missing Buyer and BuyerOperator fields"
+			} else {
+				if buyer == "" {
+					msg = "Missing Buyer field"
+				} else {
+					msg = "Missing BuyerOperator field"
+				}
 			}
-
-			if rp.Href == "" {
-				// TODO: Implement fixing logic for missing party href (V4)
-				// If v.config.FixValidationErrors is true, attempt to generate or set a default href
-				// and move the error to result.ErrorsFixed if successfully fixed
-
-				result.Errors = append(result.Errors, ValidationError{
-					Field:   fmt.Sprintf("relatedParty %s.href", spelled[rp.Role]),
-					Message: "Related party href is missing",
-					Code:    "MISSING_PARTY_HREF",
-				})
-			}
-
-			if rp.Name == "" {
-				// TODO: Implement fixing logic for missing party name (V4)
-				// If v.config.FixValidationErrors is true, attempt to generate or set a default name
-				// and move the error to result.ErrorsFixed if successfully fixed
-
-				result.Errors = append(result.Errors, ValidationError{
-					Field:   fmt.Sprintf("relatedParty %s.name", spelled[rp.Role]),
-					Message: "Related party name is missing",
-					Code:    "MISSING_PARTY_NAME",
-				})
-			}
-
-			if rp.ReferredType == "" {
-				// TODO: Implement fixing logic for missing party referred type (V4)
-				// If v.config.FixValidationErrors is true, attempt to generate or set a default referred type
-				// and move the error to result.ErrorsFixed if successfully fixed
-
-				result.Errors = append(result.Errors, ValidationError{
-					Field:   fmt.Sprintf("relatedParty %s.referredType", spelled[rp.Role]),
-					Message: "Related party referred type is missing",
-					Code:    "MISSING_PARTY_REFERRED_TYPE",
-				})
-			}
-
-		}
-	}
-
-	// Set the required roles depending on the type of object
-	requiredRoles := []string{"seller", "selleroperator", "buyer", "buyeroperator"}
-	if slices.Contains(DoNotRequireBuyerInfo, objectType) {
-		requiredRoles = []string{"seller", "selleroperator"}
-	}
-
-	// Check if we found all the required roles
-	for _, requiredRole := range requiredRoles {
-		if !foundRoles[requiredRole] {
-			// TODO: Implement fixing logic for missing required roles (V4)
-			// If v.config.FixValidationErrors is true, attempt to add default role information
-			// and move the error to result.ErrorsFixed if successfully fixed
 
 			result.Errors = append(result.Errors, ValidationError{
 				Field:   "relatedParty",
-				Message: fmt.Sprintf("Required related party role '%s' is missing", spelled[requiredRole]),
-				Code:    "MISSING_REQUIRED_ROLE",
+				Message: msg,
+				Code:    "MISSING_BUYER_INFO",
 			})
+			return
 		}
 	}
 
@@ -323,7 +272,7 @@ func (v *Validator) hasField(obj *TMFObject, field string) bool {
 }
 
 // ValidateObjects validates multiple TMF objects
-func (v *Validator) ValidateObjects(objects []TMFObject, objectType string) []ValidationResult {
+func (v *Validator) ValidateObjects(objects []repository.TMFObjectMap, objectType string) []ValidationResult {
 	results := make([]ValidationResult, len(objects))
 	for i, obj := range objects {
 		results[i] = v.ValidateObject(obj, objectType)

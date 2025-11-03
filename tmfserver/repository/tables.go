@@ -1,95 +1,47 @@
 package repository
 
 import (
-	"fmt"
-	"log/slog"
-
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/jmoiron/sqlx"
 )
 
-const DBVersionMajor = 1
-const DBVersionMinor = 1
-
-const CreateConfigTableSQL = `CREATE TABLE IF NOT EXISTS tmf_config (
-	"version" TEXT DEFAULT '0.0',
-	"api_version" TEXT DEFAULT 'v4',
-	"created_at" DATETIME NOT NULL,
-	"updated_at" DATETIME NOT NULL
-);`
-
+// CreateTMFTableSQL is the table 'tmf_object', the one holding all objects of all types
 const CreateTMFTableSQL = `CREATE TABLE IF NOT EXISTS tmf_object (
 	"id" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
-	"version" TEXT DEFAULT '1.0',
-	"api_version" TEXT DEFAULT 'v4',
-	"seller" TEXT DEFAULT '',
-	"buyer" TEXT DEFAULT '',
+	"version" TEXT,
+	"api_version" TEXT,
+	"seller" TEXT,
+	"seller_operator" TEXT,
+	"buyer" TEXT,
+	"buyer_operator" TEXT,
 	"last_update" TEXT,
 	"content" BLOB NOT NULL,
 	"random" INTEGER DEFAULT 0,
-	"created_at" DATETIME NOT NULL,
-	"updated_at" DATETIME NOT NULL,
+	"created_at" INTEGER DEFAULT CURRENT_TIMESTAMP,
+	"updated_at" INTEGER DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY ("id", "type", "version")
 );`
 
+// Used for migrations and to keep the database file compact
 const DeleteTMFTableSQL = `DROP TABLE IF EXISTS tmf_object;`
-const VacuumTMFTableSQL = `VACUUM;`
+const VacuumSQL = `VACUUM;`
 
+// CreateTables creates the tables in the database if they do not exist.
+// It also handles automatic schema/data migration when possible.
 func CreateTables(db *sqlx.DB) error {
-
-	// Create the config table if it doesn't exist
-	if _, err := db.Exec(CreateConfigTableSQL); err != nil {
-		return errl.Errorf("failed to create config table: %w", err)
-	}
-
-	ourVersionStr := fmt.Sprintf("%d.%d", DBVersionMajor, DBVersionMinor)
-
-	// Get the current version from the config table
-	var currentVersion string
-	err := db.Get(&currentVersion, "SELECT version FROM tmf_config LIMIT 1;")
-	if err != nil {
-		// If there is an error, it might be because the table is empty, so we insert the initial version
-		_, err = db.Exec("INSERT INTO tmf_config (version, api_version, created_at, updated_at) VALUES (?, ?, datetime('now'), datetime('now'));", ourVersionStr, "v4")
-		if err != nil {
-			return errl.Errorf("failed to insert initial config version: %w", err)
-		}
-		currentVersion = "0.0"
-	}
-
-	// Parse the current version as CurrentMajor.CurrentMinor
-	// For simplicity, we assume the version is always in the correct format
-	// In a real-world scenario, you would want to add error handling here
-	var CurrentMajor, CurrentMinor int
-	_, err = fmt.Sscanf(currentVersion, "%d.%d", &CurrentMajor, &CurrentMinor)
-	if err != nil {
-		return errl.Errorf("failed to parse current version: %w", err)
-	}
-
-	slog.Info("Database version", slog.String("current", currentVersion), slog.String("our", ourVersionStr))
-
-	// Delete the database in case of a major version change
-	if CurrentMajor < DBVersionMajor {
-		if _, err := db.Exec(DeleteTMFTableSQL); err != nil {
-			return errl.Errorf("failed to delete tmf_object table: %w", err)
-		}
-		slog.Info("Database major version change detected, tmf_object table deleted")
-
-		if _, err := db.Exec(VacuumTMFTableSQL); err != nil {
-			return errl.Errorf("failed to vacuum database: %w", err)
-		}
-
-	}
-
-	// Always update the version in the config table
-	_, err = db.Exec("UPDATE tmf_config SET version = ?, updated_at = datetime('now');", fmt.Sprintf("%d.%d", DBVersionMajor, DBVersionMinor))
-	if err != nil {
-		return errl.Errorf("failed to update config version: %w", err)
-	}
 
 	if _, err := db.Exec(CreateTMFTableSQL); err != nil {
 		return errl.Errorf("failed to create tmf_object table: %w", err)
 	}
+
+	if err := RunMigrationsUp(db); err != nil {
+		return errl.Error(err)
+	}
+
+	// if err := MigrateTables(db, oldMajor, oldMinor); err != nil {
+	// 	return errl.Error(err)
+	// }
 
 	return nil
 }

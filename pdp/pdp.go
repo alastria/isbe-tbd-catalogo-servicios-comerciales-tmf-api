@@ -74,6 +74,8 @@ type PDP struct {
 	httpClient *http.Client
 }
 
+var threadPoolCounter int
+
 // NewPDP creates a new PDP instance.
 func NewPDP(
 	config *Config,
@@ -96,7 +98,8 @@ func NewPDP(
 	// Create the pool of parsed and compiled Starlark policy rules.
 	m.threadPool = sync.Pool{
 		New: func() any {
-			slog.Info("Creating a new thread entry in the PDP pool")
+			threadPoolCounter++
+			slog.Info("Creating a new thread entry in the PDP pool", slog.Int("count", threadPoolCounter))
 			te, err := m.bufferedParseAndCompileFile(m.scriptname)
 			if err != nil {
 				slog.Error("Error creating a new thread entry in the PDP pool", slog.String("error", err.Error()))
@@ -127,7 +130,6 @@ func NewPDP(
 // bufferedParseAndCompileFile reads a file with Starlark code and compiles it
 func (m *PDP) bufferedParseAndCompileFile(scriptname string) (*threadEntry, error) {
 	te := m.createThreadEntry(scriptname)
-	slog.Debug("Created a new thread entry in the PDP pool")
 	if te == nil {
 		return nil, errl.Errorf("error creating thread entry")
 	}
