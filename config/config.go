@@ -119,9 +119,9 @@ var isbeEvidenceConfig = &Config{
 	Environment:  ISBE_EVIDENCE,
 	ProxyEnabled: false,
 
-	ServerOperatorOrganizationIdentifier: "VATES-11111111K",
-	ServerOperatorDid:                    "did:elsi:VATES-11111111K",
-	ServerOperatorName:                   "ISBE Foundation",
+	ServerOperatorOrganizationIdentifier: "VATES-G87936159",
+	ServerOperatorDid:                    "did:elsi:VATES-G87936159",
+	ServerOperatorName:                   "Alastria",
 	ServerOperatorCountry:                "ES",
 
 	LEARPower: types.OnePower{
@@ -141,14 +141,14 @@ var isbeMycredentialConfig = &Config{
 	Environment:  ISBE_MYCRED,
 	ProxyEnabled: false,
 
-	ServerOperatorOrganizationIdentifier: "VATES-11111111K",
-	ServerOperatorDid:                    "did:elsi:VATES-11111111K",
-	ServerOperatorName:                   "ISBE Foundation",
+	ServerOperatorOrganizationIdentifier: "VATES-G87936159",
+	ServerOperatorDid:                    "did:elsi:VATES-G87936159",
+	ServerOperatorName:                   "Alastria",
 	ServerOperatorCountry:                "ES",
 
 	LEARPower: types.OnePower{
 		Tmf_type:     "Domain",
-		Tmf_domain:   "ISBE",
+		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
 	},
