@@ -436,12 +436,18 @@ func (svc *Service) listObjects(req *Request, tokenMap map[string]any, objectTyp
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
 		var obj repo.TMFObject
+		var created_at int64
+		var updated_at int64
 		if err := rows.Scan(&obj.ID, &obj.Type, &obj.Version, &obj.APIVersion,
-			&obj.Seller, &obj.Buyer, &obj.LastUpdate, &obj.Content, &obj.CreatedAt, &obj.UpdatedAt); err != nil {
+			&obj.Seller, &obj.Buyer, &obj.LastUpdate, &obj.Content, &created_at, &updated_at); err != nil {
 
 			return nil, 0, errl.Errorf("iterating over rows in query %s with args %v: %w", baseQuery, args, err)
 
 		}
+
+		// Convert the Unix epoch timestamps created_at and updated_at to time.Time values
+		obj.CreatedAt = time.Unix(created_at, 0)
+		obj.UpdatedAt = time.Unix(updated_at, 0)
 
 		// Generate the map-based object and verify it formally
 		objMap, err := obj.ToMap()
