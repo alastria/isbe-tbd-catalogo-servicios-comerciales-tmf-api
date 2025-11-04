@@ -105,7 +105,7 @@ func (d *Database) UpdateObject(obj *repo.TMFObject) error {
 	slog.Debug("Updating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Update the updated_at timestamp
-	obj.UpdatedAt = time.Now()
+	obj.UpdatedAt = time.Now().Unix()
 
 	query := `UPDATE tmf_object SET version = :version, last_update = :last_update, content = :content, updated_at = :updated_at 
 		WHERE id = :id AND type = :type`

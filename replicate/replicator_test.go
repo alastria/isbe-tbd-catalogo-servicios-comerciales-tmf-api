@@ -110,8 +110,8 @@ func TestDatabaseOperations(t *testing.T) {
 		APIVersion: "v4",
 		LastUpdate: time.Now().Format(time.RFC3339),
 		Content:    []byte(`{"id":"test-id","name":"Test Product"}`),
-		CreatedAt:  time.Now(),
-		UpdatedAt:  time.Now(),
+		CreatedAt:  time.Now().Unix(),
+		UpdatedAt:  time.Now().Unix(),
 	}
 
 	err = db.StoreObject(obj)
@@ -258,8 +258,8 @@ func TestReplicatorClearDatabase(t *testing.T) {
 		APIVersion: "v4",
 		LastUpdate: time.Now().Format(time.RFC3339),
 		Content:    []byte(`{"id":"test-id","name":"Test Product"}`),
-		CreatedAt:  time.Now(),
-		UpdatedAt:  time.Now(),
+		CreatedAt:  time.Now().Unix(),
+		UpdatedAt:  time.Now().Unix(),
 	}
 
 	err = db.StoreObject(obj)

@@ -185,7 +185,7 @@ func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFObject {
 	seller, _, _ := obj.GetSellerInfo("v4")
 	buyer, _, _ := obj.GetBuyerInfo("v4")
 
-	now := time.Now()
+	now := time.Now().Unix()
 
 	o := &TMFObject{
 		ID:         id,
