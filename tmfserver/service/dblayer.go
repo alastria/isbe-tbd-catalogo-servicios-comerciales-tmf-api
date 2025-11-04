@@ -59,8 +59,8 @@ func (svc *Service) createObject(obj *repo.TMFObject) error {
 
 	// Make sure timestamps are correct
 	now := time.Now()
-	obj.CreatedAt = now
-	obj.UpdatedAt = now
+	obj.CreatedAt = now.Unix()
+	obj.UpdatedAt = now.Unix()
 
 	// Execute the SQL
 	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, seller, buyer, last_update, content, created_at, updated_at)
@@ -87,8 +87,8 @@ func (svc *Service) createObjectIfNotExist(obj *repo.TMFObject) error {
 
 	// Make sure timestamps are correct
 	now := time.Now()
-	obj.CreatedAt = now
-	obj.UpdatedAt = now
+	obj.CreatedAt = now.Unix()
+	obj.UpdatedAt = now.Unix()
 
 	// Execute the SQL
 	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, seller, buyer, last_update, content, created_at, updated_at)
@@ -115,8 +115,8 @@ func (svc *Service) upsertObject(obj *repo.TMFObject) error {
 
 	// Make sure timestamps are correct
 	now := time.Now()
-	obj.CreatedAt = now
-	obj.UpdatedAt = now
+	obj.CreatedAt = now.Unix()
+	obj.UpdatedAt = now.Unix()
 
 	// Execute the SQL
 	_, err := svc.db.NamedExec(`INSERT INTO tmf_object (id, type, version, api_version, seller, buyer, last_update, content, created_at, updated_at)
@@ -269,7 +269,7 @@ func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error
 
 	// If we found the object and it is not stale, return it
 	if obj != nil {
-		if time.Since(obj.UpdatedAt) < svc.fressness {
+		if time.Since(obj.GetUpdatedAt()) < svc.fressness {
 			slog.Debug("Object found in local database and fresh")
 			return obj, nil
 		}
@@ -370,7 +370,7 @@ func (svc *Service) updateObject(obj *repo.TMFObject) error {
 	}
 
 	// Make sure timestamps are correct
-	obj.UpdatedAt = time.Now()
+	obj.UpdatedAt = time.Now().Unix()
 
 	// Execute the SQL
 	_, err := svc.db.NamedExec(`UPDATE tmf_object SET version = :version, last_update = :last_update, content = :content, updated_at = :updated_at WHERE id = :id AND type = :type`, obj)

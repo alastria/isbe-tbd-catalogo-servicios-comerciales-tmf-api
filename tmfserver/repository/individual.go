@@ -172,8 +172,8 @@ func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Orga
 		APIVersion: "v4",
 		LastUpdate: lastUpdate,
 		Content:    content,
-		CreatedAt:  now,
-		UpdatedAt:  now,
+		CreatedAt:  now.Unix(),
+		UpdatedAt:  now.Unix(),
 	}
 
 	return org, nil

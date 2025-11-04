@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"log/slog"
 	"sort"
+	"time"
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/jmoiron/sqlx"
@@ -12,7 +13,7 @@ import (
 
 const createMigrationsTableSQL = `CREATE TABLE IF NOT EXISTS migrations (
     version TEXT NOT NULL,
-	"created_at" INTEGER DEFAULT CURRENT_TIMESTAMP
+	"created_at" INTEGER
 );`
 
 type migrationfun func(db *sqlx.DB) error
@@ -161,7 +162,7 @@ func applyMigration(db *sqlx.DB, migration oneMigration) error {
 	}
 
 	// Mark the migration as applied
-	_, err = db.Exec("INSERT INTO migrations (version) VALUES (?)", migration.version)
+	_, err = db.Exec("INSERT INTO migrations (version, created_at) VALUES (?, ?)", migration.version, time.Now().Unix())
 	if err != nil {
 		return errl.Error(err)
 	}

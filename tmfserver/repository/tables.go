@@ -18,8 +18,8 @@ const CreateTMFTableSQL = `CREATE TABLE IF NOT EXISTS tmf_object (
 	"last_update" TEXT,
 	"content" BLOB NOT NULL,
 	"random" INTEGER DEFAULT 0,
-	"created_at" INTEGER DEFAULT CURRENT_TIMESTAMP,
-	"updated_at" INTEGER DEFAULT CURRENT_TIMESTAMP,
+	"created_at" INTEGER,
+	"updated_at" INTEGER,
 	PRIMARY KEY ("id", "type", "version")
 );`
 

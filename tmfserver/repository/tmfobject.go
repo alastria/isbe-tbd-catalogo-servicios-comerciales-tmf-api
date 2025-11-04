@@ -23,8 +23,8 @@ type TMFObject struct {
 	Content        []byte           `db:"content"`
 	ContentMap     TMFObjectMap     `db:"-"`
 	Validations    ValidationResult `db:"-"`
-	CreatedAt      time.Time        `db:"created_at"`
-	UpdatedAt      time.Time        `db:"updated_at"`
+	CreatedAt      int64            `db:"created_at"`
+	UpdatedAt      int64            `db:"updated_at"`
 }
 
 // NewTMFObject creates a new TMFObject.
@@ -38,8 +38,8 @@ func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, conten
 		APIVersion: apiVersion,
 		LastUpdate: lastUpdate,
 		Content:    content,
-		CreatedAt:  now,
-		UpdatedAt:  now,
+		CreatedAt:  now.Unix(),
+		UpdatedAt:  now.Unix(),
 	}
 
 	return o
@@ -58,6 +58,16 @@ func (o *TMFObject) SetSellerID(sellerID string) {
 		sellerID = "did:elsi:" + sellerID
 	}
 	o.Seller = sellerID
+}
+
+// GetCreatedAt returns the time.Time representation of the Unix timestamp of th einternal field CreatedAt
+func (o *TMFObject) GetCreatedAt() time.Time {
+	return time.Unix(o.CreatedAt, 0)
+}
+
+// GetUpdatedAt returns the time.Time representation of the Unix timestamp of th einternal field UpdatedAt
+func (o *TMFObject) GetUpdatedAt() time.Time {
+	return time.Unix(o.UpdatedAt, 0)
 }
 
 // Validate validates the TMFObject.

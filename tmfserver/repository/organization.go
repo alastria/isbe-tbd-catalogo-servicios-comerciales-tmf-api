@@ -124,8 +124,8 @@ func TMFOrganizationFromToken(accessToken map[string]any, user *Organization) (*
 		APIVersion: "v4",
 		LastUpdate: lastUpdate,
 		Content:    content,
-		CreatedAt:  now,
-		UpdatedAt:  now,
+		CreatedAt:  now.Unix(),
+		UpdatedAt:  now.Unix(),
 	}
 
 	return org, nil

@@ -205,7 +205,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		LastUpdate: existingLastUpdate,
 		Content:    existingObjectContent,
 		CreatedAt:  existingObj.CreatedAt,
-		UpdatedAt:  time.Now(),
+		UpdatedAt:  time.Now().Unix(),
 	}
 
 	if err := svc.updateObject(existingObject); err != nil {
