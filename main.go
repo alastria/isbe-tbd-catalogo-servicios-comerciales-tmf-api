@@ -51,14 +51,14 @@ func main() {
 		panic(err)
 	}
 
+	// Get the PID and name of our executable
 	ourPid := os.Getpid()
-
-	// Get the name fo our executable
 	ourExecPath, err := os.Executable()
 	if err != nil {
 		panic(err)
 	}
 
+	// Exclude the name of the program from the list of arguments
 	args := os.Args[1:]
 
 	// ******************************************************
@@ -79,93 +79,34 @@ func main() {
 	}
 
 	if runAsInit {
-		// We are the init process in a container, or testing the functionality
-		fmt.Println("We are the init process! PID:", ourPid)
-
-		// Pass to child all arguments following the "init" entry (first argument after program name)
-		cmd := exec.Command(ourExecPath, args...)
-
-		cmd.Stdout = os.Stdout
-		cmd.Stderr = os.Stderr
-		// Set ProcessGroupID for child process as init process. Both will be under same process group
-		cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
-
-		// We need notification of all relevant signals
-		sigs := make(chan os.Signal, 1)
-		signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
-
-		done := make(chan bool, 1)
-
-		// Forward all signals to the child in a goroutine
-		go func() {
-			for sig := range sigs {
-
-				if sig == syscall.SIGHUP {
-					fmt.Println("INIT: process received SIGHUP")
-				} else {
-					fmt.Printf("INIT: process received %v signal\n", sig)
-				}
-
-				if cmd.Process != nil {
-					fmt.Printf("INIT: received %v signal for PID %v\n", sig, cmd.Process.Pid)
-					_ = cmd.Process.Signal(sig)
-				}
-
-				if sig == syscall.SIGTERM || sig == syscall.SIGINT {
-					// We are done, and the init process will terminate
-					fmt.Println("INIT: using DONE channel to terminate init process")
-					done <- true
-				}
-			}
-		}()
-
-		// Enter in a goroutine an infinite loop reaping periodically the zombie children
-		go func() {
-			for {
-				var ws syscall.WaitStatus
-				pid, err := syscall.Wait4(-1, &ws, syscall.WNOHANG, nil)
-				if pid <= 0 || err != nil {
-					time.Sleep(1 * time.Second)
-				} else {
-					fmt.Printf("INIT: reaped zombie child with PID: %v\n", pid)
-				}
-			}
-
-		}()
-
-		// Start the child (a fork of ourselves) without waiting for termination
-		fmt.Println("INIT: starting child process")
-		if err := cmd.Start(); err != nil {
-			log.Fatalf("INIT: failed to start child process: %v", err)
-		}
-
-		fmt.Println("INIT: awaiting signal to terminate init process")
-		<-done
-		fmt.Println("INIT: exiting init process")
+		runAsInitProcess(ourPid, ourExecPath, args)
 		return
-
 	}
-	// ******************************************************
-	// ******************************************************
+
+	runNormalProcess(configuration, restartHour, restartMinute, ourExecPath, args)
+
+}
+
+func runNormalProcess(configuration *config.Config, restartHour int, restartMinute int, ourExecPath string, args []string) {
 	// We are now executing the normal process
 
-	slog.Info("Process started", "PID", ourPid, "executable", ourExecPath, "args", args)
+	slog.Info("Process started", "PID", os.Getpid(), "executable", ourExecPath, "args", args)
 
 	// Connect to the database
 	db := sqlx.MustConnect("sqlite3", configuration.Dbname)
 	defer db.Close()
 
 	slog.Info("About to create tables if they do not exist")
-	err = repository.CreateTables(db)
+	err := repository.CreateTables(db)
 	if err != nil {
 		slog.Error("failed to create tables", slog.Any("error", err))
 		os.Exit(1)
 	}
 
-	// Create the PDP (aka rules engine)
+	// Create the PDP (aka Policy Decision Point or rules engine)
 	rulesEngine, err := pdp.NewPDP(&pdp.Config{
 		PolicyFileName: configuration.PolicyFileName,
-		Debug:          debugFlag,
+		Debug:          configuration.Debug,
 	})
 	if err != nil {
 		slog.Error("failed to create rules engine", slog.Any("error", err))
@@ -173,7 +114,11 @@ func main() {
 	}
 
 	// Create the service
-	s := service.NewService(configuration, db, rulesEngine)
+	s, err := service.NewTMFService(configuration, db, rulesEngine)
+	if err != nil {
+		slog.Error("failed to create service", slog.Any("error", err))
+		os.Exit(1)
+	}
 
 	// Create Fiber app with custom configuration
 	app := fiber.New(fiber.Config{
@@ -195,7 +140,7 @@ func main() {
 
 	// 1. Recovery middleware - should be first to catch panics
 	app.Use(recover.New(recover.Config{
-		EnableStackTrace: debugFlag,
+		EnableStackTrace: configuration.Debug,
 	}))
 
 	// 2. Request ID middleware - for tracing requests
@@ -330,4 +275,70 @@ func main() {
 		fmt.Println("Exiting without error")
 	}
 
+}
+
+func runAsInitProcess(ourPid int, ourExecPath string, args []string) {
+	// We are the init process in a container, or testing the functionality
+	fmt.Println("We are the init process! PID:", ourPid)
+
+	// Pass to child all arguments following the "init" entry (first argument after program name)
+	cmd := exec.Command(ourExecPath, args...)
+
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	// Set ProcessGroupID for child process as init process. Both will be under same process group
+	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+
+	// We need notification of all relevant signals
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP)
+
+	done := make(chan bool, 1)
+
+	// Forward all signals to the child in a goroutine
+	go func() {
+		for sig := range sigs {
+
+			if sig == syscall.SIGHUP {
+				fmt.Println("INIT: process received SIGHUP")
+			} else {
+				fmt.Printf("INIT: process received %v signal\n", sig)
+			}
+
+			if cmd.Process != nil {
+				fmt.Printf("INIT: received %v signal for PID %v\n", sig, cmd.Process.Pid)
+				_ = cmd.Process.Signal(sig)
+			}
+
+			if sig == syscall.SIGTERM || sig == syscall.SIGINT {
+				// We are done, and the init process will terminate
+				fmt.Println("INIT: using DONE channel to terminate init process")
+				done <- true
+			}
+		}
+	}()
+
+	// Enter in a goroutine an infinite loop reaping periodically the zombie children
+	go func() {
+		for {
+			var ws syscall.WaitStatus
+			pid, err := syscall.Wait4(-1, &ws, syscall.WNOHANG, nil)
+			if pid <= 0 || err != nil {
+				time.Sleep(1 * time.Second)
+			} else {
+				fmt.Printf("INIT: reaped zombie child with PID: %v\n", pid)
+			}
+		}
+
+	}()
+
+	// Start the child (a fork of ourselves) without waiting for termination
+	fmt.Println("INIT: starting child process")
+	if err := cmd.Start(); err != nil {
+		log.Fatalf("INIT: failed to start child process: %v", err)
+	}
+
+	fmt.Println("INIT: awaiting signal to terminate init process")
+	<-done
+	fmt.Println("INIT: exiting init process")
 }

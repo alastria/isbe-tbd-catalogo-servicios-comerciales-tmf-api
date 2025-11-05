@@ -5,6 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "GENTMF",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "cmd/gentmfv4/main.go",
+            "cwd": "${workspaceFolder}"
+        },
+        {
             "name": "Fixing",
             "type": "go",
             "request": "launch",

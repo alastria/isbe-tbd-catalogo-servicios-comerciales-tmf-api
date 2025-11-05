@@ -30,13 +30,11 @@ var (
 
 func main() {
 
-	// Visit recursively the directories in the "swagger" directory
-	// It assumes an "almost" flat structure with directories named after the management system
-	// and one file inside each directory named "api.json" or similar.
-	baseDir := "./www/oapiv4/oapiv4"
+	// Visit all the JSON files in the "swagger" directory
+	swaggerDir := "./www/oapiv4/oapiv4"
 
 	// Read the directory entries
-	dirEntries, err := os.ReadDir(baseDir)
+	dirEntries, err := os.ReadDir(swaggerDir)
 	if err != nil {
 		panic(err)
 	}
@@ -45,7 +43,7 @@ func main() {
 	for _, dirEntry := range dirEntries {
 		if !dirEntry.IsDir() {
 			// Process the file
-			filePath := path.Join(baseDir, dirEntry.Name())
+			filePath := path.Join(swaggerDir, dirEntry.Name())
 			if !strings.HasSuffix(filePath, ".json") {
 				// Skip non-JSON files
 				continue
@@ -74,12 +72,12 @@ func main() {
 	}
 
 	// Adjust imports before writing the file
-	out, err := imports.Process("types.go", b.Bytes(), nil)
+	out, err := imports.Process("perico.go", b.Bytes(), nil)
 	if err != nil {
 		panic(err)
 	}
 
-	err = os.WriteFile("./types.go", out, 0644)
+	err = os.WriteFile("./perico.go", out, 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -118,7 +116,6 @@ func processOneFile(filePath string) {
 
 	apiFamily := basePathParts[1]
 	fmt.Println("API family:", apiFamily)
-	managementToUpstream[apiFamily] = "TODO: set upstream host and path like http://localhost:8062"
 
 	// Get the "paths" key from the map
 	paths := jpath.GetMap(swagMap, "paths")
@@ -127,11 +124,6 @@ func processOneFile(filePath string) {
 
 	// Iterate over the keys in the "paths" map
 	for thePath := range paths {
-		// Check if the value is a map
-		// methodsMap, ok := methods.(map[string]any)
-		// if !ok {
-		// 	panic("methods value is not a map")
-		// }
 
 		thePath = strings.Trim(thePath, "/")
 
@@ -144,7 +136,7 @@ func processOneFile(filePath string) {
 		}
 
 		if resourceName == "hub" || resourceName == "listener" {
-			// TODO: implement specia processing for these paths
+			// TODO: implement special processing for these paths
 			continue
 		}
 
@@ -154,13 +146,48 @@ func processOneFile(filePath string) {
 
 	}
 
-	// fmt.Println(description)
-	fmt.Printf("- **%s**\n", apiFamily)
+	// ******************************
+	// Get the definitions
+	definitions := jpath.GetMap(swagMap, "definitions")
 
-	for resourceName := range localResourceNames {
-		fmt.Printf("  - %s\n", resourceName)
+	for definitionName, v := range definitions {
+
+		if strings.Contains(definitionName, "ChangeEvent") || strings.Contains(definitionName, "DeleteEvent") || strings.Contains(definitionName, "CreateEvent") {
+			continue
+		}
+
+		properties := jpath.GetMap(v, "properties")
+
+		var found bool
+		var propsSlice = []string{}
+		for propertyName := range properties {
+			propsSlice = append(propsSlice, propertyName)
+			if propertyName == "name" {
+				found = true
+				break
+			}
+		}
+
+		if !found {
+			fmt.Println("   NAME NOT REQUIRED FOR", definitionName, ">>>>", propsSlice)
+		}
+
+		if strings.HasSuffix(definitionName, "_Create") || strings.HasSuffix(definitionName, "_Update") {
+			requiredAttributes := jpath.GetListString(v, "required")
+			if len(requiredAttributes) > 0 {
+				fmt.Println("   ", definitionName, "->", requiredAttributes)
+			}
+		}
+
 	}
 
-	fmt.Println()
+	// // fmt.Println(description)
+	// fmt.Printf("- **%s**\n", apiFamily)
+
+	// for resourceName := range localResourceNames {
+	// 	fmt.Printf("  - %s\n", resourceName)
+	// }
+
+	// fmt.Println()
 
 }

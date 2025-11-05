@@ -120,14 +120,14 @@ type Service struct {
 	LEARPower types.OnePower
 }
 
-// NewService creates a new service.
-func NewService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) *Service {
-	svc := &Service{
-		db:             db,
-		ruleEngine:     ruleEngine,
-		verifierServer: cnf.VerifierServer,
-		proxyEnabled:   cnf.ProxyEnabled,
-	}
+// NewTMFService creates a new service.
+func NewTMFService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) (*Service, error) {
+	svc := &Service{}
+
+	svc.db = db
+	svc.ruleEngine = ruleEngine
+	svc.verifierServer = cnf.VerifierServer
+	svc.proxyEnabled = cnf.ProxyEnabled
 
 	// Information about us (the server operator)
 	svc.ServerOperatorOrganizationIdentifier = cnf.ServerOperatorOrganizationIdentifier
@@ -147,10 +147,31 @@ func NewService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) *Service {
 		svc.fressness = 10 * time.Minute
 	}
 
-	err := svc.initializeService()
-	if err != nil {
-		panic(err)
+	// Create the server operator identity, in case it is not yet in the database
+	org := &repository.Organization{
+		CommonName:             svc.ServerOperatorName,
+		Country:                svc.ServerOperatorCountry,
+		EmailAddress:           svc.ServerEmailAddress,
+		Organization:           svc.ServerOperatorName,
+		OrganizationIdentifier: svc.ServerOperatorOrganizationIdentifier,
 	}
+	obj, _ := repository.TMFOrganizationFromToken(nil, org)
+
+	if err := svc.upsertObject(obj); err != nil {
+		if errors.Is(err, &ErrObjectExists{}) {
+			slog.Debug("server operator organization already exists", "organizationIdentifier", svc.ServerOperatorOrganizationIdentifier)
+		} else {
+			err = errl.Errorf("error creating server operator organization: %w", err)
+			panic(err)
+		}
+	}
+
+	// Retrieve the OpenId configuration of the Verifier server
+	oid, err := NewOpenIDConfig(svc.verifierServer)
+	if err != nil {
+		return nil, errl.Errorf("failed to retrieve OpenID configuration: %w", err)
+	}
+	svc.oid = oid
 
 	// Create the paging service
 	pagingConfig := DefaultPagingConfig()
@@ -171,40 +192,7 @@ func NewService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) *Service {
 	deliver := notifications.NewHTTPDelivery(5 * time.Second)
 	svc.notif = notifications.NewManager(store, deliver)
 
-	return svc
-}
-
-func (svc *Service) initializeService() error {
-
-	// Create the server operator identity, in case it is not yet in the database
-	org := &repository.Organization{
-		CommonName:             svc.ServerOperatorName,
-		Country:                svc.ServerOperatorCountry,
-		EmailAddress:           svc.ServerEmailAddress,
-		Organization:           svc.ServerOperatorName,
-		OrganizationIdentifier: svc.ServerOperatorOrganizationIdentifier,
-	}
-
-	obj, _ := repository.TMFOrganizationFromToken(nil, org)
-
-	if err := svc.upsertObject(obj); err != nil {
-		if errors.Is(err, &ErrObjectExists{}) {
-			slog.Debug("server operator organization already exists", "organizationIdentifier", svc.ServerOperatorOrganizationIdentifier)
-		} else {
-			err = errl.Errorf("error creating server operator organization: %w", err)
-			panic(err)
-		}
-	}
-
-	// Retrieve the OpenId configuration of the Verifier server
-	oid, err := NewOpenIDConfig(svc.verifierServer)
-	if err != nil {
-		return errl.Errorf("failed to retrieve OpenID configuration: %w", err)
-	}
-	svc.oid = oid
-
-	return nil
-
+	return svc, nil
 }
 
 // ToKebabCase converts a camelCase string to kebab-case.
