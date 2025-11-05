@@ -35,8 +35,9 @@ func main() {
 
 	// Read the directory entries
 	dirEntries, err := os.ReadDir(swaggerDir)
-	if err != nil {
-		panic(err)
+if err != nil {
+		fmt.Fprintf(os.Stderr, "Error reading directory %s: %v\n", swaggerDir, err)
+		os.Exit(1)
 	}
 
 	// Process each file in the directory
