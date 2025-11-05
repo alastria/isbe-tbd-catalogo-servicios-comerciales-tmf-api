@@ -30,15 +30,15 @@ func (svc *Service) ProcessAccessToken(r *Request) (tokenClaims map[string]any, 
 	// This is to support testing
 	verify := true
 
-	if len(r.AccessToken) == 0 {
-		// The user did not provide an access token.
-		// Normally this is forbidden, but for testing we can provide a fake one, and do not verify signature
-		if AllowFakeClaims && r.Method != "GET" {
-			slog.Debug("using fake claims for testing")
-			r.AccessToken = FakeATold
-			verify = false
-		}
-	}
+	// if len(r.AccessToken) == 0 {
+	// 	// The user did not provide an access token.
+	// 	// Normally this is forbidden, but for testing we can provide a fake one, and do not verify signature
+	// 	if AllowFakeClaims && r.Method != "GET" {
+	// 		slog.Debug("using fake claims for testing")
+	// 		r.AccessToken = FakeATold
+	// 		verify = false
+	// 	}
+	// }
 
 	// An empty token is not considered an error, and the caller should enforce its existence if needed
 	if len(r.AccessToken) == 0 {
