@@ -54,8 +54,8 @@ func main() {
 	// Get the PID and name of our executable
 	ourPid := os.Getpid()
 	ourExecPath, err := os.Executable()
-	if err != nil {
-		panic(err)
+if err != nil {
+		log.Fatalf("Failed to get executable path: %v", err)
 	}
 
 	// Exclude the name of the program from the list of arguments
