@@ -7,9 +7,9 @@ import (
 	"github.com/hesusruiz/isbetmf/internal/errl"
 )
 
-// TMFObject represents a generic TMForum object.
+// TMFRecord represents a generic TMForum object.
 // It is used to store and retrieve objects from the database.
-type TMFObject struct {
+type TMFRecord struct {
 	ID             string           `db:"id"`
 	Type           string           `db:"type"`
 	Version        string           `db:"version"`
@@ -27,11 +27,11 @@ type TMFObject struct {
 	UpdatedAt      int64            `db:"updated_at"`
 }
 
-// NewTMFObject creates a new TMFObject.
-func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, content []byte) *TMFObject {
+// NewTMFRecord creates a new TMFObject.
+func NewTMFRecord(id, objectType, version, apiVersion, lastUpdate string, content []byte) *TMFRecord {
 	now := time.Now()
 
-	o := &TMFObject{
+	o := &TMFRecord{
 		ID:         id,
 		Type:       objectType,
 		Version:    version,
@@ -46,14 +46,14 @@ func NewTMFObject(id, objectType, version, apiVersion, lastUpdate string, conten
 
 }
 
-func (o *TMFObject) SetBuyerID(buyerID string) {
+func (o *TMFRecord) SetBuyerID(buyerID string) {
 	if !strings.HasPrefix(buyerID, "did:elsi:") {
 		buyerID = "did:elsi:" + buyerID
 	}
 	o.Buyer = buyerID
 }
 
-func (o *TMFObject) SetSellerID(sellerID string) {
+func (o *TMFRecord) SetSellerID(sellerID string) {
 	if !strings.HasPrefix(sellerID, "did:elsi:") {
 		sellerID = "did:elsi:" + sellerID
 	}
@@ -61,27 +61,27 @@ func (o *TMFObject) SetSellerID(sellerID string) {
 }
 
 // GetCreatedAt returns the time.Time representation of the Unix timestamp of th einternal field CreatedAt
-func (o *TMFObject) GetCreatedAt() time.Time {
+func (o *TMFRecord) GetCreatedAt() time.Time {
 	return time.Unix(o.CreatedAt, 0)
 }
 
 // GetUpdatedAt returns the time.Time representation of the Unix timestamp of th einternal field UpdatedAt
-func (o *TMFObject) GetUpdatedAt() time.Time {
+func (o *TMFRecord) GetUpdatedAt() time.Time {
 	return time.Unix(o.UpdatedAt, 0)
 }
 
 // Validate validates the TMFObject.
 // It returns an error if the object is invalid, and detailed validations are in o.Validations
-func (o *TMFObject) Validate() error {
+func (o *TMFRecord) Validate() error {
 	// We need to unmarshal the JSON to a Map
 	// Doing this we get the validations performed and the result in o.Validations
-	_, err := o.ToMap()
+	_, err := o.ToTMFObjectMap()
 	return err
 }
 
-// ToMap returns a TMFObjectMap reusing any previous marshalling and validation.
+// ToTMFObjectMap returns a TMFObjectMap reusing any previous marshalling and validation.
 // To force to always marshal of o.Content and running validations, use o.MustToMap
-func (o *TMFObject) ToMap() (TMFObjectMap, error) {
+func (o *TMFRecord) ToTMFObjectMap() (TMFObjectMap, error) {
 	if o == nil {
 		return nil, errl.Errorf("object is nil")
 	}
@@ -89,11 +89,11 @@ func (o *TMFObject) ToMap() (TMFObjectMap, error) {
 		return o.ContentMap, nil
 	}
 
-	return o.MustToMap()
+	return o.MustToTMFObjectMap()
 }
 
-// MustToMap returns a TMFObjectMap after running validations
-func (o *TMFObject) MustToMap() (TMFObjectMap, error) {
+// MustToTMFObjectMap returns a TMFObjectMap after running validations
+func (o *TMFRecord) MustToTMFObjectMap() (TMFObjectMap, error) {
 
 	omap, err := NewTMFObjectMap(o.Content)
 	if err != nil {

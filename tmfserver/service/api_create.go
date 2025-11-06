@@ -173,7 +173,10 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, incomingObjectMap); !authorized {
+	incomingObjectMap.SetLastUpdateNow()
+	obj := incomingObjectMap.ToTMFObject(req.ResourceName)
+
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,
@@ -188,7 +191,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// Now we can proceed, creating an object in the database or the remote server in proxy mode
 	// ************************************************************************************************
 
-	respSt := svc.createLocalOrRemoteObject(req, incomingObjectMap)
+	respSt := svc.createLocalOrRemoteObject(req, obj)
 
 	if respSt.StatusCode == http.StatusCreated {
 		// Send TMForum notification

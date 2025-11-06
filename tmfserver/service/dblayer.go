@@ -49,7 +49,7 @@ func (e *ErrObjectConflict) Error() string {
 }
 
 // createObject creates a new TMF object. Returns &ErrObjectExists if the object already existed.
-func (svc *Service) createObject(obj *repo.TMFObject) error {
+func (svc *Service) createObject(obj *repo.TMFRecord) error {
 	slog.Debug("dbLayer: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Direct to another storage system if defined
@@ -77,7 +77,7 @@ func (svc *Service) createObject(obj *repo.TMFObject) error {
 	return err
 }
 
-func (svc *Service) createObjectIfNotExist(obj *repo.TMFObject) error {
+func (svc *Service) createObjectIfNotExist(obj *repo.TMFRecord) error {
 	slog.Debug("dbLayer: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Direct to another storage system if defined
@@ -105,7 +105,7 @@ func (svc *Service) createObjectIfNotExist(obj *repo.TMFObject) error {
 	return err
 }
 
-func (svc *Service) upsertObject(obj *repo.TMFObject) error {
+func (svc *Service) upsertObject(obj *repo.TMFRecord) error {
 	slog.Debug("dbLayer: Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Direct to another storage system if defined
@@ -136,13 +136,15 @@ func (svc *Service) upsertObject(obj *repo.TMFObject) error {
 
 // createLocalOrRemoteObject creates an object in the remote server and then in the local database, if the proxy is enabled.
 // Othewise, it just creates the object in the local database.
-func (svc *Service) createLocalOrRemoteObject(req *Request, objMap repo.TMFObjectMap) *Response {
+func (svc *Service) createLocalOrRemoteObject(req *Request, obj *repo.TMFRecord) *Response {
+
+	objMap, err := obj.ToTMFObjectMap()
+	if err != nil {
+		return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object: %w", err)
+	}
 
 	// Set the lastUpdate attribute
 	objMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
-
-	// Prepare the object for the database
-	obj := objMap.ToTMFObject(req.ResourceName)
 
 	// Create the object only in the local database if the proxy is not enabled
 	if !svc.proxyEnabled {
@@ -214,7 +216,7 @@ func (svc *Service) createLocalOrRemoteObject(req *Request, objMap repo.TMFObjec
 		return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object content: %w", err)
 	}
 
-	receivedObject := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, receivedContent)
+	receivedObject := repo.NewTMFRecord(id, req.ResourceName, version, req.APIVersion, lastUpdate, receivedContent)
 
 	// Create the new object in the local database
 	if err := svc.createObject(receivedObject); err != nil {
@@ -227,12 +229,12 @@ func (svc *Service) createLocalOrRemoteObject(req *Request, objMap repo.TMFObjec
 	}
 	slog.Info("Object created successfully", slog.String("id", id), slog.String("resourceName", req.ResourceName), slog.String("location", receivedObjectMap.Href()))
 
-	return &Response{StatusCode: http.StatusCreated, Body: receivedObjectMap}
+	return &Response{StatusCode: http.StatusCreated, Headers: headers, Body: receivedObjectMap}
 
 }
 
 // getObject retrieves a TMF object by its ID and type, returning the latest version.
-func (svc *Service) getObject(id, objectType string) (*repo.TMFObject, error) {
+func (svc *Service) getObject(id, objectType string) (*repo.TMFRecord, error) {
 	slog.Debug("dbLayer: Getting object", slog.String("id", id), slog.String("type", objectType))
 
 	// Direct to another storage system if defined
@@ -240,7 +242,7 @@ func (svc *Service) getObject(id, objectType string) (*repo.TMFObject, error) {
 		return svc.storage.GetObject(id, objectType)
 	}
 
-	var obj repo.TMFObject
+	var obj repo.TMFRecord
 	err := svc.db.Get(&obj, "SELECT * FROM tmf_object WHERE id = ? AND type = ? ORDER BY version DESC LIMIT 1", id, objectType)
 	if err == sql.ErrNoRows {
 		slog.Info("Service: Object not found", slog.String("id", id), slog.String("type", objectType))
@@ -253,7 +255,7 @@ func (svc *Service) getObject(id, objectType string) (*repo.TMFObject, error) {
 
 // getLocalOrRemoteObject retrieves the object from the database. If it is not found, we try to get it from the remote server (if proxy is enabled).
 // If the object is not found anywhere, it returns a nil object and no error.
-func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error) {
+func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFRecord, error) {
 
 	// Check if we have the object locally
 	obj, err := svc.getObject(req.ID, req.ResourceName)
@@ -296,7 +298,7 @@ func (svc *Service) getLocalOrRemoteObject(req *Request) (*repo.TMFObject, error
 
 }
 
-func (svc *Service) getRemoteObject(req *Request) (*repo.TMFObject, error) {
+func (svc *Service) getRemoteObject(req *Request) (*repo.TMFRecord, error) {
 	slog.Debug("retrieving object from remote", slog.String("id", req.ID))
 
 	// Send the access token
@@ -331,7 +333,7 @@ func (svc *Service) getRemoteObject(req *Request) (*repo.TMFObject, error) {
 
 	// Build the object from the reply
 	receivedObjectMap, err := repo.NewTMFObjectMapFromRequest(req.ResourceName, body)
-	if err := json.Unmarshal(body, &receivedObjectMap); err != nil {
+	if err != nil {
 		return nil, errl.Errorf("failed to bind request body: %w", err)
 	}
 
@@ -355,13 +357,13 @@ func (svc *Service) getRemoteObject(req *Request) (*repo.TMFObject, error) {
 		return nil, errl.Errorf("failed to marshal object content: %w", err)
 	}
 
-	obj := repo.NewTMFObject(id, req.ResourceName, version, req.APIVersion, lastUpdate, receivedContent)
+	obj := repo.NewTMFRecord(id, req.ResourceName, version, req.APIVersion, lastUpdate, receivedContent)
 
 	return obj, nil
 }
 
 // updateObject updates an existing TMF object.
-func (svc *Service) updateObject(obj *repo.TMFObject) error {
+func (svc *Service) updateObject(obj *repo.TMFRecord) error {
 	slog.Debug("dbLayer: Updating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Direct to another storage system if defined
@@ -403,26 +405,26 @@ func (svc *Service) deleteObject(id, objectType string) error {
 	return err
 }
 
-type objectFilter func(obj *repo.TMFObject) bool
+type objectFilter func(obj *repo.TMFRecord) bool
 
 // listObjects retrieves all TMF objects of a given type, returning only the latest version for each unique ID.
 // It supports pagination, filtering, and sorting according to TMF630 guidelines.
-func (svc *Service) listObjects(req *Request, tokenMap map[string]any, objectType string, apiVersion string, queryParams url.Values, filter objectFilter) ([]repo.TMFObject, int, error) {
-	slog.Debug("dbLayer: Listing objects", "type", objectType, "queryParams", queryParams)
+func (svc *Service) listObjects(req *Request, filter objectFilter) ([]repo.TMFRecord, int, error) {
+	slog.Debug("dbLayer: Listing objects", "type", req.ResourceName, "queryParams", req.QueryParams)
 
 	// Direct to another storage system if defined
 	if svc.storage != nil {
-		return svc.storage.ListObjects(objectType, apiVersion, queryParams)
+		return svc.storage.ListObjects(req.ResourceName, req.APIVersion, req.QueryParams)
 	}
 
 	// Parse the parameters according to TM Forum specs and build the SELECT
-	baseQuery, args, limit, offset, err := BuildSelectFromParms(objectType, queryParams)
+	baseQuery, args, limit, offset, err := BuildSelectFromParms(req.ResourceName, req.QueryParams)
 	if err != nil {
 		return nil, 0, errl.Errorf("failed to build select query: %w", err)
 	}
 	fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
 
-	var objs []repo.TMFObject
+	var objs []repo.TMFRecord
 	var totalCount int
 	var offsetCounter int
 
@@ -435,7 +437,7 @@ func (svc *Service) listObjects(req *Request, tokenMap map[string]any, objectTyp
 
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
-		var obj repo.TMFObject
+		var obj repo.TMFRecord
 		if err := rows.Scan(&obj.ID, &obj.Type, &obj.Version, &obj.APIVersion,
 			&obj.Seller, &obj.Buyer, &obj.LastUpdate, &obj.Content, &obj.CreatedAt, &obj.UpdatedAt); err != nil {
 
@@ -443,22 +445,9 @@ func (svc *Service) listObjects(req *Request, tokenMap map[string]any, objectTyp
 
 		}
 
-		// Generate the map-based object and verify it formally
-		objMap, err := obj.ToMap()
-		if err != nil {
-			slog.Info("object %s is invalid: %w", obj.ID, errl.Error(err))
-			continue
-		}
-
-		// Check if the user can access the object
-		authorized, err := svc.takeDecision(svc.ruleEngine, req, tokenMap, objMap)
-		if !authorized {
-			slog.Info("object %s not authorized: %w", obj.ID, errl.Error(err))
-			continue
-		}
-
-		// Callback to the caller for additional filtering/ammendment of the object
+		// Callback to the caller for filtering/ammendment of the object
 		if filter != nil && !filter(&obj) {
+			// The callback said thatwe should not include this object
 			continue
 		}
 

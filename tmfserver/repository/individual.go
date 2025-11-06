@@ -59,7 +59,7 @@ const exampleIndividualObject = `
   "version": "1.0"
 }`
 
-func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Organization) (*TMFObject, error) {
+func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Organization) (*TMFRecord, error) {
 
 	// TODO: what happens if we receive a LEARCredentialMachine?
 	lc, err := types.LEARCredentialFromMap(verifiableCredential)
@@ -165,7 +165,7 @@ func TMFIndividualFromCredential(verifiableCredential map[string]any, user *Orga
 		return nil, errl.Errorf("error marshalling organization: %w", err)
 	}
 
-	org := &TMFObject{
+	org := &TMFRecord{
 		ID:         id,
 		Type:       objectType,
 		Version:    version,

@@ -33,7 +33,7 @@ func (u *Organization) ToMap() map[string]any {
 	}
 }
 
-func TMFOrganizationFromToken(accessToken map[string]any, user *Organization) (*TMFObject, error) {
+func TMFOrganizationFromToken(accessToken map[string]any, user *Organization) (*TMFRecord, error) {
 
 	id := "urn:ngsi-ld:organization:" + user.OrganizationIdentifier
 	did := user.OrganizationIdentifier
@@ -117,7 +117,7 @@ func TMFOrganizationFromToken(accessToken map[string]any, user *Organization) (*
 		return nil, errl.Errorf("error marshalling organization: %w", err)
 	}
 
-	org := &TMFObject{
+	org := &TMFRecord{
 		ID:         id,
 		Type:       objectType,
 		Version:    version,

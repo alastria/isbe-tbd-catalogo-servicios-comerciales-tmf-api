@@ -34,8 +34,13 @@ func (svc *Service) takeDecision(
 	ruleEngine *pdp.PDP,
 	req *Request,
 	tokenClaims map[string]any,
-	objectMap repo.TMFObjectMap,
+	obj *repo.TMFRecord,
 ) (authorized bool, err error) {
+
+	objectMap, err := obj.ToTMFObjectMap()
+	if err != nil {
+		return false, errl.Errorf("failed to convert object to map: %w", err)
+	}
 
 	// Evaluate the hardcoded policies, if they fail return immediately.
 	// Otherwise, continue to see if the user policies allow access

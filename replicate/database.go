@@ -66,7 +66,7 @@ func (d *Database) initializeSchema() error {
 }
 
 // StoreObject stores a TMF object in the database
-func (d *Database) StoreObject(obj *repo.TMFObject) error {
+func (d *Database) StoreObject(obj *repo.TMFRecord) error {
 	slog.Debug("Storing object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Check if object already exists
@@ -85,7 +85,7 @@ func (d *Database) StoreObject(obj *repo.TMFObject) error {
 }
 
 // CreateObject creates a new TMF object in the database
-func (d *Database) CreateObject(obj *repo.TMFObject) error {
+func (d *Database) CreateObject(obj *repo.TMFRecord) error {
 	slog.Debug("Creating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	query := `INSERT INTO tmf_object (id, type, version, api_version, last_update, content, created_at, updated_at)
@@ -101,7 +101,7 @@ func (d *Database) CreateObject(obj *repo.TMFObject) error {
 }
 
 // UpdateObject updates an existing TMF object in the database
-func (d *Database) UpdateObject(obj *repo.TMFObject) error {
+func (d *Database) UpdateObject(obj *repo.TMFRecord) error {
 	slog.Debug("Updating object", slog.String("id", obj.ID), slog.String("type", obj.Type), slog.String("version", obj.Version))
 
 	// Update the updated_at timestamp
@@ -129,10 +129,10 @@ func (d *Database) UpdateObject(obj *repo.TMFObject) error {
 }
 
 // GetObject retrieves a TMF object by its ID and type
-func (d *Database) GetObject(id, objectType string) (*repo.TMFObject, error) {
+func (d *Database) GetObject(id, objectType string) (*repo.TMFRecord, error) {
 	slog.Debug("Getting object", slog.String("id", id), slog.String("type", objectType))
 
-	var obj repo.TMFObject
+	var obj repo.TMFRecord
 	query := "SELECT * FROM tmf_object WHERE id = ? AND type = ? ORDER BY version DESC LIMIT 1"
 
 	err := d.db.Get(&obj, query, id, objectType)
@@ -146,10 +146,10 @@ func (d *Database) GetObject(id, objectType string) (*repo.TMFObject, error) {
 }
 
 // ListObjects retrieves all TMF objects of a given type
-func (d *Database) ListObjects(objectType string) ([]repo.TMFObject, error) {
+func (d *Database) ListObjects(objectType string) ([]repo.TMFRecord, error) {
 	slog.Debug("Listing objects", slog.String("type", objectType))
 
-	var objs []repo.TMFObject
+	var objs []repo.TMFRecord
 	query := `SELECT t1.*
 		FROM tmf_object t1
 		INNER JOIN (

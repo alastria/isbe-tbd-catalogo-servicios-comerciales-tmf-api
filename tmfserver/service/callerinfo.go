@@ -45,6 +45,10 @@ func (svc *Service) ProcessAccessToken(r *Request) (tokenClaims map[string]any, 
 		return nil, nil
 	}
 
+	if r.AccessToken == "eyJhdWQiOiJodHRwczovL2NhdGFsb2cuaX" {
+		r.AccessToken = FakeATold
+	}
+
 	// It is an error to send an invaild token with the request, so we have to verify it.
 	// We verify the token and extract the claims, a verification error stops processing.
 

@@ -23,8 +23,8 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 	// Authentication: anonymous access is allowed for some objects, so we do not check the existence of the access token at this moment
 
 	// Defaut values for pagination, meaning that they were not specified by the user
-	var userLimit = -1
-	var userOffset = -1
+	var userLimit = 10
+	var userOffset = 0
 
 	// Get the user-specified values for pagination
 	limitStr := req.QueryParams.Get("limit")
@@ -39,7 +39,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 	// Respond immediately if the caller wanted zero objects
 	if userLimit == 0 {
-		var objs []repo.TMFObject
+		var objs []repo.TMFRecord
 		return &Response{StatusCode: http.StatusOK, Body: objs}
 	}
 
@@ -135,10 +135,10 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			}
 
 			// Process the list of response objects to filter depending on the user
-			for _, obj := range responseData {
+			for _, responseObject := range responseData {
 
 				// Prepare object for the database, validating it to check for errors
-				objectMap := repo.TMFObjectMap(obj)
+				objectMap := repo.TMFObjectMap(responseObject)
 				validations := objectMap.Validate(req.ResourceName)
 				if len(validations.Errors) > 0 {
 					invalidObjects++
@@ -146,22 +146,22 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 					continue
 				}
 
-				theObject := objectMap.ToTMFObject(req.ResourceName)
+				obj := objectMap.ToTMFObject(req.ResourceName)
 
 				// Store locally for further usage
-				if err := svc.upsertObject(theObject); err != nil {
+				if err := svc.upsertObject(obj); err != nil {
 					if errors.Is(err, &ErrObjectExists{}) {
-						slog.Debug("object already exists", "id", theObject.ID)
+						slog.Debug("object already exists", "id", obj.ID)
 					} else {
 						invalidObjects++
-						err = errl.Errorf("error saving object %s in local database: %w", theObject.ID, err)
+						err = errl.Errorf("error saving object %s in local database: %w", obj.ID, err)
 						slog.Error("error saving object in local database", "error", err)
 						continue
 					}
 				}
 
 				// Check if the object can be read by the user
-				authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, objectMap)
+				authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj)
 				if !authorized {
 					invalidObjects++
 					slog.Info("object %s not authorized: %w", objectMap.ID(), errl.Error(err))
@@ -225,10 +225,26 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 	} else {
 
-		var objs []repo.TMFObject
+		// Set the offset and limit to the user-specified values or the default
+		req.QueryParams.Set("offset", strconv.Itoa(userOffset))
+		req.QueryParams.Set("limit", strconv.Itoa(userLimit))
+
+		var objs []repo.TMFRecord
 		var totalCount int
 
-		objs, totalCount, err = svc.listObjects(req, req.TokenMap, req.ResourceName, req.APIVersion, req.QueryParams, nil)
+		objs, totalCount, err = svc.listObjects(req, func(obj *repo.TMFRecord) bool {
+
+			// Check if the user can access the object
+			authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj)
+			if !authorized {
+				slog.Info("object %s not authorized: %w", obj.ID, errl.Error(err))
+				return false
+			}
+
+			return true
+
+		})
+
 		if err != nil {
 			slog.Error("failed to list objects from service", slog.String("error", err.Error()))
 			return ErrorResponsef(http.StatusInternalServerError, "failed to list objects from service: %w", err)
@@ -240,7 +256,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		// Generate the response to the caller, which must be an array of repo.TMFObjectMap
 		responseData := make([]repo.TMFObjectMap, 0, len(objs))
 		for _, obj := range objs {
-			objectMap, err := obj.ToMap()
+			objectMap, err := obj.ToTMFObjectMap()
 			if err != nil {
 				slog.Error("failed to unmarshal object content for listing", slog.String("error", err.Error()))
 				return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
