@@ -5,7 +5,6 @@ import (
 	"log/slog"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/hesusruiz/isbetmf/internal/errl"
@@ -141,9 +140,10 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
 		}
 
-		if incomingObjectMap.LastUpdate() != "" {
-			// Set the lastUpdate property. We overwrite whatever the user sets.
-			incomingObjectMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
+		// Set the lastUpdate property if the user did not specify one
+		if incomingObjectMap.LastUpdate() == "" {
+			incomingObjectMap.SetLastUpdateNow()
+			slog.Debug("Set lastUpdate", slog.String("lastUpdate", incomingObjectMap["lastUpdate"].(string)))
 		}
 
 		// If the object requires a lifecycleStatus, add it if not specified by the caller
@@ -173,7 +173,6 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	incomingObjectMap.SetLastUpdateNow()
 	obj := incomingObjectMap.ToTMFObject(req.ResourceName)
 
 	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj); !authorized {

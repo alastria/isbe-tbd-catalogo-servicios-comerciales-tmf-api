@@ -143,9 +143,6 @@ func (svc *Service) createLocalOrRemoteObject(req *Request, obj *repo.TMFRecord)
 		return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object: %w", err)
 	}
 
-	// Set the lastUpdate attribute
-	objMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
-
 	// Create the object only in the local database if the proxy is not enabled
 	if !svc.proxyEnabled {
 		if err := svc.createObject(obj); err != nil {
@@ -205,10 +202,7 @@ func (svc *Service) createLocalOrRemoteObject(req *Request, obj *repo.TMFRecord)
 	// It is an error if the remote server does not return a 'lastUpdate', but we fix it and log a warning
 	if lastUpdate == "" {
 		slog.Warn("remote server did not return lastUpdate, fixing it", slog.String("id", id))
-
-		now := time.Now()
-		lastUpdate = now.Format(time.RFC3339Nano)
-		receivedObjectMap["lastUpdate"] = lastUpdate
+		receivedObjectMap.SetLastUpdateNow()
 	}
 
 	receivedContent, err := json.Marshal(receivedObjectMap)
