@@ -103,7 +103,7 @@ func TestDatabaseOperations(t *testing.T) {
 	defer db.Close()
 
 	// Test storing an object
-	obj := &repo.TMFObject{
+	obj := &repo.TMFRecord{
 		ID:         "test-id",
 		Type:       "productOffering",
 		Version:    "1.0",
@@ -251,7 +251,7 @@ func TestReplicatorClearDatabase(t *testing.T) {
 
 	// Add some objects to the database
 	db := replicator.database
-	obj := &repo.TMFObject{
+	obj := &repo.TMFRecord{
 		ID:         "test-id",
 		Type:       "productOffering",
 		Version:    "1.0",

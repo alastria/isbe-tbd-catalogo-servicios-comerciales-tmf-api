@@ -95,7 +95,7 @@ func (c *Converter) ReplicateTMFObjectToReportingTMFObject(replicateObj TMFObjec
 }
 
 // ReplicateTMFObjectToRepositoryTMFObject converts a replicate.TMFObject to repository.TMFObject
-func (c *Converter) ReplicateTMFObjectToRepositoryTMFObject(replicateObj TMFObjectMap, objectType string) (*repo.TMFObject, error) {
+func (c *Converter) ReplicateTMFObjectToRepositoryTMFObject(replicateObj TMFObjectMap, objectType string) (*repo.TMFRecord, error) {
 	// Convert to JSON
 	jsonData, err := replicateObj.ToJSON()
 	if err != nil {
@@ -103,7 +103,7 @@ func (c *Converter) ReplicateTMFObjectToRepositoryTMFObject(replicateObj TMFObje
 	}
 
 	// Create repository object
-	repoObj := repo.NewTMFObject(
+	repoObj := repo.NewTMFRecord(
 		replicateObj.GetID(),
 		objectType,
 		replicateObj.GetVersion(),
@@ -116,7 +116,7 @@ func (c *Converter) ReplicateTMFObjectToRepositoryTMFObject(replicateObj TMFObje
 }
 
 // RepositoryTMFObjectToReplicateTMFObject converts a repository.TMFObject to replicate.TMFObject
-func (c *Converter) RepositoryTMFObjectToReplicateTMFObject(repoObj *repo.TMFObject) (TMFObjectMap, error) {
+func (c *Converter) RepositoryTMFObjectToReplicateTMFObject(repoObj *repo.TMFRecord) (TMFObjectMap, error) {
 	// Create replicate object from repository content
 	replicateObj, err := NewTMFObjectMap(repoObj.Content)
 	if err != nil {

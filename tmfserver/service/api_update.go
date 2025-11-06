@@ -98,7 +98,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// Retrieve existing object locally or from proxy
 	// ************************************************************************************************
 
-	var existingObj *repo.TMFObject
+	var existingObj *repo.TMFRecord
 
 	// Retrieve existing object, locally or remotely
 	existingObj, err = svc.getLocalOrRemoteObject(req)
@@ -110,7 +110,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusNotFound, "object %s not found", req.ID)
 	}
 
-	existingObjectMap, err := existingObj.ToMap()
+	existingObjectMap, err := existingObj.ToTMFObjectMap()
 	if err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", err)
 	}
@@ -120,7 +120,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObjectMap); !authorized {
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObj); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,
@@ -197,7 +197,7 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object content for update: %w", err)
 	}
 
-	existingObject := &repo.TMFObject{
+	existingObject := &repo.TMFRecord{
 		ID:         req.ID,
 		Type:       req.ResourceName,
 		Version:    existingVersion,

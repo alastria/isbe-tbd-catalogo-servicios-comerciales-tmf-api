@@ -34,7 +34,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "main.go",
-            "args": ["-run", "sbx"],
+            "args": ["-d"],
             "cwd": "${workspaceFolder}"
         }
     ]

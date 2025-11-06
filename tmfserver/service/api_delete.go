@@ -48,7 +48,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	// Retrieve existing object from database
 	// ************************************************************************************************
 
-	var existingObject *repo.TMFObject
+	var existingObject *repo.TMFRecord
 
 	// Retrieve existing object, locally or remotely
 	existingObject, err = svc.getLocalOrRemoteObject(req)
@@ -63,7 +63,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	}
 
 	// Convert to a type-safe map representation to facilitate manipulation
-	existingObjectMap, err := existingObject.ToMap()
+	existingObjectMap, err := existingObject.ToTMFObjectMap()
 	if err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", err)
 	}
@@ -73,7 +73,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObjectMap); !authorized {
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObject); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,

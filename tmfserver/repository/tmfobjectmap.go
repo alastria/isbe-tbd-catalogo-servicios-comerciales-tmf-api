@@ -169,7 +169,7 @@ func (obj TMFObjectMap) validateRelatedParty(objectType string, result *Validati
 
 }
 
-func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFObject {
+func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFRecord {
 
 	id := obj.ID()
 	objectType := obj.GetType()
@@ -187,7 +187,7 @@ func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFObject {
 
 	now := time.Now().Unix()
 
-	o := &TMFObject{
+	o := &TMFRecord{
 		ID:         id,
 		Type:       objectType,
 		Version:    version,
