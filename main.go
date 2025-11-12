@@ -51,10 +51,14 @@ func main() {
 		panic(err)
 	}
 
+	// Set restart schedule
+	configuration.RestartHour = restartHour
+	configuration.RestartMinute = restartMinute
+
 	// Get the PID and name of our executable
 	ourPid := os.Getpid()
 	ourExecPath, err := os.Executable()
-if err != nil {
+	if err != nil {
 		log.Fatalf("Failed to get executable path: %v", err)
 	}
 
@@ -83,14 +87,14 @@ if err != nil {
 		return
 	}
 
-	runNormalProcess(configuration, restartHour, restartMinute, ourExecPath, args)
+	slog.Info("Process started", "PID", os.Getpid(), "executable", ourExecPath, "args", args)
+
+	runNormalProcess(configuration)
 
 }
 
-func runNormalProcess(configuration *config.Config, restartHour int, restartMinute int, ourExecPath string, args []string) {
+func runNormalProcess(configuration *config.Config) {
 	// We are now executing the normal process
-
-	slog.Info("Process started", "PID", os.Getpid(), "executable", ourExecPath, "args", args)
 
 	// Connect to the database
 	db := sqlx.MustConnect("sqlite3", configuration.Dbname)
@@ -129,7 +133,11 @@ func runNormalProcess(configuration *config.Config, restartHour int, restartMinu
 			if e, ok := err.(*fiber.Error); ok {
 				code = e.Code
 			}
-			slog.Error("Fiber error", slog.Any("error", err), slog.Int("status", code))
+			// slog.Error("Fiber error", slog.Any("error", err), slog.Int("status", code))
+
+			meth := fmt.Sprintf("<= %s %s", c.Method(), c.Path())
+			slog.Error(meth, slog.Any("error", err), slog.Int("status", code), slog.String("ip", c.IP()))
+
 			return c.Status(code).JSON(fiber.Map{
 				"error": err.Error(),
 			})
@@ -199,42 +207,10 @@ func runNormalProcess(configuration *config.Config, restartHour int, restartMinu
 		}
 	}()
 
-	// Schedule restarts/upgrades every night, the exact time does not matter
-	targetHour := restartHour
-	targetMinute := restartMinute
-	targetSecond := 0
+	// Schedule restarts if enabled
+	scheduleRestart(configuration, upg)
 
-	go func() {
-		for {
-			now := time.Now()
-
-			// Calculate the next scheduled time
-			nextRun := time.Date(
-				now.Year(), now.Month(), now.Day(),
-				targetHour, targetMinute, targetSecond, 0, now.Location(),
-			)
-
-			// If the next run time is in the past, schedule it for the next day
-			if nextRun.Before(now) {
-				nextRun = nextRun.Add(24 * time.Hour)
-			}
-
-			fmt.Printf("Time now: %v\n", now)
-
-			// Calculate the duration until the next run
-			duration := time.Until(nextRun)
-			fmt.Printf("Next restart/upgrade scheduled at: %v\n", nextRun)
-
-			// Wait until the next run time
-			time.Sleep(duration)
-
-			// Execute the function
-			fmt.Println("Executing scheduled restart...")
-			upg.Upgrade()
-		}
-	}()
-
-	// Listen must be called before Ready
+	// Listen must be called before signaling we are ready
 	ln, err := upg.Listen("tcp", "0.0.0.0:9991")
 	if err != nil {
 		panic(errl.Error(err))
@@ -274,6 +250,51 @@ func runNormalProcess(configuration *config.Config, restartHour int, restartMinu
 	} else {
 		fmt.Println("Exiting without error")
 	}
+
+}
+
+// scheduleRestart starts a goroutine to initiate an upgrade at the scheduled time every day.
+// The restart uses the https://github.com/cloudflare/tableflip graceful restart to keeo client connections
+func scheduleRestart(configuration *config.Config, upg *tableflip.Upgrader) {
+
+	if configuration.RestartHour < 0 {
+		return
+	}
+
+	// Schedule restarts/upgrades every night, the exact time does not matter
+	targetHour := configuration.RestartHour
+	targetMinute := configuration.RestartMinute
+	targetSecond := 0
+
+	go func() {
+		for {
+			now := time.Now()
+
+			// Calculate the next scheduled time
+			nextRun := time.Date(
+				now.Year(), now.Month(), now.Day(),
+				targetHour, targetMinute, targetSecond, 0, now.Location(),
+			)
+
+			// If the next run time is in the past, schedule it for the next day
+			if nextRun.Before(now) {
+				nextRun = nextRun.Add(24 * time.Hour)
+			}
+
+			fmt.Printf("Time now: %v\n", now)
+
+			// Calculate the duration until the next run
+			duration := time.Until(nextRun)
+			fmt.Printf("Next restart/upgrade scheduled at: %v\n", nextRun)
+
+			// Wait until the next run time
+			time.Sleep(duration)
+
+			// Execute the function
+			fmt.Println("Executing scheduled restart...")
+			upg.Upgrade()
+		}
+	}()
 
 }
 

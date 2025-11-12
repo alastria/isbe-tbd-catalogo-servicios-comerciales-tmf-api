@@ -11,6 +11,9 @@ type AuthUser struct {
 	IsAuthenticated        bool
 	IsLEAR                 bool
 	IsOwner                bool
+	ProductCreatePower     bool
+	ProductUpdatePower     bool
+	ProductDeletePower     bool
 }
 
 func (u *AuthUser) ToMap() map[string]any {

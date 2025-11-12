@@ -45,6 +45,7 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 		return ErrorResponsef(http.StatusNotFound, "object not found")
 	}
 
+	// Convert to a type-safe map representation to facilitate manipulation
 	existingObjectMap, err := existingObject.ToTMFObjectMap()
 	if err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", errl.Error(err))
@@ -55,7 +56,7 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObject); !authorized {
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObjectMap); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,

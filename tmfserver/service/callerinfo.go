@@ -72,6 +72,39 @@ func (svc *Service) ProcessAccessToken(r *Request) (tokenClaims map[string]any, 
 
 	authUser.IsAuthenticated = true
 
+	// Parse the user powers for the ones we only care about
+	authUserPowers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
+	for _, p := range authUserPowers {
+		power, ok := p.(types.OnePower)
+		if !ok {
+			continue
+		}
+
+		if power.Includes(svc.LEARPower) {
+			authUser.IsLEAR = true
+			// A LEAR can create, update and delete product offerings
+			authUser.ProductCreatePower = true
+			authUser.ProductUpdatePower = true
+			authUser.ProductDeletePower = true
+			break
+		}
+
+		if power.Includes(svc.ProductCreatePower) {
+			authUser.ProductCreatePower = true
+			break
+		}
+		if power.Includes(svc.ProductUpdatePower) {
+			authUser.ProductUpdatePower = true
+			break
+		}
+		if power.Includes(svc.ProductDeletePower) {
+			authUser.ProductDeletePower = true
+			break
+		}
+	}
+
+	//	if svc.ProductCreatePower.Includes()
+
 	// Check the powers of the caller to see if is a LEAR
 	powers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
 	for _, p := range powers {
@@ -81,21 +114,8 @@ func (svc *Service) ProcessAccessToken(r *Request) (tokenClaims map[string]any, 
 		pfunction := jpath.GetString(p, "function")
 		pactions := jpath.GetListString(p, "action")
 
-		// // Check fields without regards to case
-		// if strings.EqualFold(ptype, "Domain") &&
-		// 	strings.EqualFold(pdomain, "DOME") &&
-		// 	strings.EqualFold(pfunction, "Onboarding") {
-		// 	for _, action := range pactions {
-		// 		if strings.EqualFold(action, "execute") {
-		// 			authUser.IsLEAR = true
-		// 		}
-		// 	}
-		// }
-
 		// Check fields without regards to case
-		if strings.EqualFold(ptype, svc.LEARPower.Tmf_type) &&
-			strings.EqualFold(pdomain, svc.LEARPower.Tmf_domain) &&
-			strings.EqualFold(pfunction, svc.LEARPower.Tmf_function) {
+		if strings.EqualFold(ptype, svc.LEARPower.Tmf_type) && strings.EqualFold(pdomain, svc.LEARPower.Tmf_domain) && strings.EqualFold(pfunction, svc.LEARPower.Tmf_function) {
 
 			// We check for only one configured action
 			for _, action := range pactions {

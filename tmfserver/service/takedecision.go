@@ -34,13 +34,8 @@ func (svc *Service) takeDecision(
 	ruleEngine *pdp.PDP,
 	req *Request,
 	tokenClaims map[string]any,
-	obj *repo.TMFRecord,
+	objectMap repo.TMFObjectMap,
 ) (authorized bool, err error) {
-
-	objectMap, err := obj.ToTMFObjectMap()
-	if err != nil {
-		return false, errl.Errorf("failed to convert object to map: %w", err)
-	}
 
 	// Evaluate the hardcoded policies, if they fail return immediately.
 	// Otherwise, continue to see if the user policies allow access
@@ -92,19 +87,28 @@ func (svc *Service) takeDecision(
 //   - reason: error containing the reason for the decision
 func (svc *Service) hardcodedPolicies(req *Request, obj repo.TMFObjectMap) (decision bool, reason error) {
 
-	// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
+	// Try to retrieve the Seller and Buyer info in the object
+	objSeller, objSellerOperator, _ := obj.GetSellerInfo("v4")
+	objBuyer, objBuyerOperator, _ := obj.GetBuyerInfo("v4")
+
 	// Method GET includes actions READ and LIST
-	if req.Method == "GET" && config.IsPublicResource(req.ResourceName) {
-		return true, errl.Errorf("GET request to a public resource %s", req.ResourceName)
+	if req.Method == "GET" {
+
+		// Read operations (GET) to public resources are allowed to all users, even unauthenticated ones.
+		// But this is true only if the object does not have Buyer info set (like a private productOffering for a special tender).
+		if config.IsPublicResource(req.ResourceName) && objBuyer == "" && objBuyerOperator == "" {
+			return true, errl.Errorf("GET request to a public resource %s", req.ResourceName)
+		}
+
 	}
 
-	// GET operations to non-public resources, or any other method (POST, PUT, DELETE) to any object
-	// are only allowed to authenticated users.
+	// Any other operation is only allowed to authenticated users.
 	if !req.AuthUser.IsAuthenticated {
 		return false, errl.Errorf("user not authenticated")
 	}
 
-	// Ownership of an object depends on the type of object
+	// Determining ownership of an object depends on the type of object. There are some "special" objects,
+	// like Organization, Individual or Category, which we treat differently.
 	objType, _ := obj["@type"].(string)
 	objType = strings.ToLower(objType)
 
@@ -128,14 +132,14 @@ func (svc *Service) hardcodedPolicies(req *Request, obj repo.TMFObjectMap) (deci
 
 	case "individual":
 
-		// TODO: revise this policy to be restrictive
+		// TODO: revise this policy to be more restrictive
 
 		// If the caller is us (the server operator), then we can read/write/update/delete
 		if repo.SameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
 			return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
 		}
 
-		// If the caller is the Organization that is the mandator is the LEARCredential of the employee
+		// If the caller is the Organization that is the mandator in the LEARCredential of the employee
 		// then the caller can read/write/update/delete
 		individualIdentificationArray := jpath.GetList(obj, "individualIdentification")
 
@@ -164,42 +168,157 @@ func (svc *Service) hardcodedPolicies(req *Request, obj repo.TMFObjectMap) (deci
 
 		return false, errl.Errorf("caller %s is not the server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
 
-	default:
+	}
 
-		// If the caller is us (the server operator), then we can read/write/update/delete
-		if repo.SameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
-			return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+	// // If the caller is us (the server operator), then we can read/write/update/delete
+	// if repo.SameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+	// 	return true, errl.Errorf("caller %s is server operator %s", caller.OrganizationIdentifier, svc.ServerOperatorDid)
+	// }
+
+	// // For any other objects, we require that the object includes the Seller info, and then
+	// // the user must be either the server operator or the seller
+
+	// // Try to retrieve the Seller info
+	// objSellerDid, objSellerOperatorDid, err := obj.GetSellerInfo("v4")
+	// if err != nil {
+	// 	return false, errl.Errorf("object (%s) does not contain seller information", obj.ID())
+	// }
+
+	// // If the caller is the same as the object SellerOperator or the Seller, then is the owner
+	// if repo.SameOrganizations(caller.OrganizationIdentifier, objSellerDid) || repo.SameOrganizations(caller.OrganizationIdentifier, objSellerOperatorDid) {
+	// 	return true, errl.Errorf("caller %s is seller %s or seller operator %s", caller.OrganizationIdentifier, objSellerDid, objSellerOperatorDid)
+	// }
+
+	// // Try to retrieve the Buyer info, which may not exist.
+	// // We already checked for Seller info, so if Buyer info does not exist, caller is not the owner
+	// objBuyerDid, objBuyerOperatorDid, err := obj.GetBuyerInfo("v4")
+	// if err != nil {
+	// 	return false, errl.Errorf("object (%s) does not contain buyer information and caller (%s) is not the seller or seller operator", obj.ID(), caller.OrganizationIdentifier)
+	// }
+
+	// // If the caller is the same as the object BuyerOperator or the Buyer, then is the owner
+	// if repo.SameOrganizations(caller.OrganizationIdentifier, objBuyerDid) || repo.SameOrganizations(caller.OrganizationIdentifier, objBuyerOperatorDid) {
+	// 	return true, errl.Errorf("caller %s is buyer %s or buyer operator %s", caller.OrganizationIdentifier, objBuyerDid, objBuyerOperatorDid)
+	// }
+
+	// There are several items which play in the hardcoded rules (not modifiable by the users) for access control:
+	// 1. The Caller, which we take from the authentication token. The Caller can be of different types:
+	//    - It can be ourselves (the ServerOperator).
+	//    - It can be an organization acting as federated Marketplace, with a specific marketplace agreement with ourselves.
+	//    - It can be an organization which is "normal" CSP.
+	// 2. The powers of the entity acting on behalf of the Caller, that is, the actual entity invoking the API.
+	//    - The powers can be Onboard (only for the ServerOperator) and Product/Create (for anybody, including the ServerOperator)
+	//    - If the ServerOperator has Onboard power, it is the Admin and can do anything.
+	//    - If the ServerOperator has Product/Create power, it can do anything but only for its Sellers, not for those of other Marketplaces
+	//    - For anybody else, they can manage their own products
+	// 3. The Seller and SellerOperator information in the object
+	//    - For CREATE, we check that the info is correct and can amend it in some circumstances
+	//    - For UPDATE/DELETE, we check that the caller can manage the object
+	// 4. The Buyer and BuyerOperator information in the object
+
+	//    Caller/Power        SellerOperator       Seller
+	// =================================================================================================================================
+	// ServerOperator/Onboard   *                 *              Accept: the admin (Onboard) in ServerOperator can do everything in its own server
+	//                                                                If SellerOperator or Seller are empty, they are set to ServerOperator
+	// ServerOperator/Product   ServerOperator    *              Accept: the ServerOperator can do anything for its Sellers
+	//                                                                If Seller is empty, it is set to ServerOperator
+	// ServerOperator/Product   empty             *              Accept and set SellerOperator to Caller: the ServerOperator can do anything for its Sellers
+	//                                                                If Seller is empty, it is set to Caller
+	// ServerOperator/Product   other value       *              Reject: the ServerOperator can not operate Sellers of other Marketplaces
+	//
+	// Marketplace/Onboard      Caller            empty          Reject: Seller info is required
+	// Marketplace/Onboard      Caller            +              Accept: we trust on the Marketplace for the identification of its Sellers
+	// Marketplace/Onboard      other value       anything       Reject: the SellerOperator must be the Marketplace and Caller
+	// Marketplace/other        *                 *              Reject: the Marketplace/Caller does not have enough powers
+	//
+	// CSP in db/Product        ServerOperator    Caller         Accept: the CSP is the owner and we are the operator
+	//                                                                If SellerOperator or Seller are empty, set them to Caller
+	// CSP in db/Product        other value       *              Reject: only our CSPs are accepted
+	//
+	// other value/Product      ServerOperator    Caller         Accept and store Caller in DB: the CSP is the owner and we are the operator
+	//                                                                If SellerOperator or Seller are empty, set them to Caller
+	// other value/Product      ServerOperator    != Caller      Reject: the Seller must be the Caller
+
+	// If the caller is us (the server operator)
+	if repo.SameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+
+		// ServerOperator/Onboard   *                 *              Accept: the admin (Onboard) in ServerOperator can do everything in its own server
+		//                                                                If SellerOperator or Seller are empty, they are set to ServerOperator
+		if caller.IsLEAR {
+			// If SellerOperator or Seller are empty, they are set to ServerOperator
+			if objSellerOperator == "" {
+				objSellerOperator = svc.ServerOperatorDid
+			}
+			if objSeller == "" {
+				objSeller = svc.ServerOperatorDid
+			}
+			err := obj.SetSellerInfo(objSellerOperator, objSeller, "v4")
+			if err != nil {
+				slog.Error("error trying to set seller info")
+			}
+
+			return true, errl.Errorf("caller %s is server operator %s and is a LEAR", caller.OrganizationIdentifier, svc.ServerOperatorDid)
 		}
 
-		// For any other objects, we require that the object includes the Seller info, and then
-		// the user must be either the server operator or the seller
+		// ServerOperator/Product   ServerOperator    *              Accept: the ServerOperator can do anything for its Sellers
+		//                                                                If Seller is empty, it is set to ServerOperator
+		// ServerOperator/Product   empty             *              Accept and set SellerOperator to Caller: the ServerOperator can do anything for its Sellers
+		//                                                                If Seller is empty, it is set to Caller
+		// ServerOperator/Product   other value       *              Reject: the ServerOperator can not operate Sellers of other Marketplaces
+		if caller.ProductCreatePower {
+			if objSellerOperator == "" {
+				objSellerOperator = svc.ServerOperatorDid
+			}
 
-		// Try to retrieve the Seller info
-		objSellerDid, objSellerOperatorDid, err := obj.GetSellerInfo("v4")
-		if err != nil {
-			return false, errl.Errorf("object (%s) does not contain seller information", obj.ID())
+			if repo.SameOrganizations(objSellerOperator, svc.ServerOperatorDid) {
+				// If Seller is empty, it is set to ServerOperator
+				if objSeller == "" {
+					objSeller = svc.ServerOperatorDid
+					err := obj.SetSellerInfo(objSellerOperator, objSeller, "v4")
+					if err != nil {
+						slog.Error("error trying to set seller info")
+					}
+				}
+				return true, errl.Errorf("the ServerOperator can do anything for its Sellers")
+			} else {
+				return false, errl.Errorf("we can not operate Sellers of other Marketplaces (%s)", objSellerOperator)
+			}
+
 		}
-
-		// If the caller is the same as the object SellerOperator or the Seller, then is the owner
-		if repo.SameOrganizations(caller.OrganizationIdentifier, objSellerDid) || repo.SameOrganizations(caller.OrganizationIdentifier, objSellerOperatorDid) {
-			return true, errl.Errorf("caller %s is seller %s or seller operator %s", caller.OrganizationIdentifier, objSellerDid, objSellerOperatorDid)
-		}
-
-		// Try to retrieve the Buyer info, which may not exist.
-		// We already checked for Seller info, so if Buyer info does not exist, caller is not the owner
-		objBuyerDid, objBuyerOperatorDid, err := obj.GetBuyerInfo("v4")
-		if err != nil {
-			return false, errl.Errorf("object (%s) does not contain buyer information and caller (%s) is not the seller or seller operator", obj.ID(), caller.OrganizationIdentifier)
-		}
-
-		// If the caller is the same as the object BuyerOperator or the Buyer, then is the owner
-		if repo.SameOrganizations(caller.OrganizationIdentifier, objBuyerDid) || repo.SameOrganizations(caller.OrganizationIdentifier, objBuyerOperatorDid) {
-			return true, errl.Errorf("caller %s is buyer %s or buyer operator %s", caller.OrganizationIdentifier, objBuyerDid, objBuyerOperatorDid)
-		}
-
-		return false, errl.Errorf("caller %s is not seller or buyer in object %s", caller.OrganizationIdentifier, obj.ID())
 
 	}
+
+	// The caller is a "normal" CSP
+	// TODO: implement Marketplace authorization when we are ready
+
+	// CSP in db/Product        ServerOperator    Caller         Accept: the CSP is the owner and we are the operator
+	//                                                                If SellerOperator or Seller are empty, set them to ServerOperator and Caller
+	// CSP in db/Product        other value       *              Reject: only our CSPs are accepted
+	if caller.ProductCreatePower {
+		// If SellerOperator or Seller are empty, they are set to ServerOperator
+		if objSellerOperator == "" {
+			objSellerOperator = svc.ServerOperatorDid
+		}
+		if objSeller == "" {
+			objSeller = caller.OrganizationIdentifier
+		}
+		err := obj.SetSellerInfo(objSellerOperator, objSeller, "v4")
+		if err != nil {
+			slog.Error("error trying to set seller info")
+		}
+
+		if !repo.SameOrganizations(objSellerOperator, svc.ServerOperatorDid) {
+			return false, errl.Errorf("only our CSPs are accepted")
+		}
+
+		if repo.SameOrganizations(objSeller, caller.OrganizationIdentifier) {
+			return true, errl.Errorf("the CSP is the owner and we are the operator")
+		}
+
+	}
+
+	// If we reach here we should reject
+	return false, errl.Errorf("the Caller does not have powers to create an object of type %s", objType)
 
 }
 

@@ -26,17 +26,18 @@ var DOMEHacks = true
 // In this way, we support easily any HTTP framework (currently Fiber), but also other
 // future channels like JSON-RPC or even non-HTTP channels like GRPC.
 type Request struct {
-	Method       string
-	Action       HttpAction
-	APIfamily    string
-	APIVersion   string
-	ResourceName string
-	ID           string
-	QueryParams  url.Values
-	Body         []byte
-	AuthUser     types.AuthUser
-	AccessToken  string
-	TokenMap     map[string]any
+	Method        string
+	Action        HttpAction
+	APIfamily     string
+	APIVersion    string
+	ResourceName  string
+	ID            string
+	QueryParams   url.Values
+	Body          []byte
+	AuthUser      types.AuthUser
+	AccessToken   string
+	TokenMap      map[string]any
+	HealthRequest bool
 }
 
 func (r *Request) ToMap() map[string]any {
@@ -117,7 +118,16 @@ type Service struct {
 	ServerOperatorCountry                string
 	ServerEmailAddress                   string
 
+	// The domain of the remote TMForum API server when we act as proxy
+	RemoteTMFServer string
+
+	// The power required by a caller to be considered LEAR
 	LEARPower types.OnePower
+
+	// The powers required by a caller to be able to create, update and delete a product
+	ProductCreatePower types.OnePower
+	ProductUpdatePower types.OnePower
+	ProductDeletePower types.OnePower
 }
 
 // NewTMFService creates a new service.
@@ -136,6 +146,7 @@ func NewTMFService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) (*Servi
 	svc.ServerOperatorCountry = cnf.ServerOperatorCountry
 	svc.ServerEmailAddress = cnf.ServerEmailAddress
 	svc.LEARPower = cnf.LEARPower
+	svc.RemoteTMFServer = strings.TrimRight(cnf.RemoteTMFServer, "/")
 
 	if svc.proxyEnabled {
 		clientCfg := &tmfclient.Config{

@@ -222,6 +222,14 @@ func (obj TMFObjectMap) ID() string {
 	return ""
 }
 
+func (obj TMFObjectMap) IsIndividual() bool {
+	return strings.EqualFold(obj.GetType(), "Individual")
+}
+
+func (obj TMFObjectMap) IsOrganization() bool {
+	return strings.EqualFold(obj.GetType(), "Organization")
+}
+
 // SetID sets the object ID
 func (obj TMFObjectMap) SetID(id string) {
 	obj["id"] = id
@@ -806,6 +814,10 @@ func (obj TMFObjectMap) RequiresBuyerInfo() bool {
 	return !rr
 }
 
+// GetSellerInfo finds the Seller and SellerOperator identifiers in the relatedParty array of the object.
+// If some identifier is missing (or both), it returns an error. But it returns what it finds.
+// So, even if the returned error is not nil, the caller may check the sellerDid and the sellerOperatorDid.
+// This is useful if the caller has logic to handle cases where only one of the values is found.
 func (obj TMFObjectMap) GetSellerInfo(apiVersion string) (sellerDid string, sellerOperatorDid string, err error) {
 	if !obj.RequiresSellerInfo() {
 		return
@@ -947,10 +959,14 @@ func getSellerAndBuyerInfoV5(tmfObjectMap map[string]any) (sellerDid string, sel
 
 }
 
+// getUserAndUserOperatorInfoV4 finds the relatedparty entries with the specified roles.
+// It returns what it finds. So, even if the returned error is not nil, the caller may check the sellerDid and the sellerOperatorDid.
+// This is useful if the caller has logic to handle cases where only one of the values is found.
 func getUserAndUserOperatorInfoV4(tmfObjectMap map[string]any, userRole string, userOperatorRole string) (sellerDid string, sellerOperatorDid string, err error) {
 	// In V4, relatedParty is a list of maps with fields like "role", "id", "href", "name", "@referredType"
 	// We need to extract the "name" for the "Seller" and "SellerOperator" roles
 
+	// Convert roles to lowercase to facilitate case-insensitive comparison
 	userRole = strings.ToLower(userRole)
 	userOperatorRole = strings.ToLower(userOperatorRole)
 
@@ -962,14 +978,17 @@ func getUserAndUserOperatorInfoV4(tmfObjectMap map[string]any, userRole string, 
 	}
 
 	for _, rp := range relatedParties {
+		// Cast the entry to a map[string]any
 		rpMap, _ := rp.(map[string]any)
 		if len(rpMap) == 0 {
 			return "", "", errl.Errorf("invalid relatedParty entry")
 		}
 
+		// Extract the "role" field in lowercase for case-insentitive comparison
 		rpRole, _ := rpMap["role"].(string)
 		rpRole = strings.ToLower(rpRole)
 
+		// If the role of the entry is not one that we are looking for, continue the loop
 		if rpRole != userRole && rpRole != userOperatorRole {
 			continue
 		}
@@ -984,21 +1003,18 @@ func getUserAndUserOperatorInfoV4(tmfObjectMap map[string]any, userRole string, 
 		}
 	}
 
+	// Set the error depending on what we have found
 	if sellerDid == "" && sellerOperatorDid == "" {
 		err = errl.Errorf("no %s or %s", userRole, userOperatorRole)
-		return "", "", err
-	}
-
-	if sellerDid == "" {
+	} else if sellerDid == "" {
 		err = errl.Errorf("no %s", userRole)
-		return "", "", err
-	}
-	if sellerOperatorDid == "" {
+	} else if sellerOperatorDid == "" {
 		err = errl.Errorf("no %s", userOperatorRole)
-		return "", "", err
 	}
 
-	return
+	// return what we have foud. So, even if the err is not nil, the caller may check the sellerDid and the sellerOperatorDid.
+	// This is useful if the caller has logic to handle cases where only one of the values is found.
+	return sellerDid, sellerOperatorDid, err
 
 }
 

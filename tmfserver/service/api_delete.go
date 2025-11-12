@@ -73,7 +73,7 @@ func (svc *Service) DeleteGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObject); !authorized {
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, existingObjectMap); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,

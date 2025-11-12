@@ -46,11 +46,11 @@ func (vr *ValidationResult) String() string {
 }
 
 var RequiredFieldsForAllObjects = []string{
-	"id", "href", "lastUpdate",
+	"id", "href",
 }
 
 var RecommendedFieldsForAllObjects = []string{
-	"name", "version",
+	"name", "version", "lastUpdate",
 }
 
 var DoNotRequireRelatedParties = []string{
