@@ -144,7 +144,7 @@ func applyMigration(db *sqlx.DB, migration oneMigration) error {
 	// Start a SQLite SAVEPOINT with an unguessable name
 	// This is instead of a normal transaction so that user migration code
 	// can nest SAVEPOINTS if they wish
-	_, err := db.Exec("SAVEPOINT " + savepointName)
+	_, err := db.Exec("SAVEPOINT " + "S_" + savepointName)
 	if err != nil {
 		return errl.Error(err)
 	}
