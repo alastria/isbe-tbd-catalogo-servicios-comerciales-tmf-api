@@ -24,6 +24,8 @@ const (
 	ISBE_MYCRED   Environment = 5
 )
 
+const DefaultClonePeriod = 10 * time.Minute
+
 type Config struct {
 
 	// The environment for the default configuration profile
@@ -48,6 +50,11 @@ type Config struct {
 
 	// The power required by a caller to be considered LEAR
 	LEARPower types.OnePower
+
+	// The powers required by a caller to be able to create, update and delete a product
+	ProductCreatePower types.OnePower
+	ProductUpdatePower types.OnePower
+	ProductDeletePower types.OnePower
 
 	// PolicyFileName is the name of the file where the policies are stored.
 	// It can specify a local file or a remote URL.
@@ -80,6 +87,9 @@ type Config struct {
 	// LogLevel is a slog.LevelVar that can be set to different log levels (e.g. Debug, Info, Warn, Error).
 	LogLevel *slog.LevelVar
 
+	// Hour and minute of the day when the server will automatically restart (each day). Hour=-1 disables restart.
+	RestartHour, RestartMinute int
+
 	// ProxyEnabled enables the TMF caching proxy functionality.
 	ProxyEnabled bool
 
@@ -102,10 +112,28 @@ var sbxConfig = &Config{
 	ServerOperatorCountry:                "ES",
 
 	LEARPower: types.OnePower{
-		Tmf_type:     "Domain",
+		Tmf_type:     "domain",
 		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
+	},
+	ProductCreatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Create"},
+	},
+	ProductUpdatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Update"},
+	},
+	ProductDeletePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Delete"},
 	},
 
 	PolicyFileName:  "auth_policies.star",
@@ -125,10 +153,28 @@ var isbeEvidenceConfig = &Config{
 	ServerOperatorCountry:                "ES",
 
 	LEARPower: types.OnePower{
-		Tmf_type:     "Domain",
+		Tmf_type:     "domain",
 		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
+	},
+	ProductCreatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Create"},
+	},
+	ProductUpdatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Update"},
+	},
+	ProductDeletePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Delete"},
 	},
 
 	PolicyFileName: "auth_policies.star",
@@ -147,10 +193,28 @@ var isbeMycredentialConfig = &Config{
 	ServerOperatorCountry:                "ES",
 
 	LEARPower: types.OnePower{
-		Tmf_type:     "Domain",
+		Tmf_type:     "domain",
 		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
+	},
+	ProductCreatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Create"},
+	},
+	ProductUpdatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Update"},
+	},
+	ProductDeletePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Delete"},
 	},
 
 	PolicyFileName: "auth_policies.star",
@@ -164,10 +228,28 @@ var proConfig = &Config{
 	ProxyEnabled: true,
 
 	LEARPower: types.OnePower{
-		Tmf_type:     "Domain",
+		Tmf_type:     "domain",
 		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
+	},
+	ProductCreatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Create"},
+	},
+	ProductUpdatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Update"},
+	},
+	ProductDeletePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Delete"},
 	},
 
 	PolicyFileName:  "auth_policies.star",
@@ -182,10 +264,28 @@ var dev2Config = &Config{
 	ProxyEnabled: true,
 
 	LEARPower: types.OnePower{
-		Tmf_type:     "Domain",
+		Tmf_type:     "domain",
 		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
+	},
+	ProductCreatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Create"},
+	},
+	ProductUpdatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Update"},
+	},
+	ProductDeletePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Delete"},
 	},
 
 	PolicyFileName:  "auth_policies.star",
@@ -200,10 +300,28 @@ var lclConfig = &Config{
 	ProxyEnabled: true,
 
 	LEARPower: types.OnePower{
-		Tmf_type:     "Domain",
+		Tmf_type:     "domain",
 		Tmf_domain:   "DOME",
 		Tmf_function: "Onboarding",
 		Tmf_action:   []string{"execute"},
+	},
+	ProductCreatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Create"},
+	},
+	ProductUpdatePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Update"},
+	},
+	ProductDeletePower: types.OnePower{
+		Tmf_type:     "domain",
+		Tmf_domain:   "DOME",
+		Tmf_function: "ProductOffering",
+		Tmf_action:   []string{"Delete"},
 	},
 
 	PolicyFileName:  "auth_policies.star",
@@ -231,6 +349,11 @@ func LoadConfig(
 
 	// Normalize to lowercase for comparisons
 	envir = strings.ToLower(envir)
+
+	en := os.Getenv("ISBETMF_RUN_ENVIRONMENT")
+	if en != "" {
+		envir = en
+	}
 
 	// Configure the slog logger
 	var logLevel slog.Level
@@ -314,3 +437,14 @@ func LoadConfig(
 	return conf, nil
 
 }
+
+// The names of some special objects in the DOME ecosystem
+const ProductOffering = "productOffering"
+const ProductSpecification = "productSpecification"
+const ProductOfferingPrice = "productOfferingPrice"
+const ServiceSpecification = "serviceSpecification"
+const ResourceSpecification = "resourceSpecification"
+const Category = "category"
+const Catalog = "catalog"
+const Organization = "organization"
+const Individual = "individual"

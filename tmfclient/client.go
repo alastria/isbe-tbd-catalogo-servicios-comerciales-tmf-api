@@ -8,6 +8,15 @@ import (
 	"time"
 )
 
+// Config holds the configuration for the tmfclient package
+type Config struct {
+	// BaseURL of the remote TMForum server
+	BaseURL string `json:"base_url" yaml:"base_url"`
+
+	// Timeout in seconds for HTTP requests
+	Timeout int `json:"timeout" yaml:"timeout"`
+}
+
 // Client is a client for the TMForum API.
 type Client struct {
 	config *Config
@@ -63,9 +72,7 @@ func (c *Client) do(method, path string, body []byte, headers map[string]string)
 
 	// TODO: send the authorization header
 	for key, value := range headers {
-		if key != "Authorization" {
-			req.Header.Set(key, value)
-		}
+		req.Header.Set(key, value)
 	}
 
 	return c.client.Do(req)

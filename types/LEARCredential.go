@@ -2,6 +2,8 @@ package types
 
 import (
 	"encoding/json"
+	"log/slog"
+	"strings"
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/hesusruiz/isbetmf/internal/errl"
@@ -53,6 +55,71 @@ type OnePower struct {
 	Tmf_action   []string `json:"action,omitempty"`
 }
 
+func (p *OnePower) SameAs(other *OnePower) bool {
+	if !strings.EqualFold(p.Tmf_type, other.Tmf_type) {
+		return false
+	}
+	if !strings.EqualFold(p.Tmf_domain, other.Tmf_domain) {
+		return false
+	}
+	if !strings.EqualFold(p.Tmf_function, other.Tmf_function) {
+		return false
+	}
+	for i, action := range p.Tmf_action {
+		if !strings.EqualFold(action, other.Tmf_action[i]) {
+			return false
+		}
+	}
+	return true
+}
+
+// Includes reports whether a given power p "includes" the supplied other power.
+//
+// It returns true iff all of the following conditions hold:
+//   - p.Tmf_type equals other.Tmf_type (case-insensitive, via strings.EqualFold)
+//   - p.Tmf_domain equals other.Tmf_domain (case-insensitive)
+//   - p.Tmf_function equals other.Tmf_function (case-insensitive)
+//   - every action in other power is present in the actions of p
+//
+// The method performs early returns and returns false on the first mismatch. It treats p.Tmf_action as a superset:
+// extra actions present in p but not in other do not prevent inclusion. Note that the implementation assumes both
+// p and other are non-nil; calling Includes with a nil receiver or nil other will result in a runtime panic.
+func (p *OnePower) Includes(other OnePower) bool {
+	// Check the lengths of the action arrays for a maximum length of 10
+	if len(p.Tmf_action) > 10 || len(other.Tmf_action) > 10 {
+		slog.Error("lenghts of action arrays are greater than 10", "p", len(p.Tmf_action), "other", len(other.Tmf_action))
+		return false
+	}
+
+	if !strings.EqualFold(p.Tmf_type, other.Tmf_type) {
+		return false
+	}
+	if !strings.EqualFold(p.Tmf_domain, other.Tmf_domain) {
+		return false
+	}
+	if !strings.EqualFold(p.Tmf_function, other.Tmf_function) {
+		return false
+	}
+
+	// Check that each element of other.Tmf_action is included in p.Tmf_action
+	// The comparison of individual elements must be case-insensitive using strings.EqualFold
+	for _, otherAction := range other.Tmf_action {
+		found := false
+		for _, pAction := range p.Tmf_action {
+			if strings.EqualFold(pAction, otherAction) {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+
+	return true
+
+}
+
 // Example of credentialStatus
 //
 //	"credentialStatus": {
@@ -87,37 +154,6 @@ type LEARCredentialEmployeeJWTClaims struct {
 	LEARCredentialEmployee
 	jwt.RegisteredClaims
 }
-
-// // CreateLEARCredentialJWTtoken creates a JWT token from the given claims,
-// // signed with the first private key associated to the issuer DID
-// func CreateLEARCredentialJWTtoken(learCred LEARCredentialEmployee, sigMethod jwt.SigningMethod, privateKey any) (string, error) {
-
-// 	// Prepare some fields of the LEARCredential
-// 	now := time.Now()
-
-// 	// Create claims with multiple fields populated
-// 	claims := LEARCredentialEmployeeJWTClaims{
-// 		learCred,
-// 		jwt.RegisteredClaims{
-// 			ExpiresAt: jwt.NewNumericDate(now.Add(24 * 365 * time.Hour)),
-// 			IssuedAt:  jwt.NewNumericDate(now),
-// 			NotBefore: jwt.NewNumericDate(now),
-// 			Issuer:    learCred.Issuer.Id,
-// 			Subject:   learCred.CredentialSubject.Mandate.Mandatee.Id,
-// 			ID:        learCred.Id,
-// 			Audience:  []string{"everybody"},
-// 		},
-// 	}
-
-// 	// Serialize and sign the JWT. The result is a byte array with the JWT in compact form:
-// 	// header.payload.signature
-// 	token := jwt.NewWithClaims(sigMethod, claims)
-// 	ss, err := token.SignedString(privateKey)
-// 	fmt.Println(ss, err)
-
-// 	return ss, nil
-
-// }
 
 func LEARCredentialFromMap(s map[string]any) (*LEARCredentialEmployee, error) {
 

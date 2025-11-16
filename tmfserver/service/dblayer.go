@@ -143,9 +143,6 @@ func (svc *Service) createLocalOrRemoteObject(req *Request, obj *repo.TMFRecord)
 		return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object: %w", err)
 	}
 
-	// Set the lastUpdate attribute
-	objMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
-
 	// Create the object only in the local database if the proxy is not enabled
 	if !svc.proxyEnabled {
 		if err := svc.createObject(obj); err != nil {
@@ -161,75 +158,33 @@ func (svc *Service) createLocalOrRemoteObject(req *Request, obj *repo.TMFRecord)
 
 	// With the proxy enabled, first create the object in the remote server and then locally
 
-	headers := map[string]string{
-		"Content-Type":  "application/json",
-		"Authorization": "Bearer " + req.AccessToken,
-	}
-
-	requestBody, err := json.Marshal(objMap)
-	if err != nil {
-	}
-	headers["Content-Length"] = strconv.Itoa(len(requestBody))
-
-	path := fmt.Sprintf("/tmf-api/%s/%s/%s", req.APIfamily, req.APIVersion, req.ResourceName)
-
-	// Perform a POST to create the object
-	resp, err := svc.tmfClient.Post(path, requestBody, headers)
-	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", err)
-	}
-	defer resp.Body.Close()
-
-	// Parse response
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to read response body: %w", err)
-	}
-
-	if resp.StatusCode >= 300 {
-		return ErrorResponsef(resp.StatusCode, "body: %s", string(body))
-	}
-
-	// Put the created objet in a map
-
-	receivedObjectMap, err := repo.NewTMFObjectMapFromRequest(req.ResourceName, body)
-	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to bind request body: %w", errl.Error(err))
+	remoteObjectMap, errs := ForwardTMFPost(req, svc.RemoteTMFServer, objMap)
+	if len(errs) > 0 {
+		return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", errs[0])
 	}
 
 	// Prepare the object for the database
-	id := receivedObjectMap.ID()
-	version := receivedObjectMap.Version()
-	lastUpdate := receivedObjectMap.LastUpdate()
+	lastUpdate := remoteObjectMap.LastUpdate()
 
-	// It is an error if the remote server does not return a 'lastUpdate', but we fix it and log a warning
+	// It is an error if the remote server does not return a 'lastUpdate', but we just log a warning
 	if lastUpdate == "" {
-		slog.Warn("remote server did not return lastUpdate, fixing it", slog.String("id", id))
-
-		now := time.Now()
-		lastUpdate = now.Format(time.RFC3339Nano)
-		receivedObjectMap["lastUpdate"] = lastUpdate
+		slog.Warn("remote server did not return lastUpdate, fixing it", slog.String("id", remoteObjectMap.ID()))
 	}
 
-	receivedContent, err := json.Marshal(receivedObjectMap)
-	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to marshal object content: %w", err)
-	}
-
-	receivedObject := repo.NewTMFRecord(id, req.ResourceName, version, req.APIVersion, lastUpdate, receivedContent)
+	remoteObject := remoteObjectMap.ToTMFObject(req.ResourceName)
 
 	// Create the new object in the local database
-	if err := svc.createObject(receivedObject); err != nil {
+	if err := svc.createObject(remoteObject); err != nil {
 		return ErrorResponsef(http.StatusInternalServerError, "failed to create object in service: %w", err)
 	}
 
 	// Set the headers of the reply to the caller, as per TMF specs
-	headers = map[string]string{
-		"Location": receivedObjectMap.Href(),
+	headers := map[string]string{
+		"Location": remoteObjectMap.Href(),
 	}
-	slog.Info("Object created successfully", slog.String("id", id), slog.String("resourceName", req.ResourceName), slog.String("location", receivedObjectMap.Href()))
+	slog.Info("Object created successfully", slog.String("id", remoteObjectMap.ID()), slog.String("resourceName", req.ResourceName), slog.String("location", remoteObjectMap.Href()))
 
-	return &Response{StatusCode: http.StatusCreated, Headers: headers, Body: receivedObjectMap}
+	return &Response{StatusCode: http.StatusCreated, Headers: headers, Body: remoteObjectMap}
 
 }
 
@@ -410,8 +365,9 @@ type objectFilter func(obj *repo.TMFRecord) bool
 // listObjects retrieves all TMF objects of a given type, returning only the latest version for each unique ID.
 // It supports pagination, filtering, and sorting according to TMF630 guidelines.
 func (svc *Service) listObjects(req *Request, filter objectFilter) ([]repo.TMFRecord, int, error) {
-	slog.Debug("dbLayer: Listing objects", "type", req.ResourceName, "queryParams", req.QueryParams)
-
+	if !req.HealthRequest {
+		slog.Debug("dbLayer: Listing objects", "type", req.ResourceName, "queryParams", req.QueryParams)
+	}
 	// Direct to another storage system if defined
 	if svc.storage != nil {
 		return svc.storage.ListObjects(req.ResourceName, req.APIVersion, req.QueryParams)
@@ -422,7 +378,9 @@ func (svc *Service) listObjects(req *Request, filter objectFilter) ([]repo.TMFRe
 	if err != nil {
 		return nil, 0, errl.Errorf("failed to build select query: %w", err)
 	}
-	fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
+	if !req.HealthRequest {
+		fmt.Printf("SQL: %s\nARGS: %v\n", baseQuery, args)
+	}
 
 	var objs []repo.TMFRecord
 	var totalCount int

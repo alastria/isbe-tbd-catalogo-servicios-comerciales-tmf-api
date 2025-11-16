@@ -5,7 +5,6 @@ import (
 	"log/slog"
 	"net/http"
 	"strings"
-	"time"
 
 	"github.com/google/uuid"
 	"github.com/hesusruiz/isbetmf/internal/errl"
@@ -25,8 +24,8 @@ import (
 //   - It checks for mandatory name fields based on the resource type (`givenName` and `familyName` for `Individual`, `tradingName` for `Organization`, and `name` for others).
 //   - If an `id` is provided in the incoming object, it ensures that a `version` is also present.
 //   - If no `id` is provided, a new one is generated in the format "urn:ngsi-ld:{resource-in-kebab-case}:{uuid}".
-//   - It sets a default `version` to "1.0" if not provided.
-//   - It overwrites the `href` field to ensure it is correct.
+//   - It sets a default `version` to "0.1" if not provided.
+//   - It overwrites the `href` field to ensure it is correct and consistent with the 'id'.
 //   - It adds a default `lifecycleStatus` if the resource type requires it and it's not present.
 //   - It sets the `@type` field if it's not specified.
 //   - It sets the `seller` and `buyer` information, overwriting any existing values.
@@ -87,7 +86,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		// Check for the different required name fields depending on the object type
-		if strings.EqualFold(req.ResourceName, "Individual") {
+		if incomingObjectMap.IsIndividual() {
 			// Individual requires givenName and familyName
 			if givenName, _ := incomingObjectMap["givenName"].(string); givenName == "" {
 				return ErrorResponsef(http.StatusBadRequest, "givenName is required in individual object: %s", incomingObjectMap)
@@ -95,7 +94,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			if familyName, _ := incomingObjectMap["familyName"].(string); familyName == "" {
 				return ErrorResponsef(http.StatusBadRequest, "familyName is required in individual object: %s", incomingObjectMap)
 			}
-		} else if strings.EqualFold(req.ResourceName, "Organization") {
+		} else if incomingObjectMap.IsOrganization() {
 			// Organization requires tradingName
 			if tradingName, _ := incomingObjectMap["tradingName"].(string); tradingName == "" {
 				return ErrorResponsef(http.StatusBadRequest, "tradingName is required in organization object: %s", incomingObjectMap)
@@ -127,7 +126,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 
 			// Set default 'version' if not provided by the user
 			if version == "" {
-				version = "1.0"
+				version = "0.1"
 				incomingObjectMap.SetVersion(version)
 				slog.Debug("Set default version", slog.String("version", version))
 			}
@@ -141,9 +140,10 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			slog.Debug("Set href", slog.String("href", incomingObjectMap["href"].(string)))
 		}
 
-		if incomingObjectMap.LastUpdate() != "" {
-			// Set the lastUpdate property. We overwrite whatever the user sets.
-			incomingObjectMap.SetLastUpdate(time.Now().Format(time.RFC3339Nano))
+		// Set the lastUpdate property if the user did not specify one
+		if incomingObjectMap.LastUpdate() == "" {
+			incomingObjectMap.SetLastUpdateNow()
+			slog.Debug("Set lastUpdate", slog.String("lastUpdate", incomingObjectMap["lastUpdate"].(string)))
 		}
 
 		// If the object requires a lifecycleStatus, add it if not specified by the caller
@@ -160,12 +160,6 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 			incomingObjectMap.SetType(resourceType)
 		}
 
-		// Add Seller info. We overwrite whatever is in the incoming object
-		err = incomingObjectMap.SetSellerInfo(svc.ServerOperatorDid, req.AuthUser.OrganizationIdentifier, req.APIVersion)
-		if err != nil {
-			return ErrorResponsef(http.StatusInternalServerError, "failed to add Seller and Buyer info: %w", err)
-		}
-
 	}
 
 	// ************************************************************************************************
@@ -173,10 +167,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// based on the rules defined by the user in the policy engine.
 	// ************************************************************************************************
 
-	incomingObjectMap.SetLastUpdateNow()
-	obj := incomingObjectMap.ToTMFObject(req.ResourceName)
-
-	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj); !authorized {
+	if authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, incomingObjectMap); !authorized {
 		return ErrorResponsef(http.StatusForbidden,
 			"user %s is not authorized, object: %s, error: %w",
 			req.AuthUser.OrganizationIdentifier,
@@ -190,6 +181,8 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 	// ************************************************************************************************
 	// Now we can proceed, creating an object in the database or the remote server in proxy mode
 	// ************************************************************************************************
+
+	obj := incomingObjectMap.ToTMFObject(req.ResourceName)
 
 	respSt := svc.createLocalOrRemoteObject(req, obj)
 

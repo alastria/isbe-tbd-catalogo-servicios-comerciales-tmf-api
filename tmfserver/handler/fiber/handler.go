@@ -48,12 +48,25 @@ func NewHandler(s *svc.Service) *Handler {
 }
 
 // Health is a simple hello world handler.
+// To exercise the full path as much as possible, we simulate a LIST request with limit = 1
 func (h *Handler) Health(c *fiber.Ctx) error {
-	resp := &svc.Response{
-		StatusCode: 200,
-		Body:       "I am good, thanks",
+
+	// Create a request to list a catalog with limit=1
+	queryParams, _ := url.ParseQuery("limit=1")
+	req := &svc.Request{
+		HealthRequest: true,
+		Method:        "GET",
+		Action:        svc.HttpActions["LIST"],
+		APIfamily:     "productCatalogManagement",
+		APIVersion:    "v4",
+		ResourceName:  "catalog",
+		QueryParams:   queryParams,
+		AccessToken:   "",
 	}
+
+	resp := h.service.ListGenericObjects(req)
 	return SendResponse(c, resp)
+
 }
 
 // CreateHubSubscription creates a new notification subscription (hub)

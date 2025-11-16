@@ -18,8 +18,9 @@ import (
 // List is the most complex operation due to access control, which makes it very difficult to cache the requests efficiently.
 func (svc *Service) ListGenericObjects(req *Request) *Response {
 	var err error
-	slog.Debug("ListGenericObjects called", slog.String("resourceName", req.ResourceName))
-
+	if !req.HealthRequest {
+		slog.Debug("ListGenericObjects called", slog.String("resourceName", req.ResourceName))
+	}
 	// Authentication: anonymous access is allowed for some objects, so we do not check the existence of the access token at this moment
 
 	// Defaut values for pagination, meaning that they were not specified by the user
@@ -108,8 +109,9 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 			// Build the path with the canonicalized parameters
 			path := fmt.Sprintf("/tmf-api/%s/%s/%s%s", req.APIfamily, req.APIVersion, req.ResourceName, parameters)
-			slog.Debug("sending request to remote", "path", path)
-
+			if !req.HealthRequest {
+				slog.Debug("sending request to remote", "path", path)
+			}
 			// Retrieve the page from the remote server
 			resp, err := svc.tmfClient.Get(path, headers)
 			if err != nil {
@@ -161,10 +163,10 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 				}
 
 				// Check if the object can be read by the user
-				authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj)
+				authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, objectMap)
 				if !authorized {
 					invalidObjects++
-					slog.Info("object %s not authorized: %w", objectMap.ID(), errl.Error(err))
+					slog.Debug("object %s not authorized: %w", objectMap.ID(), errl.Error(err))
 					continue
 				}
 
@@ -220,7 +222,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		responseHeaders := make(map[string]string)
 		responseHeaders["X-Total-Count"] = strconv.Itoa(len(responseObjectMaps))
 
-		slog.Info("Remote objects listed", slog.Int("valid", len(responseObjectMaps)), slog.Int("invalid", invalidObjects), slog.String("resourceName", req.ResourceName))
+		slog.Debug("Remote objects listed", slog.Int("valid", len(responseObjectMaps)), slog.Int("invalid", invalidObjects), slog.String("resourceName", req.ResourceName))
 		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseObjectMaps}
 
 	} else {
@@ -234,10 +236,17 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 		objs, totalCount, err = svc.listObjects(req, func(obj *repo.TMFRecord) bool {
 
+			// Convert to a type-safe map representation to facilitate manipulation
+			objMap, err := obj.ToTMFObjectMap()
+			if err != nil {
+				err = errl.Errorf("failed to unmarshal object content for listing: %w", err)
+				slog.Error(err.Error())
+			}
+
 			// Check if the user can access the object
-			authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, obj)
+			authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, objMap)
 			if !authorized {
-				slog.Info("object %s not authorized: %w", obj.ID, errl.Error(err))
+				slog.Debug("object %s not authorized: %w", obj.ID, errl.Error(err))
 				return false
 			}
 
@@ -285,7 +294,9 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 
 		}
 
-		slog.Info("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
+		if !req.HealthRequest {
+			slog.Debug("Objects listed successfully", slog.Int("count", len(responseData)), slog.String("resourceName", req.ResourceName))
+		}
 		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseData}
 	}
 

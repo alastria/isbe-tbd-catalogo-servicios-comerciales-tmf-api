@@ -576,33 +576,44 @@ func (h *SQLogHandler) appendAttr(buf []byte, a slog.Attr, keyColor *color.Color
 	return buf
 }
 
+var noLoggingFor = map[string]bool{
+	"/health":      true,
+	"/favicon.ico": true,
+}
+
+// FiberRequestLogger logs HTTP requests on entry and exit
 func FiberRequestLogger(c *fiber.Ctx) error {
-	slog.Info("=> "+c.Method()+" "+c.Path(), slog.String("ip", c.IP()), slog.String("request_id", c.Get("X-Request-Id")))
 
-	// Go to next middleware:
-	err := c.Next()
+	// Log entry, except the /health request, to keep logs clean
+	if _, found := noLoggingFor[c.Path()]; !found {
+		slog.Info("=> "+c.Method()+" "+c.Path(), slog.String("ip", c.IP()), slog.String("request_id", c.Get("X-Request-Id")))
+	}
 
-	if err != nil {
-		slog.Error("Error in middleware chain", slog.Any("error", err))
+	// Go to next middleware
+	if err := c.Next(); err != nil {
+		return err
+	}
+
+	// Log exit
+	code := c.Response().StatusCode()
+
+	if code >= 500 {
+		// Internal server errors
+		meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
+		slog.Error(meth, slog.Int("status", code), slog.String("ip", c.IP()))
+	} else if code >= 400 {
+		// Caller errors
+		meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
+		slog.Warn(meth, slog.Int("status", code), slog.String("ip", c.IP()))
 	} else {
-
-		code := c.Response().StatusCode()
-
-		if code >= 500 {
-			// meth := color.RedString("<= " + c.Method() + " " + c.Path())
-			meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
-			slog.Error(meth, slog.Int("status", code), slog.String("ip", c.IP()))
-		} else if code >= 400 {
-			meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
-			slog.Warn(meth, slog.Int("status", code), slog.String("ip", c.IP()))
-		} else {
+		// The rest
+		if _, found := noLoggingFor[c.Path()]; !found {
 			meth := fmt.Sprintf("<= %s %d %s", c.Method(), code, c.Path())
 			slog.Debug(meth, slog.Int("status", code), slog.String("ip", c.IP()))
 		}
-
 	}
 
-	return err
+	return nil
 
 }
 
