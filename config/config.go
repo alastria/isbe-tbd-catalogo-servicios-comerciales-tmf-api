@@ -350,6 +350,11 @@ func LoadConfig(
 	// Normalize to lowercase for comparisons
 	envir = strings.ToLower(envir)
 
+	en := os.Getenv("ISBETMF_RUN_ENVIRONMENT")
+	if en != "" {
+		envir = en
+	}
+
 	// Configure the slog logger
 	var logLevel slog.Level
 	if debug {
