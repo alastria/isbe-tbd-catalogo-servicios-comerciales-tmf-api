@@ -54,6 +54,25 @@ func NewTMFObjectMapFromRequest(resourceName string, data []byte) (TMFObjectMap,
 
 }
 
+func NewTMFObjectMapFromRequestMap(resourceName string, data map[string]any) (TMFObjectMap, error) {
+	obj := TMFObjectMap(maps.Clone(data))
+
+	// Check that the object matches the resourceName
+	objType, _ := obj["@type"].(string)
+	if objType != "" {
+		// If the object type is specified, it must match the resourceName passed by the caller
+		if !strings.EqualFold(resourceName, objType) {
+			return nil, errl.Errorf("invalid object type, expected %s but received %s", resourceName, objType)
+		}
+
+	} else {
+		// No object type in the object, set it to the resourceName
+		obj["@type"] = resourceName
+	}
+
+	return obj, nil
+}
+
 // NewTMFObjectFromMap creates a new TMFObject from an existing map
 func NewTMFObjectFromMap(data map[string]any) TMFObjectMap {
 	obj := TMFObjectMap(maps.Clone(data))
