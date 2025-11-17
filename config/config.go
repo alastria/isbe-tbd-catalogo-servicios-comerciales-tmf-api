@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/hesusruiz/isbetmf/internal/sqlogger"
-	"github.com/hesusruiz/isbetmf/tmfclient"
 	"github.com/hesusruiz/isbetmf/types"
 )
 
@@ -92,9 +91,6 @@ type Config struct {
 
 	// ProxyEnabled enables the TMF caching proxy functionality.
 	ProxyEnabled bool
-
-	// TMFClient is the configuration for the TMF client when calling the remote TMF server
-	TMFClient *tmfclient.Config
 }
 
 // As this PDP is designed for DOME and ISBE environments, many config data items are hardcoded.

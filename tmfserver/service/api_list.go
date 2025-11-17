@@ -1,10 +1,8 @@
 package service
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"log/slog"
 	"net/http"
 	"strconv"
@@ -14,7 +12,7 @@ import (
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
-// ListGenericObjects retrieves all TMF objects of a given type using.
+// ListGenericObjects retrieves all TMF objects of a given type.
 // List is the most complex operation due to access control, which makes it very difficult to cache the requests efficiently.
 func (svc *Service) ListGenericObjects(req *Request) *Response {
 	var err error
@@ -75,7 +73,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 	if svc.proxyEnabled {
 
 		// Delete the attribute selection for the query to the backend. We will receice full objects and
-		// perform attribute selection ourselves. This is because we want to store the full objects in our local database.
+		// perform attribute selection ourselves. This is because we want to store the full objects in our local cache.
 		req.QueryParams.Del("fields")
 
 		// Will send the authorization header
@@ -84,22 +82,39 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			"Authorization": "Bearer " + req.AccessToken,
 		}
 
+		// We will accumulate the objects in this array, and return it to the caller.
+		// This is necessary because we need to know the total number of objects that match the query,
+		// and the caller may specify a limit that is greater than the number of objects that match the query.
+		// In this case, we will return the objects that match the query, and the total number of objects that match the query.
 		responseObjectMaps := make([]repo.TMFObjectMap, 0)
+		// diagnosticMessages := make([]string, 0)
+		diagnosticObjects := make([]repo.ValidationResult, 0)
 		var offsetCounter int
 		invalidObjects := 0
+		diagnostic := false
 
-		// Loop retrieving pages of objects until we fulfill the request of the user. We have to do this because of access control
+		// Loop retrieving pages of objects until we fulfill the request of the user. We have to do this because of access control.
 		// The strategy is the following:
 		//   - start from offset 0, counting the objects suitable for the user, until we reach the user-specified offset
 		//   - continue retrieving objects suitable for the user until we get the number specified by the user (limit)
 		// We have to do this because we can not predict how many objects will be discarded by access control until we reach offset.
+		// To accelerate the process, we will use in the future our cache to serve requests from the local database.
+		// TODO: implement caching of replies from the remote server, when testing has been performed on the normal flow.
 		pageSize := 100
 		pageOffset := 0
 		for {
 
-			// Set the offset and limit to the current values for the query
+			// Set (maybe overwriting user-specified values) the offset and limit to the current values for the query to the remote server.
 			req.QueryParams.Set("offset", strconv.Itoa(pageOffset))
 			req.QueryParams.Set("limit", strconv.Itoa(pageSize))
+
+			// Get the diagnostic flag set by the user
+			diagnostic = req.QueryParams.Has("diagnostic")
+			if diagnostic {
+				slog.Debug("diagnostic mode enabled")
+				// Delete the diagnostic flag from the query parameters. The upstream server will not understand it.
+				req.QueryParams.Del("diagnostic")
+			}
 
 			// Encode all query parameters sorted by key, which is useful for caching the reply using the path as key
 			parameters := req.QueryParams.Encode()
@@ -113,42 +128,21 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 				slog.Debug("sending request to remote", "path", path)
 			}
 			// Retrieve the page from the remote server
-			resp, err := svc.tmfClient.Get(path, headers)
+
+			responseData, err := svc.tmfClient.ForwardTMFGetList(path, headers)
 			if err != nil {
-				return ErrorResponsef(http.StatusInternalServerError, "failed to proxy request: %w", err)
-			}
-			defer resp.Body.Close()
-
-			body, err := io.ReadAll(resp.Body)
-			if err != nil {
-				return ErrorResponsef(http.StatusInternalServerError, "failed to read response body: %w", err)
-			}
-
-			if resp.StatusCode >= 300 {
-				return &Response{
-					StatusCode: resp.StatusCode,
-					Body:       body,
-				}
-			}
-
-			responseData := make([]map[string]any, 0, pageSize)
-			if err := json.Unmarshal(body, &responseData); err != nil {
-				return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
+				return ErrorResponsef(http.StatusInternalServerError, "upstream server failed with error: %w", err)
 			}
 
 			// Process the list of response objects to filter depending on the user
 			for _, responseObject := range responseData {
 
 				// Prepare object for the database, validating it to check for errors
-				objectMap, err := repo.NewTMFObjectMapFromRequestMap(req.ResourceName, responseObject)
-				if err != nil {
-					return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
-				}
-
-				validations := objectMap.Validate(req.ResourceName)
+				objectMap, validations := repo.NewTMFObjectMapFromUpstream(req.ResourceName, responseObject)
 				if len(validations.Errors) > 0 {
 					invalidObjects++
 					fmt.Println(validations.String())
+					diagnosticObjects = append(diagnosticObjects, validations)
 					continue
 				}
 
@@ -170,7 +164,20 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 				authorized, err := svc.takeDecision(svc.ruleEngine, req, req.TokenMap, objectMap)
 				if !authorized {
 					invalidObjects++
-					slog.Debug("object %s not authorized: %w", objectMap.ID(), errl.Error(err))
+					slog.Debug("object %s not authorized: %s", objectMap.ID(), errl.Error(err))
+					// diagnosticMessages = append(diagnosticMessages, fmt.Sprintf("object %s not authorized: %s", objectMap.ID(), errl.Error(err)))
+					diagnosticObjects = append(diagnosticObjects, repo.ValidationResult{
+						ObjectID:   objectMap.ID(),
+						ObjectType: req.ResourceName,
+						Valid:      false,
+						Errors: []repo.ValidationError{
+							{
+								Field:   objectMap.ID(),
+								Message: fmt.Sprintf("object %s not authorized: %s", objectMap.ID(), errl.Error(err)),
+								Code:    "NOT_AUTHORIZED",
+							},
+						},
+					})
 					continue
 				}
 
@@ -227,7 +234,11 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 		responseHeaders["X-Total-Count"] = strconv.Itoa(len(responseObjectMaps))
 
 		slog.Debug("Remote objects listed", slog.Int("valid", len(responseObjectMaps)), slog.Int("invalid", invalidObjects), slog.String("resourceName", req.ResourceName))
-		return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseObjectMaps}
+		if diagnostic {
+			return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: diagnosticObjects}
+		} else {
+			return &Response{StatusCode: http.StatusOK, Headers: responseHeaders, Body: responseObjectMaps}
+		}
 
 	} else {
 

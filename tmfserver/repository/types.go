@@ -10,12 +10,12 @@ import (
 type ValidationResult struct {
 	ObjectID      string              `json:"object_id"`
 	ObjectType    string              `json:"object_type"`
-	Valid         bool                `json:"valid"`
+	Valid         bool                `json:"-"`
 	Errors        []ValidationError   `json:"errors,omitempty"`
-	Warnings      []ValidationWarning `json:"warnings,omitempty"`
-	ErrorsFixed   []ValidationError   `json:"errors_fixed,omitempty"`
-	WarningsFixed []ValidationWarning `json:"warnings_fixed,omitempty"`
-	Timestamp     time.Time           `json:"timestamp"`
+	Warnings      []ValidationWarning `json:"-"`
+	ErrorsFixed   []ValidationError   `json:"-"`
+	WarningsFixed []ValidationWarning `json:"-"`
+	Timestamp     time.Time           `json:"-"`
 }
 
 // ValidationError represents a validation error

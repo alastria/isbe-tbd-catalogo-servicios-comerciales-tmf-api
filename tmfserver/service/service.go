@@ -12,7 +12,6 @@ import (
 	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	pdp "github.com/hesusruiz/isbetmf/pdp"
-	"github.com/hesusruiz/isbetmf/tmfclient"
 	"github.com/hesusruiz/isbetmf/tmfserver/notifications"
 	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 	"github.com/hesusruiz/isbetmf/types"
@@ -100,7 +99,7 @@ type Service struct {
 	notif *notifications.Manager
 
 	// TMF Client for proxying requests
-	tmfClient *tmfclient.Client
+	tmfClient *TMFClient
 
 	// Fressness for local objects when proxy enabled
 	fressness time.Duration
@@ -149,12 +148,12 @@ func NewTMFService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) (*Servi
 	svc.RemoteTMFServer = strings.TrimRight(cnf.RemoteTMFServer, "/")
 
 	if svc.proxyEnabled {
-		clientCfg := &tmfclient.Config{
+		tmfClientConfig := &TMFClientConfig{
 			BaseURL: cnf.RemoteTMFServer,
 			Timeout: 20,
 		}
 
-		svc.tmfClient = tmfclient.NewClient(clientCfg)
+		svc.tmfClient = NewClient(tmfClientConfig)
 		svc.fressness = 10 * time.Minute
 	}
 

@@ -1,17 +1,22 @@
 package service
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
+	"log/slog"
+	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
-// Config holds the configuration for the tmfclient package
-type Config struct {
+// TMFClientConfig holds the configuration for the tmfclient package
+type TMFClientConfig struct {
 	// BaseURL of the remote TMForum server
 	BaseURL string `json:"base_url" yaml:"base_url"`
 
@@ -19,31 +24,21 @@ type Config struct {
 	Timeout int `json:"timeout" yaml:"timeout"`
 }
 
-// // Client is a client for the TMForum API.
-// type Client struct {
-// 	config *Config
-// 	client *http.Client
-// }
+// TMFClient is a client for the TMForum API.
+type TMFClient struct {
+	config *TMFClientConfig
+	client *http.Client
+}
 
-// // NewClient creates a new client.
-// func NewClient(config *Config) *Client {
-// 	return &Client{
-// 		config: config,
-// 		client: &http.Client{
-// 			Timeout: time.Duration(config.Timeout) * time.Second,
-// 		},
-// 	}
-// }
-
-// // Get sends a GET request to the remote server.
-// func (c *Client) Get(path string, headers map[string]string) (*http.Response, error) {
-// 	return c.do("GET", path, nil, headers)
-// }
-
-// // Post sends a POST request to the remote server.
-// func (c *Client) Post(path string, body []byte, headers map[string]string) (*http.Response, error) {
-// 	return c.do("POST", path, body, headers)
-// }
+// NewClient creates a new client.
+func NewClient(config *TMFClientConfig) *TMFClient {
+	return &TMFClient{
+		config: config,
+		client: &http.Client{
+			Timeout: time.Duration(config.Timeout) * time.Second,
+		},
+	}
+}
 
 func ForwardTMFPost(req *Request, remoteServer string, objMap repository.TMFObjectMap) (repository.TMFObjectMap, []error) {
 
@@ -86,37 +81,92 @@ func ForwardTMFPost(req *Request, remoteServer string, objMap repository.TMFObje
 
 }
 
-// // Patch sends a PATCH request to the remote server.
-// func (c *Client) Patch(path string, body []byte, headers map[string]string) (*http.Response, error) {
-// 	return c.do("PATCH", path, body, headers)
-// }
+// Get sends a GET request to the remote server.
+func (c *TMFClient) Get(path string, headers map[string]string) (*http.Response, error) {
+	return c.do("GET", path, nil, headers)
+}
 
-// // Delete sends a DELETE request to the remote server.
-// func (c *Client) Delete(path string, headers map[string]string) (*http.Response, error) {
-// 	return c.do("DELETE", path, nil, headers)
-// }
+func (c *TMFClient) ForwardTMFGetList(path string, headers map[string]string) ([]repository.TMFObjectMap, error) {
 
-// func (c *Client) do(method, path string, body []byte, headers map[string]string) (*http.Response, error) {
-// 	url := fmt.Sprintf("%s%s", c.config.BaseURL, path)
-// 	slog.Debug("sending", slog.String("method", method), "url", url)
+	method := "GET"
+	url := fmt.Sprintf("%s%s", c.config.BaseURL, path)
+	slog.Debug("sending", slog.String("method", method), "url", url)
 
-// 	var req *http.Request
-// 	var err error
+	var req *http.Request
+	var err error
 
-// 	if body != nil {
-// 		req, err = http.NewRequest(method, url, bytes.NewReader(body))
-// 	} else {
-// 		req, err = http.NewRequest(method, url, nil)
-// 	}
+	req, err = http.NewRequest(method, url, nil)
+	if err != nil {
+		return nil, errl.Errorf("failed to create request: %w", err)
+	}
 
-// 	if err != nil {
-// 		return nil, err
-// 	}
+	for key, value := range headers {
+		req.Header.Set(key, value)
+	}
 
-// 	// TODO: send the authorization header
-// 	for key, value := range headers {
-// 		req.Header.Set(key, value)
-// 	}
+	resp, err := c.client.Do(req)
+	if err != nil {
+		return nil, errl.Errorf("remote server %s returned error: %w", url, err)
+	}
+	defer resp.Body.Close()
 
-// 	return c.client.Do(req)
-// }
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, errl.Errorf("remote server %s returned error: %w", url, err)
+	}
+
+	// Check the content type of the response and return an error if it is not JSON
+	if resp.Header.Get("Content-Type") != "application/json" {
+		return nil, errl.Errorf("remote server %s returned non-JSON content type: %s", url, resp.Header.Get("Content-Type"))
+	}
+
+	if resp.StatusCode >= 300 {
+		return nil, errl.Errorf("remote server %s returned status %d: %s", url, resp.StatusCode, string(body))
+	}
+
+	var objects []repository.TMFObjectMap
+	if err := json.Unmarshal(body, &objects); err != nil {
+		return nil, errl.Errorf("remote server %s returned invalid JSON: %w", url, err)
+	}
+
+	return objects, nil
+}
+
+// Post sends a POST request to the remote server.
+func (c *TMFClient) Post(path string, body []byte, headers map[string]string) (*http.Response, error) {
+	return c.do("POST", path, body, headers)
+}
+
+// Patch sends a PATCH request to the remote server.
+func (c *TMFClient) Patch(path string, body []byte, headers map[string]string) (*http.Response, error) {
+	return c.do("PATCH", path, body, headers)
+}
+
+// Delete sends a DELETE request to the remote server.
+func (c *TMFClient) Delete(path string, headers map[string]string) (*http.Response, error) {
+	return c.do("DELETE", path, nil, headers)
+}
+
+func (c *TMFClient) do(method, path string, body []byte, headers map[string]string) (*http.Response, error) {
+	url := fmt.Sprintf("%s%s", c.config.BaseURL, path)
+	slog.Debug("sending", slog.String("method", method), "url", url)
+
+	var req *http.Request
+	var err error
+
+	if body != nil {
+		req, err = http.NewRequest(method, url, bytes.NewReader(body))
+	} else {
+		req, err = http.NewRequest(method, url, nil)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	for key, value := range headers {
+		req.Header.Set(key, value)
+	}
+
+	return c.client.Do(req)
+}

@@ -54,23 +54,11 @@ func NewTMFObjectMapFromRequest(resourceName string, data []byte) (TMFObjectMap,
 
 }
 
-func NewTMFObjectMapFromRequestMap(resourceName string, data map[string]any) (TMFObjectMap, error) {
+func NewTMFObjectMapFromUpstream(resourceName string, data map[string]any) (TMFObjectMap, ValidationResult) {
 	obj := TMFObjectMap(maps.Clone(data))
+	validations := obj.Validate(resourceName)
 
-	// Check that the object matches the resourceName
-	objType, _ := obj["@type"].(string)
-	if objType != "" {
-		// If the object type is specified, it must match the resourceName passed by the caller
-		if !strings.EqualFold(resourceName, objType) {
-			return nil, errl.Errorf("invalid object type, expected %s but received %s", resourceName, objType)
-		}
-
-	} else {
-		// No object type in the object, set it to the resourceName
-		obj["@type"] = resourceName
-	}
-
-	return obj, nil
+	return obj, validations
 }
 
 // NewTMFObjectFromMap creates a new TMFObject from an existing map
@@ -79,19 +67,19 @@ func NewTMFObjectFromMap(data map[string]any) TMFObjectMap {
 	return obj
 }
 
-func (obj TMFObjectMap) Validate(objectType string) ValidationResult {
+func (obj TMFObjectMap) Validate(resourceName string) ValidationResult {
 	result := ValidationResult{
 		ObjectID:   obj.ID(),
-		ObjectType: objectType,
+		ObjectType: resourceName,
 		Valid:      true,
 		Timestamp:  time.Now(),
 	}
 
 	// Validate required fields
-	obj.validateRequiredFields(objectType, &result)
+	obj.validateRequiredFields(resourceName, &result)
 
 	// Validate related party requirements
-	obj.validateRelatedParty(objectType, &result)
+	obj.validateRelatedParty(resourceName, &result)
 
 	// Determine overall validity (object is valid if it has zero validation errors)
 	result.Valid = len(result.Errors) == 0
@@ -100,7 +88,31 @@ func (obj TMFObjectMap) Validate(objectType string) ValidationResult {
 }
 
 // validateRequiredFields checks if all required fields are present and optionally fixes them
-func (obj TMFObjectMap) validateRequiredFields(objectType string, result *ValidationResult) {
+func (obj TMFObjectMap) validateRequiredFields(resourceName string, result *ValidationResult) {
+
+	// Special processiong for the object type: check that the object matches the resourceName and fix the object if needed.
+	objType := obj.GetType()
+	if objType != "" {
+		// If the object type is specified, it must match the resourceName passed by the caller
+		field := "@type"
+		if !strings.EqualFold(resourceName, objType) {
+			result.Errors = append(result.Errors, ValidationError{
+				Field:   field,
+				Message: fmt.Sprintf("Invalid value for field '%s': %s", field, objType),
+				Code:    "MISSING_REQUIRED_FIELD",
+			})
+		}
+
+	} else {
+		// No object type in the object, set it to the resourceName
+		field := "@type"
+		result.Warnings = append(result.Warnings, ValidationWarning{
+			Field:   field,
+			Message: fmt.Sprintf("Recommended field '%s' is missing, setting it to %s", field, resourceName),
+			Code:    "MISSING_RECOMMENDED_FIELD",
+		})
+		obj.SetType(resourceName)
+	}
 
 	// This checks the fields that are required for all objects
 	for _, field := range RequiredFieldsForAllObjects {
@@ -133,7 +145,7 @@ func (obj TMFObjectMap) validateRequiredFields(objectType string, result *Valida
 
 }
 
-func (obj TMFObjectMap) validateRelatedParty(objectType string, result *ValidationResult) {
+func (obj TMFObjectMap) validateRelatedParty(resourceName string, result *ValidationResult) {
 
 	// We just return if the object does not require Seller nor Buyer info
 	if !obj.RequiresSellerInfo() {
