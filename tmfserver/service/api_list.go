@@ -84,7 +84,7 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			"Authorization": "Bearer " + req.AccessToken,
 		}
 
-		var responseObjectMaps []repo.TMFObjectMap
+		responseObjectMaps := make([]repo.TMFObjectMap, 0)
 		var offsetCounter int
 		invalidObjects := 0
 
@@ -140,7 +140,11 @@ func (svc *Service) ListGenericObjects(req *Request) *Response {
 			for _, responseObject := range responseData {
 
 				// Prepare object for the database, validating it to check for errors
-				objectMap := repo.TMFObjectMap(responseObject)
+				objectMap, err := repo.NewTMFObjectMapFromRequestMap(req.ResourceName, responseObject)
+				if err != nil {
+					return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal object content for listing: %w", err)
+				}
+
 				validations := objectMap.Validate(req.ResourceName)
 				if len(validations.Errors) > 0 {
 					invalidObjects++

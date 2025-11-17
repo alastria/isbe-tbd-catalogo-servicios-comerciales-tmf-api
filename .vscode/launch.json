@@ -27,6 +27,15 @@
             "program": "cmd/reporting/main.go"
         },
         
+        {
+            "name": "DOMESBX",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "main.go",
+            "args": ["-d", "-run", "sbx"],
+            "cwd": "${workspaceFolder}"
+        },
 
         {
             "name": "ISBETMF",
