@@ -8,6 +8,7 @@ import (
 	"log/slog"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -116,7 +117,7 @@ func (c *TMFClient) ForwardTMFGetList(path string, headers map[string]string) ([
 	}
 
 	// Check the content type of the response and return an error if it is not JSON
-	if resp.Header.Get("Content-Type") != "application/json" {
+	if !strings.Contains(resp.Header.Get("Content-Type"), "application/json") {
 		return nil, errl.Errorf("remote server %s returned non-JSON content type: %s", url, resp.Header.Get("Content-Type"))
 	}
 
