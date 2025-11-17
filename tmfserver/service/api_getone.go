@@ -48,7 +48,11 @@ func (svc *Service) GetGenericObject(req *Request) *Response {
 	// Convert to a type-safe map representation to facilitate manipulation
 	existingObjectMap, err := existingObject.ToTMFObjectMap()
 	if err != nil {
-		return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", errl.Error(err))
+		if len(existingObject.Validations.Errors) > 0 {
+			return ErrorResponsef(http.StatusInternalServerError, "validation errors found: %s", existingObject.Validations.String())
+		} else {
+			return ErrorResponsef(http.StatusInternalServerError, "failed to unmarshal existing object content: %w", errl.Error(err))
+		}
 	}
 
 	// ************************************************************************************************

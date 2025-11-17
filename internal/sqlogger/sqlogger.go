@@ -586,7 +586,7 @@ func FiberRequestLogger(c *fiber.Ctx) error {
 
 	// Log entry, except the /health request, to keep logs clean
 	if _, found := noLoggingFor[c.Path()]; !found {
-		slog.Info("=> "+c.Method()+" "+c.Path(), slog.String("ip", c.IP()), slog.String("request_id", c.Get("X-Request-Id")))
+		slog.Debug("=> "+c.Method()+" "+c.Path(), slog.String("ip", c.IP()), slog.String("request_id", c.Get("X-Request-Id")))
 	}
 
 	// Go to next middleware
