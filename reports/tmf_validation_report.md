@@ -1,10 +1,10 @@
 # TMForum Object Validation Report
 
-**Generated:** 2025-11-05 09:06:23 UTC
+**Generated:** 2025-11-17 14:01:01 UTC
 
 **Configuration:**
 - Base URL: `https://tmf.dome-marketplace-sbx.org`
-- Object Types: billingAccount, catalog, customerBillOnDemand, partyAccount, productOfferingPrice, productOrder, productSpecification, serviceCatalog, customerBill, migrate, organization, product, productOffering, serviceSpecification, agreement, billPresentationMedia, cancelProductOrder, cancelResourceOrder, customer, usage, category, financialAccount, individual, resourceCategory, resourceOrder, resourceSpecification, serviceCategory, settlementAccount, agreementSpecification, appliedCustomerBillingRate, billFormat, cancelServiceOrder, heal, scale, serviceOrder, usageSpecification, billingCycleSpecification, quote, resourceCandidate, serviceCandidate, monitor, partyRole, resourceCatalog, resourceFunction, service, resource
+- Object Types: resourceCategory, resourceFunction, migrate, product, resourceOrder, usage, usageSpecification, agreement, billingCycleSpecification, category, partyRole, serviceCandidate, serviceSpecification, billFormat, catalog, customerBill, productSpecification, resourceCandidate, settlementAccount, agreementSpecification, billingAccount, cancelServiceOrder, financialAccount, resource, scale, service, organization, partyAccount, serviceCategory, serviceOrder, appliedCustomerBillingRate, cancelProductOrder, customer, customerBillOnDemand, quote, cancelResourceOrder, individual, productOffering, resourceSpecification, serviceCatalog, billPresentationMedia, heal, monitor, productOfferingPrice, productOrder, resourceCatalog
 - Timeout: 30 seconds
 - Validate Required Fields: true
 - Validate Related Party: true
@@ -13,6654 +13,51 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Objects | 1845 |
-| Valid Objects | 141 |
-| Invalid Objects | 1704 |
-| Total Errors | 2518 |
-| Total Warnings | 2298 |
+| Total Objects | 1065 |
+| Valid Objects | 136 |
+| Invalid Objects | 929 |
+| Total Errors | 1189 |
+| Total Warnings | 947 |
 | Total Errors Fixed | 0 |
 | Total Warnings Fixed | 0 |
-| Processing Time | 221.701µs |
+| Processing Time | 160.591µs |
 
 ## Statistics by Object Type
 
 | Object Type | Count | Valid | Invalid | Errors | Warnings | Errors Fixed | Warnings Fixed |
 |-------------|-------|-------|---------|--------|----------|--------------|----------------|
-| appliedCustomerBillingRate | 600 | 0 | 600 | 1200 | 600 | 0 | 0 |
 | billingAccount | 14 | 0 | 14 | 28 | 14 | 0 | 0 |
-| catalog | 45 | 0 | 45 | 80 | 44 | 0 | 0 |
-| category | 107 | 107 | 0 | 0 | 107 | 0 | 0 |
-| customerBill | 365 | 0 | 365 | 365 | 730 | 0 | 0 |
-| individual | 85 | 0 | 85 | 85 | 170 | 0 | 0 |
-| organization | 22 | 0 | 22 | 22 | 38 | 0 | 0 |
-| product | 25 | 0 | 25 | 50 | 25 | 0 | 0 |
-| productOffering | 51 | 0 | 51 | 51 | 12 | 0 | 0 |
-| productOfferingPrice | 316 | 0 | 316 | 316 | 313 | 0 | 0 |
-| productOrder | 66 | 0 | 66 | 132 | 132 | 0 | 0 |
-| productSpecification | 45 | 31 | 14 | 14 | 12 | 0 | 0 |
-| resource | 17 | 0 | 17 | 34 | 17 | 0 | 0 |
-| resourceSpecification | 15 | 0 | 15 | 15 | 15 | 0 | 0 |
-| service | 51 | 0 | 51 | 102 | 51 | 0 | 0 |
-| serviceSpecification | 15 | 3 | 12 | 12 | 12 | 0 | 0 |
-| usageSpecification | 6 | 0 | 6 | 12 | 6 | 0 | 0 |
+| catalog | 46 | 0 | 46 | 49 | 45 | 0 | 0 |
+| category | 109 | 109 | 0 | 0 | 109 | 0 | 0 |
+| customerBill | 41 | 0 | 41 | 41 | 82 | 0 | 0 |
+| individual | 90 | 0 | 90 | 90 | 180 | 0 | 0 |
+| organization | 26 | 0 | 26 | 26 | 43 | 0 | 0 |
+| product | 43 | 0 | 43 | 86 | 43 | 0 | 0 |
+| productOffering | 58 | 0 | 58 | 58 | 2 | 0 | 0 |
+| productOfferingPrice | 360 | 0 | 360 | 360 | 117 | 0 | 0 |
+| productOrder | 83 | 0 | 83 | 166 | 166 | 0 | 0 |
+| productSpecification | 46 | 24 | 22 | 22 | 0 | 0 | 0 |
+| resource | 28 | 0 | 28 | 56 | 28 | 0 | 0 |
+| resourceSpecification | 16 | 0 | 16 | 16 | 16 | 0 | 0 |
+| service | 82 | 0 | 82 | 164 | 82 | 0 | 0 |
+| serviceSpecification | 16 | 3 | 13 | 13 | 13 | 0 | 0 |
+| usageSpecification | 7 | 0 | 7 | 14 | 7 | 0 | 0 |
 
 ## Error Summary
 
 | Error Code | Count |
 |-------------|-------|
-| MISSING_BUYER_INFO | 42 |
-| MISSING_REQUIRED_FIELD | 921 |
-| MISSING_SELLER_INFO | 1555 |
+| MISSING_BUYER_INFO | 1 |
+| MISSING_REQUIRED_FIELD | 376 |
+| MISSING_SELLER_INFO | 812 |
 
 ## Warning Summary
 
 | Warning Code | Count |
 |---------------|-------|
-| MISSING_RECOMMENDED_FIELD | 2298 |
+| MISSING_RECOMMENDED_FIELD | 947 |
 
 ## Detailed Validation Results
-
-### appliedCustomerBillingRate Objects
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7ea1db4a-b6b6-489f-ad68-1e5d0644dcb6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a886304d-d699-4adf-b93e-dcdcd54474f1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c25e45c6-8116-44d8-8101-651fddd379e2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:144d5a4a-6b0b-4308-beec-f15cddce3cbd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0bd7ffd4-4a34-4e9c-8dc8-dfd60818bf65
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9b2925a3-775b-4996-8f7d-7d70ca15e367
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:88ff6269-f482-414f-9bc8-8d9bfe2319ba
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f31b4e0f-b862-4734-8db6-16e4561feb94
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ec368608-72f9-44f4-8fb0-8495aa1dd693
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8e069348-1325-4d29-b8b0-c6d54893e344
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:801d7a23-9743-462b-b67e-777bdc10d1a5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:03e417b3-4437-4dbc-becc-eb9f0adcb780
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a0042729-b42f-4e28-9acc-094076301576
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:912e0825-9f20-458f-b324-8816bfa4143f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:406e73e1-53c6-4ef7-bdaf-e253c56913fc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a6346dc5-2a05-43b7-9274-e979b233d683
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3d53178f-03b0-49bb-b8e4-12eab700e2ef
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:69aa0e17-932d-42e5-85eb-69792105aafb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a8e1d3ff-3423-498c-8241-65e6b96a6940
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ccc98bbb-18bb-4eb3-86fa-465e753dd37a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1b8f97be-111a-4b85-9de5-9403d6151aec
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b7c297b2-7478-434e-ac54-a66733576833
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:00a8b12c-fcb0-4679-abf4-458771901e0d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9b5cca42-c853-45cb-ace0-66bb028b59ae
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:abcdf3c2-34ab-42da-ae8b-ce5d944a1553
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bf844a1b-166f-4d14-be17-8959926815f7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0b80f8a8-0018-4500-8ce1-4a7670e85861
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9972715a-d707-43d4-87b9-59f35e4f5507
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cf849c53-92eb-4935-b939-cb86451429a5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:103bbc81-3043-407b-8eb9-290d2ba05862
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:55d72821-20fd-42ee-b364-de470032b2ad
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bc29b825-ad80-41e4-916c-c2fe589e28bd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2eaaf9e0-eee9-4b5b-9a1f-cbba90b75d3d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0de4d1e6-021e-4095-939b-29b6442f8b6f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cd816bab-1994-4fd6-b3a2-864bb594e8fe
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fced7b3f-5650-487c-9b1c-489855ea5e75
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e5cf4fea-a9eb-4860-9549-8345cb046349
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8b843238-d4c6-4636-9d67-a4201278d86c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3d0becb9-d384-4814-91ca-cca1111b2fd2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ece516ee-1c05-46a8-b50c-76e80788f9e6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0d038a51-750f-4bde-9e08-be6b12e38f52
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:33b3af63-1986-4291-8e79-7a5bb8f32559
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:166384be-32ac-4a6d-bb01-e40d0d4f0672
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cf2edcb4-6fde-4887-ae6e-da4fcd922227
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5fc22b5f-70a3-4cfe-addc-750913b0d2be
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bda413a6-d047-4d52-bd95-65acdff7b7a7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5c4d0b20-3d22-4ec4-9fe7-7bc951803328
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:be41afe9-952c-4f17-89ce-f45113eb841e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dd418261-707b-4729-a9c7-3c66c87f7c63
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ffa7dfda-34d6-407c-bbb1-01a1e51cfb40
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6382c945-5701-4780-ba3c-5cb8241f2950
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0b26798c-783a-415f-9619-1798df6036d0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4fad7bce-e46f-4b8a-8b00-25c16cb6e370
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:44dff418-d94e-422d-82d8-4f8dea977cb2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a9baa97d-ba90-4751-a85d-3083786bd7b1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b356a686-dc52-48cb-ab18-9eda444d0c9d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:57a07cfd-86bc-447d-9cac-d9203b17b59a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f3eeab01-28b6-4e7e-a7c2-4b34a354efad
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a02f0580-6932-4760-97d1-9cefb8a64d22
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:eca4ce08-7ff2-46c2-bcb1-d8ebf277cba9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ec72cc4f-22cc-4050-b607-ca6b30bd85b3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1d41756b-4cd8-4b7e-a64d-9f3821666acb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8d64a903-99b1-42f6-9345-fe7c518813d4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:04a5ab67-445d-4558-9267-422109118420
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4ead4c80-bb3a-455e-9f73-e7acc22791e7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e7c55187-b6d4-414d-b796-e6d46bd21f00
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f3080352-311b-4a0f-a7b0-ce853304f830
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:be01687d-e7a4-44ce-a6e3-efdc6c932eaf
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:800979f5-8369-44ae-bea5-0ca87ec0e5c5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c02b29ef-fc0f-448b-b7de-28c88c29cb5f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b014bd20-7fe1-42f4-b43e-f6b732d6f2f7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ebc3b151-2b60-467b-b940-c6251037e7fa
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fdb2ab1e-6216-4cd7-b774-994267727e8a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d8bc68d7-e789-42b6-ab99-141e14218538
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bc51f46c-b2f1-46e9-9728-545e7e728c8b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4eaec895-03e8-4fd0-9049-adee256b372c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2d462004-9a5d-4e8f-bde7-ae78691896eb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4bff5933-b951-426d-b62d-7ba28c918c4a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1eca2583-7766-4d86-b205-03f9dfdc55c9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cbb6f992-239a-4023-a56d-1b476a2ee9bc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d6150126-c294-44df-8cd0-2bd65a959a60
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cefefc99-cb10-4371-803f-926aa422baa0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d426491b-21d3-4105-8845-d2b3399338ae
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c3dff354-95e4-4a85-81f1-0baf31cb13e6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:38ed96f6-90b6-49e2-93f1-b9a663ec561a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2c1d80b5-f4f0-402e-a644-565b68eab05c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f0ab8d2f-0576-4231-b1e1-97003c4b0f1b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bb458bbf-33c6-424e-a5d7-f33ff5b4afd1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:31dc80ab-fd1e-4574-8d9d-3c90a803eef8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2f231431-73c8-41ff-aef6-660314f3967c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:aff3e601-13de-4ed9-86a3-a1b25f302506
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bc19f745-38cd-4ed9-b27d-54b48992bdfd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:265f6e40-d374-4050-afb3-e72e26a3cefc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f8df0277-8ca2-48f5-bd15-8fdacdca9ac8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a006fe70-c947-4dbb-a373-fff7939f3a2e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:45373148-e0c1-4bce-acfe-11efde5f35d7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9fb6b3b0-7ac6-4ec6-8aa3-d3c107a5512f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9c69158e-b649-47c6-aeb5-2f8d2458ca8a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e8e8dde6-048d-467c-ab1b-c96021dfcc0f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5e1dce4d-71a7-4803-b3c8-1fa62b1692a3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:07 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:88af64e8-9c82-4c45-b410-6ffd20ac0a45
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1d44df73-c57e-40a9-9b37-43781f0661e5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:38b5c85e-9f1c-426e-9d8e-7368c1a6fa54
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d5520e26-0edc-44b4-8422-b4f963af9ad2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:905c42d2-ec57-46fc-9f57-413b6f27947a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:37fb0780-6ad6-4143-aaa6-450895992b9e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e563a07a-87b6-401d-a6a4-53f189fe0966
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7dbb4274-74e8-4dac-91c8-37ff6fd1590b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2cb8d2aa-74f1-4651-9354-a969ff6e2e27
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9c3c2128-7cac-495f-b619-64b141b7c1bd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3ebb7fd6-f14b-458e-a3d1-3bd9b492a30d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2851707f-a545-4d2f-bea7-8edbfca0e9e8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d61a0b24-7d23-4ec4-b69a-dd9bb8b6447f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:40db34e0-cea1-48ca-83c3-d738b79a4bbd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:93263439-dca2-4cb2-b221-785f57a0cb1a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:20664461-d848-4008-92a8-88da0b43e12c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0c504e95-24a0-476e-836f-4d5328a2f767
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:09c64699-568d-4e34-b33a-1467eb6e2968
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:268460d7-374c-4cfe-8389-12dda4531905
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:07dbc7bf-4c67-41b9-ae5b-02062e17d302
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ea6f2582-4de6-4e5b-90a7-26467401ac3f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:21795bce-9132-4e12-84b0-379189c034c6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0011d2c5-9c5b-462f-b4b2-7a6de3f64d3b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3d1cb4f0-3afe-429b-9f51-e7eff3403150
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6d255c30-2bd8-4abc-818a-648879b0e4c7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ba290351-2628-4237-90b3-26129c1f58f5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:33b57784-3465-41b0-9fee-a3c4d7ef84ce
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8b546de1-4698-4a41-8d6d-bcd7fc8353c7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:66cd0bcb-954b-4edd-a10b-49c8561570e8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:752d508f-cdb9-4789-a8bb-a20d76002040
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:79333352-87d7-409a-95b7-f5d1c8363922
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:79ef0129-2619-4bb6-a4a7-4d7d49da9870
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:175d34a1-62bf-4b8e-9dbd-1bc7a067d2b0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:177c62f8-3844-4e6f-8ccc-f4d2cd48bde6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c2d9d85f-4ea9-4bf6-8191-0875de12a650
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3dfb736d-c59b-4534-b448-b3b4be32138c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:320c6787-a147-4008-bacc-4b6c2f1c4a2b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f9e595fc-4510-452d-a8a3-a6af9280b972
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6364e0c9-78a7-4b1b-8824-90581f968b65
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:20caab97-7b86-45b2-aa32-72bc4f1fbee5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:eac09619-e6fb-42bc-902a-4db8cea316ea
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:19fbe216-6cb5-4691-9623-2d81f3abaae1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:feab923f-6404-4b01-a320-e493990a71be
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4b43f202-070a-4d69-b098-de63e09145ed
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2abd8782-f9ad-4e53-b6c9-2d6e4abe7081
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f0dcccd9-70b9-4f3f-8226-5917fb6d5929
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7e24fb9d-902c-4ada-9158-debcaf62031f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b0d1a596-203f-4b98-b24c-3d6ad1f85ea2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:82750cd8-f60b-4ec9-943e-992005ea07f1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b33e34cd-7091-4f40-a129-6806049d0467
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c0df670e-2638-4f24-8073-787efc129289
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:966beeb1-bd5d-4921-9eb0-959098a72654
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8694f626-ec8c-45db-a413-692c56359bae
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d236057c-1155-4989-b27e-d5aa68c5938b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ba0a6e8c-2e6c-4b22-89d0-df716ecb8b76
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:84547127-b464-4b43-a135-5375201f3e63
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8b746b9a-afd6-441d-bae7-ec763518665e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:13987baa-281c-4953-89d2-c8b55552040a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d363249b-6803-45d9-a26e-2dccdbabbf3a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c258e69f-ccd7-4d9a-9818-8be71604fd63
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7e446b5c-1c14-4bf1-802c-fb9ece077bed
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d0bd9232-145d-4bd1-93a5-b1a55036a6ab
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:68ac4325-de3f-4b24-a9b8-ba735e0840e9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:90b35940-1676-4213-b50d-65f4319b3cef
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5e4b8389-5adc-4cb4-b099-ae13148f410d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:84bf4428-bc5f-412a-87ef-9ec54314c6d8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6f5c8fa6-3349-4952-bce8-b2c9be3c275b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:856bd132-0482-4f30-8fcf-5a8b2ef34204
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c16a4b01-7a74-435a-b5f3-c5fbda432500
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3ce55daa-12c9-4039-9f09-d49ab46df3f0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:07a8ee71-0b21-4bb8-b5ca-a036e24cc7d7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:029972fb-03d6-4d4f-8714-9055d6f4fbdd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3a70ca9d-1b80-4bc2-8427-9293e98d3193
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2166bd1b-fb60-45c1-95ca-137b16d682b7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b65885d1-6574-42fd-bac9-de1ef7417553
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a6978153-c6a3-44d7-9065-985f277cb7d9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9c459074-1e5f-4b96-8df5-1caf55947729
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:895d0f99-3e96-45a4-ae36-5a07be36e3ea
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8e1a68e5-7e64-46fd-b5e1-3ffabc6709d8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:17a07a8a-2ca6-4fb5-b99b-e1ed6b043dd1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0b923bc4-0cae-4b27-9ea9-55fc393ac88e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:231fb9d5-52e5-4aa7-8e3a-1fcb4a7cb884
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fea31a13-331b-415c-ab55-c8cc7cf57e72
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b000815d-74d3-43f9-8f86-a0673fcb1b49
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8f25781b-6283-489b-8d85-5e36d6bddf15
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a1df1727-0fb5-475c-a670-8c7ee2a640ea
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9c5f0b49-ded5-4865-8a6c-d7380a53536d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:03d0efa9-a10f-4f8b-a1d3-0c1a43a713c2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:783effa7-b31e-48d5-9a5b-5aa578b03a96
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:208ad83f-71eb-403d-bb31-e717c95c375c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a64ed9ab-8d49-4d68-af66-40b91658caac
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b3d447de-24ac-4f1b-a685-4aed7749228e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b9ef1d02-39c3-416d-ba61-70d72e2e0b11
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6cdbe210-12ea-4f11-8db1-328aa8ee4a88
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0cd11a6c-5066-4b6e-a42e-ade8e62a57af
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:530637a0-d0dd-4287-867c-bbfb0c3d767a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:332f4686-29f1-464a-81b3-bc72e9133c8c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f4d5c7ac-99bd-4684-abd7-725d3189df91
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2abec5df-3de8-4007-89ea-f173282cd98f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3235a9d9-9c7f-4918-b1da-ed4ed3f2753b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:09 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:368f3d52-6695-468e-9936-131a7f3f5fda
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b9080abe-5a94-411c-bc90-22d887bd4c93
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d3daeea1-03f3-40e4-be67-322b7c7c7f6f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fe868d26-d0cc-4041-84c9-f91f11992d29
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7b86640f-4193-43ba-8705-355d92c98ba2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:95d79d8c-5db7-419b-8072-321b52b7d7fc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3d84c884-50d9-4075-9155-561b76f1f1bb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e1fb8234-1abc-4c9e-84c5-a03743487144
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:52690d3c-b6e0-4ed6-b6c5-2822118f8ed5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:015c24d2-edfa-4750-bfc4-411da6ed1a95
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f339153a-46d4-4d72-9c36-e2cbec9465c0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8f1d496e-f966-47d2-ab9e-2f274b7acf62
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cbd6d55d-b369-4696-9f91-f8b5e232b0a2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:126aab0a-5997-4902-ab93-591f4cb0d739
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:20933fbe-bc4f-4e71-92f0-01bc915dc8a9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8addf274-ab44-47ce-a8a2-aeab1f5e4fc5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:98ead9f2-3935-45df-95df-bff86a9f6b60
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a661867d-5770-4b65-83d6-bc2995cda1bc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d6a2b573-4268-44da-9676-82a2958552c3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:68d02779-7b68-41f5-8432-83e874855391
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:32213b60-133f-4abe-bc91-2c95bcb2aff9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:aac83697-924f-4a18-8999-de4d5da77957
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9b9d0d0d-426e-46f3-87b2-2fb59b61f902
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2c66452a-c9c3-4ef1-b769-b8aa5915524d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5cb68fb3-0656-4945-9b7d-8bdbb3d81e08
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fd55180e-09d4-4326-857b-9aef312af093
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:be1408ba-da75-47d6-a751-b3ed44cc4907
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:62e90d6a-ecb4-4f7a-b145-f4cf60c45b05
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:72860b09-cf0b-4ba1-ac5c-397cefc291f5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:072e2860-50db-4fe1-a1b7-5e3ca4e031a0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:789cd55a-d1a6-4b28-a83f-54c06715476b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cd7c6505-8f42-49bc-86a7-372d85dbc5f7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f3c86a02-223e-4733-b02f-639e9db411c7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e0b9e3d7-ce94-4e86-add7-70985f83ccb1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:04ae60ed-7fd6-495e-a5e1-91e7b9dc3e86
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:066aa9e4-d862-49c6-b2fe-510899004ce5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d2be2f66-da4b-4a0d-a3f8-5875894a11a7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:65a92526-5a54-4998-bd94-ff8feef80158
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:116286bb-99d8-4a47-8eb0-f42e74a43d66
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:06fc469f-755b-4b56-8d6a-ff2a93a48e00
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b1972368-2ca7-4dd9-ace1-2b413b28079e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:925b01ea-695c-4984-a331-76bc112b2542
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f40fae94-4e70-425e-885a-da860de4fb31
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c388d5bc-02f1-4740-8523-70a7acb5c993
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:04fa48b2-8cf3-47f5-a205-3b7f4a82a52c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5af658f5-43f6-4b69-aab0-d35341128747
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e57253e1-9be2-4f5d-a165-a08b7efbcc20
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3cb7360d-5077-4706-9d9d-bb3b0dff2341
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cfffdc22-b21c-4886-92c6-6c5c4d1dce81
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3b307325-665c-4045-b96b-948ffecffc98
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:991cc522-31e3-48f4-a958-e8adb6d74549
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a5ef21d9-2a72-4329-a74c-97c46f1172cd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a740f9cd-1440-460a-b9b2-0b066db548d6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8e4db772-c1c5-4fd2-910b-fb4da9e6f83e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b87c974f-3697-4438-9a27-c884c6a8c29f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7b694ca0-0e37-4652-ab28-321c6e3a698a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:addeb829-201b-4e3f-873b-60c30d3f73a8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c9817364-6a13-48d0-8d8e-9ed957e422f1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9ab6a480-4614-447d-999b-0af40e576758
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1b14444a-e8a9-4f91-924e-94606a6f1ff5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c9fe0fb2-31d3-4f2d-b73b-4070a2a36d2f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:352ef135-2bb5-478e-8070-8184d377da87
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7669f033-c0ef-4070-85d5-e776ccd1adf3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1222fb88-26ac-46c6-b7f4-258108d1cc2f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:edda99b7-fc9d-4c6e-bcf7-fb7e2b9efd53
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:da2561e5-0187-4ad9-8776-75a8d324299a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2bf5d7a2-2e33-4309-9150-b27abfdca9d1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d958d336-b6d4-4dd8-a239-d12da16616be
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1653c065-09dc-4a2e-9416-99b4f8a44c7c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4cf44824-dc47-41a6-982e-b074d7478c5a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4a4f462d-cfa4-487d-92a4-804d06c45cc0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:50bca712-e5e8-4870-a3fa-20425edd3b11
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cc47158b-f32c-428d-9b25-7a3969fdcf14
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:448cd64b-0a78-4743-b12f-9e8af87f5809
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e5f751fd-7eeb-474f-90d5-0ddfb87582fa
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e2231221-7df8-4b48-9dc9-1641901de7e0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b544d632-483a-43a1-993f-107271a9e0c0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0ebd7f0c-558c-4d01-9163-01e23f682b05
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5b1a356d-0bac-4db1-b0de-6a924994b112
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0b34ab90-ce12-4a36-bad6-d7a1e9df5869
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2b030ac1-cf16-4404-a924-062c314b067f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c61809c0-a7a8-4d09-93f7-699d099a5c7b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:712d6790-df54-477f-abe0-0baedd12f612
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3fedd506-4a88-41fb-a169-850a5474fd58
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e91fe95b-6953-4dfd-9c17-0a30a35ba803
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f8adc9cb-013e-4a69-93d5-6b02eb77455a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4846ed5b-5b8d-4b35-869e-a79762649d5f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3c299941-5cab-4ba7-a11b-bf85d512fe42
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8726b1d7-0ff6-4d35-8fec-1f56c14c42a1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bd438aa6-790a-4c6c-ab80-01655aab84ca
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1637588b-ec5e-411d-b7ab-2a5d60b4fad1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dac3a3e1-1f9c-4e95-983c-95c5c4eee864
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7da00f16-b3c8-4f09-8c45-9b734ae0817d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:16184347-a530-4097-88ab-4e963e011600
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7c854e7a-9c97-4284-98cf-487f66494a1d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c9367dab-297e-4cf4-a553-654123256fdd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:17ebaeb1-83be-4455-b77a-e4d5b317072c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:860482b4-37a8-4d23-bceb-75c564171057
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:25742d08-8a7b-4026-b574-3ba6c3c028a9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:12fadb7c-c3bb-480d-84a4-52104d872894
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:12 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dd50251b-308e-43e8-99a3-809ee6549d6b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e6012ba8-4cef-4445-a147-7753ecd6ecd7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0566ab02-018c-4e0b-9f51-d5d76b3de7d3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0127d02a-8451-4ae3-aa73-b9ef179732fb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7befdc18-208a-4980-9842-d18c80dcaa90
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:19019068-d791-41cf-8682-641d4b3ddf13
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:47a7c205-77ce-466d-a53a-9ed923807228
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e8200eed-5005-48fd-b01d-5214263ff1d4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:972b3812-88be-4dd0-aea6-43b46f7cb8f9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3782a37e-bf3c-4e29-9656-7b3ccfcead29
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2765d48e-425a-4495-86c5-f89fa8f66fff
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cec80a19-ead7-4698-9530-92f7ca3a0955
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7c660d1b-57da-4c2b-9443-e388f17eda70
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a4a4b18c-4912-4f0f-b94b-cedf8f3a4059
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:46d79d84-2ff2-483a-9407-211a661baed3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2be5d432-8372-4d91-b9e5-93e0faa01d2d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3e171b50-f4ba-4543-975f-5ab40061fdf5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8c59e029-c114-4faf-bfc9-9a715f63cdf6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:636ce9ed-8d5c-46cc-a9d4-06f4412daa95
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c4b183c0-f8e1-4c5b-887b-2cbbb2ee07ef
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8718d900-862a-4d19-9adf-ffad53cd3e12
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4ab08965-a555-44b4-806b-ca8945174942
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:724b9148-1f91-4615-9153-0da882d6f8b6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8074de5f-5135-429c-9af7-48d8f6cdb908
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:85a1b045-6941-40f1-abc1-c079b04ca919
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5f7e6340-60a6-4c96-957f-0deb38663ae6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:30849ba7-fefb-4db6-9d8b-f601330d8ad1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e0c0f2a2-381f-409c-bcf9-0c52a2eb75b1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c9a560b1-d525-44aa-8abe-0ef487116551
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ad902837-723c-4549-893c-698868801f2e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:221124b9-0c98-43f8-b1d9-c3fc8c311329
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8405ae35-e4bf-4345-8a5f-9e2432e06cc7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:34466e0a-4d0e-48ca-bf38-36511ff1180c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0f8bf871-2b3b-49f6-9a3b-6af655d32336
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9ca28664-25ab-43b9-8762-1a4208dddf56
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ce30a613-0b80-4de1-aff9-f3deca050f61
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:badd7411-20cc-454d-a406-574b2a1ec04b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0699bfd6-0453-4ef6-92af-4169768c0f22
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:671a25fc-b240-4232-9ba4-4a5415441fb8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:80f8c8f7-aba4-4601-aa05-32f785b67274
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ba28eba7-44cc-4fba-91b7-5a0810ca39cb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:92fdba43-e03d-42c7-b358-afdec2f95471
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6d4a8dd7-0dc5-4d50-93b8-094a750dfaf6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5962b820-24e4-470f-9520-b282d76d6b78
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:54b60686-0b67-4666-ab61-7f44cbb22661
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:61799c7e-bc9b-449d-94f6-36756299f165
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:32332569-bb10-4ebc-979a-ad82330d529d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cc5cdf46-b61f-4b34-bbe5-c671caeb738f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:aabebe51-ba7d-460c-8796-e752e6cb37b7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:42e77d52-9ee2-44e8-8f1b-e79fee1291a9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b16b3920-37a0-4b8f-8033-4641f58c5321
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:12271b62-b502-48fa-8d37-67230d3522e7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:69537d24-3c4f-44c8-a976-0b0092b769e5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c71b50c0-d1b1-4885-870d-a25708f7fd6b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bf6f8640-b26e-4707-b190-6f50d412d9b0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f931d0d6-43cf-43cd-979b-b99d9f7a2c2d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:491bee7e-1354-445d-a36e-f104211f9596
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ae9f013a-21f4-4d92-a684-e8f4f574aa92
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:146d43f0-6ab8-4a46-a272-3b87910b0167
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b718c2fc-2ffa-4a63-a030-53c408358d11
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:51d7552c-18d0-4701-8c65-691a8b986518
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:56f0955c-db9c-49d3-9800-80a557b56581
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2d8c0ec5-bfec-4cf4-9a62-122c615b1fac
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ee7767bb-4150-485e-ad29-887888095774
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:135b6f06-fff4-4339-a8e0-7d986fcacbe4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b34353b4-9d36-4b51-b637-d44a65b3b5a1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:850b6b9f-2d4a-4159-980d-7e17b7263f35
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:98f271a1-e9dc-4752-ad14-fadb9541c437
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:870bc343-ac4f-46f8-8e5f-044bf390b0cd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d736672b-9414-4861-9973-1f52cba2163e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:16d48c0e-1f29-4bc6-9a5c-c5de46099cfd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8f5a9b59-5191-43fc-8cba-f6288c7a899b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2244c776-b4ee-463c-9215-f74fe417db42
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5fe136cb-4b92-479b-9a84-b1d01fcf01e1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:84788456-d640-4bd1-aa32-ccbf97726f7b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4180df72-ec48-4e1b-9c4e-5adba2df36cd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0098a543-980e-41b5-b291-f90b33818e1c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fb3d9361-fe11-4b13-b129-37a3698b6d2b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:57c618ad-41b7-4fd8-a21f-4ccf428e3643
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:646731ec-caa1-406d-b1b1-39fb116983f4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ebc67130-d43c-4523-a319-8323466891c6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6b846c90-7757-471c-b1c0-b1ef3a868564
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5078e2e2-86b2-40de-8b6d-da93f96d799c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7fe517d9-87f7-4fbf-9f8b-ae16838d3381
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d2460bc2-3068-4185-a241-807d3f96c9dd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:69dd416e-ac2f-4d47-88a2-2957e5709d02
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f8bf5996-5ca9-460e-b534-661d02a0b681
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:05f0b8b5-f9e9-47d9-a98a-098139f18ab0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4680e34f-5e58-4341-b8e9-5a841f82953b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b07acae3-0e67-4e34-b381-2fc821073e24
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:39cc10be-0bed-437f-997f-56c67d73c1e0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:80ed4e48-3ed4-4213-821b-1cb58a01c414
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5799283f-2cf6-402d-b2b4-2771d9d076bc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:47183387-8ddb-4c70-858f-428ef261e989
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:eef4f764-6e8b-4b49-9350-b9c83d24e8f4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f48c98e9-c3e6-43d1-a183-6ddd99d2d77e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e80cea90-a23a-4a44-9d74-bdaaa2b609f4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:630a17c7-5d4d-43f8-84de-c9d068bd8da0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:02de2fea-61ad-4a9a-b2bd-f50230de5d27
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c2008a5f-b1d5-425a-aa4a-726f7ae461fd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:15 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:49fd0a44-6ef5-48be-8342-1ada6c636ef2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c10b4d87-e41c-4a1a-b5a3-ca3a6f2f15e9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ec18591c-c9f2-4281-84b3-d0526ca2e57d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c3add22a-d178-4715-8757-7e5ce896dbb0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:50640b1e-778a-4a11-8a96-af296574ffc9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f6154ef1-ce27-4510-ab1c-9932f56b4dd9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4e54dd53-7ce8-4bc1-82fe-b29bf7462ee3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d93e128d-8fa2-49ad-a643-749d6e636fe7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:48ddac6d-f01b-42e1-965e-7e926d0b4915
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0ae47075-adb3-40f9-b768-10bf10171c38
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b33489ef-478c-47c7-98c5-dcd2bc6b0a5c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3a53a4e4-1747-4582-821b-6d87b4abfa89
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3c295bf6-42ef-45b6-81e6-cb5a56bbb8ea
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:813a3d32-5ba7-4f6e-abdb-a7e88bae97fe
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4aa4319b-90b9-4008-af32-edf0ba73c369
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b29c24a0-2d11-4b22-b50a-aba5cd6b515a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3bf26d2a-f053-40b7-8d10-6b9f46a7afae
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:83b0db69-96c7-445a-bc46-da76344eca24
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:aa49a797-ae62-468c-a59b-c874cc3b4e0e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d76e7294-e4d9-4ff4-a3ab-6b5da673b1e1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:86d6db51-1a99-49e3-9166-73860f2e9a8d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0535b174-d994-4d0e-9816-d5a7e9467169
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2e4b19ef-7964-4281-9ea8-f6a13c895092
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a217bf83-4cd5-4eb1-a331-791c0cf34bf4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:562d4209-ce08-40df-acc8-1e80e083235d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:960cdbfa-c927-4fc7-b7ed-8822487d6ff7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bbab3b58-eadd-431d-930a-2f8cc43fe3a0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:45981808-540e-4ef1-8f61-e66aaa966f6d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:214b217f-4b4e-49bb-9d67-cd4129b5edcb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:162d3132-f457-4f5e-8271-b3452b7793bf
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:aa1afb31-57c5-453e-a2d0-42bcb723821d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:28913e66-bb3a-4917-9782-dcd9dff2e7f7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5dc3e6df-89d3-4821-9d3a-c8b79d1cd21e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:71a057cb-5e3b-4246-a299-f038687d2c66
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:cc328443-4fbb-4ab1-98d9-d1ad9405d863
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9d379ca9-58d5-4328-b980-5ba45e96d314
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:37de4f55-a8c3-409e-9856-bfc5bd8f85b4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:70094e7c-6190-403e-b5cd-a93047507b0a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8ea8ee21-d86b-443a-8b4f-7afcdac75983
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9339860a-f37a-4a99-a4da-16791de52296
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fd193128-6f0c-4f43-af4d-003a9d766158
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d9bec7ff-fa90-4f60-9af4-dc6ecd977132
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:543820cc-f7dc-4488-8d2b-62a54386abf1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:180bb66c-2dac-4c4d-957e-68fa962d643d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:44608aec-c353-42f9-b998-d27e715fda7f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0f1787fd-768e-450a-922e-78114049041d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:99daf6e4-5a97-4554-b6da-c5e5821aba9a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fafcea31-fd01-495f-bb18-509f489076fd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:675165c7-64fc-4cfe-8bb3-eb33ede7bdf3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:02f8dd56-00f4-4afe-88cb-77aa4ffcb24d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2346817f-e25f-48ae-8956-c0d83f71efe1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:29452e37-7b0a-4704-9201-760e2b986250
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1ebbf946-fc97-4043-acf1-e8cb9b7006a2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3bfa8108-1826-4812-803d-7698d24a8929
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7619966e-e9bd-44ab-a2b9-7357b0d912a6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1b45ab72-14b3-4d57-8e0e-6d7659f19203
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8942dc14-0c69-43e5-ab28-602e9f74550d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:924c6b62-9911-4928-af3e-b9947669d8f7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:32e45d7e-17a6-4c64-a3cd-e62f360969fe
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7dcfae86-35c8-4907-b805-0fdeca8779cb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a049386b-db21-4dbc-9cca-07af99553503
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e72279e7-92b5-45d3-a4ed-756dd85b867d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e3c2cc97-64f6-4221-87d7-a6c889976dd2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f9c270e8-527a-4c52-ab85-82f8d5a98447
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fafa6f8f-502c-4fde-8c34-b0e4aa49be1f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:03c22eb4-153d-425f-acff-4bce15e9aeb4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0042dbdc-ae07-419f-9982-9b261e54604f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1e6b40f0-443b-4f7d-afa2-2528f06e1f5f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6c9c73c5-6a76-4639-b0e8-b4ce17f1eef5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:55cf216c-1c24-4504-b373-e2e0463855dd
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:30e8aa1a-6145-49b9-a783-ad390c345163
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7cee803e-bb8a-42da-bacf-39d19e6e3ad8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:52b6603e-0ad3-43b1-a46c-d712e948f69b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fe274245-b684-4fa7-a1fd-b4f337439478
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0d2f5868-d09b-4dbc-b492-2ad9366d92f6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:9f50cc49-2fd1-43cb-a9f2-2d83056f66fb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2503bb12-3697-47cf-b865-5a0485c02e4a
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a27f10be-1e69-4929-aa18-e99eb928bf2f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c57dc9a3-eb8e-4666-977c-2f30724d5370
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b6ff35ed-3a3a-438f-835c-cc183e12b695
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1579296d-5604-44a3-a5cb-31189de48c9e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:04ab6f53-c31e-4ba8-8418-5480f4611067
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a3a8874f-d470-40f0-8fce-6066a1116e41
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6eb117b8-34c8-406e-91d3-e74d758fe3af
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2553474f-8cf3-4153-8f5b-7d25291944c8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:1aab4d06-0ad3-4aaa-8e86-06f794ee7254
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:26b425d4-be54-410d-bb5c-7193f9545fd3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:268bf2d5-968a-49d7-ad9f-3cdba22e2887
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3a346b17-184c-429c-81ed-f2bdcae2015e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2f712ddd-0825-43ea-8196-b64e2727da14
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3f2ed19f-dfb3-4110-804f-037dd34e002e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:79ecfc63-030a-4c2f-ac01-d1dc664957cc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:015226fe-5c1c-4b79-8266-45805920e141
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bb010b0a-3402-4e0a-bdb3-197ec04ede3b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:949d5944-75cf-4f4d-9a53-dd47108ee9d9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:a1bef2e3-f5db-4618-a259-ed2249f21522
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:57838490-6e5b-4a2c-a8ad-83eeea140fdc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:41063304-631d-474c-a58f-fa41bcad06c2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:2a99dfc2-8c06-4762-b67f-709be613fa5e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8080f913-3084-43d9-a70f-fda46dc4787c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:17 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3353376c-61ec-4568-98de-8da47852046e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:71ac5884-b78a-445f-ae15-ab0b765e8721
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:306c350a-1672-4b7f-aca7-e9abd9409ec7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:53133903-eb0b-4def-a654-8f916131fe65
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7f884c5a-95ed-48d9-b180-89a7f21228d4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d685bc98-9eb8-4e5a-a3e7-667a3690989c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c80769fd-f949-4a43-8dc4-dd116d7788c5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:29c9ebe7-eb28-44d5-8128-4c953147e9e9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:980e632a-e32c-48b5-9570-aed1cda736e6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:027391c9-f3a8-444e-a5d7-bbd8fc683add
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d08c50c8-395d-4a8a-9ad9-7e1687610862
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:65fbbad0-99b9-426f-a210-8efaaa563153
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f6931d83-b2f6-4b1d-9786-087320b9ee3f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:53043aac-0d78-4bae-9247-fdfb90bdc986
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dbbac728-fd39-41db-806e-c8a6e27efca7
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:17b1f5f1-f20d-4b3e-8a9b-f002484073fe
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ea3a18d6-0d02-4c5e-99cd-2cf2646b9b35
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:59bbdc23-2a7c-4693-8ff2-25d932310b2f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b252215c-bc3c-4a40-8844-2e2a994ec0c4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:26feb55e-a603-4d3b-9d57-f9ded92ee4ec
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e96d4fc7-a6de-467d-b4b7-23da72cf1eac
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d113cf60-b3da-4620-ab81-8f916e92db63
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3e8b475e-2aa8-46c7-a269-47f0cb4238e0
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b62113ab-21fe-4335-a287-9cf1b68f788b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:0ae9a38a-b79f-45b3-a47f-40dd9d89bf92
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:16d926d7-b0cf-4402-86b3-0a4e6a3eeaaf
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f59593b5-9d77-4fe4-9b53-01eb5646aa49
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:82f581ab-f143-43bc-a241-bdf3ce8b7877
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:86210323-9e2f-4cd6-b90e-895fb3412bbe
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:96262cea-5b33-4c80-8472-1badb948ed04
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7c14c9ec-a051-4877-a39e-3eab457fdb27
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c0ba53b7-ac3f-43d1-9c2d-4b037032bd89
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:499d95af-f038-41a0-b043-43b91000ae3e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dceba86b-50cd-4732-9abf-d8aeb083dcb8
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d687d701-072d-4e57-b174-3dac7089d373
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:159e23fb-2adc-461d-8ab7-a2d03b51ebc9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:db454275-dd56-4485-870a-b91c15dc3aca
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8f773a11-c696-47b3-b5d5-9966147c3b22
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:22cb7098-c040-4f33-96f8-19a26bd731a6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b0675439-179f-4156-bd2e-6b11127270de
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b83a536d-7de8-4364-b16c-7f223e205563
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dc2aeee1-fa55-495c-91f1-13ebb71b3f05
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e67645fd-225c-4a07-a827-306e371ee215
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:04e80ac9-d73b-4cf1-bfb4-cfd8cb61c67d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:db9f17c0-5c6a-4a8f-9b60-8efa6406c6ab
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bb7be3ef-dc00-4454-a1db-df3f9fe72b17
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5f1d1bc9-dc3c-493f-98a0-d47cd03e1e3f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f5870965-ba2d-463a-8b9e-e87d6ba5a2ae
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e9f8a91b-6fcf-46b2-b7bb-1c66fbf15f91
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:96248143-a46c-409f-9c24-e8100f13c233
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:37f26d3c-6d2e-4813-b578-ec4481aa5ef4
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f48d1bfa-6737-422e-854c-83534780a8ac
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f7f9cc81-7fc9-4267-b075-0e175689e368
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5ed78b4b-1bf2-4b17-bfe7-42fccf9f1b19
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:fdf02201-0b42-4a28-b9ca-24b21923ff86
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:537eb49b-2385-4d55-aafb-e7edb548b222
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:63f0263d-2dfc-4dff-8e10-4ae7cf6a2531
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e4537c65-46e3-45a7-b50e-386ae577f856
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:8966239a-721c-4cb4-bb26-79c2316a4a57
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f6f78c07-fca8-4b01-8738-06f3b8166d79
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c52bf4c1-dac9-4e24-b28f-6d8f737ac744
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7caace0b-682a-4036-942c-02181f3e0bf9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ab1139b7-28fa-4b4e-8084-fce7e521ef71
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5e5768dd-9101-491e-a73e-cadf2dfcd200
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:aa0d6f90-7120-4283-8736-2eecf3db2231
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d487c076-dc91-4792-9abc-4befdc363346
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:21556d87-daaf-4011-a441-ded18f863f16
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7dbf6dd2-dfd6-4a30-b47b-b5b27ce0f497
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3686b78e-de5c-40e9-867d-ea1796d402d2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f0d31d08-64e6-4663-acc2-aa25bb647dc5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:bfac3c47-8d2f-4cc2-b4e1-e4198f393264
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:6a86e855-a513-4b0e-992b-3a235caf76ef
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ad2be5da-1d48-4bce-b0bd-9a6d8c4888a2
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f9809454-1987-4e1a-846f-0d8f86b5614c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:4c9dc507-5499-4ba7-bef1-27198dfe08de
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dcddfa81-351b-4882-9667-bc57c1e2546e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:889c7996-1a80-4e53-8ab8-2b6c9ee7d39b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b458c9e0-ea03-48bd-9392-cf25f1fe541f
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:63dca400-a4ae-4062-b4bd-20ef74802f09
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:dd8ffd34-82fc-414d-8211-dbaeb187b018
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:3b5d3474-6f5f-49d9-b9e0-05fc9899a8d1
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c63a9b8c-2fcc-4502-a05f-0f2e43236551
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7142435b-24c2-4afd-84c2-5a05583e2db9
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:014c22b0-a814-4254-bb2b-e728c39c3791
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:abe0beee-6abf-4e0c-a667-9f969afabe40
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:ccda15db-575e-47a2-a36e-d6e03de2dddb
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:99b194b6-ed5f-481e-87b2-145ef0401fa6
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:b55d8310-f8ec-407e-9e73-818eb484702c
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7be979b5-dc6a-4fd3-85ce-a28028be7ffe
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:e6d52f88-d734-4565-8fbb-d950efb27c1d
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:c556e541-b01b-400e-bb7b-30b02719fb67
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:7ea8921e-0294-48ba-8039-b9287c221715
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:295bee94-f652-4b4c-a1da-709bc9eca3cc
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:859e65ae-ffcd-4e00-9805-c90a844ef9c3
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:179dbb74-95d8-4627-85e0-7de1711d70e5
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:d83d71c0-401a-4cff-a451-d3e50b51946e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:af3c1385-a3cc-4a4e-8d9f-57a428098b1e
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:019c8ca4-9548-417c-8f4b-826294c2c1ec
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:5fa68bb0-d92b-45d9-9bc3-37fbc8830168
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:applied-customer-billing-rate:f67777d0-16a4-4a09-bba4-ca42567cf63b
-
-- **Type:** appliedCustomerBillingRate
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
 ### billingAccount Objects
 
@@ -6668,7 +65,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6679,7 +76,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6690,7 +87,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6701,7 +98,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6712,7 +109,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6723,7 +120,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6734,7 +131,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6745,7 +142,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6756,7 +153,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6767,7 +164,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6778,10 +175,10 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6789,10 +186,10 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6800,7 +197,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6811,7 +208,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:20 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6824,10 +221,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6835,10 +231,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6846,10 +241,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6857,10 +251,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6868,10 +261,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6879,10 +271,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6890,10 +281,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6901,10 +291,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6912,10 +301,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6923,7 +311,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6934,10 +322,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6945,10 +332,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6956,7 +342,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6967,7 +353,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -6978,19 +364,17 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:catalog:5593c5c0-c62f-4d98-a0ef-fc596ce73f63
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -6998,10 +382,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7009,10 +392,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7020,10 +402,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7031,10 +412,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7042,10 +422,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7053,10 +432,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7064,10 +442,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7075,10 +452,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7086,10 +462,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7097,10 +472,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7108,10 +482,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7119,10 +492,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7130,10 +502,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7141,10 +512,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7152,10 +522,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7163,10 +532,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7174,10 +542,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7185,10 +552,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7196,10 +562,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7207,9 +572,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7217,9 +582,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7227,9 +592,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7237,9 +602,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7247,9 +612,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7257,9 +622,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7267,9 +632,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7277,9 +642,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7287,9 +652,9 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7297,9 +662,19 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:47 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:catalog:e5f817da-cc9b-488b-beae-04a7e586b845
+
+- **Type:** catalog
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7309,7 +684,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7317,7 +692,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7325,7 +700,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7333,7 +708,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7341,7 +716,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7349,7 +724,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7357,7 +732,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7365,7 +740,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7373,7 +748,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7381,7 +756,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7389,7 +764,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7397,7 +772,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7405,7 +780,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7413,7 +788,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7421,7 +796,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7429,7 +804,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7437,7 +812,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7445,7 +820,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7453,7 +828,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7461,7 +836,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7469,7 +844,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7477,7 +852,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7485,7 +860,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7493,7 +868,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7501,7 +876,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7509,7 +884,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7517,7 +892,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7525,7 +900,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7533,7 +908,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7541,7 +916,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7549,7 +924,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7557,7 +932,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7565,7 +940,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7573,7 +948,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7581,7 +956,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7589,7 +964,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7597,7 +972,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7605,7 +980,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7613,7 +988,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7621,7 +996,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7629,7 +1004,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7637,7 +1012,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7645,7 +1020,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7653,7 +1028,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7661,7 +1036,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7669,7 +1044,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7677,7 +1052,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7685,7 +1060,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7693,7 +1068,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7701,7 +1076,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7709,7 +1084,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7717,7 +1092,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7725,7 +1100,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7733,7 +1108,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7741,7 +1116,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7749,7 +1124,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7757,7 +1132,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7765,7 +1140,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7773,7 +1148,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7781,7 +1156,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7789,7 +1164,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7797,7 +1172,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7805,7 +1180,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7813,7 +1188,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7821,7 +1196,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7829,7 +1204,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7837,7 +1212,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7845,7 +1220,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7853,7 +1228,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7861,7 +1236,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7869,7 +1244,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7877,7 +1252,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7885,7 +1260,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7893,7 +1268,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7901,7 +1276,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7909,7 +1284,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7917,7 +1292,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7925,7 +1300,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7933,7 +1308,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7941,7 +1316,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7949,7 +1324,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7957,7 +1332,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7965,7 +1340,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7973,7 +1348,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7981,7 +1356,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7989,7 +1364,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -7997,7 +1372,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8005,7 +1380,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8013,15 +1388,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:category:91abfd48-4870-4af1-b64f-69cb144d1dc6
-
-- **Type:** category
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8029,7 +1396,15 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:category:91abfd48-4870-4af1-b64f-69cb144d1dc6
+
+- **Type:** category
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8037,7 +1412,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8045,7 +1420,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8053,7 +1428,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8061,7 +1436,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8069,7 +1444,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8077,7 +1452,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8085,7 +1460,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8093,7 +1468,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8101,15 +1476,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:category:3867db98-1eb3-4bff-8a23-715082f404ff
-
-- **Type:** category
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8117,15 +1484,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:category:5b55bcbc-4776-4702-b400-bf32a1821fb4
-
-- **Type:** category
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8133,7 +1492,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8141,7 +1500,15 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:category:3867db98-1eb3-4bff-8a23-715082f404ff
+
+- **Type:** category
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8149,7 +1516,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8157,7 +1524,31 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:03 UTC
+- **Timestamp:** 2025-11-17 14:00:17 UTC
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:category:5b55bcbc-4776-4702-b400-bf32a1821fb4
+
+- **Type:** category
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:17 UTC
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:category:961389ac-7e86-4e80-864a-0f130cc9863b
+
+- **Type:** category
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:17 UTC
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:category:515f7838-331f-4164-bb9f-8d843e04a101
+
+- **Type:** category
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:17 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -8167,3186 +1558,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2447acec-611c-4040-9761-c806ca6ec5dc
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2f0dc2f4-85ab-48e9-8852-43752fd01b70
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8b5eb69f-60e6-459f-bcbd-ba2bc6d09485
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ecdcf017-77e8-4d74-b631-753e2eeefa4b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:71d16ef9-4970-4a40-9096-6c43904e7739
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:121b229c-f82a-4307-bc32-b5eb5be85e64
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5bceecfa-945c-472f-9e79-62ea13a2a7cf
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2a06f62f-b7a7-46ec-84ff-b4eca47e33e5
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4e2aeed6-f071-46e4-ac71-058507b01f9f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d8b29f22-55b4-4f29-a101-e269104c4b22
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c8bae9f5-69d1-4d2a-8a0a-98ba9d28c61a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:611aa436-c1be-427d-9317-d83df3259c5c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4f578930-6fba-4c40-af0e-57f3efe3e928
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6f98f295-34cf-4457-9237-fce10244bddd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3c9a78c9-f59b-46a5-bd55-00a934e73a1e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a8cfb775-5c3d-47c2-90ed-49d2212b4647
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:895154ee-e813-4e8f-b20d-a1a782c2894d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e8b9f30b-8055-48b0-9cfe-6997349f92b2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d47ffd4d-0402-4259-8250-f0a6730ddccb
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:faa793e6-e70b-4a72-bbc3-795d03712057
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9fed8539-74a2-4137-aadb-4066472182e4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:782db606-b79d-4ab7-9ff1-e41d2a113bda
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e8ab6978-35ac-4747-833e-9935b7b10a7f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:23a46de3-8c40-4c0a-9010-057a3bf53407
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a7250360-03ce-4e16-b937-21559f9fd3e8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fb822905-beb1-434e-85e3-7b31cddbf92e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:31db3ec8-3630-4c11-81eb-4e475bbb0f61
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:be3802ad-e3b8-45b8-b091-dcc297ff3c83
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d1fef074-7830-4bc1-a339-760ffe9ad7af
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6da4f48d-9a2d-4e58-bc07-78c31dc6ab4e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f134c6c5-ae19-4db5-a170-c6c38a8dd037
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d4818758-7571-42d5-ac83-fd570a3098ee
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cb5b50e1-fe9c-4f22-ac43-c0b098b87d56
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2d114838-5813-4672-8a67-fe81e331f948
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:034a89b6-1238-4424-ab27-ecd961ed7501
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:74b60a5f-7a9c-4049-967a-ee98ba3a8e41
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d55daa57-e79f-45fc-b3c3-b1014afed621
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:434ef80c-6ba6-470f-8ce1-d83df7044246
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:460e4093-0346-4f0b-8b77-59cb3fe6379b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2b3f983a-f0c1-4bf2-ad4b-04b15f0de580
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5dc6dee9-2690-498b-b8cf-b66fcfb67ab1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:23fcf696-3d5c-457f-8a98-d45f68d8b915
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:68ab2b53-2b65-40dc-aac1-4bb770e35819
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:186a3f49-72ef-40d9-93d7-5e9a6dc3452a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8e38ff1f-5eae-440d-9112-1610a3590565
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:410e688c-2e9b-4180-a1a1-fa9b7b96a45c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:092a7c76-e4fd-46d8-9b90-71fab7d99f6c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b9a6c297-04f0-4ea3-8d35-b4a65aaef9cd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:df39d259-7fa0-4fec-ba23-6a5ba5d362b1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3d66bdec-a8a9-49b8-b98b-6c9905771323
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:63f2f84b-732d-42d2-a888-a4f3a166892d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2b38204e-f901-4c8c-8d78-4f68a4588ac3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:856e8bd6-14d0-4d4a-bfce-6d97d2421939
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:87423c0e-ea6b-4847-9254-0a36412c9571
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a4011b5e-1da6-48bd-af1f-c76a07725dd7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ca2eb739-a770-4549-9fb9-80e151956fa8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9a2a41e0-85eb-43e5-85a2-d58240c6a619
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6be5131b-a68e-4b35-9b3b-9901ba4261e1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b4a1c4f2-5138-4a54-a698-65f5ae658434
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:74260bbe-21a0-4ec4-a7db-2d7724148b84
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d278aa91-4890-4c4f-8eda-9879a5a200d2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3bfaf074-6d17-4ef8-a854-1f384b2bd2a1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5bae45fd-b679-4969-964c-d188c9c36a15
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4b78b016-7ec1-4b16-ab85-6dfca8a08916
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:dd34f5e0-bafc-488f-b3ae-74a90add6f0e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e1c52f1d-0892-4cb0-a0f9-24d52c9a5393
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0a6cecec-1157-487b-b8b4-6faf5a38a540
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:72e25ec8-d3a8-4e41-8c33-1f0c599a2f5e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:336ba0bf-1cd4-41f4-8690-3a05a0334c0b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:7b501a0a-aabd-44f3-86c8-ef32e75067e8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:64c09c75-2259-47ec-97e0-607e9ce34a39
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:46852054-7a03-4c20-9fef-c0e7c482554b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6e55c2dc-7a58-4716-92b7-64e272cbc2dd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fbabf129-e7a1-4244-a641-c2db41487d92
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:bdc678aa-b808-40e9-b5c6-e44d15d5f0c8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d5e39128-b21f-4971-bd18-62f944e28a63
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f3657fad-79df-4996-975f-ffedd380a097
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f04957d5-a87d-4bc4-bd62-79b5d7eed26b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:10ef2636-5be1-4866-bd40-1558bee9854d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:bc45f43e-d136-4aec-b911-d40649259544
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5bc55de7-97d1-4c15-9563-43bacc11b4c3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:00b3e80a-c2a5-4070-9a14-7dcc08735bab
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6ddaa66f-14f4-4574-a51a-4cb034eee6c3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8cd356a0-38c2-4b06-9382-44c06b892f9d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c655f380-5ab2-447a-9cd6-4ab5207028aa
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:17c25f5f-1553-4bf6-a10d-54729a025047
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:71360201-5c2d-4bc7-9a14-ceb6dcfba78b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2ebad7cf-5a26-4c0e-9171-3dfe0f847671
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:07b1ec0a-a0ce-4c39-9c8a-4644c7fb9ef7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1095d161-5414-4fac-959f-0ca6830c6bdd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:43185932-018c-46b9-8a56-0d9ccb2372d7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:dc03f0dd-e06c-4f22-a060-831ee6383e0e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8400407b-30f0-4414-b87e-54018dec2717
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:00b9a97d-9b28-498f-b7c7-72acf061d206
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1998b969-2e2e-47ba-86c5-5c0fd462c96d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:589f7a2c-61ae-4cb2-aec1-c4e83ae15e8d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:bc2916d5-78f2-4f34-a2b8-fe88757bbc3d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a98375ea-59e7-4931-8758-58e8603676b6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:81ad6ff7-2168-466d-8c06-0f187783f75c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b80fc022-ec70-4333-b8b5-056e035d2807
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:7c6c7443-77b2-4697-b621-26050b694471
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:dda3da7e-0a38-4f86-bdd2-e1e6448a82c3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6d4c5bcb-37d2-4d70-a678-b5c62a1b56d4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:580b2031-1f11-42f0-bdd1-f9c417f2b544
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9729c9bc-7e36-493a-a271-fa6ea5e19cc8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3cdc39e5-e135-4493-b1c8-412561bd4774
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8972461a-3568-49ce-a667-0671c7e9eb42
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a0073e02-834f-47e7-9f9d-dbfb123b3d95
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:49894f7c-f9ed-4468-ab46-d733b0b8c4c8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:bdbcebbf-f875-4e41-b0bf-4951f6f364b2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d9b0a66a-ec51-4562-b3a7-eef3626e3994
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2394f018-d03c-409d-a942-1c20098416f1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a3656631-dcae-429d-bc07-ea98525ed0e3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9557e225-4d01-42a1-903b-2bf61342cc02
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f9b04bb5-18e5-46e3-82df-b22c82c6bf50
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:baf84d54-7b4c-44c3-9154-b6409beb7429
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c270653b-155b-4764-99e4-cd1566071d6a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e40717ee-cca9-469e-a02b-b5c12bb732b0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5b11df6a-bd31-49d8-8e6f-bd54bf7ee045
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f721c036-53a3-4729-b41d-1b664638394a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e7764603-4aaa-4766-beb7-421f53809ec0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:dc9cc68b-69d0-48cb-a105-c72769688f56
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:85386b37-1db0-4889-8a7c-eafba3abef89
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a6bea15c-af1e-4f3a-b64a-150908354da0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ed503a62-fd46-4cf6-9f2a-c0338787e61f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:87d7d7cf-bce8-4e43-845c-26e0d485be98
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:83a8d710-84fa-4405-be5e-93e95be1122b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:409173e7-20c4-4add-b9fc-88aa35a3bf55
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4e1a972d-e31e-4f62-a7e7-ac7db1c9d7bf
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a928d134-a47d-4c77-afe2-83440310aa92
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:078927d9-90ae-4bfd-ad43-f8630834888e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3423f512-357f-445b-9a31-0faaec02b814
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c7e9d18b-92f2-4fbb-b0b9-f08047f4d3e6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:73ef53d6-7b82-4726-9df2-5d332bcf7471
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:be03ae66-05e6-4adf-b466-2902a8998343
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3fc93e1c-e133-47d8-921f-25b8a035bf71
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d09912f0-5caf-48cb-b228-30429b7f76d3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ad7686af-b234-436d-9010-83dd168c33e9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f6b33c0a-8418-4084-ba4c-3d4a62f1c533
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1159128c-4588-49aa-8c09-638a1da178d1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:24568175-5943-4974-ab64-bff827600b7c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cce2648b-103e-4757-b155-36e943cf29b8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fea49a10-f8a8-4b55-8139-d0f5eac3f7c0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c8c8c533-1847-4329-a713-5574362a6ce7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e0fc21df-409e-4e60-a2fa-d83151ab92d3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:69cf4ae1-202d-4b16-92fd-1c6cf2ad4c1d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a21602a5-9869-4f4d-8670-e830f7387d23
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2a4f3e36-9e7c-425d-a7c3-d45c730699bc
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:880ea7b7-7b7b-473e-9e35-16985f8876b4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e9a208c5-f348-4c49-a491-67909dd1a262
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:7c964d7e-83c7-42f5-a77d-03ce6b59865e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5aea72bf-c241-4502-9e8c-6dfe1a4d9d80
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:21b50908-8cc5-4673-a2d9-fa90ec69001a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:20817ece-b706-4a68-b6d3-42cebbe5dc6b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ed730cc0-97b0-4ad6-bc61-76cba8d5b169
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1bf67960-8f7e-4235-895e-59babb020cec
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ab2fe147-e4c6-4ff2-bb9b-697728887aa1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d7955eca-f04c-4155-82c1-d9f8bb0f8321
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:61919797-6f5d-43a3-9552-dc60b5b47473
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:60664c89-eff0-4034-9dd9-ab8b1ce40130
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:72764ce4-6143-4a26-ad5a-73b0292f3e19
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3f5c0f07-50ed-4092-b392-83ed72a76993
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:30ccadf6-4b67-4220-8616-b0a8bf3c83ff
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f625f054-b227-4ce0-b1d8-260b9d97cc0f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:07c39e3e-bf8d-40c6-b873-222dbf805489
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a6e3e86c-9ea1-46df-bb89-35c68497aed3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9a094e7f-607c-4bb3-83b1-8b15f99b812a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:239f2e70-99c8-4702-8896-9b7f0c87b7ae
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8b783615-9705-43f4-a261-bea91866ffa8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:18e63ba3-865a-4522-8dc7-33578d7a10dd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1e96bb21-3660-46f7-b91e-869758980311
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a4634cf8-3b16-4940-afe2-102aad4b155b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:49e8a609-9b53-47ab-b731-67af0cfad4e6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:39eda4a5-0bdc-4a43-b662-86474490cd38
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d8e03c16-7657-4afd-8bd3-c235f728ccb9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b7a1bb8e-665f-4c74-b637-c3990c9eab6b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:963ed1fc-ac37-4edf-a1de-9ac15b367d39
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:86a08fbd-5c98-4dde-8a25-47d0c3082e6b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a5047317-1802-4266-902b-b2fc6a00a68d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fbb095a1-998d-4741-99e0-5f4c911c0605
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0bd034bb-3f5b-40ad-8e83-ef438b8b70ec
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:70e685ab-0f78-4f20-a330-3d44d8b45041
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4c990520-11e8-4e4f-a65d-53940ff94373
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e1bd3ad5-5a94-4d58-817c-79fac2363ec9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:14724159-b39c-4eb3-aebd-19d335a3ce54
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4c654d56-cdab-4308-b661-54f3b968b97f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1728f44d-5d24-4f94-8807-cc9bd29e6c5b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:14dd0dc0-076f-4b0c-99eb-979e699e249e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d1a88961-b363-4d4c-ab8b-4ef316f9b4ac
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:74e23dc0-568e-4333-ac0b-a55152b6747d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0eedc8f8-8871-4b7f-ac53-35154dc4b522
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b898e153-bae4-42d2-aee6-c5d7318aaf7d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:51d8f2ee-9715-4581-80ff-2f5a9a5f7a52
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:937f3a34-3352-46b9-9f3c-4d9b86c48b47
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4aee44a8-6367-4ac0-bf48-8195108f2851
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:76aa7dbd-40b5-4e32-91ed-e8055e1779b3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:73e249de-a664-4def-8f4d-d4e79c56626c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:871aa98f-a6b5-4d34-9618-a1e6a9eb88ee
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d6c29195-0bb5-4d19-846d-e0ed5c4b13fd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fdae0159-48b5-4a1f-9183-66bd5eda69e9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:874ad43b-2a06-4dec-bc54-6eae3dd93bda
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a0b4af00-32d5-491d-97dd-74834def7d87
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cf4d9f73-ccef-4b4d-98c6-029ec2a2aa6b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e60d631f-c48b-4e5e-8d37-4cd8497cdc0e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:127cc665-6b09-4c72-8840-adcc5ad045e2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ccacea88-0fa6-40e7-bfb4-1a25112059a5
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c31a6d66-d840-4daf-859b-7e29ac93e16b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a5ef1acf-b24c-4ca6-8e34-5b8b9a1443bc
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2d790955-8524-484c-9c74-01dd6cfe9062
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8b18143a-cafe-4514-a21e-5f034a872240
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3f521106-13f6-490b-9b7b-0464028b209c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d0f399d4-5cbd-47ed-ada6-372a7f3555ee
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:986ede24-51be-425a-a237-33bc169348a9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fabd1a2c-695f-434c-9914-95cd5d7ae06f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f8f079f9-c30c-455a-a25e-50c22caee119
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c16aac82-357a-4e82-88a6-7345e21d8e80
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:14673ab2-f535-4239-b7bb-fe5287ae98a2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d4a40eff-f860-4f5f-8cb6-43d901ab35e8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a07094c8-28ea-47d3-9199-bb1514c2af32
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8669ab82-5663-4d22-80bc-7ad6bd16bfd6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:78f81553-5f43-4f1c-8d1c-cbbbae12419b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c45981ed-f70e-4075-9ae7-ec6d1e571446
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0c8e8432-931b-4e6b-b449-7f7ccd809c4a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:38dc9a03-bd10-4ab9-bbb9-b0d56a90ab4a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:844e8bc4-4817-4856-a7e9-d9065c55680c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:086e74a3-7263-482d-933b-a42a2c29bb5c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d119a9b6-31c4-41a8-9615-1275084e8692
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4462f778-ba68-419f-966b-7c26fb515536
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:176b77ce-f435-4b3c-ba90-45abef3db7e7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:26e60832-3fd7-4a3b-ba05-a52768e5aa1e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9af71fe2-7f47-43a1-ade4-dc5c577d4c4c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:39c6c74a-5aae-449f-aefe-7f9967e25821
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a128a70f-6e4f-45c3-9500-d7427fcbebbd
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:35bbd4de-0125-480e-abdc-a41a0d00b764
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:7c6143f8-7039-425e-8b42-fb72a9643e61
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3f596b25-d4ce-40f2-a80d-54a7a65c5d80
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:87921772-6f73-4b3c-b00b-6c87fab45881
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:20ab213e-52d6-4d33-9dca-aca0ffbde144
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8a1d5d02-150e-46f7-b2fc-ee46c1fa4969
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:33a974a5-7ed7-4924-b8d2-e00de2d01aa7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:25c1f83b-2394-4290-9da7-d77ca3d303e2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9431918d-5d04-4188-8807-aff19688c940
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a61a1b0d-7761-4b9a-a9d8-2f6c5664c587
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:61f14c81-887a-48f3-bb28-8045fefe56c4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8211fe15-cf34-4cff-ac8a-2e491f08841c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:eeb34d4c-2318-4d75-9008-c4cd5bc3c090
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f96452e3-2a6f-485b-ae03-b7f0bf3550ba
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:902f9d4a-5c0b-4c9f-bc7b-c390ace6bad9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:7c60b3d3-f6c4-4231-8878-8ec5b423589e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fac2f4f1-c33d-4b88-b7c4-b3ee06c14670
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:06ba662d-2d6c-43b3-b2bd-d41caaf73ad9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fdc2285b-707f-41f6-97da-dbbcfe200863
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ed7e83ea-a273-4111-9b10-0e426aa63c31
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1107ec69-b51a-4d9a-b44c-f9847812c61b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f491ce17-8a01-40d8-b34b-2d2e74b43803
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cc50e1fd-fcf0-48a7-b527-d13a8feb59b0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6ea3d827-b1ed-43a7-8cde-0abcb65e30bc
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:39dcb92f-1d96-484a-a30c-dc34df6ce893
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:91736711-1618-4edd-8283-faeeda46ff5a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9a581052-de4c-4d11-9a49-4e201f297e81
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2ea87cdc-650c-4801-ab9d-e69fb7f67495
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0e9e2835-5197-4481-943b-728ab7de856f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:96d5c275-8c79-4174-a2e0-26f444308f55
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:75862ef0-818c-4bb7-9b07-545f04538ff6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:93712446-a53c-45c8-ad95-77b531a26041
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ac40353e-bc10-4b0b-9a45-d2c11bc9629e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2290d75a-80b4-4480-8b13-6e39fc3d3324
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a9a13b3f-18c0-4625-9104-b9e9bd9f9711
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d65f3be6-9156-4072-81ef-9712d82baa0b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:af188e72-c9c5-43bc-821a-a1274118fd88
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e711d9ea-b0f5-405f-8891-aea04d0a1b1a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cd37fec7-b71d-468a-b21b-44b2bf61c526
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:5ad3b62a-71dd-49f1-af50-380d23af68de
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:194ff17e-a65c-4017-8fe7-ee571fb98c34
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:810a1968-612c-4809-b528-88172fa7f6f3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b4b138f2-7264-4144-88b4-8eaee7ee514d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:19257bf0-63af-4e08-b75e-a115fdd492f0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:99e0b966-e663-46d1-b192-2809bcfe8d2d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0bb0ba92-2048-4ee4-b445-d66d936cc4c4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:03688a3c-305a-4eb5-b43e-daaefcd1fb7f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:11a48444-4e50-4293-86cd-8e735e3b6668
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c3b62e8c-7a37-4602-9d3d-ad12a72efeaf
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:7bb23490-17f8-450d-8fb6-817e00284a6c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8320aec6-7037-457a-8686-9dd8ccfb323b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:10fdc57c-e70d-438f-9057-2be84c775515
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0d619211-b4a0-4677-b10c-35e096f9cfda
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:22b5de54-63c4-403d-9031-53ffa55ef6ab
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:467b216d-5667-42ba-afeb-27590aaf571f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:85ac7f14-deca-49b8-b075-1d028b419396
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -11357,9 +1569,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -11368,9 +1580,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -11379,9 +1591,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -11390,9 +1602,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -11401,9 +1613,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -11412,724 +1624,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d44017f0-1f05-4c89-9c6d-7dbca061c4f8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d477139f-957a-46d1-9731-2ea136eaf4e8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0728565f-902f-4e32-adab-3b3d80540b5b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:67f5b152-9d1e-4dda-b0b4-0a5cb2c18471
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:57 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6a5aaaff-285f-4927-a3d0-f79059efe540
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8967f17c-ece4-4578-85ab-b089745d926c
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4a57a9cd-b093-46af-bbce-b4355b427b16
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1f8d857a-f22c-46e9-a62e-89a4ef641fe3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:107dcbcb-584c-4982-9699-bfb4deb1c7c0
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:9c3bdbf0-4dbd-4f5f-b4ec-9a3e0b3cdfe6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e5029f8d-e708-4c0d-a9f3-dcd80eebbf26
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:43715173-1a2e-4230-bdc3-6a9c36c3826e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b8a361d7-c837-4724-9ad4-5d42fcd59fea
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:19990bef-13a7-4bfb-a310-906f437beb5f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:dd98755b-7c70-4466-b986-ce7b1def4cec
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:003b3d1c-0154-4933-91c6-8e3b76d733c2
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4e916120-1460-411a-a097-ae241db0a861
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e8c02218-a700-4e45-a3e9-278a35cb8708
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:36bed8de-837e-4ac9-9a02-a95b5dfa5017
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fd675b3f-ef19-4330-b35b-fa231b70c1d9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1c575200-734e-43d3-9cd8-f63dee2bbea1
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:009fe402-ab6e-4e4e-91c4-5f6556ec633a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:75e0cc1c-fc9a-444d-ad68-751eeef0cd63
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3460385b-03d1-4471-a46f-b813921f4a94
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f54263b3-97c2-45af-a16f-bd09215f5240
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:4583d0f1-81f4-4173-9b57-c8c511c6f654
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:c21243f8-e710-4ad4-baab-3d00cb09598b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:feff5b3d-bc02-43f1-945e-e9b9db2df400
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:71f3c0fb-7f79-4ed2-bfa6-72e6efef7494
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:f9c07126-472f-41ab-b2ea-03704e11da2a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2ec1a1a6-dba8-4a64-af21-040753edd912
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e0c714b1-961b-4d5e-9e35-4471200ef43a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1c1366f7-57a8-4405-889b-caa3bdb06389
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1fd4135b-a5b2-4738-a956-292d9af8cace
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b6291740-28d2-4eef-b2f9-cd29a7743c53
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3332929f-e045-4123-94dc-d19b0548709d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:06792664-e9bc-47ae-a654-4993e12be405
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b46a606d-46d2-4984-96b2-e4c257111f96
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:62eee5a4-f676-479f-9357-3fd4cf61f2e9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cc8d22c4-d820-4f51-a550-fcf5fc2ddcfa
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0dcd1a9d-d75d-4d93-b81e-1152eb2dc6d4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a9d5879a-ea77-4e61-a8e9-8db5cfe95e2d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:91effe0f-5829-4455-923a-e39abfcd53a3
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:cff118ea-d1bc-4774-936c-fb71be43805a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:70e7fae4-ec63-4524-a470-83c97e738359
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:2026a692-d50f-4f3c-ba78-3870e86b057b
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:d35266ec-bc91-4d1a-a3bf-bbe5f7c3a57f
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:8a919bc0-974d-40e6-bc09-3c4639d1f552
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a92b73e3-1514-42e6-ace1-a933a1fbf52a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fef16ed2-fe2d-436f-a65b-7c0dc2b2461d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:b92809c5-954b-414e-a995-04ac1f9ccda9
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:059e265f-2e51-469a-92c8-350ad7f4ec11
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:ca46960a-fe3f-4fd1-bd8f-e94099fb68b6
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:47dfa8f3-de46-40cf-a0f6-d320f38a3fb4
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0be4631b-a977-47f6-9eab-bf01ff0dcc7e
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:e0129904-2dc7-4785-8204-38a428569c98
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:6dea5361-6b39-4727-bdaf-1867f537776a
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3f3eb3cd-3421-438f-8154-f23ceb91698d
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:1df0ce9b-37b9-4f5d-a11a-934e63f93fc7
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:0de6bdf2-cd0a-4ab4-a534-cc06cc0768ed
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:623b6eff-22ae-48f8-939d-0f1681e198dc
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:a1a030e5-267f-4ca1-8bbe-df13ae639ecc
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:35d8834b-6b40-49a6-b5cd-65769d9e7d25
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:fae3f0ba-da71-4316-b879-4fdb4a3e1bb8
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:customer-bill:3deb8acc-5623-4b8d-8155-9222e3d65f84
-
-- **Type:** customerBill
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
-- **Errors:**
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -12138,9 +1635,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -12149,9 +1646,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -12160,9 +1657,9 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -12171,7 +1668,337 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:58 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:7753b831-d482-44b1-a3de-9790c7df2f40
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:f25072b8-572e-4d53-898d-3fef1c7bd3d6
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:b542fc2a-975e-446e-b18a-2a6d37957f0b
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:e1b3be4f-dcc6-4133-b2b3-47154665444a
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:82bc0490-7868-4f71-ae26-94dbb314eb17
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:d45f9686-e3b6-433d-980f-3261aaafaa74
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:f7555d3f-c980-4e60-baa5-bacaeaf318df
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:77c737cf-3e7e-4efd-bc15-d4e55d4de86e
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:b5bf019c-b42e-47e5-9fa5-e3cb042c1612
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:c84035b8-0282-4893-bf76-41d026e9d795
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:28cf30a1-92af-4b50-99c2-83ef2e6ab12c
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing SellerOperator field (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:9143c42b-8429-45e6-812e-ba8a29b840b9
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:f07eebc8-435b-4abe-ad98-a17117031588
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:9d17558b-d31a-40cd-9358-f7d671577beb
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:4defc8f0-46a5-4fdc-8e27-b608b80578aa
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:0b94eac0-1103-4fa3-8e2b-e75bb78e45bc
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:77a43a73-397d-4aea-90f2-1d1bd5e37a2a
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:0c2aa78f-4c1b-44e0-b31a-b753066bba65
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:385c62cf-2d3b-403b-9d27-9e2297f99b0e
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:48c5e7eb-006d-48c4-b7db-d43602e42c65
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:b9119a39-c32e-40fc-a574-2805d1b14789
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:4f0d1fdd-78fc-4256-8edf-4569dc2bb68c
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:4d1ed9c5-1287-496a-a7c0-6262a0c96940
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:2099f627-3bdd-4d5e-8e18-c5dcdc799555
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:58dc4ab8-62bf-4a20-837c-d28fdaf714e9
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:25329f76-abae-441d-84b3-8a8f800fed09
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:9fca8c85-c7cb-44be-ab3d-1912a32fae6e
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:db0368e8-9e77-4691-8618-d6514dd0a6d6
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:ec2bd9a5-94f5-4eaf-9e77-34b6fc43de39
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:customer-bill:db07e589-adf2-409a-a196-705b011f69d0
+
+- **Type:** customerBill
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -12184,7 +2011,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12195,7 +2022,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12206,7 +2033,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12217,7 +2044,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12228,7 +2055,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12239,7 +2066,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12250,7 +2077,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12261,7 +2088,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12272,7 +2099,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12283,7 +2110,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12294,7 +2121,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12305,7 +2132,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12316,7 +2143,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12327,7 +2154,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12338,7 +2165,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12349,7 +2176,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12360,7 +2187,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12371,7 +2198,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12382,7 +2209,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12393,7 +2220,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12404,7 +2231,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12415,7 +2242,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12426,7 +2253,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12437,7 +2264,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12448,7 +2275,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12459,7 +2286,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12470,7 +2297,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12481,7 +2308,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12492,7 +2319,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12503,7 +2330,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12514,7 +2341,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12525,7 +2352,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12536,7 +2363,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12547,7 +2374,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12558,7 +2385,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12569,7 +2396,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12580,7 +2407,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12591,7 +2418,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12602,7 +2429,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12613,7 +2440,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12624,7 +2451,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12635,7 +2462,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12646,7 +2473,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12657,7 +2484,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12668,7 +2495,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12679,7 +2506,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12690,7 +2517,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12701,7 +2528,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12712,7 +2539,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12723,7 +2550,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12734,7 +2561,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12745,7 +2572,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12756,7 +2583,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12767,7 +2594,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12778,7 +2605,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12789,7 +2616,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12800,7 +2627,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12811,7 +2638,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12822,7 +2649,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12833,7 +2660,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12844,7 +2671,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12855,7 +2682,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12866,7 +2693,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12877,7 +2704,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12888,7 +2715,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12899,7 +2726,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12910,7 +2737,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12921,7 +2748,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12932,7 +2759,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12943,7 +2770,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12954,7 +2781,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12965,7 +2792,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12976,7 +2803,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12987,7 +2814,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -12998,7 +2825,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13009,7 +2836,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13020,7 +2847,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13031,7 +2858,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13042,7 +2869,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13053,7 +2880,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13064,7 +2891,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13075,7 +2902,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13086,7 +2913,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13097,7 +2924,7 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13108,7 +2935,62 @@
 
 - **Type:** individual
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:22 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:individual:0ce6cb59-1f98-4a2b-82fa-6819f217866f
+
+- **Type:** individual
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:22 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:individual:79d65e28-ea8a-40dd-89a6-32ee266af46d
+
+- **Type:** individual
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:22 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:individual:a6db3ab3-d6dd-41a3-bc76-3fc7edd440b2
+
+- **Type:** individual
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:22 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:individual:ff3a3436-fdc4-4214-a2f8-eb2ea0d80e26
+
+- **Type:** individual
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:22 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:individual:622547ef-076a-4aba-90cc-f899b75bd282
+
+- **Type:** individual
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:22 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13121,7 +3003,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13132,7 +3014,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13143,7 +3025,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13154,7 +3036,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13165,7 +3047,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13176,7 +3058,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13187,7 +3069,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13198,7 +3080,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13209,7 +3091,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13220,7 +3102,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13231,7 +3113,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13241,7 +3123,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13252,18 +3134,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-- **Warnings:**
-  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:organization:b9877465-f7b9-4312-bf42-ba17140b5bdb
-
-- **Type:** organization
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13274,7 +3145,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13284,7 +3155,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13294,7 +3165,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13304,7 +3175,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13314,7 +3185,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13324,7 +3195,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13335,7 +3206,7 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
@@ -13346,11 +3217,63 @@
 
 - **Type:** organization
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
 - **Warnings:**
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:organization:649e20ba-8cdc-4090-ba5e-a835b63123fc
+
+- **Type:** organization
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:organization:f465f0c1-b735-49f1-a1e1-c02200f250e9
+
+- **Type:** organization
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:organization:3af4da45-59b1-4271-84b4-d3e87bc907ae
+
+- **Type:** organization
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:organization:1fc74f3a-d918-4116-8d64-163b11cf8170
+
+- **Type:** organization
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:organization:63ded74e-f2b5-4f73-a34b-3422f5ff3fee
+
+- **Type:** organization
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+- **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
 ### product Objects
@@ -13359,7 +3282,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13370,7 +3293,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13381,10 +3304,10 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Buyer and BuyerOperator fields (Code: MISSING_BUYER_INFO)
+  - relatedParty: Missing Buyer field (Code: MISSING_BUYER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -13392,10 +3315,10 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -13403,7 +3326,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13414,7 +3337,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13425,18 +3348,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product:61540da5-526b-4063-b783-cd4e2c0c7d2f
-
-- **Type:** product
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13447,7 +3359,18 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:61540da5-526b-4063-b783-cd4e2c0c7d2f
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13458,7 +3381,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13469,7 +3392,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13480,7 +3403,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13491,7 +3414,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13502,7 +3425,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13513,7 +3436,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13524,7 +3447,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13535,7 +3458,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13546,7 +3469,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13557,18 +3480,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product:02e5916d-b80f-4847-863d-1e888a968a92
-
-- **Type:** product
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13579,7 +3491,18 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:02e5916d-b80f-4847-863d-1e888a968a92
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13590,7 +3513,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13601,7 +3524,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13612,7 +3535,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13623,7 +3546,205 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:59 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:20e796a3-a53f-4f09-a27c-8c1c38d94a9a
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:8f4823ca-1b5c-4625-92b0-45c852a0ded8
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:7f639423-63e1-4e1a-bcc9-477eaf234501
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:09b6a975-f510-4ef5-97bd-ac5d00d9c01b
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:7575d6d5-4a32-4a99-8f72-5715c005e23d
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:0b3acbf0-c65c-4749-b86b-6d5fdc196b6b
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:4c97c536-79bd-433c-8ab2-3fcaac888bdb
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:d0dc9008-e514-40aa-bcb4-761b79c28707
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:92c65cc5-bd77-4182-92b3-4d521ae1dfe2
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:79b01644-7cb5-4162-8971-a6b03626ad97
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:8cae331e-5901-4fb3-9ce9-a122f0039a92
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:6e0784ed-5028-44f2-9207-a861bf6d0500
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:6d6bd534-9782-4e5d-9ad0-268c6abce924
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:a5680a3a-6953-4a34-a8ea-56ca3f6e99cd
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:23ac0ab2-9c03-43ed-9d0c-0688f84f7f00
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:1e642558-761a-4155-abf7-fc47f27c47b5
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:8a0e52f2-3cb2-4389-b6ce-501e0169da5f
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product:374535f1-5e66-4b22-9e13-ff89c097413c
+
+- **Type:** product
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -13636,7 +3757,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13644,7 +3765,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13652,7 +3773,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13660,7 +3781,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13668,7 +3789,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13676,7 +3797,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13684,7 +3805,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13692,7 +3813,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13700,7 +3821,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13708,7 +3829,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13716,7 +3837,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13724,7 +3845,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13732,7 +3853,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13740,7 +3861,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13748,7 +3869,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13756,7 +3877,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13764,7 +3885,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13772,7 +3893,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13780,7 +3901,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13788,7 +3909,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13796,15 +3917,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-
-#### Object: urn:ngsi-ld:product-offering:e7dacb3f-7332-428f-8d1a-59a86ffc5985
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13812,7 +3925,15 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:e7dacb3f-7332-428f-8d1a-59a86ffc5985
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13820,7 +3941,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13828,7 +3949,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13836,7 +3957,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13844,7 +3965,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13852,7 +3973,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13860,7 +3981,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13868,7 +3989,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13876,7 +3997,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13884,7 +4005,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13892,7 +4013,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13900,7 +4021,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13908,7 +4029,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -13916,135 +4037,15 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-
-#### Object: urn:ngsi-ld:product-offering:8ab2fa76-ac44-494d-a8d3-543adae18bbe
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:3ca8600e-7c5b-4c7d-b3c4-c80732c66782
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:8a13254c-dd2d-4342-97f3-06ab0ee943e4
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:69b6a360-2483-41b4-b028-81dd761a9b1f
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:74850daf-ec5e-4d34-898d-3f0ec9f5b93f
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:d33cceac-67ff-47a1-b61e-66861b80bb31
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:ed52d32f-2b57-4201-950b-9852245641b7
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:cf735be5-3f00-4078-861a-52d122547434
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:00a46674-1412-4474-b3a0-98daf1cdcc63
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:1996d6de-362e-46e7-886a-2d05b30a8fca
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:f2bd12d5-84a9-4e02-9498-1bfea1526eda
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering:7a52b6c1-be31-414e-9a75-9d696c92e04e
-
-- **Type:** productOffering
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: urn:ngsi-ld:product-offering:6caa329a-713f-4816-aab0-daad3536fe7a
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -14052,7 +4053,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -14060,7 +4061,162 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:f5353acd-ee1d-41b6-80d6-d3eb6ac86640
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:055a8b41-f80e-4835-80f1-b8cb10d27109
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:abadbea7-1c87-46b4-b391-9110ccd7519c
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:7b2fc7ad-1835-4688-9e8e-c88fc47ec179
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:6b357653-81fe-4cfc-8423-19d6752822b0
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:41bab3d8-d030-41fb-aa74-a9ce18d80899
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering:5b9eecc9-6005-4ac2-a334-c2351e89f001
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:fc6d2f30-ec21-4d77-a1bd-d705dae868d8
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:30e2552b-0773-4453-8809-d6d573d2f88f
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:4c2f6cc2-0a19-49f3-a949-5438a7193429
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:fe3c1b4b-655e-4b0e-b854-2241636a4682
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:97488a56-6158-404e-ba9a-4975b7384924
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:ac394906-585e-41c2-a0f8-21ef00454eb5
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:e6429790-8432-4bb1-9e2b-e6c010f7ca39
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:5cac5209-a67f-4f98-bfea-d4444569ab47
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:d554fb90-a2ab-4521-b86c-66e19d798532
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:409bfcc3-9af1-41c1-9834-8aa35280819d
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:ebc0dc5a-4d40-4d1b-8c38-ec3b7b3c30ab
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering:1a4ec325-fc21-4385-886f-25da9c978f63
+
+- **Type:** productOffering
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -14070,7 +4226,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14080,7 +4236,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14090,7 +4246,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14100,7 +4256,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14110,17 +4266,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a0f8fe96-f382-4f56-aae6-6d90cec6797e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14130,7 +4276,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14140,7 +4286,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:a0f8fe96-f382-4f56-aae6-6d90cec6797e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14150,45 +4306,15 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
-#### Object: urn:ngsi-ld:product-offering-price:4bffd57e-6868-44d2-a750-15eb3ef19a94
+#### Object: urn:ngsi-ld:product-offering-price:fba7585e-2fbb-4c29-a54d-902340ad158a
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3a0fbcbb-d241-4692-8a4a-045f8c9a459c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1f66f58d-6a2b-4014-aa89-be103f992dea
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3ae20fb5-4c93-4e28-8803-fb08cdb495c6
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14198,27 +4324,47 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
-#### Object: urn:ngsi-ld:product-offering-price:fba7585e-2fbb-4c29-a54d-902340ad158a
+#### Object: urn:ngsi-ld:product-offering-price:3ae20fb5-4c93-4e28-8803-fb08cdb495c6
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
-#### Object: urn:ngsi-ld:product-offering-price:6e13c06d-c2a4-49c9-99f5-5d5b7fb2c3fd
+#### Object: urn:ngsi-ld:product-offering-price:3a0fbcbb-d241-4692-8a4a-045f8c9a459c
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:1f66f58d-6a2b-4014-aa89-be103f992dea
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:4bffd57e-6868-44d2-a750-15eb3ef19a94
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14228,7 +4374,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14238,37 +4384,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
-#### Object: urn:ngsi-ld:product-offering-price:0fe122dd-0dbd-4502-8cc9-de9d50359fd0
+#### Object: urn:ngsi-ld:product-offering-price:6e13c06d-c2a4-49c9-99f5-5d5b7fb2c3fd
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d4cc9f2f-73d5-417d-9a54-2da4a45281cd
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4f74eb07-202c-40f9-bbb8-c7d276e71df0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14278,7 +4404,37 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:4f74eb07-202c-40f9-bbb8-c7d276e71df0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:d4cc9f2f-73d5-417d-9a54-2da4a45281cd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:0fe122dd-0dbd-4502-8cc9-de9d50359fd0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14288,7 +4444,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -14296,7 +4452,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 
@@ -14304,7 +4460,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14314,17 +4470,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3da6a9ac-6d05-4225-936c-95ff20d6314a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14334,7 +4480,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:3da6a9ac-6d05-4225-936c-95ff20d6314a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14344,7 +4500,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14354,7 +4510,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14364,7 +4520,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14374,7 +4530,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14384,7 +4540,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14394,7 +4550,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14404,7 +4560,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14414,7 +4570,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14424,7 +4580,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14434,7 +4590,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14444,7 +4600,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14454,7 +4610,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14464,7 +4620,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14474,7 +4630,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14484,7 +4640,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14494,7 +4650,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14504,7 +4660,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14514,7 +4670,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14524,7 +4680,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14534,7 +4690,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14544,17 +4700,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:775bc3c7-e63d-4ee8-8c90-d0d0c18dadc7
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14564,7 +4710,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:775bc3c7-e63d-4ee8-8c90-d0d0c18dadc7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14574,17 +4730,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6584eca7-5d04-4234-8e27-1754286b7cf4
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14594,7 +4740,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:6584eca7-5d04-4234-8e27-1754286b7cf4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14604,7 +4760,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14614,7 +4770,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14624,7 +4780,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14634,17 +4790,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6055443d-785b-4644-bbda-4dd25c4108bb
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14654,7 +4800,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:6055443d-785b-4644-bbda-4dd25c4108bb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14664,7 +4820,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14674,17 +4830,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:8d9338c8-6a43-4ae4-a57f-96deaba612db
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14694,7 +4840,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:8d9338c8-6a43-4ae4-a57f-96deaba612db
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14704,37 +4860,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:aa5dddd0-44bc-4edd-a07c-8a7e8a5c8219
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5bfe47e3-2466-4381-a22c-da072b5a333c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c798d017-8e6e-40be-9f09-ce2ae7f28ba6
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14744,7 +4870,27 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:5bfe47e3-2466-4381-a22c-da072b5a333c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:c798d017-8e6e-40be-9f09-ce2ae7f28ba6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14754,7 +4900,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:aa5dddd0-44bc-4edd-a07c-8a7e8a5c8219
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14764,17 +4920,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4a65a9f9-037d-4694-9bcc-1206487485ff
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14784,37 +4930,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
-#### Object: urn:ngsi-ld:product-offering-price:3bb60c49-65de-4a77-bdbe-4a6ded9637f5
+#### Object: urn:ngsi-ld:product-offering-price:4a65a9f9-037d-4694-9bcc-1206487485ff
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c40d71ec-4a8e-4ecf-a1dc-50ed537cb915
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:08cc66ce-1df6-4a70-98fc-10f94336a732
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14824,7 +4950,27 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:08cc66ce-1df6-4a70-98fc-10f94336a732
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:c40d71ec-4a8e-4ecf-a1dc-50ed537cb915
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14834,7 +4980,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14844,7 +4990,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:3bb60c49-65de-4a77-bdbe-4a6ded9637f5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14854,7 +5010,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14864,7 +5020,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -14874,2267 +5030,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:7212e64c-8ffe-44fe-bdce-41cb39ab0445
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:cc10dc19-8f4c-4b81-b47f-953f0354f159
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4e7104b8-0d6c-46ea-9f87-e91cbb82ce41
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:f6078852-2fde-4790-b905-a5a81b3b740d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c614b09f-9041-4d62-9a1f-044a65af5ff8
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d82dd04f-3267-474c-889a-58fa08ef7a70
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:fc17838e-5b04-4b5b-9733-247571f0f6e2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:13dae350-cdb9-46cb-944a-d254e159f9b7
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6ba4c12f-1d54-4ec2-836f-0fb5db8e4fea
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3446bfbf-6a1e-41af-9ed3-bfc0149e2964
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:7f5ef942-13c5-4b6a-bdff-e7cd42b20695
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:94201ad2-fade-45a8-bb74-6802954ea188
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3b180c78-d912-47df-9100-484b1404945c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ebfcdae3-a1ad-428c-b4a4-4fe49ab05117
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:68ec177f-1e4f-47e6-8a42-4ce2e288cdcc
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ef33bcb3-feed-4bb5-bf0a-7531f47e2bd8
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6a3fdb60-d2f7-4e84-8b83-fe02426723fe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:8ea39e91-11f9-451c-a9df-b5639690c41e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:48 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:753b8d49-37f9-45de-9345-126a2502001b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:2d0255b6-606c-423e-8dc3-2616d62e92b0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1e1c8049-3adf-4efb-aa08-758d20c2d3ee
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d21fead1-648b-4fe6-974d-fa88e5aa4abf
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c8f02b65-366d-4a86-8751-5143adf9d09e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:aa7a2d61-c9ff-40a0-a475-efb885dede23
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3bdd4247-8517-4626-943e-c5ddfbf5cecf
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:96075441-6bc4-4596-ba03-b432a7372614
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a8db8394-2914-4b9b-a378-756ebc597e22
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b1d09ed1-1cb3-4bb8-ac74-f9b6ae5250bb
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b54bc319-da4c-4003-810b-c7ad2540961a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:bd939454-82f9-4478-a417-a751b2ac9a42
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:41a3659a-a281-4796-95e2-53d194177588
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:81e31a76-0858-4994-b648-80be2a132efb
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:f648b01c-b3a6-4b93-b773-6b34f222625b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:51bdfc71-1699-4ee5-8ea0-878750eb61bd
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c67512d4-387d-45aa-bf08-391a08dbc7ea
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3554b610-fe5a-4069-8775-720e778d0eec
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:32bc9aa6-e3ac-4a03-9c53-de441b5e3906
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:82d764b0-c93e-4966-b202-ab91d934b678
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:50254e80-2fd1-4e7a-8585-a03ab92c20af
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:850e35ff-c417-4fac-b034-a322a2b7706a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e9722c3d-b7c9-405f-8304-42b3ae5a7991
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4d834740-c089-4b4c-8d30-01c9f257e699
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:9add45d0-9a3b-40f3-a0f5-e3df55406db7
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:fdcdf5b9-d9e9-4743-bd85-78deac7608e0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:575e105e-e0ea-43e0-9037-389628587c8e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:077e0c6d-26a2-4e6b-bb0c-cd7382a32b35
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a81c880c-e88a-44eb-8947-6934624d7727
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3295dd16-0856-4a56-a0cd-f84ad4187f1b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:664a87ae-75dc-4f5b-80ec-8fe02c9aa071
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e111e903-4284-419a-8b08-fe0ccb93f8d3
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:9c7476fc-7241-4d56-a042-e867f0264cb3
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:871519ad-f445-4db1-86d4-e1fed9c67042
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:13378f4e-3d48-40a8-bb4f-69af87fe965e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:fb780ac6-3251-4d5c-bc94-834e1aa7e7a6
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b51a9730-7d92-420d-9a74-129f02677513
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d207a666-3463-48b2-a846-fc0927a1199d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3cca009b-6ad4-435f-8755-9e8cdb562e94
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:f03557b3-c423-4bd0-93d7-e934890159a5
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0110d4a3-75d7-434e-a1f9-22cec743ae3c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d3b948bb-b2e1-4aec-94ac-37e678016eac
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c86252d7-9ba7-4995-8c13-61db03340a36
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:2ee75ece-678c-4b23-83de-04052a29d85d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3b8e2de3-3684-42ca-a225-f1141f5fabd5
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:f2cc0cc6-9e77-4195-abf9-52ce5533dabe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1480f704-deb7-45c2-8c8e-973cf1bf932b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:342d2ceb-ffc2-4acb-9a82-80fde94523fd
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:45abe401-e58c-4af6-8a60-007977dbaabe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:8ad5feb3-86e6-480b-90f6-a701392c6967
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:630aa306-5671-43f1-9890-2752bb18d499
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0fde53d3-69ec-4993-80e9-b00bb4464472
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a9a56d16-8a87-41c1-b67e-b3a022801d32
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:93035583-cde0-477e-8c7f-eb27abf40bcf
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3500db5d-68b4-4ade-a1a1-8e7aed874bfc
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b18cc109-3e17-4826-8401-80cb3e9b499d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a4736901-5a27-480c-bb62-62bc8b89d2f2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1adaf053-08ce-48d1-a85d-c5ed7d86ff8c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a98ad2a9-f90f-403e-b156-5a36293932f6
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1d375938-1d68-4143-bc39-09b6e728a392
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1e18f8e9-3110-4db9-9421-1e9da27353fa
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:cbbc55b5-0b4a-425b-ba36-235b251e564d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3cfa83d8-3067-41c7-bd03-9deef6dbd841
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:82d5e3ac-0924-4f0f-812e-a1f1c2d36051
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b15ca1ee-28c9-483a-ab3f-77a7f1997474
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:fab7e1f8-9c4c-4780-b833-ac336e94706d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:bc3eef0a-46d0-4cd0-8d69-84c92809bb35
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b2b21f8b-b274-4a9e-98fa-ed0a6b4952a3
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5e21aeeb-3777-4e78-8857-a1f44679c232
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0088496f-e57d-422e-aca7-7354f4731613
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:44587dde-39ef-458f-a4b4-7c05d4d683b1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c76d5659-2a98-403c-be8e-03aca6c21cca
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5948f267-7a70-4143-a3db-df3f7f5227d9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5efef314-c551-4adf-99e2-47581c6719da
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6de0c5e5-08cb-497c-8c5e-6e0ff8a1a557
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:7a358c22-9b76-414c-9cd6-733496e369f1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:496b97d7-c128-4789-bc3d-d588442f1f35
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4be8964b-01ba-4845-9b41-dc7e1338774b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e69a7795-552e-4593-989c-e1b6e9f184d8
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:07823b47-5c2a-473c-85bf-1afd7a4966f9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:8671710a-d498-4fc3-acda-9e8434b8d927
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:9fd7b8c1-4ce2-403b-ae07-4690bbd80732
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:9f9e3234-5ef7-4ca3-831e-019c05ecb7b0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e76b2b8f-0e48-45dd-9f54-5f15f0099f2a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:35ed5985-b881-4346-8490-e4a45a08f842
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:afa9d7cd-2da1-4899-8e5e-4184316f4cd9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e0771661-a044-4b5c-9b1c-62713eb8eea0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b9a6603d-0385-4e43-916b-338539e1c532
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a2659ae8-91f9-4e5d-893d-88bcc2648baf
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a8672171-214a-462a-b87f-b2ea94fb54e1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3578a2af-ba87-4714-a4a3-24da5a9a8d70
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:00a7db48-8eec-4378-a96b-9e3e434af454
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:eaf1c363-e5b8-402a-87aa-dbf0e1d6cbb9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b53fa33c-1c4e-46b1-bf33-65811cdfebfe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:8ef04840-75b4-4c01-9923-64534bba08b7
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:cb890fa8-ea80-4a65-b8a5-50ad7a95a90e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ec233e77-ca4e-4738-a1ca-1f06f3af9532
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3b56e035-84d9-4665-8f03-a3d0cd4c9d4a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a1d3fd4f-4abf-4ae6-8452-db08dd09d645
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:cacc4f5d-37b8-493e-9099-93af14add697
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:51 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b0937b5a-167e-4c8a-9e0c-960d504eaa0d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:42a3d47d-bd2a-47f4-bde9-bcd73cd64e63
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:23c49bc7-7f1f-4204-84df-7cef601f6dc2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e0d2633e-0235-41de-9162-1536673147b3
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b4c3f6f0-ebad-4d0a-ac8c-9f98a96bfe57
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0d7ebe12-29cd-4864-8210-21f1b229a6fe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:aad58116-6740-4948-887c-22fe20661509
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:954ba545-4c09-4fac-b756-ffc5b6d5f06e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:277c6cca-69eb-4278-adc8-e47c641aa44f
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:056706e4-c553-4819-8dca-3159b00d9a8c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4c802695-db31-4d22-bf58-2006f603d150
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4101a22f-c9e8-4b9f-8708-79c943120c33
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:20ee90f9-3306-4e69-b1db-59a9f02e3d7d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:15c0a431-28ec-464d-995e-f1a4aa906fc6
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c6adca07-35fc-4b36-b0f6-79aff9d2dc88
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5896612d-9757-4284-9f89-9ff29d8f2e52
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:98290899-5774-4dad-8b11-a99063733566
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5bd13a65-d70b-4cf3-99a5-c2db18a56c2e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e5fa0abb-9085-4786-8510-df85451dc66f
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:410ff264-0f65-4f41-8e28-56804ef53c5d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3a4fae2f-bd2d-4f78-a4bd-18e64640395a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3e521b34-1b3d-4f15-92aa-e6a6eac16900
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:fa1441f1-97ab-42ea-8682-6be8fe7f1aeb
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:bb5fdd1f-636f-4cfe-b002-3a3f13cbf801
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:2859af05-7edb-4913-b362-9df00c1cedfe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:13824473-bc5c-443a-aef4-d8cbce4ad182
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a549e826-210d-4279-89a6-40ff54f132c9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:9c273fe7-93e9-4071-aac2-0c5e3c111d8e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:8cac5e1b-6ad6-491f-95b8-38425ede5974
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:33bda480-0482-491c-8922-fcb136176725
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a61007c0-e46d-4073-802d-a332d16aedd9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d85f4a23-226d-4bbc-ab86-9d1d658978f2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:64a0ec6b-3592-403e-8d8a-e5849eab964e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:1b706088-c61f-4479-ae0f-6941a4cfa94c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ecb40837-bbf5-466a-82f1-e5c448c513df
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:28c2fd26-832b-4b4f-8a41-c00fc95691d5
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ee552ffd-fb59-4a16-96ec-8427a4ffed93
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:40c9cc69-c7e7-4d55-a310-0955eef2f3e1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e97d6c14-625f-4d5c-9270-25a7db19b6df
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d6d13e61-c426-477f-b69e-d2789aaa37c1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:f00a1515-3b98-4821-90a3-54cb924896f8
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b8294f53-8977-4c5e-b99f-37b221f41d13
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e4cc4eba-9a85-4ed8-b1b1-105e0efa15dc
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:67173415-a89c-4210-b2b7-140e6a848ca9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a7f1c6d1-f3a4-4a56-94c3-dae7a73e4c2b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:07a224aa-9bd9-4e68-a812-cb1916a94824
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:29749638-7ae2-4233-a262-7a2f0b31a0d8
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a5f92d87-0548-4dd3-bac5-ddb26235f401
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5187ced5-436f-46d7-ba2b-7487e06832d2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:83075f38-9e4b-4b27-baeb-4d0467a2785a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:defeb8bd-ce86-4f9d-bafc-d9412c8a0802
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:989786b0-72ff-42bb-b3c1-a9ee3aa28a32
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:03450c5f-4004-406c-9844-cbba3a2b275b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:160f5644-9690-4d0e-9ba8-638ee9acced3
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:75a1d641-15c7-4c94-b9cf-a08f3fba10e3
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:877fca34-ed8e-45f7-9142-ee0713518db0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d7934fcf-7fac-4a85-9417-80f500665fb5
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:fa8c8077-dd58-4730-8858-b7604cc2a28b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e7fca842-fc39-4de0-a5ad-8f97b6e2e1e4
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:bcf2ad2a-3dce-4823-85d8-b5abe76f72d1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:95db510a-58b1-4343-b26a-69e59ef14fe0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0746752f-5aa6-4fe9-a378-64e7c95eafb2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b51b4086-777d-44bd-9616-336c55c087e8
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:88d10f59-e893-4a15-8eb0-48a15f69dcc5
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:85ef9995-8bbd-47db-a564-de14fbfa856a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:37ea9565-2ec8-40b7-b7f2-abb0d94553f2
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ccc239ff-3f93-44f0-bf89-b2657593cf4b
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:3ffb4f15-d959-4e79-b62a-c9f53f4535da
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0f50551d-e4dc-4f70-b76e-6daa8284e8c4
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:93a6f266-77ad-4300-8106-b9a5065d429d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:b27562ad-611d-4da5-87e4-6142c0eea79c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:36134895-0829-4926-943c-ce6f0a56208f
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:2b0cb210-8ff4-451d-b5db-461df78a3694
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:2ea37c05-af16-4bc7-8d04-32b8bd834e4a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:10b1ec2a-ff02-4481-82ff-f72c2861fd15
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:21d06901-32c8-4375-8b3e-339c50598fb0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a32eca12-fbff-4308-85c3-8f030f91a738
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:41213689-d6d3-4c83-832c-9fef7b9fc77d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:967314a2-c5c7-4e94-bad4-6f03c102a8bd
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:2274fc03-9b28-410a-a6dc-9043ce825119
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4f4edfec-b323-4b1e-b3f0-befdff1b75a9
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6c8c8636-131e-4694-8a6c-115bb0e535c1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ab6e898d-7034-40db-a16c-cf7d429a75e0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:dc2e60c1-fe1b-44a2-aea7-e3bbe11cf513
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:50e6f121-af5a-4aa5-be7d-8b26921a079a
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:df169512-226a-4870-b30c-88770a31072c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6f992dfd-d6e5-4cce-be69-559b0bbcc033
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ed383f12-d4dd-4523-8aa6-448f6da111be
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e65d93a5-d120-4364-89c9-d74f84d8a1ff
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:23f1ad2c-8756-483b-b487-f283c53424bf
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:f8d67b79-921a-41de-94c6-791785bf6978
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:ae479304-6510-4a7a-96cd-27747a097564
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a354ac3e-f093-41b4-b8bb-0ae049cc41c1
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:c7c677e4-9feb-4e85-893c-febc0e641fbe
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:346915ce-9f9b-4755-b46b-351a0cfc8a7d
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:6d0f15a0-37e8-4b4e-9a69-e41e810e7379
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:dae9a186-ce14-4a76-8c20-686446014915
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:a7bbcda1-7091-495f-a289-8fa1dae68927
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:4cdb8eec-194a-499d-8cad-0564914b2525
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:d6c03f0f-c4f2-4233-a577-5b6b55fff268
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:53 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:5a104ee9-8bf4-4c45-8d7e-cb07edc4fb4e
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:173a9637-53ba-414b-b0eb-4e99f8b56e3c
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:176709c3-4aae-40b2-a3b8-d80f55066859
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:69067608-3e7d-4fa2-a4ed-2e690911609f
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:58cc8be5-0add-4ee9-854e-b9ed891ef7e6
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:10facecb-73e8-409d-b277-b015a55e915f
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:e7907d47-6e36-4cb7-b597-354014db5067
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:9b27d33c-0856-400c-ba91-36ca0669c0c7
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -17144,7 +5040,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:9b27d33c-0856-400c-ba91-36ca0669c0c7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -17154,7 +5060,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -17164,17 +5070,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:0b2dcaa4-2c1d-4d50-9bca-ca69e79facf0
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -17184,27 +5080,17 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
-#### Object: urn:ngsi-ld:product-offering-price:f346907c-e792-4ca0-830d-21772439bfaa
+#### Object: urn:ngsi-ld:product-offering-price:0b2dcaa4-2c1d-4d50-9bca-ca69e79facf0
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-offering-price:7b60dfbc-dffe-40da-8c62-3dc410402a51
-
-- **Type:** productOfferingPrice
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -17214,7 +5100,2237 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:54 UTC
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:7b60dfbc-dffe-40da-8c62-3dc410402a51
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:f346907c-e792-4ca0-830d-21772439bfaa
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:f026d149-b29e-4d15-b710-5cc785808c98
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:9541b92a-8422-43b8-8bc3-2191a80c4db0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:33358d97-bc25-45ce-96ed-6aabd2ed6fa0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:e2416ee0-7778-4708-b905-5146d5376c8e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:30d168c5-9537-490d-8dfa-eb352d4d8c9b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:653a42f3-a031-400d-88eb-a56fa03015d8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:6f4fd197-816f-4ab8-988d-1e89c866d445
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:63578d82-7280-4b2d-9e85-6379f7b17d58
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:96b1e4cb-b8b3-4fa6-acd7-9e1f47794ba0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:30 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:dcb20903-1d01-4b74-8c0e-46a2f2b920dd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:acbd99be-2f4e-4dea-9a81-6cb797d4e1ae
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:a6760111-3b5b-4b03-a2b3-1af9cde04cf0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:c0263817-5961-4164-b8f4-95042817975f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:d4eb9f12-39f3-4f20-b2ec-8b1ec9fd288f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:b55cc65d-2c12-436c-ba02-d2c64687bdd8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:00c8b914-9b16-4b2f-8558-021ed2938c8e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:9f8c70a3-dde9-4925-b1f4-66baacaf5c91
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:fbaa4ff7-ad07-4151-a66e-5404df28e77d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:ed158cbe-5c29-4fa9-85c5-9171b85336cb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:1a8bb8de-96a6-4ab3-a1fb-4153aa6ab44f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7cb21085-01c0-4b51-9c4b-f3ff6f510eba
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:9c9ae134-4f97-4b9c-9fd2-b3fd8e96da5f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:499e5825-32f8-41a7-9f49-e5dba28094ac
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:588267d9-c68d-4754-bca7-1169e97e0df6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:a7fcc974-0754-43ac-a3ca-b9d083d81649
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5a4968ff-053c-4040-a28c-14871c1cf8e6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:f4513107-2697-4e21-9d8f-89d8cacd4a55
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:de400ec1-6932-42c8-806a-a789618054bd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:9c957909-3a01-473e-a7e0-cbd873ebfb2a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:e4357db7-2339-4051-afc1-a4e4e95ac3db
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:abefd473-1f0a-4244-9a69-c0568504ab7b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5cf12673-a33f-4516-ad69-70a102b50bf0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3f8d055d-cec8-47f5-a116-dfaa90c08598
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:f0aac682-a141-4f55-8fb4-8502d6da40ce
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6862a634-b40d-4f9e-8719-1b57513b954f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:229eead4-7103-400d-989f-ab5a7fb4b3d3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b206f02d-50cd-4100-b722-bbc7db0daa35
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ea94085a-b883-4ec3-a3ed-005a4afb333e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:beae51b7-9c13-45ec-ad04-f750f5b1eefb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b54bc88e-8104-44e7-a7ec-051881852093
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d671dce4-1960-4470-b994-fe35cca4efa5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:010ed217-8db2-404b-8aa8-6e3b9cd60f61
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3a29cc75-5792-4222-a7a2-38acc237658d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:00eb3279-aa7b-414c-9201-8fb455342e46
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2c064d03-5860-4cd2-8607-9a85450a5826
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:e11d0edf-7ec3-4bd9-aab0-3942931f5e63
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:036cd75a-908a-42ef-830b-14d18dc65f87
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:143b311e-bfa2-4612-8974-75b29c991d45
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4dd1b451-8366-4be9-b473-568f1ff704bd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7a45ace3-f8d4-4c28-9c9b-7191a5fe28ed
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2bf6fc82-6423-429c-a963-94e137e55e65
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2f4f669e-8365-4f7f-b6c4-547c0cd58924
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:dccf3108-14bc-4e7e-bd26-27b3c9f4abdc
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:75759183-6a6f-43b0-a2d0-d5be4f4aa3d2
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:75534c79-5493-47ce-99e9-a06125a61322
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8c8a046b-15a8-4a8c-a616-f186fab53714
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6baf7b40-a203-4aa1-8c52-e19d34ebae55
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:bee90d28-fc11-4bd1-af98-ba8757b532e4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:853011f4-ca90-41e3-95c9-1141836723eb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:1f6b7299-89e1-42aa-80fa-282aba42504c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:05099d5c-29f3-4929-baa3-505df5ca68e0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:62085d6a-ab60-4d4e-8514-5120f69ac3b6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:f65e274c-76bc-4d52-a090-d0c0b13ed15b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4bc35f20-74dd-4f2e-9fd5-839bcf779790
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:12a5c9e7-99e1-4b68-8512-0665c6a42027
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4e4d1da0-009a-4d76-9bad-444331a2197d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3587a720-0e0f-4569-9674-62a647e137de
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:91de3726-4d0d-4782-99a7-0a5c39d8619d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:028604b4-6a02-4151-b6b4-9a0d40819ec3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5dbda5f9-1024-4123-bd45-b0919aa7420c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:789a3618-a0fa-4736-a6b4-fc538a23df93
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:70e027f1-931e-4854-92dc-ca2ec86bb3f8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5174d7f1-8b7f-4fac-abb9-c2ba78f799f4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:67d11a7e-85d1-4603-808c-374265c87df5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4e3181d7-22ac-45fe-998e-d8e89c0d2f3d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:9351cabe-b828-4469-aa96-53eabcdd33e6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:dc2edec2-ae18-413e-918d-eb0ff81dc5bd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:89992021-0f73-416c-a553-7c9625950ca8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8331f85c-2521-4a89-8ba5-1fc507badafa
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b89eba0f-1b8f-4583-8617-9079a0ace4cf
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:a4d492e6-bfe1-4d0b-8aec-fea3233e846e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:14c6e0ab-14ba-4684-9592-e053dfaeb9f3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:cb1c522d-6992-47ee-bd3f-06310f0a2e04
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ae15b3b0-6650-4bfa-aacd-595ad247b604
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:9fc44f02-809c-4ad9-8c02-01739369f050
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2364d6c1-21e8-436b-b54d-289d67f9c198
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8366f679-1b36-47b1-98d1-8ec7419c6f49
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:58e60366-e54c-4bfb-b74a-d379d1b5e810
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c4f98a8a-01ff-4637-82aa-b1414858230a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:1d431284-ad03-458a-aba1-d7a0950dc72f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3d904149-53b1-49eb-9bf3-ac2f4ae7ac0b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2e49cb26-de04-4ba8-b014-78d7c44b79bd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:fdb99f48-6b79-4e40-9a79-4eaf27dec313
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c33530a8-f56f-45cf-8387-2efcd5aec3f3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:aa5580ce-dd29-4305-8560-9416d8ecd8e3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c2d6e61d-eb87-4942-9f44-6af9e8877e31
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:36753374-ad79-4dee-98b4-e05d3986174d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:dda6aea9-4127-4591-b746-25ab03b8896e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c469000b-40b7-4cf5-a343-9727427127f3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:73a3c6e8-5767-473f-b152-5520cd3475d2
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:81ba5637-95b9-4c08-a21b-fa4238b05d68
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:cf7ba21c-c3ba-4260-a91c-a1188fdfe648
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:831fadd7-86b2-49e8-b852-d04d97eb7cb2
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b2bcb36b-af5c-40d4-85b4-0fe414db6511
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:64847008-03a7-49f6-8fc8-e8bb36c07d56
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:539b3e98-35ad-4b9d-a514-48f9618e5c5e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:f074c366-8286-4000-a6bd-0796fdfd7fd4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:66a73399-85cc-47b0-8675-301552ba725c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d789ab42-e949-4c96-b287-a140f3528267
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:41 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:36b33c3a-2923-48b0-ad9a-82ca7ab8790d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ea057aa3-dfa3-4d90-aaf8-f1cb8cdd3966
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:30a13850-3ea2-4e5c-a79b-0d88543fef64
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:77d25781-f15a-4864-965e-3206c79d4740
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d9ebcd5c-7e5a-4fb5-8283-8a1a6f9326f9
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4fe1bc96-cb11-4dfc-a523-abdfefd49fe8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3afd750c-1547-466a-ae2a-1cefec930ccf
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:220f95c1-b20c-405e-8351-a34746330b42
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8c96201e-dd51-41c9-af24-96d210a4f156
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:011d51c8-4108-43c5-be2e-95c22cbb4ce8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:7d78b71d-262e-4a83-ac22-8e1768f5f4a4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d2593254-0e54-4cfe-820f-9dc727aaa629
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b886312f-a488-440b-999e-3c1cb5dcc0b2
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:885084a0-900d-4956-9cc3-f6fd44d6b9d7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:46a9dd25-cba6-4b26-b7b3-1e75048697a6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8c7e0dc8-a03d-40b3-b2e6-7ba8ef1a4b5c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:a3b49d8f-ed46-448a-a159-4a451c2198ad
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:fc105ca2-9d7e-46fc-ae7b-0241f2bd2751
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:226c388e-69e5-45d1-8171-baef2a29336c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7116e4c4-3c97-4652-8824-62371a77e9ac
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6b64a300-8c2c-464d-974e-28bdd06994b3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6b51a48c-2731-421d-b3a7-05c00f67fe12
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b8c20bcd-b227-4983-b96f-d58ebc7284b6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:a3b3de69-2903-4ac9-8bd4-15be81cb0691
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:17c99d15-dd9e-4d1c-ae3a-8605ba01c1ef
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b242ca11-4d68-4308-bbf8-47b1ca1d2526
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c91597ef-6c7e-4fae-a128-6924d5890ec4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b9008c32-0aa8-4d2c-a64d-4230d01f1e9b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4bce7b40-75d9-4d17-8c52-9711e823a2ef
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:bb486136-cc13-4dc3-af66-23680fe32ac0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d7d1003e-d1c8-4582-9b32-17f417ddcb25
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7dab9686-4c52-4951-b420-d4aff9a19cb2
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:79f5acff-9d87-4476-8ee8-47768585a82f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b5299589-96f8-4540-ac7f-3316adf3fb41
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:799962bc-f628-48ff-ae11-60a8cd6ab85b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d4568a25-a296-4154-8a88-394117e891b0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:bbfffe02-466a-4f9c-bee2-fedc07c39bb7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:87fd14f7-cb6e-4bd2-9149-45ccae1c4a9c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:85684d70-d96d-4f6c-8e80-008ae5792611
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:89acb00d-42bd-4582-a945-94d800a77889
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6d73cf20-dec9-49d9-9be5-31cfd868fe86
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ca721fb0-507f-42d4-80a9-395337766d6c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:88428c8f-1e6c-48d8-98f5-9f7d07f23f42
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c8a0d287-b104-4dd4-bec1-e4c38108f042
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:dd616652-c77b-49cb-92d9-dbbf3b022c1f
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:74d0de69-f40c-4345-87bc-2c44f8ea286e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ee651a53-68bc-49d6-a00c-3505a785da63
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ba526e3b-e4ef-41af-9280-7deb3ae8d3ef
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:bb1e78a5-a7b4-4162-884f-170f10e6cecb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:a19fb68d-7896-49f7-bb97-a10fd3d8c289
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:821f7740-e067-47ed-99b0-d8e0af013d46
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:34d2613e-ed4f-47dd-ade7-593c048392c5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:dde62bae-5bb9-4a86-8a72-d045ac056745
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3560cd20-758b-4667-b17e-71e8b254cd26
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:debb531a-58cd-4967-a5e3-fb506e535f63
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:eb095bb1-a0b8-4a1f-9ffb-cecc857f3494
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:56e098be-5276-4567-8735-045358d040e6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:da29fd02-e98a-4a2c-b745-d25546f5b2f3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:192eb6b4-cc67-47ba-bc84-17083ce43c16
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:41278603-c6b1-441a-98a3-762186d84f44
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3bd80ac0-df29-422f-9514-3f391e2a5386
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:32f94c7c-95d1-47e2-a901-93f251fa1183
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:06d54d38-6839-4c89-95e6-af204f1b9bd3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:fbaf08b9-3bc0-43d2-a6b0-2947de5ebb4a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2b6dfba2-f197-4ca2-848e-cbc8a9fec26c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5f2f1480-8101-4621-a31d-84b51b016e2b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:98861972-fdf3-4cb6-a38f-9f851185168d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2bdea539-1470-449e-a79e-4c9e8243497c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5feb54eb-33f8-43a3-aa2f-68f5bc8f2585
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3282cc40-b169-4536-9e79-e2f6cc73e72e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:469c81eb-b9d5-4347-8913-d1225505696a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:f8363712-ecba-446d-b453-678dde3a2ef6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:2462c62c-4b5b-494a-8c32-1dcdfae17a7a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:43f872ae-9de5-4927-a119-139675a03236
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:96fd27d6-c0f4-4c98-8f17-e900b217fe46
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6fbeef02-49b5-4685-86d4-58bcac75d701
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:de1ae86d-438f-406e-80c2-858fe200daaa
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8711a720-3648-485d-81f6-7c0bf81afb02
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4033a990-8900-48a8-8b94-feaf092961e4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:0bad5ee8-4cfc-493c-9fc5-3707cc823f33
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:fc4c0e5c-2751-48af-aa0b-71cc6dc03e6b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3e3b6d90-fe3f-46aa-b971-2ebdf4d3ce9a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:752275bd-c88b-4a7e-aaa3-ec566d0dc197
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c9124c8c-ace8-42f1-a42c-2156dd2b506c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:552e3f5d-2964-445b-9fb2-eea3d1168252
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:27994a95-751f-4e15-81af-36fc5cc5cdf1
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7d259a70-bb35-4988-b131-4da3335c7c5c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6e5dc4e3-4ad0-48f6-a92e-ec5b48324c03
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:76ad71ac-d40d-4e62-bfed-9faf4d224e59
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7976a0eb-60be-42a0-99f3-fa5efdb4be7a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:e499e2c0-882e-4a10-94e0-84959f009904
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:db22b038-e309-47ce-a38e-8abd4de4f4e5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3cba3d9d-507e-4bae-a632-59698c4950ed
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4fefddf8-a6a9-4d62-8e51-c655a67dbabd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:1f5f2891-5ff4-4751-b420-1068af6ac0ef
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:62581ec3-cf51-47ca-8ba0-8f82b96d6868
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:189a9f03-27b0-4e38-9a04-7ee3c458be0a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:1027d4a1-958f-49b4-ba5f-9afad1d2716a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d7af253c-1e3e-41ad-b4b5-dc7cfabf621b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:1bfde910-3ec3-4a51-bb45-6a21c50bb095
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:53 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:25d69a0c-df35-49f0-8317-8ac2e05bd128
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c13fdaae-051b-45ca-86eb-654f5d22ccd4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:7e30fd40-4a31-4221-b4de-c9250213b110
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5abc072e-6017-471e-819e-ded12cf4f0eb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:89c03787-cfca-419c-8c91-bf739e40cb88
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:86c7df56-f19d-4c34-b6e4-7b60d7b964bb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:196dae1b-c441-487a-8f4d-9f5490b8f050
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:65e0d9c8-d710-43d4-8576-2bc3e7e7bf66
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-offering-price:0a68e165-fcff-4f83-92df-70f24faad4f4
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3432c068-6a90-430a-afa9-ebf451f2c1c1
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:98ac2e31-249f-4ce4-8e91-a01888b0d1f7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:4fb4c894-e2ee-4f1b-b2cd-93e75a838910
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:318c8bc8-9cf7-41dd-bc3f-f7477684c582
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:1171ebfc-cc87-4ef3-9d3e-1c3f89469aea
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:cfab7960-1c8d-4465-b0a2-c1fc5f28b8d9
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:860c45cd-4c02-4263-b41c-275c5c1b273d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:560d8e3d-4e92-409f-b9f6-da86a710f732
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:afe5d8e5-b4e6-41a6-8d33-4adbb5daf62d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:bd278d1e-088f-4ec9-adbc-1faeded7f13b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:9a486c59-49db-42a1-8e9b-a0db598512d3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:f1c77f18-b7c5-4351-ba96-c34c83dc9126
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:388bcb19-f02d-4279-8488-908dfe189f3b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:625238e6-8798-4ae5-ac74-2f872f755f23
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3e20cb40-b498-4796-9978-985308efa639
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d4a7647c-87d4-4357-9637-67063052acd0
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:d4368b6e-539b-4f84-8923-1bd3042212fc
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:def44115-6fd4-4768-bd86-e80643a35064
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c294ece1-c65b-46a6-8729-bee5b5e4c00c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:7331aad3-2f71-451d-910e-f63435761866
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:bbf124dd-587d-47ed-9e77-c16855021cad
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:0d02b372-430b-4bb6-9f12-c67214edd8a3
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:20576f40-8804-4254-b4bf-609bcddeb264
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:72de7ae2-3f8d-4066-af3e-949ace677424
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:5f1910c3-1ad2-4d44-9e71-a3ab91e600d6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:eca21ec0-bf62-4c32-a6f2-5a5f97c16922
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c713edc2-c783-4b76-a506-cb51df0f0ad5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:cdb90c94-fe6c-412f-8a65-330e569d90fd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:f293e4ef-9ade-45c4-8786-677c1b09bcd5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:34a6cf3d-d331-41a2-a5e8-69879cde023a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:c95a6853-808a-4381-97a8-da6194ddd03c
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6a75671a-1f82-42ad-9259-e2c13f73c0df
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:61291e91-b0dd-4a38-9e1d-c5aaf9579338
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:dc96b1ce-f691-4f59-ba82-67354c2ed89b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:246c1588-8926-46ae-a2ca-ebc5faf2e746
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:3385c995-513d-47aa-b081-25315672dbb8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:203b9afb-c71f-4d83-8656-73e1a703b1c5
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:8ebd8bc7-f348-417e-ac95-59adb3ed2933
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:9fd82253-4897-427c-a215-50f6b4a5febd
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:b77c51c4-a060-4a54-8663-568080ff7ce7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:aeecebd6-d2e7-4fdc-9712-9827e520daeb
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:68236147-8812-4bc1-97e9-badbb4922d8d
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:19ced729-426f-4387-86ba-f56436dfc31a
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:88606fdd-f145-4a73-9210-a74efd98771e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:ae1e70b7-837d-4812-a493-9ec565cde1e6
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6a0f74f1-aebe-4306-b7ab-ef726c921ee7
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:6380fdea-968a-4c6e-8916-0f34d921074b
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:0cf7e3a1-c348-4f9b-a998-d910dfa17da8
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:0b3d79b7-a884-498c-b3a2-9cf85a188e2e
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:a4e41091-a17b-4132-8037-ba3b2d277911
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-offering-price:da57686e-c6c9-4ec4-ad2a-5a01d4f97151
+
+- **Type:** productOfferingPrice
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:00 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -17226,7 +7342,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17238,7 +7354,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17250,7 +7366,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17262,7 +7378,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17274,7 +7390,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17286,7 +7402,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17298,7 +7414,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17310,7 +7426,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17322,7 +7438,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17334,7 +7450,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17346,7 +7462,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17358,7 +7474,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17370,7 +7486,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17382,7 +7498,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17394,7 +7510,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17406,7 +7522,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17418,7 +7534,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17430,7 +7546,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17442,7 +7558,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17454,7 +7570,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17466,7 +7582,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17478,7 +7594,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17490,7 +7606,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17502,7 +7618,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17514,7 +7630,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17526,7 +7642,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17538,7 +7654,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17550,7 +7666,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17562,7 +7678,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17574,7 +7690,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17586,7 +7702,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17598,7 +7714,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17610,7 +7726,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17622,7 +7738,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17634,7 +7750,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17646,7 +7762,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17658,7 +7774,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17670,7 +7786,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17682,7 +7798,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17694,7 +7810,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17706,7 +7822,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17718,7 +7834,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17730,7 +7846,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17742,7 +7858,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17754,7 +7870,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17766,7 +7882,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17778,7 +7894,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17790,7 +7906,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17802,7 +7918,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17814,7 +7930,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17826,7 +7942,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17838,7 +7954,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17850,7 +7966,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17862,7 +7978,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17874,7 +7990,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17886,7 +8002,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17898,7 +8014,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17910,7 +8026,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17922,7 +8038,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17934,7 +8050,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17946,7 +8062,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17958,7 +8074,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17970,7 +8086,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17982,7 +8098,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -17994,7 +8110,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18006,7 +8122,211 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:55 UTC
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:44dd81dc-7b13-45bf-9939-3148b5b3cea7
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:90cd0e3b-5c96-4490-96fc-cf242fcb517c
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:d5c8d11b-b638-4240-a554-357183250d92
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:d0d52d66-ff36-49cd-bb59-017771e03395
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:33b43e7a-cff2-4e69-b879-9ed9e0904838
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:667f766c-9f7e-4699-af59-edc6537ba4a7
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:56081401-5159-432c-b59b-1da51815fba1
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:f9583989-3f7f-4a63-a7d5-e1e29de5e259
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:d9ba0c19-68d2-4bdc-ae3e-e578e579d84b
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:9b00eecc-c2f6-4544-8e31-748d61867c06
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:3c5cf5e3-3d86-4469-a9ac-23f2d28dbda6
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:304f90fc-42e7-4fce-a8c3-60d031548c81
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:90f607ca-4c54-401b-9976-36f85d1308bb
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:e85bc0fd-de26-4052-a32e-4d0278ebdd57
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:f67c89d7-0d37-4824-b53e-1f89dacb2396
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:84126d35-3052-4250-9510-be0f5bc976cc
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:product-order:b443cf29-005d-483e-ae3a-76a4b5af1319
+
+- **Type:** productOrder
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:01:01 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18019,324 +8339,322 @@
 #### Object: urn:ngsi-ld:product-specification:bf72e349-03f0-4e88-965a-73815d8881b4
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:55158c3d-ef8f-4f1c-b9d0-82dd3138b2ae
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:5e2ced54-45f1-4687-b9f9-ee13cb318a66
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:ba4123f5-77f2-4b80-8c8d-13c01d3a6e72
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:534697ce-c774-4cc2-a8f4-d4f2ae6cf4f9
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:bfe7418d-2614-4e6a-920c-6d6711171f10
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:351bbc6e-515f-4159-9082-e60563c927da
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:1cb811e6-4661-41ff-935c-26176e209dab
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:32096043-6ce0-49c0-acb6-4ffde182b254
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:36f45313-8f8d-49c4-bbf2-bd2816934e6d
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:1226966e-795f-4508-a876-6c67c5cb1059
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:8e867c80-2a58-49c7-9502-30f8373802ad
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:9f3eebce-ddfd-40a4-9227-a62f98f94344
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:839e37f8-5f9d-48fc-b2c9-3e5a32d90424
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:2adb577d-ec29-4406-b2d5-86b295c2c434
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:64c19187-4f24-4dcb-bfa2-a06afd3b5b11
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:6a8476a3-88e5-49de-873b-4ad36ebf6db5
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:cb3d1a1a-802a-4463-bc2d-056014051201
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:9f141090-01ef-4988-a639-97d84f2d76ba
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:1fd76f44-79c6-46d6-9fb1-11899181e905
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:e4794956-d42e-46c9-a2ce-3df53e2df26d
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:411816fd-3f8b-4e6f-8c35-02e8cada5ce9
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:3c2ea42e-77de-4012-8d12-2e760facca23
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:a45a592d-480d-429d-8ad8-f81b1bf528bb
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:ace61c97-0f51-4601-8359-59b3987ff3f7
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:ccaec925-9fad-40c0-8015-5b9087f92aff
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:2532e67f-0a84-4aed-b31f-7654984daac9
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:10ebf2c1-fe79-4191-81a3-b58207307c5a
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 #### Object: urn:ngsi-ld:product-specification:7b61b736-d15c-411c-90fa-649508d2a9f5
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:021517fe-650f-4834-92f1-4bf29487c5e3
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:90962671-9c9d-4328-b78b-b551b74fdc92
 
 - **Type:** productSpecification
-- **Valid:** true
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-
-#### Object: urn:ngsi-ld:product-specification:dbe56463-02d6-430d-8f54-b211c06cb72b
-
-- **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:f7504fb4-2f23-470d-b90b-1b86228d66c4
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:0f2ac31a-d6c7-4178-9b87-0ef7d4987d54
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:159b671c-1924-47d6-8746-a01d8b955750
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:31cb5035-5145-40ce-b117-bf38a45d4213
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:df18f4fe-c2f3-47ec-85b6-0011df525c7d
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:9abbf3b6-6df3-41a5-810b-d5e5d641931b
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:7b2293f2-5fbb-4487-b2ef-c430a9c481fe
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:fa2b31ea-48b0-45e6-9edd-ba0a3788c6df
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:c57c7a17-6915-49cb-89fa-befbafc80b12
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:669f8cd9-67b7-4529-b3c8-1413ca8adebc
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:product-specification:eae0d5aa-3c76-4014-97f6-45eae71da830
-
-- **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
-- **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:e84e6c6c-7791-40f1-8904-b14134e3cbcb
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
 
 #### Object: urn:ngsi-ld:product-specification:e9ac6275-bb21-47d7-89bd-187f71f55e3c
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:05:56 UTC
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 - **Errors:**
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-specification:95332c87-ccb7-4ab2-bce9-78b21295e06f
+
+- **Type:** productSpecification
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+- **Errors:**
+  - relatedParty: Missing Seller field (Code: MISSING_SELLER_INFO)
+
+#### Object: urn:ngsi-ld:product-specification:8569bbcc-aca6-4aa7-b26e-290e9191a352
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:3e0e7cc0-77ef-4546-9c71-0254b53c147d
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:7f3a773f-969e-479c-bbbf-d9a11292351f
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:dc9dea35-41ab-4a3c-b4c2-76a80f6a9aca
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:ec990ad1-fc40-43b8-8681-5f327ee32c3e
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:21d73795-9213-4ab8-a721-c8973fa7acce
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:e3fb95ab-8cc0-4ad1-8b83-881ab14b8d36
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:70c8489b-2116-49d2-95ef-ff12e0a3fb8d
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:6bf3eab8-25fd-42f7-a809-170835e9bfc7
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:21c93fdf-e74b-4815-84cb-7efa7932fa40
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:f046a9e9-781f-4352-a1ce-6f7b1728fc94
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
+
+#### Object: urn:ngsi-ld:product-specification:5d32ba32-c7d5-43fc-b64a-2c00a21a470b
+
+- **Type:** productSpecification
+- **Valid:** true
+- **Timestamp:** 2025-11-17 14:00:19 UTC
 
 ### resource Objects
 
@@ -18344,7 +8662,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18355,7 +8673,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18366,7 +8684,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18377,7 +8695,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18388,18 +8706,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:resource:bb198be7-01b5-4c40-837b-b1b97b2ab5bb
-
-- **Type:** resource
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18410,7 +8717,18 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:bb198be7-01b5-4c40-837b-b1b97b2ab5bb
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18421,7 +8739,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18432,7 +8750,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18443,7 +8761,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18454,7 +8772,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18465,7 +8783,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18476,7 +8794,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18487,7 +8805,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18498,7 +8816,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18509,7 +8827,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18520,7 +8838,128 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:23 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:c714add4-d818-4a23-ae1d-f770cf56ccb3
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:d41ca912-91ae-4bab-be0f-e2ce3419d33f
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:a6f30dbd-8a74-4427-b5d5-abe19dc61d79
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:a700af5a-f59e-4ba0-b801-4ba09c3d2115
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:1cb497c3-6212-4fee-a042-11af0e15dda7
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:47494568-4ca8-4fbd-9a02-484f368b9558
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:27d89a1a-fbac-4c1d-b4c6-e585b49f2d2f
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:3a6ab23e-a3c1-45ab-91cc-a4f4dedeac24
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:ce133ff0-0eb5-46db-a837-63c0af515aba
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:9accc80d-1490-4994-a1fa-8624bcf968c8
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource:8d70ccb9-5f54-42b4-aeb2-14a15348ba51
+
+- **Type:** resource
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18533,7 +8972,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18543,7 +8982,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18553,7 +8992,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18563,7 +9002,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18573,7 +9012,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18583,7 +9022,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18593,7 +9032,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18603,7 +9042,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18613,7 +9052,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18623,7 +9062,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18633,7 +9072,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18643,7 +9082,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18653,7 +9092,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18663,7 +9102,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18673,7 +9112,17 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:04 UTC
+- **Timestamp:** 2025-11-17 14:00:29 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:resource-specification:0d389ed9-44c7-4d11-9afd-4ccf467943bd
+
+- **Type:** resourceSpecification
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:29 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -18685,7 +9134,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18696,7 +9145,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18707,29 +9156,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:1f25b49d-b116-4348-837c-85b6dffaa323
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:f0477ba9-7d87-4ed9-a7e1-2835b31196dc
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18740,7 +9167,29 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f0477ba9-7d87-4ed9-a7e1-2835b31196dc
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:1f25b49d-b116-4348-837c-85b6dffaa323
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18751,7 +9200,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18762,29 +9211,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:11ada031-6eed-4385-814b-0d0e18a2fab0
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:5410fce1-2c30-4e04-8849-8b171ff80250
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18795,7 +9222,29 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:11ada031-6eed-4385-814b-0d0e18a2fab0
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:5410fce1-2c30-4e04-8849-8b171ff80250
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18806,18 +9255,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:c7af8f17-aaa6-4016-b3ec-37b05013bbeb
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18828,7 +9266,18 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:c7af8f17-aaa6-4016-b3ec-37b05013bbeb
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18839,7 +9288,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18850,7 +9299,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18861,7 +9310,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18872,18 +9321,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:a8b86ff8-c985-4c14-a511-d28014b5f619
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18894,7 +9332,18 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:a8b86ff8-c985-4c14-a511-d28014b5f619
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18905,7 +9354,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18916,7 +9365,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18927,7 +9376,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18938,7 +9387,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18949,7 +9398,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18960,18 +9409,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:efe10698-a942-415d-af3e-bce1fdf02562
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -18982,18 +9420,18 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
-#### Object: urn:ngsi-ld:service:9e80e0cb-2388-433a-81e9-5e62e5086293
+#### Object: urn:ngsi-ld:service:efe10698-a942-415d-af3e-bce1fdf02562
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19004,7 +9442,18 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:9e80e0cb-2388-433a-81e9-5e62e5086293
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19015,7 +9464,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19026,7 +9475,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19037,18 +9486,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:66b48b0e-9f8e-48c1-b26d-4363e423ee70
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19059,7 +9497,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19070,7 +9508,18 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:66b48b0e-9f8e-48c1-b26d-4363e423ee70
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19081,7 +9530,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19092,7 +9541,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19103,7 +9552,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19114,7 +9563,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19125,29 +9574,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:d1e316ed-6f50-42f1-8f94-7cd22bdc3ae4
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:7378ccbd-4cf1-4536-ac90-a8b651eee300
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19158,7 +9585,29 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:d1e316ed-6f50-42f1-8f94-7cd22bdc3ae4
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:7378ccbd-4cf1-4536-ac90-a8b651eee300
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19169,7 +9618,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19180,7 +9629,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19191,7 +9640,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19202,7 +9651,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19213,18 +9662,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
-- **Errors:**
-  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
-  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
-- **Warnings:**
-  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
-
-#### Object: urn:ngsi-ld:service:7dbeef12-eb5b-409e-9acf-d9800198974f
-
-- **Type:** service
-- **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19235,7 +9673,359 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:22 UTC
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:7dbeef12-eb5b-409e-9acf-d9800198974f
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f4b83327-b60d-45be-9853-ae347dd7965f
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:d09e3723-7471-43ce-99be-92473b1b8e23
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:4e6b7e95-f622-4cd3-965b-87b67c18fa7b
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:d8be7dcd-6585-42c5-8104-eadbde259c02
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:673a1a4b-8fa6-4b6e-8b75-eb960103aafe
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:47a0eeb6-92d8-4ddf-a060-f6a4c9ed5fc1
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:718dc9cb-1b02-411f-8fa8-63a7961bb563
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:d257497c-f703-484d-8dec-82e01321072d
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:69254f62-2af0-4931-8d5a-f949708b3974
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:ed6eed98-3f29-4f18-a93f-6db2ca4735c8
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f67e1b72-72ad-4a84-8603-322aaf2fb55a
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:db2d6070-3c20-4c66-85f1-a4ce41377823
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:2c5f61f4-5faf-45eb-a9c1-234d8615c9a5
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f62c0a94-3314-4f93-a1a5-297d55e20b5f
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:b90a8a01-2886-4113-996c-ba398b210c39
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:e98f8a5e-7574-4e39-9610-ae150027557d
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:abe6375c-7732-4470-b471-5da39ff214ed
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:e1a9680f-f415-49c4-aad4-ca00d87cce83
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f410a722-b15f-4553-8a56-fedb8b306921
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:0139f0a7-6696-4de9-b257-e6f13cd9137a
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:e8f0dd0b-9c3d-445e-8b96-c2fd16ab12e4
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f7a59980-663f-4607-9b8a-faa91e1300ed
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:3d3648e6-635c-4371-9a6b-81e16643e53b
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:007ea371-828c-4e46-9941-d9486fa44b7a
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:86d17dbe-2075-42d5-bb30-41f4bd555d98
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:169aa5c7-e738-468f-96ce-2b15569890d9
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:f99033ce-1b9a-4e75-bf3c-c2a4c93dc7f5
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:ba0ce9fc-ade9-47ed-8a9b-f70760339707
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:6af744e0-c4fa-4153-85a5-cb60a6bd6551
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:4c83d495-e0da-4aa7-94c3-8c4d184f5c56
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:service:80609802-f167-4fa9-b8f0-657f887a2dec
+
+- **Type:** service
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:21 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19248,7 +10038,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19258,7 +10048,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19268,7 +10058,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19278,7 +10068,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19288,7 +10078,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19298,7 +10088,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19308,7 +10098,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19318,7 +10108,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19328,7 +10118,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19338,7 +10128,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19348,7 +10138,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19358,7 +10148,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 - **Errors:**
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
 - **Warnings:**
@@ -19368,19 +10158,29 @@
 
 - **Type:** serviceSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 
 #### Object: urn:ngsi-ld:service-specification:89d6bddb-7805-4042-a60a-030ef09ed816
 
 - **Type:** serviceSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
 
 #### Object: urn:ngsi-ld:service-specification:f70f5f90-14d2-4442-a459-dae184f233e4
 
 - **Type:** serviceSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-05 09:06:00 UTC
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+
+#### Object: urn:ngsi-ld:service-specification:7cda71b5-24b0-4c71-b650-749ca7615531
+
+- **Type:** serviceSpecification
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:18 UTC
+- **Errors:**
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
 ### usageSpecification Objects
 
@@ -19388,7 +10188,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19399,7 +10199,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19410,7 +10210,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19421,7 +10221,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19432,7 +10232,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19443,7 +10243,18 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-05 09:06:20 UTC
+- **Timestamp:** 2025-11-17 14:00:16 UTC
+- **Errors:**
+  - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
+  - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
+- **Warnings:**
+  - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
+
+#### Object: urn:ngsi-ld:usageSpecification:7f9a65f1-3a08-43a0-bbc4-5ca8ec9f5ce5
+
+- **Type:** usageSpecification
+- **Valid:** false
+- **Timestamp:** 2025-11-17 14:00:16 UTC
 - **Errors:**
   - lastUpdate: Required field 'lastUpdate' is missing (Code: MISSING_REQUIRED_FIELD)
   - relatedParty: Missing Seller and SellerOperator fields (Code: MISSING_SELLER_INFO)
@@ -19453,4 +10264,4 @@
 ---
 
 *Report generated by TMForum Proxy Validator*
-*Generated at: 2025-11-05 09:06:23 UTC*
+*Generated at: 2025-11-17 14:01:01 UTC*

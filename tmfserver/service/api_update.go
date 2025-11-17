@@ -6,6 +6,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/hesusruiz/isbetmf/internal/errl"
@@ -67,6 +68,17 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 		incomingObjMap, err = repo.NewTMFObjectMapFromRequest(req.ResourceName, req.Body)
 		if err != nil {
 			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
+		}
+
+		// Check if the caller is trying to set the lifecycleStatus to "Launched"
+		if strings.EqualFold(incomingObjMap.LifecycleStatus(), "Launched") {
+			// If the feature is enabled, only the admin (server operator) can set the lifecycleStatus to "Launched"
+			if svc.Features.OfferingLaunchOnlyByAdmin {
+				caller := req.AuthUser
+				if !repo.SameOrganizations(caller.OrganizationIdentifier, svc.ServerOperatorDid) {
+					return ErrorResponsef(http.StatusForbidden, "offering launch is only allowed by admin")
+				}
+			}
 		}
 
 		// An update operation specifies the ID of the object to update in the URL.

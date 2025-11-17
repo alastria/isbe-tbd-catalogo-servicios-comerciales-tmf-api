@@ -127,6 +127,9 @@ type Service struct {
 	ProductCreatePower types.OnePower
 	ProductUpdatePower types.OnePower
 	ProductDeletePower types.OnePower
+
+	// The features of the environment
+	Features config.Features
 }
 
 // NewTMFService creates a new service.
@@ -137,6 +140,7 @@ func NewTMFService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) (*Servi
 	svc.ruleEngine = ruleEngine
 	svc.verifierServer = cnf.VerifierServer
 	svc.proxyEnabled = cnf.ProxyEnabled
+	svc.Features = cnf.Features
 
 	// Information about us (the server operator)
 	svc.ServerOperatorOrganizationIdentifier = cnf.ServerOperatorOrganizationIdentifier
@@ -188,14 +192,6 @@ func NewTMFService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) (*Servi
 	pagingConfig.PageSize = 10
 	paging := NewClientWithPaging(pagingConfig)
 	svc.paging = paging
-
-	// // Test the initial paging
-	// counter := 0
-	// _, err = svc.paging.GetAllObjectsOfType(context.Background(), "productOffering", func(objType string, obj repo.TMFObjectMap) (repo.TMFObjectMap, bool, error) {
-	// 	counter++
-	// 	fmt.Println("==>", counter, obj.GetID())
-	// 	return obj, true, nil
-	// })
 
 	// Initialize notifications with in-memory store and HTTP delivery
 	store := notifications.NewMemoryStore()

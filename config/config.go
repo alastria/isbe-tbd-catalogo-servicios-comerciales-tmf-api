@@ -91,12 +91,20 @@ type Config struct {
 
 	// ProxyEnabled enables the TMF caching proxy functionality.
 	ProxyEnabled bool
+
+	// The features of the environment
+	Features Features
+}
+
+// Features defines a set of feature flags which may depend on th eenvironment at a given time
+type Features struct {
+	OfferingLaunchOnlyByAdmin bool
 }
 
 // As this PDP is designed for DOME and ISBE environments, many config data items are hardcoded.
 // This avoids many configuration errors and simplifies deployment, at the expense of some flexibility.
 // However, this flexibility is not really needed in practice, as the DOME environments are well defined and stable.
-// Minimizing errors is here much more important than the ability to configure these parameters.
+// Minimizing errors is here much more important than the ease to configure these parameters.
 
 var sbxConfig = &Config{
 	Environment:  DOME_SBX,
@@ -177,6 +185,9 @@ var isbeEvidenceConfig = &Config{
 	VerifierServer: "https://verifier.dome-marketplace.eu",
 	Dbname:         "data/isbetmf.db",
 	ClonePeriod:    DefaultClonePeriod,
+	Features: Features{
+		OfferingLaunchOnlyByAdmin: true,
+	},
 }
 
 var isbeMycredentialConfig = &Config{
@@ -217,6 +228,9 @@ var isbeMycredentialConfig = &Config{
 	VerifierServer: "https://verifier.dome-marketplace.eu",
 	Dbname:         "data/isbetmf.db",
 	ClonePeriod:    DefaultClonePeriod,
+	Features: Features{
+		OfferingLaunchOnlyByAdmin: true,
+	},
 }
 
 var proConfig = &Config{
