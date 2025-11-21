@@ -54,7 +54,6 @@ jobs:
           ECR_IMAGE="${ECR_REGISTRY}/${ECR_REPOSITORY}:${TAG}"
 
           docker build -f Dockerfile --build-arg SKIP_TESTS=true -t "${ECR_IMAGE}" .
-          docker tag "${ECR_IMAGE}"
 
           docker push "${ECR_IMAGE}"
 
