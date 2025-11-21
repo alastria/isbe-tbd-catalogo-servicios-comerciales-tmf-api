@@ -60,6 +60,9 @@ func init() {
 		panic(err)
 	}
 
+	// Use an in-memory database
+	configuration.Dbname = ":memory:"
+
 	configuration.ServerOperatorOrganizationIdentifier = "VATES-11111111K"
 	configuration.ServerOperatorDid = "did:elsi:VATES-11111111K"
 
@@ -221,7 +224,8 @@ func TestInvalidSeller(t *testing.T) {
 
 }
 
-func TestUID353(t *testing.T) {
+// Test the UID-353 incidence
+func TestCategoryCreateUpdateName(t *testing.T) {
 	// Create a new httpexpect instance.
 	e := httpexpect.WithConfig(httpexpect.Config{
 		BaseURL:  serverURL,
@@ -273,9 +277,7 @@ func TestUID353(t *testing.T) {
 		WithHeader("Authorization", "Bearer "+apiToken).
 		WithJSON(updatePayload).
 		Expect().
-		Status(http.StatusOK).
-		JSON().Object().
-		Value("description").String().IsEqual("An updated description.")
+		Status(http.StatusOK)
 
 	// 4. Get again the updated object (GET)
 	updatedObject := e.GET("/category/{id}", createdSpecID).
@@ -285,5 +287,6 @@ func TestUID353(t *testing.T) {
 		JSON().Object()
 
 	updatedObject.Value("name").String().IsEqual(updatePayload["name"].(string))
+	updatedObject.Value("description").String().IsEqual("An updated description.")
 
 }
