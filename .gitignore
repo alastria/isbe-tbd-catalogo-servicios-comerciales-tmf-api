@@ -31,7 +31,7 @@ go.work.sum
 isbetmf.db*
 data/
 .sqlite*
-*.sqlite
+logs.*.sqlite
 
 # The pid files
 *.pid
