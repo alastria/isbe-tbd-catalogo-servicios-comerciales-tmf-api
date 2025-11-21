@@ -22,8 +22,11 @@ func NewValidator(config *Config) *Validator {
 }
 
 // ValidateObject validates a single TMF object (legacy method for backward compatibility)
-func (v *Validator) ValidateObject(obj repository.TMFObjectMap, objectType string) ValidationResult {
-	return v.ValidateAndFixObject(&obj, objectType)
+func (v *Validator) ValidateObject(obj repository.TMFObjectMap, objectType string) repository.ValidationResult {
+
+	return obj.Validate(objectType)
+
+	// return v.ValidateAndFixObject(&obj, objectType)
 }
 
 // ValidateAndFixObject validates a single TMF object and optionally fixes validation errors
@@ -272,8 +275,8 @@ func (v *Validator) hasField(obj *TMFObject, field string) bool {
 }
 
 // ValidateObjects validates multiple TMF objects
-func (v *Validator) ValidateObjects(objects []repository.TMFObjectMap, objectType string) []ValidationResult {
-	results := make([]ValidationResult, len(objects))
+func (v *Validator) ValidateObjects(objects []repository.TMFObjectMap, objectType string) []repository.ValidationResult {
+	results := make([]repository.ValidationResult, len(objects))
 	for i, obj := range objects {
 		results[i] = v.ValidateObject(obj, objectType)
 	}

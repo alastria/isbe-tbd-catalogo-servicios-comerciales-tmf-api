@@ -149,6 +149,10 @@ func NewTMFService(cnf *config.Config, db *sqlx.DB, ruleEngine *pdp.PDP) (*Servi
 	svc.ServerOperatorCountry = cnf.ServerOperatorCountry
 	svc.ServerEmailAddress = cnf.ServerEmailAddress
 	svc.LEARPower = cnf.LEARPower
+	svc.ProductCreatePower = cnf.ProductCreatePower
+	svc.ProductUpdatePower = cnf.ProductUpdatePower
+	svc.ProductDeletePower = cnf.ProductDeletePower
+
 	svc.RemoteTMFServer = strings.TrimRight(cnf.RemoteTMFServer, "/")
 
 	if svc.proxyEnabled {

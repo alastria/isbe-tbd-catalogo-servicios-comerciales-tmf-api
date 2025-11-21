@@ -7,6 +7,8 @@ import (
 	"sort"
 	"strings"
 	"time"
+
+	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 // Reporter generates validation reports and statistics
@@ -22,7 +24,7 @@ func NewReporter(config *Config) *Reporter {
 }
 
 // GenerateReport generates a complete validation report
-func (r *Reporter) GenerateReport(results []ValidationResult) (*ValidationReport, error) {
+func (r *Reporter) GenerateReport(results []repository.ValidationResult) (*ValidationReport, error) {
 	startTime := time.Now()
 
 	// Calculate statistics
@@ -47,7 +49,7 @@ func (r *Reporter) GenerateReport(results []ValidationResult) (*ValidationReport
 }
 
 // calculateStatistics calculates statistics from validation results
-func (r *Reporter) calculateStatistics(results []ValidationResult) *Statistics {
+func (r *Reporter) calculateStatistics(results []repository.ValidationResult) *Statistics {
 	stats := &Statistics{
 		ObjectsByType:       make(map[string]TypeStats),
 		ErrorsByType:        make(map[string]int),
@@ -230,11 +232,11 @@ func (r *Reporter) writeErrorWarningSummary(file *os.File, stats *Statistics) {
 }
 
 // writeDetailedResults writes detailed validation results
-func (r *Reporter) writeDetailedResults(file *os.File, results []ValidationResult) {
+func (r *Reporter) writeDetailedResults(file *os.File, results []repository.ValidationResult) {
 	fmt.Fprintf(file, "## Detailed Validation Results\n\n")
 
 	// Group results by object type
-	resultsByType := make(map[string][]ValidationResult)
+	resultsByType := make(map[string][]repository.ValidationResult)
 	for _, result := range results {
 		resultsByType[result.ObjectType] = append(resultsByType[result.ObjectType], result)
 	}

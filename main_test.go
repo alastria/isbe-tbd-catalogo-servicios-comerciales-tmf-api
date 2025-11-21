@@ -16,6 +16,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"testing"
 	"time"
 
@@ -47,6 +48,10 @@ type ProductSpecification struct {
 }
 
 func init() {
+
+	// Set the nocolor option for logs
+	os.Setenv("ISBETMF_LOGS_NOCOLOR", "true")
+
 	// Generate a default configuration suitable for the environment
 	// The approach is that instead of many configurable parameters, we have a set of profiles, with "hardcoded"
 	// parameters for each environment, but that can be easity extended for other purposes.
@@ -112,12 +117,13 @@ func TestProductSpecificationHappy(t *testing.T) {
 		"lifecycleStatus": "Active",
 	}
 
-	createdSpecObj := e.POST("/productSpecification").
+	theResponse := e.POST("/productSpecification").
 		WithHeader("Authorization", "Bearer "+apiToken).
 		WithJSON(ps).
-		Expect().
-		Status(http.StatusCreated).
-		JSON().Object()
+		Expect()
+
+	theResponseStatus := theResponse.Status(http.StatusCreated)
+	createdSpecObj := theResponseStatus.JSON().Object()
 
 	createdSpecObj.Value("id").String().NotEmpty()
 	createdSpecObj.Value("name").String().IsEqual(ps.Name())
@@ -204,17 +210,10 @@ func TestInvalidSeller(t *testing.T) {
 
 	ps.SetSellerInfo("pepe", "juan", "v4")
 
-	createdSpecObj := e.POST("/productSpecification").
+	e.POST("/productSpecification").
 		WithHeader("Authorization", "Bearer "+apiToken).
 		WithJSON(ps).
 		Expect().
-		Status(http.StatusCreated).
-		JSON().Object()
-
-	createdSpecObj.Value("id").String().NotEmpty()
-	createdSpecObj.Value("name").String().IsEqual(ps.Name())
-	createdSpecObj.Value("brand").String().IsEqual(ps.GetStringField("brand"))
-
-	createdSpecObj.Value("relatedParty").Array().Length().Ge(2)
+		Status(http.StatusForbidden)
 
 }
