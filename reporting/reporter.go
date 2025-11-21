@@ -253,7 +253,7 @@ func (r *Reporter) writeDetailedResults(file *os.File, results []repository.Vali
 		fmt.Fprintf(file, "### %s Objects\n\n", objType)
 
 		for _, result := range typeResults {
-			fmt.Fprintf(file, "#### Object: %s\n\n", result.ObjectID)
+			fmt.Fprintf(file, "#### Object: [%s](%s)\n\n", result.ObjectID, result.Href)
 			fmt.Fprintf(file, "- **Type:** %s\n", result.ObjectType)
 			fmt.Fprintf(file, "- **Valid:** %t\n", result.Valid)
 			fmt.Fprintf(file, "- **Timestamp:** %s\n", result.Timestamp.Format("2006-01-02 15:04:05 UTC"))

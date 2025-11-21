@@ -1,10 +1,10 @@
 # TMForum Object Validation Report
 
-**Generated:** 2025-11-21 06:59:46 UTC
+**Generated:** 2025-11-21 06:42:55 UTC
 
 **Configuration:**
 - Base URL: `https://tmf.dome-marketplace-sbx.org`
-- Object Types: billingAccount, cancelServiceOrder, customer, monitor, productOrder, serviceCatalog, agreementSpecification, financialAccount, heal, productOffering, resourceCategory, resourceFunction, resourceSpecification, productOfferingPrice, serviceCandidate, usage, agreement, resourceOrder, cancelProductOrder, cancelResourceOrder, catalog, individual, organization, partyAccount, product, productSpecification, appliedCustomerBillingRate, customerBillOnDemand, quote, resourceCandidate, serviceCategory, serviceOrder, usageSpecification, billFormat, category, customerBill, partyRole, resource, scale, service, serviceSpecification, billPresentationMedia, billingCycleSpecification, migrate, resourceCatalog, settlementAccount
+- Object Types: agreement, appliedCustomerBillingRate, resourceOrder, serviceCatalog, serviceCategory, serviceSpecification, cancelResourceOrder, category, partyRole, productOfferingPrice, serviceOrder, heal, monitor, partyAccount, product, productSpecification, resourceCategory, agreementSpecification, billingAccount, cancelProductOrder, catalog, customer, financialAccount, resourceCatalog, service, cancelServiceOrder, customerBill, customerBillOnDemand, individual, productOrder, resource, scale, usage, billPresentationMedia, migrate, billFormat, billingCycleSpecification, quote, resourceCandidate, resourceSpecification, settlementAccount, usageSpecification, organization, productOffering, resourceFunction, serviceCandidate
 - Timeout: 30 seconds
 - Validate Required Fields: true
 - Validate Related Party: true
@@ -14,30 +14,30 @@
 | Metric | Value |
 |--------|-------|
 | Total Objects | 1082 |
-| Valid Objects | 522 |
-| Invalid Objects | 560 |
-| Total Errors | 1113 |
+| Valid Objects | 255 |
+| Invalid Objects | 827 |
+| Total Errors | 1378 |
 | Total Warnings | 2413 |
 | Total Errors Fixed | 0 |
 | Total Warnings Fixed | 0 |
-| Processing Time | 181.632µs |
+| Processing Time | 224.587µs |
 
 ## Statistics by Object Type
 
 | Object Type | Count | Valid | Invalid | Errors | Warnings | Errors Fixed | Warnings Fixed |
 |-------------|-------|-------|---------|--------|----------|--------------|----------------|
-| agreement | 2 | 2 | 0 | 0 | 4 | 0 | 0 |
+| agreement | 2 | 0 | 2 | 2 | 4 | 0 | 0 |
 | billingAccount | 17 | 0 | 17 | 33 | 51 | 0 | 0 |
 | catalog | 48 | 0 | 48 | 93 | 98 | 0 | 0 |
 | category | 111 | 111 | 0 | 0 | 221 | 0 | 0 |
-| customerBill | 41 | 0 | 41 | 120 | 123 | 0 | 0 |
+| customerBill | 41 | 0 | 41 | 118 | 123 | 0 | 0 |
 | individual | 90 | 90 | 0 | 0 | 360 | 0 | 0 |
 | organization | 26 | 26 | 0 | 0 | 93 | 0 | 0 |
 | product | 43 | 0 | 43 | 106 | 129 | 0 | 0 |
-| productOffering | 61 | 14 | 47 | 91 | 62 | 0 | 0 |
-| productOfferingPrice | 363 | 253 | 110 | 110 | 482 | 0 | 0 |
+| productOffering | 61 | 0 | 61 | 105 | 62 | 0 | 0 |
+| productOfferingPrice | 363 | 0 | 363 | 363 | 482 | 0 | 0 |
 | productOrder | 83 | 0 | 83 | 249 | 332 | 0 | 0 |
-| productSpecification | 48 | 23 | 25 | 48 | 46 | 0 | 0 |
+| productSpecification | 48 | 25 | 23 | 46 | 46 | 0 | 0 |
 | resource | 28 | 0 | 28 | 56 | 84 | 0 | 0 |
 | resourceSpecification | 16 | 0 | 16 | 16 | 32 | 0 | 0 |
 | service | 82 | 0 | 82 | 164 | 246 | 0 | 0 |
@@ -48,7 +48,7 @@
 
 | Error Code | Count |
 |-------------|-------|
-| MISSING_RELATED_PARTY_INFO | 1113 |
+| MISSING_RELATED_PARTY_INFO | 1378 |
 
 ## Warning Summary
 
@@ -63,8 +63,10 @@
 #### Object: [urn:ngsi-ld:agreement:adc8a095-b1bd-471c-87f0-a49487618c7c](https://tmf.dome-marketplace-sbx.org/tmf-api/agreementManagement/v4/agreement/urn:ngsi-ld:agreement:adc8a095-b1bd-471c-87f0-a49487618c7c)
 
 - **Type:** agreement
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:34 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:12 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to agreement (Code: MISSING_RECOMMENDED_FIELD)
   - lastUpdate: Recommended field 'lastUpdate' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -72,8 +74,10 @@
 #### Object: [urn:ngsi-ld:agreement:efffa430-8b52-4e9c-9e83-e1849ec9b162](https://tmf.dome-marketplace-sbx.org/tmf-api/agreementManagement/v4/agreement/urn:ngsi-ld:agreement:efffa430-8b52-4e9c-9e83-e1849ec9b162)
 
 - **Type:** agreement
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:34 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:12 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to agreement (Code: MISSING_RECOMMENDED_FIELD)
   - lastUpdate: Recommended field 'lastUpdate' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -84,7 +88,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -97,7 +101,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -110,7 +114,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -123,7 +127,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -136,7 +140,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -149,7 +153,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -162,7 +166,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -175,7 +179,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -188,7 +192,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -201,7 +205,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -214,7 +218,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -227,7 +231,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -240,7 +244,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -253,7 +257,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -266,7 +270,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -278,7 +282,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -291,7 +295,7 @@
 
 - **Type:** billingAccount
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:13 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -306,7 +310,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -318,7 +322,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -330,7 +334,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -342,7 +346,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -354,7 +358,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -366,7 +370,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -378,7 +382,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -390,7 +394,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -402,7 +406,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -414,7 +418,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -426,7 +430,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -438,7 +442,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -450,7 +454,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -462,7 +466,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -474,7 +478,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -485,7 +489,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -497,7 +501,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -509,7 +513,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -521,7 +525,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -533,7 +537,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -545,7 +549,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -557,7 +561,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -569,7 +573,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -581,7 +585,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -593,7 +597,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -605,7 +609,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -617,7 +621,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -629,7 +633,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -641,7 +645,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -653,7 +657,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -665,7 +669,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -677,7 +681,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -689,7 +693,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -701,7 +705,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -713,7 +717,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -725,7 +729,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -737,7 +741,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -749,7 +753,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -761,7 +765,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -773,7 +777,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -785,7 +789,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -797,7 +801,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -809,7 +813,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -821,7 +825,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -833,7 +837,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -845,7 +849,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -857,7 +861,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -869,7 +873,7 @@
 
 - **Type:** catalog
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:35 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -883,7 +887,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -892,7 +896,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -901,7 +905,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -910,7 +914,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -919,7 +923,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -928,7 +932,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -937,7 +941,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -946,7 +950,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -955,7 +959,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -964,7 +968,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -973,7 +977,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -982,7 +986,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -991,7 +995,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1000,7 +1004,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1009,7 +1013,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1018,7 +1022,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1027,7 +1031,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1036,7 +1040,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1045,7 +1049,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1054,7 +1058,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1063,7 +1067,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1072,7 +1076,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1081,7 +1085,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1090,7 +1094,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1099,7 +1103,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1108,7 +1112,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1117,7 +1121,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1126,7 +1130,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1135,7 +1139,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1144,7 +1148,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1153,7 +1157,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1162,7 +1166,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1171,7 +1175,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1180,7 +1184,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1189,7 +1193,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1198,7 +1202,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1207,7 +1211,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1216,7 +1220,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1225,7 +1229,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1234,7 +1238,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1243,7 +1247,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1252,7 +1256,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1261,7 +1265,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1270,7 +1274,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1279,7 +1283,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1288,7 +1292,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1297,7 +1301,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1306,7 +1310,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1315,7 +1319,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1324,7 +1328,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1333,7 +1337,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1342,7 +1346,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1351,7 +1355,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1360,7 +1364,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1369,7 +1373,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1378,7 +1382,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1387,7 +1391,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1396,7 +1400,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1405,7 +1409,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1414,7 +1418,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1423,7 +1427,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1432,7 +1436,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1441,7 +1445,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1450,7 +1454,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1459,7 +1463,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1468,7 +1472,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1477,7 +1481,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1486,7 +1490,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1495,7 +1499,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1504,7 +1508,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1513,7 +1517,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1522,7 +1526,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1531,7 +1535,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1540,7 +1544,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1549,7 +1553,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1558,7 +1562,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1567,7 +1571,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1576,7 +1580,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1585,7 +1589,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1594,7 +1598,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1603,7 +1607,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1612,7 +1616,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1621,7 +1625,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1630,7 +1634,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1639,7 +1643,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1648,7 +1652,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1657,7 +1661,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1666,7 +1670,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1675,7 +1679,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1684,7 +1688,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1693,7 +1697,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1702,7 +1706,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1711,7 +1715,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1720,7 +1724,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1729,7 +1733,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1738,7 +1742,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1747,7 +1751,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1756,7 +1760,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1765,7 +1769,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1774,7 +1778,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -1782,7 +1786,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1791,7 +1795,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1800,7 +1804,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1809,7 +1813,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1818,7 +1822,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1827,7 +1831,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1836,7 +1840,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1845,7 +1849,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1854,7 +1858,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1863,7 +1867,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1872,7 +1876,7 @@
 
 - **Type:** category
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to category (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -1883,10 +1887,8 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
-  - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
-  - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -1898,7 +1900,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1911,7 +1913,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1924,7 +1926,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1937,7 +1939,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1950,7 +1952,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1963,7 +1965,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1976,7 +1978,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -1989,7 +1991,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2002,7 +2004,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2015,7 +2017,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2029,7 +2031,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2043,7 +2045,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2057,7 +2059,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2071,7 +2073,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2085,7 +2087,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2099,7 +2101,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2113,7 +2115,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2127,7 +2129,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2141,7 +2143,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2155,7 +2157,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2168,7 +2170,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2182,7 +2184,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2196,7 +2198,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2210,7 +2212,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2224,7 +2226,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2238,7 +2240,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2252,7 +2254,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2266,7 +2268,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2281,7 +2283,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2296,7 +2298,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2311,7 +2313,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2326,7 +2328,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2341,7 +2343,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2355,7 +2357,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2370,7 +2372,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2385,7 +2387,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2399,7 +2401,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2413,7 +2415,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2427,7 +2429,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2441,7 +2443,7 @@
 
 - **Type:** customerBill
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:44 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -2456,7 +2458,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2467,7 +2469,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2478,7 +2480,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2489,7 +2491,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2500,7 +2502,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2511,7 +2513,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2522,7 +2524,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2533,7 +2535,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2544,7 +2546,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2555,7 +2557,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2566,7 +2568,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2577,7 +2579,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2588,7 +2590,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2599,7 +2601,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2610,7 +2612,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2621,7 +2623,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2632,7 +2634,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2643,7 +2645,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2654,7 +2656,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2665,7 +2667,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2676,7 +2678,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2687,7 +2689,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2698,7 +2700,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2709,7 +2711,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2720,7 +2722,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2731,7 +2733,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2742,7 +2744,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2753,7 +2755,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2764,7 +2766,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2775,7 +2777,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2786,7 +2788,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2797,7 +2799,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2808,7 +2810,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2819,7 +2821,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2830,7 +2832,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2841,7 +2843,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2852,7 +2854,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2863,7 +2865,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2874,7 +2876,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2885,7 +2887,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2896,7 +2898,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2907,7 +2909,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2918,7 +2920,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2929,7 +2931,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2940,7 +2942,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2951,7 +2953,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2962,7 +2964,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2973,7 +2975,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2984,7 +2986,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -2995,7 +2997,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3006,7 +3008,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3017,7 +3019,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3028,7 +3030,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3039,7 +3041,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3050,7 +3052,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3061,7 +3063,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3072,7 +3074,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3083,7 +3085,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3094,7 +3096,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3105,7 +3107,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3116,7 +3118,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3127,7 +3129,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3138,7 +3140,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3149,7 +3151,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3160,7 +3162,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3171,7 +3173,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3182,7 +3184,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3193,7 +3195,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3204,7 +3206,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3215,7 +3217,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3226,7 +3228,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3237,7 +3239,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3248,7 +3250,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3259,7 +3261,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3270,7 +3272,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3281,7 +3283,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3292,7 +3294,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3303,7 +3305,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3314,7 +3316,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3325,7 +3327,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3336,7 +3338,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3347,7 +3349,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3358,7 +3360,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3369,7 +3371,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3380,7 +3382,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3391,7 +3393,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3402,7 +3404,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3413,7 +3415,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3424,7 +3426,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3435,7 +3437,7 @@
 
 - **Type:** individual
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to individual (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3448,7 +3450,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3459,7 +3461,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3470,7 +3472,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3481,7 +3483,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3492,7 +3494,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3503,7 +3505,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3514,7 +3516,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3525,7 +3527,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3536,7 +3538,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3547,7 +3549,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3558,7 +3560,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3568,7 +3570,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3579,7 +3581,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3590,7 +3592,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3600,7 +3602,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
   - lastUpdate: Recommended field 'lastUpdate' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3609,7 +3611,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3618,7 +3620,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3628,7 +3630,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3638,7 +3640,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3649,7 +3651,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3660,7 +3662,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3671,7 +3673,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3681,7 +3683,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3692,7 +3694,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - name: Recommended field 'name' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3703,7 +3705,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3713,7 +3715,7 @@
 
 - **Type:** organization
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:36 UTC
+- **Timestamp:** 2025-11-21 06:42:48 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to organization (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -3725,7 +3727,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3739,7 +3741,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3753,7 +3755,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3766,10 +3768,10 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
-  - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
+  - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -3781,7 +3783,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3795,7 +3797,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3808,7 +3810,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3821,7 +3823,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3834,7 +3836,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3847,7 +3849,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3860,7 +3862,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3873,7 +3875,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3886,7 +3888,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3899,7 +3901,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3912,7 +3914,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3925,7 +3927,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3938,7 +3940,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3952,7 +3954,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3965,7 +3967,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3978,7 +3980,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -3991,7 +3993,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4004,7 +4006,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4017,7 +4019,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4030,7 +4032,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4044,7 +4046,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4058,7 +4060,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4072,7 +4074,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4086,7 +4088,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4100,7 +4102,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4114,7 +4116,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4128,7 +4130,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4142,7 +4144,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4156,7 +4158,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4170,7 +4172,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4183,7 +4185,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4197,7 +4199,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4210,7 +4212,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4224,7 +4226,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4237,7 +4239,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4251,7 +4253,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4264,7 +4266,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4277,7 +4279,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4290,7 +4292,7 @@
 
 - **Type:** product
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:37 UTC
+- **Timestamp:** 2025-11-21 06:42:43 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4306,7 +4308,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4317,7 +4319,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4328,7 +4330,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4339,7 +4341,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4350,7 +4352,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4361,7 +4363,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4372,7 +4374,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4383,7 +4385,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4394,7 +4396,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4405,7 +4407,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4416,7 +4418,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4427,7 +4429,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4438,7 +4440,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4449,7 +4451,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4460,7 +4462,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4471,7 +4473,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4480,7 +4482,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4491,7 +4493,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4502,7 +4504,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4513,7 +4515,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4524,7 +4526,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4535,7 +4537,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4546,7 +4548,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4557,7 +4559,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4568,7 +4570,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4579,7 +4581,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4590,7 +4592,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4601,7 +4603,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4612,7 +4614,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4623,7 +4625,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4634,7 +4636,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4645,7 +4647,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4656,7 +4658,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4667,7 +4669,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4678,7 +4680,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4689,7 +4691,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4700,7 +4702,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4711,7 +4713,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4722,7 +4724,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4733,7 +4735,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4744,7 +4746,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4755,7 +4757,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4766,7 +4768,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4777,7 +4779,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -4788,7 +4790,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4800,7 +4802,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4809,96 +4811,120 @@
 #### Object: [urn:ngsi-ld:product-offering:fc6d2f30-ec21-4d77-a1bd-d705dae868d8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:fc6d2f30-ec21-4d77-a1bd-d705dae868d8)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:30e2552b-0773-4453-8809-d6d573d2f88f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:30e2552b-0773-4453-8809-d6d573d2f88f)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:4c2f6cc2-0a19-49f3-a949-5438a7193429](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:4c2f6cc2-0a19-49f3-a949-5438a7193429)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:fe3c1b4b-655e-4b0e-b854-2241636a4682](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:fe3c1b4b-655e-4b0e-b854-2241636a4682)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:97488a56-6158-404e-ba9a-4975b7384924](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:97488a56-6158-404e-ba9a-4975b7384924)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:ac394906-585e-41c2-a0f8-21ef00454eb5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:ac394906-585e-41c2-a0f8-21ef00454eb5)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:e6429790-8432-4bb1-9e2b-e6c010f7ca39](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:e6429790-8432-4bb1-9e2b-e6c010f7ca39)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:5cac5209-a67f-4f98-bfea-d4444569ab47](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:5cac5209-a67f-4f98-bfea-d4444569ab47)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:d554fb90-a2ab-4521-b86c-66e19d798532](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:d554fb90-a2ab-4521-b86c-66e19d798532)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:409bfcc3-9af1-41c1-9834-8aa35280819d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:409bfcc3-9af1-41c1-9834-8aa35280819d)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:ebc0dc5a-4d40-4d1b-8c38-ec3b7b3c30ab](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:ebc0dc5a-4d40-4d1b-8c38-ec3b7b3c30ab)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:1a4ec325-fc21-4385-886f-25da9c978f63](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:1a4ec325-fc21-4385-886f-25da9c978f63)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -4906,7 +4932,7 @@
 
 - **Type:** productOffering
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:55 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4915,16 +4941,20 @@
 #### Object: [urn:ngsi-ld:product-offering:c1790fda-d88a-4303-bc4b-fb99ea5df960](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:c1790fda-d88a-4303-bc4b-fb99ea5df960)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering:b84d9559-b141-4d2a-804b-04569dd3e974](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOffering/urn:ngsi-ld:product-offering:b84d9559-b141-4d2a-804b-04569dd3e974)
 
 - **Type:** productOffering
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:55 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOffering (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -4934,7 +4964,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4945,7 +4975,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4956,7 +4986,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4967,7 +4997,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4978,7 +5008,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -4989,7 +5019,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5000,7 +5030,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5011,7 +5041,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5022,7 +5052,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 
@@ -5030,7 +5060,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5041,7 +5071,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5052,7 +5082,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5063,7 +5093,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5074,7 +5104,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5085,7 +5115,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5096,7 +5126,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5107,7 +5137,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5118,7 +5148,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5129,7 +5159,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5140,7 +5170,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5151,7 +5181,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5162,7 +5192,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5173,7 +5203,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5183,7 +5213,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5193,7 +5223,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5204,7 +5234,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5215,7 +5245,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5226,7 +5256,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5237,7 +5267,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5248,7 +5278,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5259,7 +5289,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5270,7 +5300,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5281,7 +5311,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5292,7 +5322,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5303,7 +5333,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5314,7 +5344,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5325,7 +5355,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5336,7 +5366,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5347,7 +5377,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5358,7 +5388,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5369,7 +5399,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5380,7 +5410,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5391,7 +5421,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5402,7 +5432,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5413,7 +5443,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5424,7 +5454,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5435,7 +5465,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5446,7 +5476,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5457,7 +5487,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5468,7 +5498,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5479,7 +5509,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5490,7 +5520,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5501,7 +5531,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5512,7 +5542,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5523,7 +5553,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5534,7 +5564,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5545,7 +5575,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5556,7 +5586,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5567,7 +5597,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5578,7 +5608,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5589,7 +5619,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5600,7 +5630,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5611,7 +5641,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5622,7 +5652,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5633,7 +5663,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5644,7 +5674,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5655,7 +5685,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5666,7 +5696,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5677,7 +5707,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5688,7 +5718,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5699,7 +5729,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5710,7 +5740,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5721,7 +5751,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5732,7 +5762,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5743,7 +5773,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5754,7 +5784,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5765,7 +5795,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5776,7 +5806,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5787,7 +5817,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5798,7 +5828,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5809,7 +5839,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5820,7 +5850,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5831,7 +5861,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5842,7 +5872,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5853,7 +5883,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5864,7 +5894,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5875,7 +5905,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5886,7 +5916,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5897,7 +5927,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5908,7 +5938,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5919,7 +5949,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5930,7 +5960,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5941,7 +5971,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5952,7 +5982,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5963,7 +5993,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5974,7 +6004,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5985,7 +6015,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -5996,7 +6026,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6007,7 +6037,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6018,7 +6048,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:32 UTC
+- **Timestamp:** 2025-11-21 06:42:13 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6029,7 +6059,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6040,7 +6070,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6051,7 +6081,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6062,7 +6092,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6073,7 +6103,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6084,7 +6114,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6095,7 +6125,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6106,7 +6136,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6117,7 +6147,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6128,7 +6158,7 @@
 
 - **Type:** productOfferingPrice
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Timestamp:** 2025-11-21 06:42:24 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -6138,56 +6168,70 @@
 #### Object: [urn:ngsi-ld:product-offering-price:588267d9-c68d-4754-bca7-1169e97e0df6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:588267d9-c68d-4754-bca7-1169e97e0df6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:9c9ae134-4f97-4b9c-9fd2-b3fd8e96da5f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:9c9ae134-4f97-4b9c-9fd2-b3fd8e96da5f)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:1a8bb8de-96a6-4ab3-a1fb-4153aa6ab44f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1a8bb8de-96a6-4ab3-a1fb-4153aa6ab44f)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7cb21085-01c0-4b51-9c4b-f3ff6f510eba](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7cb21085-01c0-4b51-9c4b-f3ff6f510eba)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:499e5825-32f8-41a7-9f49-e5dba28094ac](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:499e5825-32f8-41a7-9f49-e5dba28094ac)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:a7fcc974-0754-43ac-a3ca-b9d083d81649](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:a7fcc974-0754-43ac-a3ca-b9d083d81649)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5a4968ff-053c-4040-a28c-14871c1cf8e6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5a4968ff-053c-4040-a28c-14871c1cf8e6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -6195,736 +6239,920 @@
 #### Object: [urn:ngsi-ld:product-offering-price:f4513107-2697-4e21-9d8f-89d8cacd4a55](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f4513107-2697-4e21-9d8f-89d8cacd4a55)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:de400ec1-6932-42c8-806a-a789618054bd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:de400ec1-6932-42c8-806a-a789618054bd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2c064d03-5860-4cd2-8607-9a85450a5826](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2c064d03-5860-4cd2-8607-9a85450a5826)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b206f02d-50cd-4100-b722-bbc7db0daa35](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b206f02d-50cd-4100-b722-bbc7db0daa35)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3a29cc75-5792-4222-a7a2-38acc237658d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3a29cc75-5792-4222-a7a2-38acc237658d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d671dce4-1960-4470-b994-fe35cca4efa5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d671dce4-1960-4470-b994-fe35cca4efa5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3f8d055d-cec8-47f5-a116-dfaa90c08598](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3f8d055d-cec8-47f5-a116-dfaa90c08598)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:010ed217-8db2-404b-8aa8-6e3b9cd60f61](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:010ed217-8db2-404b-8aa8-6e3b9cd60f61)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ea94085a-b883-4ec3-a3ed-005a4afb333e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ea94085a-b883-4ec3-a3ed-005a4afb333e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6862a634-b40d-4f9e-8719-1b57513b954f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6862a634-b40d-4f9e-8719-1b57513b954f)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:f0aac682-a141-4f55-8fb4-8502d6da40ce](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f0aac682-a141-4f55-8fb4-8502d6da40ce)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:beae51b7-9c13-45ec-ad04-f750f5b1eefb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:beae51b7-9c13-45ec-ad04-f750f5b1eefb)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:e11d0edf-7ec3-4bd9-aab0-3942931f5e63](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:e11d0edf-7ec3-4bd9-aab0-3942931f5e63)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:e4357db7-2339-4051-afc1-a4e4e95ac3db](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:e4357db7-2339-4051-afc1-a4e4e95ac3db)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:abefd473-1f0a-4244-9a69-c0568504ab7b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:abefd473-1f0a-4244-9a69-c0568504ab7b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:00eb3279-aa7b-414c-9201-8fb455342e46](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:00eb3279-aa7b-414c-9201-8fb455342e46)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b54bc88e-8104-44e7-a7ec-051881852093](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b54bc88e-8104-44e7-a7ec-051881852093)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:9c957909-3a01-473e-a7e0-cbd873ebfb2a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:9c957909-3a01-473e-a7e0-cbd873ebfb2a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:229eead4-7103-400d-989f-ab5a7fb4b3d3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:229eead4-7103-400d-989f-ab5a7fb4b3d3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5cf12673-a33f-4516-ad69-70a102b50bf0](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5cf12673-a33f-4516-ad69-70a102b50bf0)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:75534c79-5493-47ce-99e9-a06125a61322](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:75534c79-5493-47ce-99e9-a06125a61322)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:05099d5c-29f3-4929-baa3-505df5ca68e0](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:05099d5c-29f3-4929-baa3-505df5ca68e0)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:143b311e-bfa2-4612-8974-75b29c991d45](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:143b311e-bfa2-4612-8974-75b29c991d45)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:bee90d28-fc11-4bd1-af98-ba8757b532e4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:bee90d28-fc11-4bd1-af98-ba8757b532e4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:62085d6a-ab60-4d4e-8514-5120f69ac3b6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:62085d6a-ab60-4d4e-8514-5120f69ac3b6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:036cd75a-908a-42ef-830b-14d18dc65f87](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:036cd75a-908a-42ef-830b-14d18dc65f87)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2bf6fc82-6423-429c-a963-94e137e55e65](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2bf6fc82-6423-429c-a963-94e137e55e65)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:dccf3108-14bc-4e7e-bd26-27b3c9f4abdc](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:dccf3108-14bc-4e7e-bd26-27b3c9f4abdc)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:75759183-6a6f-43b0-a2d0-d5be4f4aa3d2](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:75759183-6a6f-43b0-a2d0-d5be4f4aa3d2)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:853011f4-ca90-41e3-95c9-1141836723eb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:853011f4-ca90-41e3-95c9-1141836723eb)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:8c8a046b-15a8-4a8c-a616-f186fab53714](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8c8a046b-15a8-4a8c-a616-f186fab53714)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:f65e274c-76bc-4d52-a090-d0c0b13ed15b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f65e274c-76bc-4d52-a090-d0c0b13ed15b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4dd1b451-8366-4be9-b473-568f1ff704bd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4dd1b451-8366-4be9-b473-568f1ff704bd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6baf7b40-a203-4aa1-8c52-e19d34ebae55](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6baf7b40-a203-4aa1-8c52-e19d34ebae55)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2f4f669e-8365-4f7f-b6c4-547c0cd58924](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2f4f669e-8365-4f7f-b6c4-547c0cd58924)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7a45ace3-f8d4-4c28-9c9b-7191a5fe28ed](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7a45ace3-f8d4-4c28-9c9b-7191a5fe28ed)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:1f6b7299-89e1-42aa-80fa-282aba42504c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1f6b7299-89e1-42aa-80fa-282aba42504c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4bc35f20-74dd-4f2e-9fd5-839bcf779790](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4bc35f20-74dd-4f2e-9fd5-839bcf779790)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:dc2edec2-ae18-413e-918d-eb0ff81dc5bd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:dc2edec2-ae18-413e-918d-eb0ff81dc5bd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:91de3726-4d0d-4782-99a7-0a5c39d8619d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:91de3726-4d0d-4782-99a7-0a5c39d8619d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3587a720-0e0f-4569-9674-62a647e137de](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3587a720-0e0f-4569-9674-62a647e137de)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4e3181d7-22ac-45fe-998e-d8e89c0d2f3d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4e3181d7-22ac-45fe-998e-d8e89c0d2f3d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4e4d1da0-009a-4d76-9bad-444331a2197d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4e4d1da0-009a-4d76-9bad-444331a2197d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5174d7f1-8b7f-4fac-abb9-c2ba78f799f4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5174d7f1-8b7f-4fac-abb9-c2ba78f799f4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:12a5c9e7-99e1-4b68-8512-0665c6a42027](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:12a5c9e7-99e1-4b68-8512-0665c6a42027)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:a4d492e6-bfe1-4d0b-8aec-fea3233e846e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:a4d492e6-bfe1-4d0b-8aec-fea3233e846e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:70e027f1-931e-4854-92dc-ca2ec86bb3f8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:70e027f1-931e-4854-92dc-ca2ec86bb3f8)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:789a3618-a0fa-4736-a6b4-fc538a23df93](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:789a3618-a0fa-4736-a6b4-fc538a23df93)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5dbda5f9-1024-4123-bd45-b0919aa7420c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5dbda5f9-1024-4123-bd45-b0919aa7420c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:9351cabe-b828-4469-aa96-53eabcdd33e6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:9351cabe-b828-4469-aa96-53eabcdd33e6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b89eba0f-1b8f-4583-8617-9079a0ace4cf](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b89eba0f-1b8f-4583-8617-9079a0ace4cf)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:67d11a7e-85d1-4603-808c-374265c87df5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:67d11a7e-85d1-4603-808c-374265c87df5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:028604b4-6a02-4151-b6b4-9a0d40819ec3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:028604b4-6a02-4151-b6b4-9a0d40819ec3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:9fc44f02-809c-4ad9-8c02-01739369f050](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:9fc44f02-809c-4ad9-8c02-01739369f050)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ae15b3b0-6650-4bfa-aacd-595ad247b604](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ae15b3b0-6650-4bfa-aacd-595ad247b604)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:cb1c522d-6992-47ee-bd3f-06310f0a2e04](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:cb1c522d-6992-47ee-bd3f-06310f0a2e04)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:14c6e0ab-14ba-4684-9592-e053dfaeb9f3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:14c6e0ab-14ba-4684-9592-e053dfaeb9f3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:8331f85c-2521-4a89-8ba5-1fc507badafa](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8331f85c-2521-4a89-8ba5-1fc507badafa)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:89992021-0f73-416c-a553-7c9625950ca8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:89992021-0f73-416c-a553-7c9625950ca8)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:dda6aea9-4127-4591-b746-25ab03b8896e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:dda6aea9-4127-4591-b746-25ab03b8896e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2e49cb26-de04-4ba8-b014-78d7c44b79bd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2e49cb26-de04-4ba8-b014-78d7c44b79bd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:58e60366-e54c-4bfb-b74a-d379d1b5e810](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:58e60366-e54c-4bfb-b74a-d379d1b5e810)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:fdb99f48-6b79-4e40-9a79-4eaf27dec313](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:fdb99f48-6b79-4e40-9a79-4eaf27dec313)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c469000b-40b7-4cf5-a343-9727427127f3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c469000b-40b7-4cf5-a343-9727427127f3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:64847008-03a7-49f6-8fc8-e8bb36c07d56](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:64847008-03a7-49f6-8fc8-e8bb36c07d56)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b2bcb36b-af5c-40d4-85b4-0fe414db6511](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b2bcb36b-af5c-40d4-85b4-0fe414db6511)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:8366f679-1b36-47b1-98d1-8ec7419c6f49](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8366f679-1b36-47b1-98d1-8ec7419c6f49)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:73a3c6e8-5767-473f-b152-5520cd3475d2](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:73a3c6e8-5767-473f-b152-5520cd3475d2)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:cf7ba21c-c3ba-4260-a91c-a1188fdfe648](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:cf7ba21c-c3ba-4260-a91c-a1188fdfe648)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:831fadd7-86b2-49e8-b852-d04d97eb7cb2](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:831fadd7-86b2-49e8-b852-d04d97eb7cb2)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c4f98a8a-01ff-4637-82aa-b1414858230a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c4f98a8a-01ff-4637-82aa-b1414858230a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:36753374-ad79-4dee-98b4-e05d3986174d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:36753374-ad79-4dee-98b4-e05d3986174d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c33530a8-f56f-45cf-8387-2efcd5aec3f3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c33530a8-f56f-45cf-8387-2efcd5aec3f3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c2d6e61d-eb87-4942-9f44-6af9e8877e31](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c2d6e61d-eb87-4942-9f44-6af9e8877e31)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:1d431284-ad03-458a-aba1-d7a0950dc72f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1d431284-ad03-458a-aba1-d7a0950dc72f)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2364d6c1-21e8-436b-b54d-289d67f9c198](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2364d6c1-21e8-436b-b54d-289d67f9c198)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3d904149-53b1-49eb-9bf3-ac2f4ae7ac0b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3d904149-53b1-49eb-9bf3-ac2f4ae7ac0b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:aa5580ce-dd29-4305-8560-9416d8ecd8e3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:aa5580ce-dd29-4305-8560-9416d8ecd8e3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:81ba5637-95b9-4c08-a21b-fa4238b05d68](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:81ba5637-95b9-4c08-a21b-fa4238b05d68)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4fe1bc96-cb11-4dfc-a523-abdfefd49fe8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4fe1bc96-cb11-4dfc-a523-abdfefd49fe8)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ea057aa3-dfa3-4d90-aaf8-f1cb8cdd3966](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ea057aa3-dfa3-4d90-aaf8-f1cb8cdd3966)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:46a9dd25-cba6-4b26-b7b3-1e75048697a6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:46a9dd25-cba6-4b26-b7b3-1e75048697a6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:36b33c3a-2923-48b0-ad9a-82ca7ab8790d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:36b33c3a-2923-48b0-ad9a-82ca7ab8790d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:58:54 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:24 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:30a13850-3ea2-4e5c-a79b-0d88543fef64](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:30a13850-3ea2-4e5c-a79b-0d88543fef64)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:77d25781-f15a-4864-965e-3206c79d4740](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:77d25781-f15a-4864-965e-3206c79d4740)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d9ebcd5c-7e5a-4fb5-8283-8a1a6f9326f9](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d9ebcd5c-7e5a-4fb5-8283-8a1a6f9326f9)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d789ab42-e949-4c96-b287-a140f3528267](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d789ab42-e949-4c96-b287-a140f3528267)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b886312f-a488-440b-999e-3c1cb5dcc0b2](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b886312f-a488-440b-999e-3c1cb5dcc0b2)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:885084a0-900d-4956-9cc3-f6fd44d6b9d7](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:885084a0-900d-4956-9cc3-f6fd44d6b9d7)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:66a73399-85cc-47b0-8675-301552ba725c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:66a73399-85cc-47b0-8675-301552ba725c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:8c96201e-dd51-41c9-af24-96d210a4f156](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8c96201e-dd51-41c9-af24-96d210a4f156)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:a3b49d8f-ed46-448a-a159-4a451c2198ad](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:a3b49d8f-ed46-448a-a159-4a451c2198ad)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -6932,32 +7160,40 @@
 #### Object: [urn:ngsi-ld:product-offering-price:8c7e0dc8-a03d-40b3-b2e6-7ba8ef1a4b5c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8c7e0dc8-a03d-40b3-b2e6-7ba8ef1a4b5c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d2593254-0e54-4cfe-820f-9dc727aaa629](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d2593254-0e54-4cfe-820f-9dc727aaa629)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7d78b71d-262e-4a83-ac22-8e1768f5f4a4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7d78b71d-262e-4a83-ac22-8e1768f5f4a4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:011d51c8-4108-43c5-be2e-95c22cbb4ce8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:011d51c8-4108-43c5-be2e-95c22cbb4ce8)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -6965,216 +7201,270 @@
 #### Object: [urn:ngsi-ld:product-offering-price:220f95c1-b20c-405e-8351-a34746330b42](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:220f95c1-b20c-405e-8351-a34746330b42)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3afd750c-1547-466a-ae2a-1cefec930ccf](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3afd750c-1547-466a-ae2a-1cefec930ccf)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:f074c366-8286-4000-a6bd-0796fdfd7fd4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f074c366-8286-4000-a6bd-0796fdfd7fd4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:539b3e98-35ad-4b9d-a514-48f9618e5c5e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:539b3e98-35ad-4b9d-a514-48f9618e5c5e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4bce7b40-75d9-4d17-8c52-9711e823a2ef](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4bce7b40-75d9-4d17-8c52-9711e823a2ef)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:fc105ca2-9d7e-46fc-ae7b-0241f2bd2751](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:fc105ca2-9d7e-46fc-ae7b-0241f2bd2751)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:bb486136-cc13-4dc3-af66-23680fe32ac0](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:bb486136-cc13-4dc3-af66-23680fe32ac0)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:17c99d15-dd9e-4d1c-ae3a-8605ba01c1ef](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:17c99d15-dd9e-4d1c-ae3a-8605ba01c1ef)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d7d1003e-d1c8-4582-9b32-17f417ddcb25](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d7d1003e-d1c8-4582-9b32-17f417ddcb25)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c91597ef-6c7e-4fae-a128-6924d5890ec4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c91597ef-6c7e-4fae-a128-6924d5890ec4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b242ca11-4d68-4308-bbf8-47b1ca1d2526](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b242ca11-4d68-4308-bbf8-47b1ca1d2526)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6b51a48c-2731-421d-b3a7-05c00f67fe12](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6b51a48c-2731-421d-b3a7-05c00f67fe12)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b8c20bcd-b227-4983-b96f-d58ebc7284b6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b8c20bcd-b227-4983-b96f-d58ebc7284b6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7dab9686-4c52-4951-b420-d4aff9a19cb2](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7dab9686-4c52-4951-b420-d4aff9a19cb2)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:a3b3de69-2903-4ac9-8bd4-15be81cb0691](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:a3b3de69-2903-4ac9-8bd4-15be81cb0691)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:79f5acff-9d87-4476-8ee8-47768585a82f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:79f5acff-9d87-4476-8ee8-47768585a82f)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:226c388e-69e5-45d1-8171-baef2a29336c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:226c388e-69e5-45d1-8171-baef2a29336c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b9008c32-0aa8-4d2c-a64d-4230d01f1e9b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b9008c32-0aa8-4d2c-a64d-4230d01f1e9b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7116e4c4-3c97-4652-8824-62371a77e9ac](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7116e4c4-3c97-4652-8824-62371a77e9ac)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6b64a300-8c2c-464d-974e-28bdd06994b3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6b64a300-8c2c-464d-974e-28bdd06994b3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ca721fb0-507f-42d4-80a9-395337766d6c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ca721fb0-507f-42d4-80a9-395337766d6c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:74d0de69-f40c-4345-87bc-2c44f8ea286e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:74d0de69-f40c-4345-87bc-2c44f8ea286e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6d73cf20-dec9-49d9-9be5-31cfd868fe86](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6d73cf20-dec9-49d9-9be5-31cfd868fe86)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:bb1e78a5-a7b4-4162-884f-170f10e6cecb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:bb1e78a5-a7b4-4162-884f-170f10e6cecb)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:34d2613e-ed4f-47dd-ade7-593c048392c5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:34d2613e-ed4f-47dd-ade7-593c048392c5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:bbfffe02-466a-4f9c-bee2-fedc07c39bb7](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:bbfffe02-466a-4f9c-bee2-fedc07c39bb7)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:87fd14f7-cb6e-4bd2-9149-45ccae1c4a9c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:87fd14f7-cb6e-4bd2-9149-45ccae1c4a9c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -7182,440 +7472,550 @@
 #### Object: [urn:ngsi-ld:product-offering-price:85684d70-d96d-4f6c-8e80-008ae5792611](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:85684d70-d96d-4f6c-8e80-008ae5792611)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:89acb00d-42bd-4582-a945-94d800a77889](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:89acb00d-42bd-4582-a945-94d800a77889)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:a19fb68d-7896-49f7-bb97-a10fd3d8c289](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:a19fb68d-7896-49f7-bb97-a10fd3d8c289)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b5299589-96f8-4540-ac7f-3316adf3fb41](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b5299589-96f8-4540-ac7f-3316adf3fb41)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d4568a25-a296-4154-8a88-394117e891b0](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d4568a25-a296-4154-8a88-394117e891b0)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:821f7740-e067-47ed-99b0-d8e0af013d46](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:821f7740-e067-47ed-99b0-d8e0af013d46)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:799962bc-f628-48ff-ae11-60a8cd6ab85b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:799962bc-f628-48ff-ae11-60a8cd6ab85b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:88428c8f-1e6c-48d8-98f5-9f7d07f23f42](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:88428c8f-1e6c-48d8-98f5-9f7d07f23f42)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:dd616652-c77b-49cb-92d9-dbbf3b022c1f](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:dd616652-c77b-49cb-92d9-dbbf3b022c1f)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c8a0d287-b104-4dd4-bec1-e4c38108f042](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c8a0d287-b104-4dd4-bec1-e4c38108f042)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ee651a53-68bc-49d6-a00c-3505a785da63](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ee651a53-68bc-49d6-a00c-3505a785da63)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ba526e3b-e4ef-41af-9280-7deb3ae8d3ef](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ba526e3b-e4ef-41af-9280-7deb3ae8d3ef)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2b6dfba2-f197-4ca2-848e-cbc8a9fec26c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2b6dfba2-f197-4ca2-848e-cbc8a9fec26c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3560cd20-758b-4667-b17e-71e8b254cd26](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3560cd20-758b-4667-b17e-71e8b254cd26)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:da29fd02-e98a-4a2c-b745-d25546f5b2f3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:da29fd02-e98a-4a2c-b745-d25546f5b2f3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:dde62bae-5bb9-4a86-8a72-d045ac056745](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:dde62bae-5bb9-4a86-8a72-d045ac056745)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:debb531a-58cd-4967-a5e3-fb506e535f63](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:debb531a-58cd-4967-a5e3-fb506e535f63)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3bd80ac0-df29-422f-9514-3f391e2a5386](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3bd80ac0-df29-422f-9514-3f391e2a5386)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:32f94c7c-95d1-47e2-a901-93f251fa1183](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:32f94c7c-95d1-47e2-a901-93f251fa1183)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:fbaf08b9-3bc0-43d2-a6b0-2947de5ebb4a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:fbaf08b9-3bc0-43d2-a6b0-2947de5ebb4a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:eb095bb1-a0b8-4a1f-9ffb-cecc857f3494](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:eb095bb1-a0b8-4a1f-9ffb-cecc857f3494)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:56e098be-5276-4567-8735-045358d040e6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:56e098be-5276-4567-8735-045358d040e6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:192eb6b4-cc67-47ba-bc84-17083ce43c16](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:192eb6b4-cc67-47ba-bc84-17083ce43c16)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:41278603-c6b1-441a-98a3-762186d84f44](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:41278603-c6b1-441a-98a3-762186d84f44)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:06d54d38-6839-4c89-95e6-af204f1b9bd3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:06d54d38-6839-4c89-95e6-af204f1b9bd3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5f2f1480-8101-4621-a31d-84b51b016e2b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5f2f1480-8101-4621-a31d-84b51b016e2b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3282cc40-b169-4536-9e79-e2f6cc73e72e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3282cc40-b169-4536-9e79-e2f6cc73e72e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5feb54eb-33f8-43a3-aa2f-68f5bc8f2585](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5feb54eb-33f8-43a3-aa2f-68f5bc8f2585)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2bdea539-1470-449e-a79e-4c9e8243497c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2bdea539-1470-449e-a79e-4c9e8243497c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:469c81eb-b9d5-4347-8913-d1225505696a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:469c81eb-b9d5-4347-8913-d1225505696a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4033a990-8900-48a8-8b94-feaf092961e4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4033a990-8900-48a8-8b94-feaf092961e4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:f8363712-ecba-446d-b453-678dde3a2ef6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f8363712-ecba-446d-b453-678dde3a2ef6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:2462c62c-4b5b-494a-8c32-1dcdfae17a7a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:2462c62c-4b5b-494a-8c32-1dcdfae17a7a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:43f872ae-9de5-4927-a119-139675a03236](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:43f872ae-9de5-4927-a119-139675a03236)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:96fd27d6-c0f4-4c98-8f17-e900b217fe46](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:96fd27d6-c0f4-4c98-8f17-e900b217fe46)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6fbeef02-49b5-4685-86d4-58bcac75d701](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6fbeef02-49b5-4685-86d4-58bcac75d701)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:de1ae86d-438f-406e-80c2-858fe200daaa](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:de1ae86d-438f-406e-80c2-858fe200daaa)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:8711a720-3648-485d-81f6-7c0bf81afb02](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8711a720-3648-485d-81f6-7c0bf81afb02)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:98861972-fdf3-4cb6-a38f-9f851185168d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:98861972-fdf3-4cb6-a38f-9f851185168d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7976a0eb-60be-42a0-99f3-fa5efdb4be7a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7976a0eb-60be-42a0-99f3-fa5efdb4be7a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:62581ec3-cf51-47ca-8ba0-8f82b96d6868](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:62581ec3-cf51-47ca-8ba0-8f82b96d6868)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:fc4c0e5c-2751-48af-aa0b-71cc6dc03e6b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:fc4c0e5c-2751-48af-aa0b-71cc6dc03e6b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3e3b6d90-fe3f-46aa-b971-2ebdf4d3ce9a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3e3b6d90-fe3f-46aa-b971-2ebdf4d3ce9a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4fefddf8-a6a9-4d62-8e51-c655a67dbabd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4fefddf8-a6a9-4d62-8e51-c655a67dbabd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:1f5f2891-5ff4-4751-b420-1068af6ac0ef](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1f5f2891-5ff4-4751-b420-1068af6ac0ef)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:db22b038-e309-47ce-a38e-8abd4de4f4e5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:db22b038-e309-47ce-a38e-8abd4de4f4e5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:e499e2c0-882e-4a10-94e0-84959f009904](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:e499e2c0-882e-4a10-94e0-84959f009904)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c9124c8c-ace8-42f1-a42c-2156dd2b506c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c9124c8c-ace8-42f1-a42c-2156dd2b506c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:76ad71ac-d40d-4e62-bfed-9faf4d224e59](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:76ad71ac-d40d-4e62-bfed-9faf4d224e59)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6e5dc4e3-4ad0-48f6-a92e-ec5b48324c03](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6e5dc4e3-4ad0-48f6-a92e-ec5b48324c03)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7d259a70-bb35-4988-b131-4da3335c7c5c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7d259a70-bb35-4988-b131-4da3335c7c5c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:27994a95-751f-4e15-81af-36fc5cc5cdf1](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:27994a95-751f-4e15-81af-36fc5cc5cdf1)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:752275bd-c88b-4a7e-aaa3-ec566d0dc197](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:752275bd-c88b-4a7e-aaa3-ec566d0dc197)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3cba3d9d-507e-4bae-a632-59698c4950ed](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3cba3d9d-507e-4bae-a632-59698c4950ed)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:552e3f5d-2964-445b-9fb2-eea3d1168252](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:552e3f5d-2964-445b-9fb2-eea3d1168252)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -7623,48 +8023,60 @@
 #### Object: [urn:ngsi-ld:product-offering-price:0bad5ee8-4cfc-493c-9fc5-3707cc823f33](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:0bad5ee8-4cfc-493c-9fc5-3707cc823f33)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d7af253c-1e3e-41ad-b4b5-dc7cfabf621b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d7af253c-1e3e-41ad-b4b5-dc7cfabf621b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:1027d4a1-958f-49b4-ba5f-9afad1d2716a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1027d4a1-958f-49b4-ba5f-9afad1d2716a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:1bfde910-3ec3-4a51-bb45-6a21c50bb095](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1bfde910-3ec3-4a51-bb45-6a21c50bb095)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:25d69a0c-df35-49f0-8317-8ac2e05bd128](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:25d69a0c-df35-49f0-8317-8ac2e05bd128)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:18 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:35 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5abc072e-6017-471e-819e-ded12cf4f0eb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5abc072e-6017-471e-819e-ded12cf4f0eb)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -7672,24 +8084,30 @@
 #### Object: [urn:ngsi-ld:product-offering-price:189a9f03-27b0-4e38-9a04-7ee3c458be0a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:189a9f03-27b0-4e38-9a04-7ee3c458be0a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7e30fd40-4a31-4221-b4de-c9250213b110](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7e30fd40-4a31-4221-b4de-c9250213b110)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c13fdaae-051b-45ca-86eb-654f5d22ccd4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c13fdaae-051b-45ca-86eb-654f5d22ccd4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -7697,40 +8115,50 @@
 #### Object: [urn:ngsi-ld:product-offering-price:196dae1b-c441-487a-8f4d-9f5490b8f050](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:196dae1b-c441-487a-8f4d-9f5490b8f050)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:98ac2e31-249f-4ce4-8e91-a01888b0d1f7](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:98ac2e31-249f-4ce4-8e91-a01888b0d1f7)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3432c068-6a90-430a-afa9-ebf451f2c1c1](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3432c068-6a90-430a-afa9-ebf451f2c1c1)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:0a68e165-fcff-4f83-92df-70f24faad4f4](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:0a68e165-fcff-4f83-92df-70f24faad4f4)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:65e0d9c8-d710-43d4-8576-2bc3e7e7bf66](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:65e0d9c8-d710-43d4-8576-2bc3e7e7bf66)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -7738,16 +8166,20 @@
 #### Object: [urn:ngsi-ld:product-offering-price:86c7df56-f19d-4c34-b6e4-7b60d7b964bb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:86c7df56-f19d-4c34-b6e4-7b60d7b964bb)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:89c03787-cfca-419c-8c91-bf739e40cb88](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:89c03787-cfca-419c-8c91-bf739e40cb88)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -7755,384 +8187,480 @@
 #### Object: [urn:ngsi-ld:product-offering-price:1171ebfc-cc87-4ef3-9d3e-1c3f89469aea](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:1171ebfc-cc87-4ef3-9d3e-1c3f89469aea)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:4fb4c894-e2ee-4f1b-b2cd-93e75a838910](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:4fb4c894-e2ee-4f1b-b2cd-93e75a838910)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:318c8bc8-9cf7-41dd-bc3f-f7477684c582](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:318c8bc8-9cf7-41dd-bc3f-f7477684c582)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:560d8e3d-4e92-409f-b9f6-da86a710f732](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:560d8e3d-4e92-409f-b9f6-da86a710f732)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:860c45cd-4c02-4263-b41c-275c5c1b273d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:860c45cd-4c02-4263-b41c-275c5c1b273d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:cfab7960-1c8d-4465-b0a2-c1fc5f28b8d9](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:cfab7960-1c8d-4465-b0a2-c1fc5f28b8d9)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:f1c77f18-b7c5-4351-ba96-c34c83dc9126](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f1c77f18-b7c5-4351-ba96-c34c83dc9126)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:afe5d8e5-b4e6-41a6-8d33-4adbb5daf62d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:afe5d8e5-b4e6-41a6-8d33-4adbb5daf62d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:9a486c59-49db-42a1-8e9b-a0db598512d3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:9a486c59-49db-42a1-8e9b-a0db598512d3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:bd278d1e-088f-4ec9-adbc-1faeded7f13b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:bd278d1e-088f-4ec9-adbc-1faeded7f13b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:388bcb19-f02d-4279-8488-908dfe189f3b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:388bcb19-f02d-4279-8488-908dfe189f3b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3e20cb40-b498-4796-9978-985308efa639](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3e20cb40-b498-4796-9978-985308efa639)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:625238e6-8798-4ae5-ac74-2f872f755f23](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:625238e6-8798-4ae5-ac74-2f872f755f23)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d4a7647c-87d4-4357-9637-67063052acd0](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d4a7647c-87d4-4357-9637-67063052acd0)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:def44115-6fd4-4768-bd86-e80643a35064](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:def44115-6fd4-4768-bd86-e80643a35064)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:d4368b6e-539b-4f84-8923-1bd3042212fc](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d4368b6e-539b-4f84-8923-1bd3042212fc)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:0d02b372-430b-4bb6-9f12-c67214edd8a3](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:0d02b372-430b-4bb6-9f12-c67214edd8a3)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:bbf124dd-587d-47ed-9e77-c16855021cad](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:bbf124dd-587d-47ed-9e77-c16855021cad)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c294ece1-c65b-46a6-8729-bee5b5e4c00c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c294ece1-c65b-46a6-8729-bee5b5e4c00c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:7331aad3-2f71-451d-910e-f63435761866](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:7331aad3-2f71-451d-910e-f63435761866)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:5f1910c3-1ad2-4d44-9e71-a3ab91e600d6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:5f1910c3-1ad2-4d44-9e71-a3ab91e600d6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:20576f40-8804-4254-b4bf-609bcddeb264](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:20576f40-8804-4254-b4bf-609bcddeb264)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:72de7ae2-3f8d-4066-af3e-949ace677424](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:72de7ae2-3f8d-4066-af3e-949ace677424)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c713edc2-c783-4b76-a506-cb51df0f0ad5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c713edc2-c783-4b76-a506-cb51df0f0ad5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:cdb90c94-fe6c-412f-8a65-330e569d90fd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:cdb90c94-fe6c-412f-8a65-330e569d90fd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:eca21ec0-bf62-4c32-a6f2-5a5f97c16922](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:eca21ec0-bf62-4c32-a6f2-5a5f97c16922)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:34a6cf3d-d331-41a2-a5e8-69879cde023a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:34a6cf3d-d331-41a2-a5e8-69879cde023a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:f293e4ef-9ade-45c4-8786-677c1b09bcd5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:f293e4ef-9ade-45c4-8786-677c1b09bcd5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:c95a6853-808a-4381-97a8-da6194ddd03c](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:c95a6853-808a-4381-97a8-da6194ddd03c)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:dc96b1ce-f691-4f59-ba82-67354c2ed89b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:dc96b1ce-f691-4f59-ba82-67354c2ed89b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6a75671a-1f82-42ad-9259-e2c13f73c0df](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6a75671a-1f82-42ad-9259-e2c13f73c0df)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:61291e91-b0dd-4a38-9e1d-c5aaf9579338](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:61291e91-b0dd-4a38-9e1d-c5aaf9579338)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:246c1588-8926-46ae-a2ca-ebc5faf2e746](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:246c1588-8926-46ae-a2ca-ebc5faf2e746)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:8ebd8bc7-f348-417e-ac95-59adb3ed2933](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:8ebd8bc7-f348-417e-ac95-59adb3ed2933)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:3385c995-513d-47aa-b081-25315672dbb8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:3385c995-513d-47aa-b081-25315672dbb8)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:203b9afb-c71f-4d83-8656-73e1a703b1c5](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:203b9afb-c71f-4d83-8656-73e1a703b1c5)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:9fd82253-4897-427c-a215-50f6b4a5febd](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:9fd82253-4897-427c-a215-50f6b4a5febd)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:b77c51c4-a060-4a54-8663-568080ff7ce7](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:b77c51c4-a060-4a54-8663-568080ff7ce7)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:aeecebd6-d2e7-4fdc-9712-9827e520daeb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:aeecebd6-d2e7-4fdc-9712-9827e520daeb)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:68236147-8812-4bc1-97e9-badbb4922d8d](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:68236147-8812-4bc1-97e9-badbb4922d8d)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:19ced729-426f-4387-86ba-f56436dfc31a](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:19ced729-426f-4387-86ba-f56436dfc31a)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:88606fdd-f145-4a73-9210-a74efd98771e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:88606fdd-f145-4a73-9210-a74efd98771e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ae1e70b7-837d-4812-a493-9ec565cde1e6](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ae1e70b7-837d-4812-a493-9ec565cde1e6)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6a0f74f1-aebe-4306-b7ab-ef726c921ee7](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6a0f74f1-aebe-4306-b7ab-ef726c921ee7)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:6380fdea-968a-4c6e-8916-0f34d921074b](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:6380fdea-968a-4c6e-8916-0f34d921074b)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:0cf7e3a1-c348-4f9b-a998-d910dfa17da8](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:0cf7e3a1-c348-4f9b-a998-d910dfa17da8)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:0b3d79b7-a884-498c-b3a2-9cf85a188e2e](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:0b3d79b7-a884-498c-b3a2-9cf85a188e2e)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:da57686e-c6c9-4ec4-ad2a-5a01d4f97151](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:da57686e-c6c9-4ec4-ad2a-5a01d4f97151)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -8140,16 +8668,20 @@
 #### Object: [urn:ngsi-ld:product-offering-price:a4e41091-a17b-4132-8037-ba3b2d277911](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:a4e41091-a17b-4132-8037-ba3b2d277911)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' object (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-offering-price:ce3d9d28-7d35-42c9-87e4-686342e0aab0](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:ce3d9d28-7d35-42c9-87e4-686342e0aab0)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -8157,8 +8689,10 @@
 #### Object: [urn:ngsi-ld:product-offering-price:d5770a00-12ee-4c43-a38d-95b13a8a75ad](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:d5770a00-12ee-4c43-a38d-95b13a8a75ad)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -8166,8 +8700,10 @@
 #### Object: [urn:ngsi-ld:product-offering-price:e5ec47b1-7bf9-4822-bad7-3cc3b55dc3a2](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productOfferingPrice/urn:ngsi-ld:product-offering-price:e5ec47b1-7bf9-4822-bad7-3cc3b55dc3a2)
 
 - **Type:** productOfferingPrice
-- **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:33 UTC
+- **Valid:** false
+- **Timestamp:** 2025-11-21 06:42:42 UTC
+- **Errors:**
+  - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productOfferingPrice (Code: MISSING_RECOMMENDED_FIELD)
   - version: Recommended field 'version' is missing (Code: MISSING_RECOMMENDED_FIELD)
@@ -8178,7 +8714,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8193,7 +8729,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8208,7 +8744,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8223,7 +8759,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8238,7 +8774,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8253,7 +8789,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8268,7 +8804,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8283,7 +8819,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8298,7 +8834,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8313,7 +8849,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8328,7 +8864,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8343,7 +8879,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8358,7 +8894,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8373,7 +8909,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8388,7 +8924,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8403,7 +8939,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8418,7 +8954,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8433,7 +8969,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8448,7 +8984,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8463,7 +8999,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8478,7 +9014,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8493,7 +9029,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8508,7 +9044,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8523,7 +9059,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8538,7 +9074,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8553,7 +9089,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8568,7 +9104,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8583,7 +9119,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8598,7 +9134,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8613,7 +9149,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8628,7 +9164,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8643,7 +9179,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8658,7 +9194,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8673,7 +9209,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8688,7 +9224,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8703,7 +9239,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8718,7 +9254,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8733,7 +9269,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8748,7 +9284,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8763,7 +9299,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8778,7 +9314,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8793,7 +9329,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8808,7 +9344,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8823,7 +9359,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8838,7 +9374,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8853,7 +9389,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8868,7 +9404,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8883,7 +9419,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8898,7 +9434,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8913,7 +9449,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8928,7 +9464,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8943,7 +9479,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8958,7 +9494,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8973,7 +9509,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -8988,7 +9524,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9003,7 +9539,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9018,7 +9554,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9033,7 +9569,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9048,7 +9584,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9063,7 +9599,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9078,7 +9614,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9093,7 +9629,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9108,7 +9644,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9123,7 +9659,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9138,7 +9674,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9153,7 +9689,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9168,7 +9704,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9183,7 +9719,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9198,7 +9734,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9213,7 +9749,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9228,7 +9764,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9243,7 +9779,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9258,7 +9794,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9273,7 +9809,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9288,7 +9824,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9303,7 +9839,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9318,7 +9854,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9333,7 +9869,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9348,7 +9884,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9363,7 +9899,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9378,7 +9914,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9393,7 +9929,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9408,7 +9944,7 @@
 
 - **Type:** productOrder
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:15 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9425,7 +9961,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9436,7 +9972,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9447,7 +9983,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9458,7 +9994,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9469,7 +10005,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9480,7 +10016,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9491,7 +10027,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9502,7 +10038,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9510,7 +10046,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9518,7 +10054,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9526,7 +10062,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9534,7 +10070,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9542,7 +10078,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9550,19 +10086,19 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 
 #### Object: [urn:ngsi-ld:product-specification:2adb577d-ec29-4406-b2d5-86b295c2c434](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productSpecification/urn:ngsi-ld:product-specification:2adb577d-ec29-4406-b2d5-86b295c2c434)
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 
 #### Object: [urn:ngsi-ld:product-specification:64c19187-4f24-4dcb-bfa2-a06afd3b5b11](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productSpecification/urn:ngsi-ld:product-specification:64c19187-4f24-4dcb-bfa2-a06afd3b5b11)
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9573,7 +10109,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9584,7 +10120,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9595,7 +10131,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9606,7 +10142,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9617,7 +10153,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9628,7 +10164,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9638,20 +10174,16 @@
 #### Object: [urn:ngsi-ld:product-specification:3c2ea42e-77de-4012-8d12-2e760facca23](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productSpecification/urn:ngsi-ld:product-specification:3c2ea42e-77de-4012-8d12-2e760facca23)
 
 - **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
-- **Errors:**
-  - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
+- **Valid:** true
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
 #### Object: [urn:ngsi-ld:product-specification:a45a592d-480d-429d-8ad8-f81b1bf528bb](https://tmf.dome-marketplace-sbx.org/tmf-api/productCatalogManagement/v4/productSpecification/urn:ngsi-ld:product-specification:a45a592d-480d-429d-8ad8-f81b1bf528bb)
 
 - **Type:** productSpecification
-- **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
-- **Errors:**
-  - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
+- **Valid:** true
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9659,7 +10191,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9670,7 +10202,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9681,7 +10213,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9689,7 +10221,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9697,7 +10229,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9708,7 +10240,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9719,7 +10251,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9730,7 +10262,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9741,7 +10273,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9752,7 +10284,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9763,7 +10295,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9771,7 +10303,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9779,7 +10311,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9787,7 +10319,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9795,7 +10327,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9803,7 +10335,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9811,7 +10343,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9819,7 +10351,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9827,7 +10359,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9835,7 +10367,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9843,7 +10375,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9851,7 +10383,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9859,7 +10391,7 @@
 
 - **Type:** productSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to productSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -9867,7 +10399,7 @@
 
 - **Type:** productSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:41 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Seller' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9880,7 +10412,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9893,7 +10425,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9906,7 +10438,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9919,7 +10451,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9932,7 +10464,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9945,7 +10477,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9958,7 +10490,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9971,7 +10503,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9984,7 +10516,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -9997,7 +10529,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10010,7 +10542,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10023,7 +10555,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10036,7 +10568,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10049,7 +10581,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10062,7 +10594,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10075,7 +10607,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10088,7 +10620,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10101,7 +10633,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10114,7 +10646,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10127,7 +10659,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10140,7 +10672,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10153,7 +10685,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10166,7 +10698,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10179,7 +10711,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10192,7 +10724,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10205,7 +10737,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10218,7 +10750,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10231,7 +10763,7 @@
 
 - **Type:** resource
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:45 UTC
+- **Timestamp:** 2025-11-21 06:42:46 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10246,7 +10778,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10257,7 +10789,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10268,7 +10800,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10279,7 +10811,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10290,7 +10822,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10301,7 +10833,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10312,7 +10844,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10323,7 +10855,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10334,7 +10866,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10345,7 +10877,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10356,7 +10888,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10367,7 +10899,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10378,7 +10910,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10389,7 +10921,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10400,7 +10932,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10411,7 +10943,7 @@
 
 - **Type:** resourceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:58:31 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -10424,7 +10956,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10437,7 +10969,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10450,7 +10982,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10463,7 +10995,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10476,7 +11008,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10489,7 +11021,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10502,7 +11034,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10515,7 +11047,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10528,7 +11060,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10541,7 +11073,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10554,7 +11086,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10567,7 +11099,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10580,7 +11112,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10593,7 +11125,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10606,7 +11138,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10619,7 +11151,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10632,7 +11164,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10645,7 +11177,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10658,7 +11190,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10671,7 +11203,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10684,7 +11216,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10697,7 +11229,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10710,7 +11242,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10723,7 +11255,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10736,7 +11268,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10749,7 +11281,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10762,7 +11294,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10775,7 +11307,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10788,7 +11320,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10801,7 +11333,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10814,7 +11346,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10827,7 +11359,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10840,7 +11372,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10853,7 +11385,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10866,7 +11398,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10879,7 +11411,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10892,7 +11424,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10905,7 +11437,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10918,7 +11450,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10931,7 +11463,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10944,7 +11476,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10957,7 +11489,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10970,7 +11502,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10983,7 +11515,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -10996,7 +11528,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11009,7 +11541,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11022,7 +11554,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11035,7 +11567,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11048,7 +11580,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11061,7 +11593,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11074,7 +11606,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11087,7 +11619,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11100,7 +11632,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11113,7 +11645,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11126,7 +11658,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11139,7 +11671,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11152,7 +11684,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11165,7 +11697,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11178,7 +11710,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11191,7 +11723,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11204,7 +11736,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11217,7 +11749,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11230,7 +11762,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11243,7 +11775,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11256,7 +11788,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11269,7 +11801,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11282,7 +11814,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11295,7 +11827,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11308,7 +11840,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11321,7 +11853,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11334,7 +11866,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11347,7 +11879,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11360,7 +11892,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11373,7 +11905,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11386,7 +11918,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11399,7 +11931,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11412,7 +11944,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11425,7 +11957,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11438,7 +11970,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11451,7 +11983,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11464,7 +11996,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11477,7 +12009,7 @@
 
 - **Type:** service
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:45 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11492,7 +12024,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11503,7 +12035,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11514,7 +12046,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11525,7 +12057,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11536,7 +12068,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11547,7 +12079,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11558,7 +12090,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11569,7 +12101,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11580,7 +12112,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11591,7 +12123,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11602,7 +12134,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11613,7 +12145,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11624,7 +12156,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to serviceSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -11632,7 +12164,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to serviceSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -11640,7 +12172,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** true
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Warnings:**
   - @type: Recommended field '@type' is missing, setting it to serviceSpecification (Code: MISSING_RECOMMENDED_FIELD)
 
@@ -11648,7 +12180,7 @@
 
 - **Type:** serviceSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:46 UTC
+- **Timestamp:** 2025-11-21 06:42:12 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
 - **Warnings:**
@@ -11661,7 +12193,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11674,7 +12206,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11687,7 +12219,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11700,7 +12232,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11713,7 +12245,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11726,7 +12258,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11739,7 +12271,7 @@
 
 - **Type:** usageSpecification
 - **Valid:** false
-- **Timestamp:** 2025-11-21 06:59:43 UTC
+- **Timestamp:** 2025-11-21 06:42:47 UTC
 - **Errors:**
   - relatedParty: Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
   - relatedParty: Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role (Code: MISSING_RELATED_PARTY_INFO)
@@ -11751,4 +12283,4 @@
 ---
 
 *Report generated by TMForum Proxy Validator*
-*Generated at: 2025-11-21 06:59:46 UTC*
+*Generated at: 2025-11-21 06:42:55 UTC*

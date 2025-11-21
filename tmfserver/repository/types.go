@@ -9,6 +9,7 @@ import (
 // ValidationResult represents the result of validating a single object
 type ValidationResult struct {
 	ObjectID      string              `json:"object_id"`
+	Href          string              `json:"href"`
 	ObjectType    string              `json:"object_type"`
 	Valid         bool                `json:"-"`
 	Errors        []ValidationError   `json:"errors,omitempty"`

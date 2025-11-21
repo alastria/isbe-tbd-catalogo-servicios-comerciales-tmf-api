@@ -84,6 +84,7 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 
 			// Count validation results for this page
 			for _, result := range results {
+
 				if result.Valid {
 					totalValidForType++
 				}
@@ -104,6 +105,11 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 				log.Printf("Warning: Reached maximum objects limit (%d) for %s", p.config.MaxObjects, objectType)
 				break
 			}
+		}
+
+		for i, result := range allResults {
+			// Set the URL of the object
+			allResults[i].Href = p.pager.GetObjectURL(result.ObjectType, result.ObjectID)
 		}
 
 		log.Printf("Validation complete for %s: %d total objects, %d valid, %d errors, %d warnings",

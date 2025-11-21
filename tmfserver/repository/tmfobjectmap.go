@@ -75,6 +75,10 @@ func (obj TMFObjectMap) Validate(resourceName string) ValidationResult {
 		Timestamp:  time.Now(),
 	}
 
+	if obj.ID() == "urn:ngsi-ld:agreement:adc8a095-b1bd-471c-87f0-a49487618c7c" {
+		fmt.Println("Found")
+	}
+
 	// Validate required fields
 	obj.validateRequiredFields(resourceName, &result)
 
