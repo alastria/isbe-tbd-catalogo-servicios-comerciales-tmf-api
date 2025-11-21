@@ -60,6 +60,9 @@ func init() {
 		panic(err)
 	}
 
+	configuration.ServerOperatorOrganizationIdentifier = "VATES-11111111K"
+	configuration.ServerOperatorDid = "did:elsi:VATES-11111111K"
+
 	// Disable restarts
 	configuration.RestartHour = -1
 
@@ -215,5 +218,72 @@ func TestInvalidSeller(t *testing.T) {
 		WithJSON(ps).
 		Expect().
 		Status(http.StatusForbidden)
+
+}
+
+func TestUID353(t *testing.T) {
+	// Create a new httpexpect instance.
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  serverURL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewCurlPrinter(t),
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	// 1. Create (POST)
+	ps := repository.TMFObjectMap{
+		"@type":           "category",
+		"name":            "Identidad Digital",
+		"brand":           "TestBrand",
+		"description":     "A detailed description of my test product specification.",
+		"lifecycleStatus": "Active",
+	}
+
+	theResponseStatus := e.POST("/category").
+		WithHeader("Authorization", "Bearer "+apiToken).
+		WithJSON(ps).
+		Expect().
+		Status(http.StatusCreated)
+
+	createdObj := theResponseStatus.JSON().Object()
+
+	createdObj.Value("id").String().NotEmpty()
+	createdObj.Value("name").String().IsEqual(ps.Name())
+	createdObj.Value("brand").String().IsEqual(ps.GetStringField("brand"))
+
+	createdSpecID := createdObj.Value("id").String().Raw()
+
+	// 2. Get (GET)
+	e.GET("/category/{id}", createdSpecID).
+		WithHeader("Authorization", "Bearer "+apiToken).
+		Expect().
+		Status(http.StatusOK).
+		JSON().Object().
+		Value("id").String().IsEqual(createdSpecID)
+
+	// 3. Update (PATCH)
+	updatePayload := map[string]any{
+		"description": "An updated description.",
+		"name":        "Gestión de Identidad Digital y Confianza",
+	}
+
+	e.PATCH("/category/{id}", createdSpecID).
+		WithHeader("Authorization", "Bearer "+apiToken).
+		WithJSON(updatePayload).
+		Expect().
+		Status(http.StatusOK).
+		JSON().Object().
+		Value("description").String().IsEqual("An updated description.")
+
+	// 4. Get again the updated object (GET)
+	updatedObject := e.GET("/category/{id}", createdSpecID).
+		WithHeader("Authorization", "Bearer "+apiToken).
+		Expect().
+		Status(http.StatusOK).
+		JSON().Object()
+
+	updatedObject.Value("name").String().IsEqual(updatePayload["name"].(string))
 
 }
