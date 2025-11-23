@@ -50,11 +50,7 @@ func main() {
 		panic(err)
 	}
 	defer configuration.Close()
-	slog.Info("Configuration loaded", slog.Any("config", configuration))
-
-	for i := range 100000 {
-		slog.Info("Looping" + fmt.Sprintf("%d", i))
-	}
+slog.Info("Configuration loaded", "environment", configuration.Environment, "debug", configuration.Debug, "proxy", configuration.ProxyEnabled)
 
 	// Set restart schedule
 	configuration.RestartHour = restartHour
@@ -131,7 +127,7 @@ func runNormalProcess(configuration *config.Config) {
 	defer cleanup(db)
 
 	// Schedule maintenance tasks every 2 hours
-	repository.ScheduleMaintenance(db, configuration.Dbname, 2*time.Hour)
+	repository.ScheduleMaintenance(db, configuration.Dbname, 2)
 
 	// Create the PDP (aka Policy Decision Point or rules engine)
 	rulesEngine, err := pdp.NewPDPService(&pdp.Config{
@@ -373,7 +369,7 @@ func runAsInitProcess(ourExecPath string, args []string) {
 				slog.Error("INIT: failed to forward signal to child process", "signal", sig, "PID", cmd.Process.Pid, "error", err)
 			}
 
-			// If we receive a SIGTERM or SIGINT, wait 5 seconds for the child to terminate and send a KILL signal
+			// If we receive a SIGTERM or SIGINT, wait 10 seconds for the child to terminate and send a KILL signal
 			if sig == syscall.SIGTERM || sig == syscall.SIGINT {
 
 				go func() {
