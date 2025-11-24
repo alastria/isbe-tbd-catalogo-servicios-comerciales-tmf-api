@@ -22,8 +22,8 @@ COPY . .
 RUN go build -ldflags="-w -s" -o /isbetmf .
 
 # Final stage
-# Using debian:bookworm-slim as a minimal debian base (glibc included)
-FROM debian:bookworm-slim
+# Using debian:trixie-slim to ensure glibc >= 2.38 support
+FROM debian:trixie-slim
 
 WORKDIR /
 
@@ -33,8 +33,9 @@ COPY ./auth_policies.star /auth_policies.star
 COPY --chmod=755 ./bin/sqlite3_rsync /usr/local/bin/sqlite3_rsync
 
 # Install runtime dependencies
+# ca-certificates is required for SSL support
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl wget && \
+    apt-get install -y --no-install-recommends curl wget ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 # Expose the port the server runs on
