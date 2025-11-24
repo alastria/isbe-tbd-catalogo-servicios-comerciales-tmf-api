@@ -1,12 +1,37 @@
-# Stage 1: Build TMForum API server
-FROM golang:1.25.3-bookworm AS builder
+# -------------------------------------------------------------------------
+# STAGE 1: Build sqlite3_rsync
+# -------------------------------------------------------------------------
+FROM alpine:3.20 AS sqlite3_rsync_builder
+
+# Install the musl-compatible build tools required for compilation (GCC, make, etc.).
+RUN apk update && \
+    apk add --no-cache \
+    build-base \
+    musl-dev \
+    linux-headers \
+    git
+
+WORKDIR /usr/src
+RUN git clone https://github.com/sqlite/sqlite.git
+RUN mkdir bld
+WORKDIR /usr/src/bld
+RUN ../sqlite/configure
+RUN make sqlite3_rsync
+
+
+# Stage 2: Build TMForum API server
+FROM golang:1.25.3-alpine AS tmfbuilder
 
 # Install build tools for CGO and sqlite tools
-# Debian uses apt-get. gcc and libc-dev are usually included in golang images, 
-# but we ensure they are there. sqlite3 is useful for tools.
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc libc6-dev && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk update && \
+    apk add --no-cache \
+    build-base \
+    musl-dev \
+    linux-headers \
+    git \
+    gcc \
+    sqlite-tools && \
+    rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
@@ -22,21 +47,13 @@ COPY . .
 RUN go build -ldflags="-w -s" -o /isbetmf .
 
 # Final stage
-# Using debian:trixie-slim to ensure glibc >= 2.38 support
-FROM debian:trixie-slim
+FROM alpine/curl:latest
 
 WORKDIR /
-
-COPY --from=builder /isbetmf /isbetmf
+COPY --from=tmfbuilder /isbetmf /isbetmf
 COPY www /www
 COPY ./auth_policies.star /auth_policies.star
-COPY --chmod=755 ./bin/sqlite3_rsync /usr/local/bin/sqlite3_rsync
-
-# Install runtime dependencies
-# ca-certificates is required for SSL support
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl wget ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+COPY --from=sqlite3_rsync_builder --chmod=755 /usr/src/bld/sqlite3_rsync /usr/local/bin/sqlite3_rsync
 
 # Expose the port the server runs on
 EXPOSE 9991
