@@ -26,7 +26,11 @@ WORKDIR /
 COPY --from=builder /isbetmf /isbetmf
 COPY www /www
 COPY ./auth_policies.star /auth_policies.star
-COPY --from=builder --chmod=755 /usr/bin/sqlite3_rsync /usr/local/bin/sqlite3_rsync
+# COPY --from=builder --chmod=755 /usr/bin/sqlite3_rsync /usr/local/bin/sqlite3_rsync
+
+RUN apk update && \
+    apk add --no-cache sqlite-tools && \
+    rm -rf /var/cache/apk/*
 
 # Expose the port the server runs on
 EXPOSE 9991
