@@ -55,6 +55,14 @@ COPY www /www
 COPY ./auth_policies.star /auth_policies.star
 COPY --from=sqlite3_rsync_builder --chmod=755 /usr/src/bld/sqlite3_rsync /usr/local/bin/sqlite3_rsync
 
+HEALTHCHECK \
+    --interval=60s \
+    --timeout=5s \
+    --start-period=10s \
+    --start-interval=3s \
+    --retries=3 \
+    CMD curl -f http://localhost:9991/health || exit 1
+
 # Expose the port the server runs on
 EXPOSE 9991
 
