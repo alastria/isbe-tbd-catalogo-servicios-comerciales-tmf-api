@@ -33,11 +33,8 @@ COPY ./auth_policies.star /auth_policies.star
 COPY --chmod=755 ./bin/sqlite3_rsync /usr/local/bin/sqlite3_rsync
 
 # Install runtime dependencies
-# sqlite3: for sqlite tools
-# ca-certificates: for HTTPS
-# curl: present in the original alpine/curl image
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
+    apt-get install -y --no-install-recommends curl wget && \
     rm -rf /var/lib/apt/lists/*
 
 # Expose the port the server runs on
