@@ -28,6 +28,7 @@ import (
 
 const (
 	serverURL = "https://tmf.mycredential.eu/tmf-api/productCatalogManagement/v4"
+	// serverURL = "https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4"
 )
 
 var (
