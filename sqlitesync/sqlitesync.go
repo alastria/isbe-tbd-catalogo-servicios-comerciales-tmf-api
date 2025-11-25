@@ -47,7 +47,6 @@ func Sync(origin, destination string) error {
 // Backup creates a backup of the origin database in a "backups" subdirectory.
 // The backup filename includes the day of the week (1=Monday, ..., 7=Sunday).
 func Backup(origin string) error {
-	slog.Info("Performing backup", slog.String("origin", origin))
 	// Get absolute path of origin to safely manipulate directories
 	absOrigin, err := filepath.Abs(origin)
 	if err != nil {
@@ -77,6 +76,7 @@ func Backup(origin string) error {
 	destination := filepath.Join(backupDir, backupFilename)
 
 	// Perform sync
+	slog.Info("Performing backup", slog.String("origin", origin), slog.String("destination", destination))
 	if err := Sync(origin, destination); err != nil {
 		return errl.Errorf("failed to perform sync: %w", err)
 	}
