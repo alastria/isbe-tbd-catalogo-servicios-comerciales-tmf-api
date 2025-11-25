@@ -74,7 +74,7 @@ The application is designed to be containerized.
 3.  **The database and backups:**
     The application uses SQLite as the database. The database is stored in the `/data` directory of the container. To persist the database in the host filesystem, you can use a volume mapped to the `/data` directory of the container.
 
-    The system maintains backups of the database in the `/data/backups` directory of the container. It maintains a rotating set of 7 backups, one for each day of the week. The backups contain the number of the day of the week in the name (e.g., `backup_01.db`, `backup_02.db`, etc.). The backups are performed every 2 hours in the backup file corresponding to the day of the week. The backups are performed aligned to the clock (that is, at 10:00 and never at 10:02 or 10:04, etc.). Storing the backups in a different system (e.g., in a cloud storage service) is as simple as copying the `/data/backups` directory (or just the latest backup file) to the desired location.
+    The system maintains backups of the database in the `/data/backups` directory of the container. It maintains a rotating set of 7 backups, one for each day of the week. The backups contain the number of the day of the week in the name (e.g., `backup_01.db`, `backup_02.db`, etc.). The backups are performed every 2 hours at even hours (e.g., 11:00, 13:00, etc.) in the backup file corresponding to the day of the week. Storing the backups in a different system (e.g., in a cloud storage service) is as simple as copying the `/data/backups` directory (or just the latest backup file) to the desired location. To ensure that there are no conflicts with the scheduled updates of the backups, it is recommended to make the copy on even hours (e.g., 10:00, 12:00, etc.).
 
     ```bash
     docker run -e ISBETMF_RUN_ENVIRONMENT=isbedev -p 9991:9991 -v /path/to/your/database:/data isbetmf
@@ -98,7 +98,7 @@ Authorization rules are defined in Starlark scripts (e.g., `auth_policies.star`)
 
 ## Architecture
 
-The project follows a clean, layered architecture:
+The project follows a layered architecture:
 
 1.  **Entrypoint (`main.go`):** Handles initialization, config loading, and graceful restarts.
 2.  **Handler Layer (`tmfserver/handler/fiber`):** Manages HTTP requests using Fiber, translating them into transport-agnostic service requests. Handles generic TMF routing.

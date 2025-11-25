@@ -4,40 +4,58 @@ import (
 	"log/slog"
 	"time"
 
+	"github.com/cloudflare/tableflip"
+	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/sqlitesync"
 	"github.com/jmoiron/sqlx"
 )
 
 // ScheduleMaintenance schedules periodic database maintenance tasks like VACUUM or backups.
-// It runs the maintenance task every 'interval'.
-func ScheduleMaintenance(db *sqlx.DB, dbPath string, hours int) {
+// It runs the maintenance task every 2 hours exactly at odd hours (1, 3, 5, ...).
+// Additionally, it schedules a restart every day at 3 o'clock.
+// The restart uses the https://github.com/cloudflare/tableflip graceful restart to keep client connections
+// alive during the restart.
+func ScheduleMaintenance(configuration *config.Config, db *sqlx.DB, upg *tableflip.Upgrader) {
 
-	if hours < 1 {
-		hours = 1
-	}
+	// Perform an initial maintenance
+	PerformMaintenance(db, configuration.Dbname)
 
-	interval := time.Duration(hours) * time.Hour
-
-	// Perform maintenance when started
-	PerformMaintenance(db, dbPath)
+	// interval := 2 * time.Hour
+	interval := time.Hour
 
 	go func() {
-		slog.Info("Database maintenance scheduled", "interval", interval)
+		// Calculate the next run time: the next odd hour (1, 3, 5, ...)
+		now := time.Now()
+		// Start with the next full hour
+		nextRun := now.Truncate(time.Hour).Add(time.Hour)
 
-		// then, perform maintenance at exactly the time "o-clock" every interval hours
-		nextRun := time.Now().Truncate(time.Hour).Add(interval)
+		// If that hour is even, add another hour to make it odd
+		if nextRun.Hour()%2 == 0 {
+			nextRun = nextRun.Add(time.Hour)
+		}
+
+		slog.Info("Database maintenance scheduled", "next_run", nextRun, "interval", interval)
 
 		for {
 			time.Sleep(time.Until(nextRun))
-			PerformMaintenance(db, dbPath)
-			nextRun = time.Now().Truncate(time.Hour).Add(interval)
+			PerformMaintenance(db, configuration.Dbname)
+
+			// If its 3 o'clock, restart the program
+			if time.Now().Hour() == 3 {
+				slog.Info("Executing scheduled restart...")
+				if err := upg.Upgrade(); err != nil {
+					slog.Error("Upgrade failed", "error", err)
+				}
+			}
+
+			nextRun = nextRun.Add(interval)
 		}
 	}()
 }
 
 // PerformMaintenance performs the actual database maintenance tasks (VACUUM and Backup).
 func PerformMaintenance(db *sqlx.DB, dbPath string) {
-	slog.Info("Executing scheduled database cleanup...")
+	slog.Info("Executing scheduled database maintenance...")
 
 	// Perform a checkpoint to ensure the WAL file is truncated
 	start := time.Now()
