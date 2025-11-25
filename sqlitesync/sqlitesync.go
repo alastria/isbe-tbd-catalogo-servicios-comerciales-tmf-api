@@ -17,15 +17,6 @@ import (
 // It assumes the sqlite3_rsync binary is present in the current working directory.
 // This function blocks until the command completes.
 func Sync(origin, destination string) error {
-	// Prepare the command
-	// Usage: sqlite3_rsync [options] SOURCE DESTINATION
-
-	// // Check if sqlite3_rsync binary exists in current directory
-	// binaryPath := "/sqlite3_rsync"
-	// if _, err := os.Stat(binaryPath); os.IsNotExist(err) {
-	// 	// Fallback to PATH
-	// 	binaryPath = "sqlite3_rsync"
-	// }
 
 	binaryPath := "sqlite3_rsync"
 	cmd := exec.Command(binaryPath, origin, destination)
