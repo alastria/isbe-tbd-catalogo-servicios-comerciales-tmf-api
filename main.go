@@ -50,7 +50,7 @@ func main() {
 		panic(err)
 	}
 	defer configuration.Close()
-slog.Info("Configuration loaded", "environment", configuration.Environment, "debug", configuration.Debug, "proxy", configuration.ProxyEnabled)
+	slog.Info("Configuration loaded", "environment", configuration.Environment, "debug", configuration.Debug, "proxy", configuration.ProxyEnabled)
 
 	// Set restart schedule
 	configuration.RestartHour = restartHour
@@ -125,9 +125,6 @@ func runNormalProcess(configuration *config.Config) {
 		return
 	}
 	defer cleanup(db)
-
-	// Schedule maintenance tasks every 2 hours
-	repository.ScheduleMaintenance(db, configuration.Dbname, 2)
 
 	// Create the PDP (aka Policy Decision Point or rules engine)
 	rulesEngine, err := pdp.NewPDPService(&pdp.Config{
@@ -209,8 +206,8 @@ func runNormalProcess(configuration *config.Config) {
 	h := fiberhandler.NewHandler(s)
 	h.RegisterRoutes(webServer)
 
-	// Schedule restarts if enabled
-	scheduleRestart(configuration, db, upg)
+	// Schedule periodic maintenance tasks
+	repository.ScheduleMaintenance(configuration, db, upg)
 
 	// Listen must be called before signaling we are ready
 	ln, err := upg.Listen("tcp", "0.0.0.0:9991")
@@ -274,54 +271,6 @@ func runNormalProcess(configuration *config.Config) {
 	} else {
 		fmt.Println("CHILD: Exiting without error")
 	}
-
-}
-
-// scheduleRestart starts a goroutine to initiate an upgrade at the scheduled time every day.
-// The restart uses the https://github.com/cloudflare/tableflip graceful restart to keep client connections
-func scheduleRestart(configuration *config.Config, db *sqlx.DB, upg *tableflip.Upgrader) {
-
-	if configuration.RestartHour < 0 {
-		return
-	}
-
-	// Schedule restarts/upgrades every night, the exact time does not matter
-	targetHour := configuration.RestartHour
-	targetMinute := configuration.RestartMinute
-	targetSecond := 0
-
-	go func() {
-		for {
-			now := time.Now()
-
-			// Calculate the next scheduled time
-			nextRun := time.Date(
-				now.Year(), now.Month(), now.Day(),
-				targetHour, targetMinute, targetSecond, 0, now.Location(),
-			)
-
-			// If the next run time is in the past, schedule it for the next day
-			if nextRun.Before(now) {
-				nextRun = nextRun.Add(24 * time.Hour)
-			}
-
-			fmt.Printf("Time now: %v\n", now)
-
-			// Calculate the duration until the next run
-			duration := time.Until(nextRun)
-			fmt.Printf("Next restart/upgrade scheduled at: %v\n", nextRun)
-
-			// Wait until the next run time
-			time.Sleep(duration)
-
-			// Perform the maintenance tasks before restarting (VACUUM and Backup)
-			repository.PerformMaintenance(db, configuration.Dbname)
-
-			// Execute the function
-			fmt.Println("Executing scheduled restart...")
-			upg.Upgrade()
-		}
-	}()
 
 }
 
