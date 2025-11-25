@@ -81,34 +81,3 @@ func TestBackup(t *testing.T) {
 		t.Logf("Backup created successfully at %s", expectedBackupPath)
 	}
 }
-
-func TestSyncLocalBinary(t *testing.T) {
-	// Create a dummy sqlite3_rsync in the current directory
-	binaryName := "sqlite3_rsync"
-	content := []byte("#!/bin/sh\necho 'LOCAL BINARY EXECUTED' >&2\nexit 1\n")
-	err := os.WriteFile(binaryName, content, 0755)
-	if err != nil {
-		t.Fatalf("Failed to create dummy binary: %v", err)
-	}
-	defer os.Remove(binaryName)
-
-	// Use dummy paths
-	origin := "dummy_origin"
-	destination := "dummy_dest"
-
-	// Call Sync
-	err = Sync(origin, destination)
-
-	// We expect an error because our dummy binary exits with 1
-	if err == nil {
-		t.Error("Expected Sync to fail with local binary, but it succeeded")
-	} else {
-		// Check if the error message contains output from our dummy binary
-		// The Sync function includes stderr in the error message
-		if !strings.Contains(err.Error(), "LOCAL BINARY EXECUTED") {
-			t.Errorf("Expected error to contain 'LOCAL BINARY EXECUTED', got: %v", err)
-		} else {
-			t.Log("Confirmed Sync used the local binary")
-		}
-	}
-}

@@ -67,7 +67,7 @@ func TestGetFile(t *testing.T) {
 
 	// Initialize cache with short freshness for disk files
 	opts := &FileCacheOptions{
-		FreshnessForDiskFiles: 100 * time.Millisecond,
+		FreshnessForDiskFiles: 2 * time.Second,
 	}
 	cache := NewSimpleFileCache(opts)
 
@@ -75,6 +75,9 @@ func TestGetFile(t *testing.T) {
 	entry, err := cache.Get(fileName)
 	require.NoError(t, err)
 	assert.Equal(t, content1, entry.Content)
+
+	// Wait half a second to ensure the second write has in the file system a bigger timestamp
+	time.Sleep(500 * time.Millisecond)
 
 	// 2. Update file content
 	content2 := []byte("content-2")
@@ -87,7 +90,7 @@ func TestGetFile(t *testing.T) {
 	assert.Equal(t, content1, entry.Content)
 
 	// 4. Wait for expiration
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(2 * time.Second)
 
 	// 5. Fetch again (should return new content)
 	entry, err = cache.Get(fileName)

@@ -20,8 +20,8 @@
 
 ### Prerequisites
 
-*   [Go](https://go.dev/dl/) 1.21 or higher
-*   [Docker](https://www.docker.com/) (optional, for containerized deployment)
+*   [Go](https://go.dev/dl/) 1.24 or higher
+*   [Docker](https://www.docker.com/) (for containerized deployment)
 *   [Make](https://www.gnu.org/software/make/) (optional, for build automation)
 
 ### Local Development

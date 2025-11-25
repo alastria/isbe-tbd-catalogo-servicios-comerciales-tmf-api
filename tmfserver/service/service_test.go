@@ -40,6 +40,7 @@ func newTestService(t *testing.T) *Service {
 func newReq(method, action, api, resource, id string, body []byte, qp url.Values) *Request {
 	return &Request{
 		Method:       method,
+		AccessToken:  FakeATold,
 		Action:       HttpActions[method],
 		APIfamily:    api,
 		ResourceName: resource,
@@ -47,6 +48,7 @@ func newReq(method, action, api, resource, id string, body []byte, qp url.Values
 		Body:         body,
 		QueryParams:  qp,
 	}
+
 }
 
 // fakeDelivery records delivered payloads for assertions
@@ -111,9 +113,17 @@ func TestCreateGenericObjectPublishesEvent(t *testing.T) {
 	obj := map[string]any{
 		"@type":   resourceName,
 		"version": "1.0",
+		"name":    "Test Product Offering",
 	}
 	b, _ := json.Marshal(obj)
 	req := newReq("POST", "CREATE", "TMF620", resourceName, "", b, nil)
+
+	tokenMap, err := s.ProcessAccessToken(req)
+	if err != nil {
+		t.Fatalf("invalid access token: %v", err)
+	}
+
+	req.TokenMap = tokenMap
 
 	resp := s.CreateGenericObject(req)
 	if resp.StatusCode != http.StatusCreated {
