@@ -1,8 +1,37 @@
-# Build stage
-FROM golang:1.25.3-alpine AS builder
+# -------------------------------------------------------------------------
+# STAGE 1: Build sqlite3_rsync
+# -------------------------------------------------------------------------
+FROM alpine:3.20 AS sqlite3_rsync_builder
 
-# Install build tools for CGO
-RUN apk add --no-cache gcc musl-dev
+# Install the musl-compatible build tools required for compilation (GCC, make, etc.).
+RUN apk update && \
+    apk add --no-cache \
+    build-base \
+    musl-dev \
+    linux-headers \
+    git
+
+WORKDIR /usr/src
+RUN git clone https://github.com/sqlite/sqlite.git
+RUN mkdir bld
+WORKDIR /usr/src/bld
+RUN ../sqlite/configure
+RUN make sqlite3_rsync
+
+
+# Stage 2: Build TMForum API server
+FROM golang:1.25.3-alpine AS tmfbuilder
+
+# Install build tools for CGO and sqlite tools
+RUN apk update && \
+    apk add --no-cache \
+    build-base \
+    musl-dev \
+    linux-headers \
+    git \
+    gcc \
+    sqlite-tools && \
+    rm -rf /var/cache/apk/*
 
 WORKDIR /app
 
@@ -21,9 +50,18 @@ RUN go build -ldflags="-w -s" -o /isbetmf .
 FROM alpine/curl:latest
 
 WORKDIR /
-COPY --from=builder /isbetmf /isbetmf
+COPY --from=tmfbuilder /isbetmf /isbetmf
 COPY www /www
 COPY ./auth_policies.star /auth_policies.star
+COPY --from=sqlite3_rsync_builder --chmod=755 /usr/src/bld/sqlite3_rsync /usr/local/bin/sqlite3_rsync
+
+HEALTHCHECK \
+    --interval=60s \
+    --timeout=5s \
+    --start-period=10s \
+    --start-interval=3s \
+    --retries=3 \
+    CMD curl -f http://localhost:9991/health || exit 1
 
 # Expose the port the server runs on
 EXPOSE 9991

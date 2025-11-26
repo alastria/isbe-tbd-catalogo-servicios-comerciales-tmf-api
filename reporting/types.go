@@ -3,6 +3,8 @@ package reporting
 import (
 	"encoding/json"
 	"time"
+
+	"github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
 
 // TMFObject represents a generic TMForum object
@@ -98,10 +100,10 @@ type TypeStats struct {
 
 // ValidationReport represents the complete validation report
 type ValidationReport struct {
-	Config      *Config            `json:"config"`
-	Statistics  *Statistics        `json:"statistics"`
-	Results     []ValidationResult `json:"results"`
-	GeneratedAt time.Time          `json:"generated_at"`
+	Config      *Config                       `json:"config"`
+	Statistics  *Statistics                   `json:"statistics"`
+	Results     []repository.ValidationResult `json:"results"`
+	GeneratedAt time.Time                     `json:"generated_at"`
 }
 
 var RequiredFieldsForAllObjects = []string{

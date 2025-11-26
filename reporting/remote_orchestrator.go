@@ -44,7 +44,7 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 	log.Printf("Object types: %v", p.config.ObjectTypes)
 
 	// Process each object type
-	var allResults []ValidationResult
+	var allResults []repository.ValidationResult
 	// var allObjects []TMFObject
 	var allObjects []repository.TMFObjectMap
 
@@ -59,6 +59,7 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 		totalWarningsForType := 0
 
 		for {
+
 			// Get a single page of objects
 			objects, err := p.pager.GetPageOfObjects(ctx, objectType, offset, nil)
 
@@ -83,6 +84,7 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 
 			// Count validation results for this page
 			for _, result := range results {
+
 				if result.Valid {
 					totalValidForType++
 				}
@@ -103,6 +105,11 @@ func (p *RemoteOrchestrator) Run(ctx context.Context) error {
 				log.Printf("Warning: Reached maximum objects limit (%d) for %s", p.config.MaxObjects, objectType)
 				break
 			}
+		}
+
+		for i, result := range allResults {
+			// Set the URL of the object
+			allResults[i].Href = p.pager.GetObjectURL(result.ObjectType, result.ObjectID)
 		}
 
 		log.Printf("Validation complete for %s: %d total objects, %d valid, %d errors, %d warnings",
@@ -166,7 +173,7 @@ func (p *RemoteOrchestrator) RunWithProgress(ctx context.Context, progressChan c
 	}
 
 	// Process object types
-	var allResults []ValidationResult
+	var allResults []repository.ValidationResult
 	totalObjectTypes := len(p.config.ObjectTypes)
 
 	for i, objectType := range p.config.ObjectTypes {

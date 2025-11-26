@@ -16,6 +16,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"testing"
 	"time"
 
@@ -27,6 +28,7 @@ import (
 
 const (
 	serverURL = "https://tmf.mycredential.eu/tmf-api/productCatalogManagement/v4"
+	// serverURL = "https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4"
 )
 
 var (
@@ -47,6 +49,10 @@ type ProductSpecification struct {
 }
 
 func init() {
+
+	// Set the nocolor option for logs
+	os.Setenv("ISBETMF_LOGS_NOCOLOR", "true")
+
 	// Generate a default configuration suitable for the environment
 	// The approach is that instead of many configurable parameters, we have a set of profiles, with "hardcoded"
 	// parameters for each environment, but that can be easity extended for other purposes.
@@ -54,6 +60,12 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
+	// Use an in-memory database
+	configuration.Dbname = ":memory:"
+
+	configuration.ServerOperatorOrganizationIdentifier = "VATES-11111111K"
+	configuration.ServerOperatorDid = "did:elsi:VATES-11111111K"
 
 	// Disable restarts
 	configuration.RestartHour = -1
@@ -112,12 +124,13 @@ func TestProductSpecificationHappy(t *testing.T) {
 		"lifecycleStatus": "Active",
 	}
 
-	createdSpecObj := e.POST("/productSpecification").
+	theResponse := e.POST("/productSpecification").
 		WithHeader("Authorization", "Bearer "+apiToken).
 		WithJSON(ps).
-		Expect().
-		Status(http.StatusCreated).
-		JSON().Object()
+		Expect()
+
+	theResponseStatus := theResponse.Status(http.StatusCreated)
+	createdSpecObj := theResponseStatus.JSON().Object()
 
 	createdSpecObj.Value("id").String().NotEmpty()
 	createdSpecObj.Value("name").String().IsEqual(ps.Name())
@@ -204,17 +217,77 @@ func TestInvalidSeller(t *testing.T) {
 
 	ps.SetSellerInfo("pepe", "juan", "v4")
 
-	createdSpecObj := e.POST("/productSpecification").
+	e.POST("/productSpecification").
 		WithHeader("Authorization", "Bearer "+apiToken).
 		WithJSON(ps).
 		Expect().
-		Status(http.StatusCreated).
+		Status(http.StatusForbidden)
+
+}
+
+// Test the UID-353 incidence
+func TestCategoryCreateUpdateName(t *testing.T) {
+	// Create a new httpexpect instance.
+	e := httpexpect.WithConfig(httpexpect.Config{
+		BaseURL:  serverURL,
+		Reporter: httpexpect.NewAssertReporter(t),
+		Printers: []httpexpect.Printer{
+			httpexpect.NewCurlPrinter(t),
+			httpexpect.NewDebugPrinter(t, true),
+		},
+	})
+
+	// 1. Create (POST)
+	ps := repository.TMFObjectMap{
+		"@type":           "category",
+		"name":            "Identidad Digital",
+		"brand":           "TestBrand",
+		"description":     "A detailed description of my test product specification.",
+		"lifecycleStatus": "Active",
+	}
+
+	theResponseStatus := e.POST("/category").
+		WithHeader("Authorization", "Bearer "+apiToken).
+		WithJSON(ps).
+		Expect().
+		Status(http.StatusCreated)
+
+	createdObj := theResponseStatus.JSON().Object()
+
+	createdObj.Value("id").String().NotEmpty()
+	createdObj.Value("name").String().IsEqual(ps.Name())
+	createdObj.Value("brand").String().IsEqual(ps.GetStringField("brand"))
+
+	createdSpecID := createdObj.Value("id").String().Raw()
+
+	// 2. Get (GET)
+	e.GET("/category/{id}", createdSpecID).
+		WithHeader("Authorization", "Bearer "+apiToken).
+		Expect().
+		Status(http.StatusOK).
+		JSON().Object().
+		Value("id").String().IsEqual(createdSpecID)
+
+	// 3. Update (PATCH)
+	updatePayload := map[string]any{
+		"description": "An updated description.",
+		"name":        "Gestión de Identidad Digital y Confianza",
+	}
+
+	e.PATCH("/category/{id}", createdSpecID).
+		WithHeader("Authorization", "Bearer "+apiToken).
+		WithJSON(updatePayload).
+		Expect().
+		Status(http.StatusOK)
+
+	// 4. Get again the updated object (GET)
+	updatedObject := e.GET("/category/{id}", createdSpecID).
+		WithHeader("Authorization", "Bearer "+apiToken).
+		Expect().
+		Status(http.StatusOK).
 		JSON().Object()
 
-	createdSpecObj.Value("id").String().NotEmpty()
-	createdSpecObj.Value("name").String().IsEqual(ps.Name())
-	createdSpecObj.Value("brand").String().IsEqual(ps.GetStringField("brand"))
-
-	createdSpecObj.Value("relatedParty").Array().Length().Ge(2)
+	updatedObject.Value("name").String().IsEqual(updatePayload["name"].(string))
+	updatedObject.Value("description").String().IsEqual("An updated description.")
 
 }

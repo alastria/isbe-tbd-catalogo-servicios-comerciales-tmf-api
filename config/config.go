@@ -12,15 +12,15 @@ import (
 
 // Indicates the environment (SBX, DEV2, PRO, LCL) where the server is running.
 // It is used to determine the default configuration profile if the user does not specify anything else.
-type Environment int
+type Environment string
 
 const (
-	DOME_PRO      Environment = 0
-	DOME_DEV2     Environment = 1
-	DOME_SBX      Environment = 2
-	DOME_LCL      Environment = 3
-	ISBE_EVIDENCE Environment = 4
-	ISBE_MYCRED   Environment = 5
+	DOME_PRO Environment = "domepro"
+	DOME_PRE Environment = "domepre"
+	DOME_DEV Environment = "domedev"
+	DOME_LCL Environment = "domelcl"
+	ISBE_PRE Environment = "isbepre"
+	ISBE_DEV Environment = "isbedev"
 )
 
 const DefaultClonePeriod = 10 * time.Minute
@@ -43,9 +43,10 @@ type Config struct {
 	// The domain of the remote TMForum API server when we act as proxy
 	RemoteTMFServer string
 
-	// Dbname is the name of the database file where the TMForum cached data is stored
+	// Dbname is the name of the database file where the TMForum data is stored
 	// It is used to store the data in a local SQLite database, the best SQL database for this purpose.
-	Dbname string
+	Dbname         string
+	BackupDisabled bool
 
 	// The power required by a caller to be considered LEAR
 	LEARPower types.OnePower
@@ -68,7 +69,7 @@ type Config struct {
 	// TODO: this is temporary for testing
 	FakeClaims bool
 
-	// fixMode enables "smart" automatit fixing of objects so they comply with the DOME specs
+	// fixMode enables "smart" automatic fixing of objects so they comply with the DOME specs
 	// There is no magic. however, and there are things that can not be done.
 	fixMode bool
 
@@ -96,249 +97,9 @@ type Config struct {
 	Features Features
 }
 
-// Features defines a set of feature flags which may depend on th eenvironment at a given time
+// Features defines a set of feature flags which may depend on the environment at a given time
 type Features struct {
 	OfferingLaunchOnlyByAdmin bool
-}
-
-// As this PDP is designed for DOME and ISBE environments, many config data items are hardcoded.
-// This avoids many configuration errors and simplifies deployment, at the expense of some flexibility.
-// However, this flexibility is not really needed in practice, as the DOME environments are well defined and stable.
-// Minimizing errors is here much more important than the ease to configure these parameters.
-
-var sbxConfig = &Config{
-	Environment:  DOME_SBX,
-	ProxyEnabled: true,
-
-	ServerOperatorOrganizationIdentifier: "VATSB-12345678J",
-	ServerOperatorDid:                    "did:elsi:VATSB-12345678J",
-	ServerOperatorName:                   "DOME Foundation SBX",
-	ServerOperatorCountry:                "ES",
-
-	LEARPower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "Onboarding",
-		Tmf_action:   []string{"execute"},
-	},
-	ProductCreatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Create"},
-	},
-	ProductUpdatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Update"},
-	},
-	ProductDeletePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Delete"},
-	},
-
-	PolicyFileName:  "auth_policies.star",
-	RemoteTMFServer: "https://tmf.dome-marketplace-sbx.org",
-	VerifierServer:  "https://verifier.dome-marketplace-sbx.org",
-	Dbname:          "data/tmf.dome.sbx.db",
-	ClonePeriod:     DefaultClonePeriod,
-}
-
-var isbeEvidenceConfig = &Config{
-	Environment:  ISBE_EVIDENCE,
-	ProxyEnabled: false,
-
-	ServerOperatorOrganizationIdentifier: "VATES-G87936159",
-	ServerOperatorDid:                    "did:elsi:VATES-G87936159",
-	ServerOperatorName:                   "Alastria",
-	ServerOperatorCountry:                "ES",
-
-	LEARPower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "Onboarding",
-		Tmf_action:   []string{"execute"},
-	},
-	ProductCreatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Create"},
-	},
-	ProductUpdatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Update"},
-	},
-	ProductDeletePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Delete"},
-	},
-
-	PolicyFileName: "auth_policies.star",
-	VerifierServer: "https://verifier.dome-marketplace.eu",
-	Dbname:         "data/isbetmf.db",
-	ClonePeriod:    DefaultClonePeriod,
-	Features: Features{
-		OfferingLaunchOnlyByAdmin: true,
-	},
-}
-
-var isbeMycredentialConfig = &Config{
-	Environment:  ISBE_MYCRED,
-	ProxyEnabled: false,
-
-	ServerOperatorOrganizationIdentifier: "VATES-G87936159",
-	ServerOperatorDid:                    "did:elsi:VATES-G87936159",
-	ServerOperatorName:                   "Alastria",
-	ServerOperatorCountry:                "ES",
-
-	LEARPower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "Onboarding",
-		Tmf_action:   []string{"execute"},
-	},
-	ProductCreatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Create"},
-	},
-	ProductUpdatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Update"},
-	},
-	ProductDeletePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Delete"},
-	},
-
-	PolicyFileName: "auth_policies.star",
-	VerifierServer: "https://verifier.dome-marketplace.eu",
-	Dbname:         "data/isbetmf.db",
-	ClonePeriod:    DefaultClonePeriod,
-	Features: Features{
-		OfferingLaunchOnlyByAdmin: true,
-	},
-}
-
-var proConfig = &Config{
-	Environment:  DOME_PRO,
-	ProxyEnabled: true,
-
-	LEARPower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "Onboarding",
-		Tmf_action:   []string{"execute"},
-	},
-	ProductCreatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Create"},
-	},
-	ProductUpdatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Update"},
-	},
-	ProductDeletePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Delete"},
-	},
-
-	PolicyFileName:  "auth_policies.star",
-	RemoteTMFServer: "https://tmf.dome-marketplace.eu",
-	VerifierServer:  "https://verifier.dome-marketplace.eu",
-	Dbname:          "data/tmf.dome.pro.db",
-	ClonePeriod:     DefaultClonePeriod,
-}
-
-var dev2Config = &Config{
-	Environment:  DOME_DEV2,
-	ProxyEnabled: true,
-
-	LEARPower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "Onboarding",
-		Tmf_action:   []string{"execute"},
-	},
-	ProductCreatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Create"},
-	},
-	ProductUpdatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Update"},
-	},
-	ProductDeletePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Delete"},
-	},
-
-	PolicyFileName:  "auth_policies.star",
-	RemoteTMFServer: "https://tmf.dome-marketplace-dev2.org",
-	VerifierServer:  "https://verifier.dome-marketplace-dev2.org",
-	Dbname:          "data/tmf.dome.dev2.db",
-	ClonePeriod:     DefaultClonePeriod,
-}
-
-var lclConfig = &Config{
-	Environment:  DOME_LCL,
-	ProxyEnabled: true,
-
-	LEARPower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "Onboarding",
-		Tmf_action:   []string{"execute"},
-	},
-	ProductCreatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Create"},
-	},
-	ProductUpdatePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Update"},
-	},
-	ProductDeletePower: types.OnePower{
-		Tmf_type:     "domain",
-		Tmf_domain:   "DOME",
-		Tmf_function: "ProductOffering",
-		Tmf_action:   []string{"Delete"},
-	},
-
-	PolicyFileName:  "auth_policies.star",
-	RemoteTMFServer: "https://tmf.dome-marketplace-lcl.org",
-	VerifierServer:  "https://verifier.dome-marketplace-lcl.org",
-	Dbname:          "data/tmf.dome.lcl.db",
-	ClonePeriod:     DefaultClonePeriod,
 }
 
 // LoadConfig initializes and returns a Config struct based on the provided parameters.
@@ -375,11 +136,15 @@ func LoadConfig(
 
 	// Initialize the custom SQLogHandler
 	logOptions := &sqlogger.Options{
-		Level: &logLevel,
+		Level:  &logLevel,
+		LogDir: "data/logs",
 	}
 
-	// Check if the logs should be colored
-	if os.Getenv("ISBETMF_LOGS_NOCOLOR") == "true" {
+	// Check if the logs should be colored:
+	// - If the process is running in a container (pid=1) then do not color the logs
+	// - If the environment variable ISBETMF_LOGS_NOCOLOR is set to "true" then do not color the logs
+	ourpid := os.Getpid()
+	if ourpid == 1 || os.Getenv("ISBETMF_LOGS_NOCOLOR") == "true" {
 		logOptions.NoColor = true
 	}
 
@@ -389,37 +154,39 @@ func LoadConfig(
 		slog.Error("failed to initialize SQLogHandler, exiting", slog.Any("error", err))
 		os.Exit(1)
 	}
-	defer sqlog.Close()
 
 	// And set the default logging system for all components
 	slog.SetDefault(slog.New(sqlog))
 
+	environment := Environment(envir)
+
 	// Choose the profile from the environment passed
-	switch envir {
-	case "pro":
-		conf = proConfig
-		slog.Info("Using the PRODUCTION environment")
-	case "dev2":
-		conf = dev2Config
-		slog.Info("Using the DEV2 environment")
-	case "sbx":
-		conf = sbxConfig
-		slog.Info("Using the SBX environment")
-	case "lcl":
+	switch environment {
+	case DOME_PRO:
+		conf = domeproConfig
+		slog.Info("Using the DOME PRO environment")
+	case DOME_PRE:
+		conf = domepreConfig
+		slog.Info("Using the DOME PRE environment")
+	case DOME_DEV:
+		conf = domedevConfig
+		slog.Info("Using the DOME SBX environment")
+	case DOME_LCL:
 		conf = lclConfig
 		slog.Info("Using the LCL environment")
-	case "evidenceledger":
-		conf = isbeEvidenceConfig
-		slog.Info("Using the ISBE evidence environment")
-	case "mycredential":
-		conf = isbeMycredentialConfig
-		slog.Info("Using the ISBE mycredential environment")
+	case ISBE_PRE:
+		conf = isbepreConfig
+		slog.Info("Using the ISBE PRE environment")
+	case ISBE_DEV:
+		conf = isbedevConfig
+		slog.Info("Using the ISBE DEV environment")
 	default:
-		conf = isbeMycredentialConfig
-		slog.Info("Using the default (ISBE mycredential) environment")
+		conf = isbedevConfig
+		slog.Info("Using the default (ISBE DEV) environment")
 	}
 
 	conf.Debug = debug
+	conf.LogHandler = sqlog
 
 	// Check for overrides with environment variables
 
@@ -446,6 +213,12 @@ func LoadConfig(
 
 	return conf, nil
 
+}
+
+func (c *Config) Close() {
+	if c.LogHandler != nil {
+		c.LogHandler.Close()
+	}
 }
 
 // The names of some special objects in the DOME ecosystem

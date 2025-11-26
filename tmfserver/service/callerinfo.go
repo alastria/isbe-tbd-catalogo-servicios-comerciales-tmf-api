@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
-	"strings"
 
+	"github.com/go-viper/mapstructure/v2"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/jpath"
@@ -75,8 +75,9 @@ func (svc *Service) ProcessAccessToken(r *Request) (tokenClaims map[string]any, 
 	// Parse the user powers for the ones we only care about
 	authUserPowers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
 	for _, p := range authUserPowers {
-		power, ok := p.(types.OnePower)
-		if !ok {
+		var power types.OnePower
+		if err := mapstructure.Decode(p, &power); err != nil {
+			slog.Error("error decoding power", slogor.Err(err))
 			continue
 		}
 
@@ -103,31 +104,6 @@ func (svc *Service) ProcessAccessToken(r *Request) (tokenClaims map[string]any, 
 		}
 	}
 
-	//	if svc.ProductCreatePower.Includes()
-
-	// Check the powers of the caller to see if is a LEAR
-	powers := jpath.GetList(verifiableCredential, "credentialSubject.mandate.power")
-	for _, p := range powers {
-
-		ptype := jpath.GetString(p, "type")
-		pdomain := jpath.GetString(p, "domain")
-		pfunction := jpath.GetString(p, "function")
-		pactions := jpath.GetListString(p, "action")
-
-		// Check fields without regards to case
-		if strings.EqualFold(ptype, svc.LEARPower.Tmf_type) && strings.EqualFold(pdomain, svc.LEARPower.Tmf_domain) && strings.EqualFold(pfunction, svc.LEARPower.Tmf_function) {
-
-			// We check for only one configured action
-			for _, action := range pactions {
-				if strings.EqualFold(action, svc.LEARPower.Tmf_action[0]) {
-					authUser.IsLEAR = true
-				}
-			}
-		}
-
-	}
-
-	// Update the request with the authenticated user info
 	r.AuthUser = *authUser
 
 	// If the user has an organization identifier, create a new organization object.

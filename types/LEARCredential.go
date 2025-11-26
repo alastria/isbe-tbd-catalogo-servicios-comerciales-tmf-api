@@ -48,25 +48,25 @@ type CredentialIssuer struct {
 }
 
 type OnePower struct {
-	Id           string   `json:"id,omitempty"`
-	Tmf_type     string   `json:"type,omitempty"`
-	Tmf_domain   string   `json:"domain,omitempty"`
-	Tmf_function string   `json:"function,omitempty"`
-	Tmf_action   []string `json:"action,omitempty"`
+	Id       string   `mapstructure:"id"`
+	Type     string   `mapstructure:"type"`
+	Domain   string   `mapstructure:"domain"`
+	Function string   `mapstructure:"function"`
+	Action   []string `mapstructure:"action"`
 }
 
 func (p *OnePower) SameAs(other *OnePower) bool {
-	if !strings.EqualFold(p.Tmf_type, other.Tmf_type) {
+	if !strings.EqualFold(p.Type, other.Type) {
 		return false
 	}
-	if !strings.EqualFold(p.Tmf_domain, other.Tmf_domain) {
+	if !strings.EqualFold(p.Domain, other.Domain) {
 		return false
 	}
-	if !strings.EqualFold(p.Tmf_function, other.Tmf_function) {
+	if !strings.EqualFold(p.Function, other.Function) {
 		return false
 	}
-	for i, action := range p.Tmf_action {
-		if !strings.EqualFold(action, other.Tmf_action[i]) {
+	for i, action := range p.Action {
+		if !strings.EqualFold(action, other.Action[i]) {
 			return false
 		}
 	}
@@ -86,26 +86,26 @@ func (p *OnePower) SameAs(other *OnePower) bool {
 // p and other are non-nil; calling Includes with a nil receiver or nil other will result in a runtime panic.
 func (p *OnePower) Includes(other OnePower) bool {
 	// Check the lengths of the action arrays for a maximum length of 10
-	if len(p.Tmf_action) > 10 || len(other.Tmf_action) > 10 {
-		slog.Error("lenghts of action arrays are greater than 10", "p", len(p.Tmf_action), "other", len(other.Tmf_action))
+	if len(p.Action) > 10 || len(other.Action) > 10 {
+		slog.Error("lenghts of action arrays are greater than 10", "p", len(p.Action), "other", len(other.Action))
 		return false
 	}
 
-	if !strings.EqualFold(p.Tmf_type, other.Tmf_type) {
+	if !strings.EqualFold(p.Type, other.Type) {
 		return false
 	}
-	if !strings.EqualFold(p.Tmf_domain, other.Tmf_domain) {
+	if !strings.EqualFold(p.Domain, other.Domain) {
 		return false
 	}
-	if !strings.EqualFold(p.Tmf_function, other.Tmf_function) {
+	if !strings.EqualFold(p.Function, other.Function) {
 		return false
 	}
 
 	// Check that each element of other.Tmf_action is included in p.Tmf_action
 	// The comparison of individual elements must be case-insensitive using strings.EqualFold
-	for _, otherAction := range other.Tmf_action {
+	for _, otherAction := range other.Action {
 		found := false
-		for _, pAction := range p.Tmf_action {
+		for _, pAction := range p.Action {
 			if strings.EqualFold(pAction, otherAction) {
 				found = true
 				break

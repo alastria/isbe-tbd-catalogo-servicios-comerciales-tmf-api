@@ -79,7 +79,7 @@ func (obj TMFObjectMap) Validate(resourceName string) ValidationResult {
 	obj.validateRequiredFields(resourceName, &result)
 
 	// Validate related party requirements
-	obj.validateRelatedParty(resourceName, &result)
+	obj.validateRelatedParty(&result)
 
 	// Determine overall validity (object is valid if it has zero validation errors)
 	result.Valid = len(result.Errors) == 0
@@ -98,8 +98,8 @@ func (obj TMFObjectMap) validateRequiredFields(resourceName string, result *Vali
 		if !strings.EqualFold(resourceName, objType) {
 			result.Errors = append(result.Errors, ValidationError{
 				Field:   field,
-				Message: fmt.Sprintf("Invalid value for field '%s': %s", field, objType),
-				Code:    "MISSING_REQUIRED_FIELD",
+				Message: fmt.Sprintf("Object type field '%s' does not match resource type '%s'", objType, resourceName),
+				Code:    "MISSING_INVALID_VALUE",
 			})
 		}
 
@@ -145,57 +145,142 @@ func (obj TMFObjectMap) validateRequiredFields(resourceName string, result *Vali
 
 }
 
-func (obj TMFObjectMap) validateRelatedParty(resourceName string, result *ValidationResult) {
+func (obj TMFObjectMap) validateRelatedParty(result *ValidationResult) {
 
 	// We just return if the object does not require Seller nor Buyer info
 	if !obj.RequiresSellerInfo() {
 		return
 	}
 
-	seller, sellerOperator, err := obj.GetSellerInfo("v4")
-	if err != nil {
-		var msg string
-		if seller == "" && sellerOperator == "" {
-			msg = "Missing Seller and SellerOperator fields"
-		} else {
-			if seller == "" {
-				msg = "Missing Seller field"
-			} else {
-				msg = "Missing SellerOperator field"
+	// Check that the object has a relatedParty object
+	relatedParties := jpath.GetList(obj, "relatedParty")
+	if len(relatedParties) == 0 {
+		// msg := "Missing " + userRole + " and " + userOperatorRole + " fields"
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: "Missing 'relatedParty' object",
+			Code:    "MISSING_RELATED_PARTY_INFO",
+		})
+
+		return
+	}
+
+	var sellerDid string
+	var sellerOperatorDid string
+	var buyerDid string
+	var buyerOperatorDid string
+
+	sellerRole := strings.ToLower("Seller")
+	sellerOperatorRole := strings.ToLower("SellerOperator")
+	buyerRole := strings.ToLower("Buyer")
+	buyerOperatorRole := strings.ToLower("BuyerOperator")
+
+	for _, rp := range relatedParties {
+		// Cast the entry to a map[string]any
+		rpMap, _ := rp.(map[string]any)
+		if len(rpMap) == 0 {
+			result.Errors = append(result.Errors, ValidationError{
+				Field:   "relatedParty",
+				Message: "Invalid 'relatedParty' object",
+				Code:    "INVALID_RELATED_PARTY_INFO",
+			})
+			return
+		}
+
+		// Extract the "role" field in lowercase for case-insentitive comparison
+		rpRole, _ := rpMap["role"].(string)
+		rpRole = strings.ToLower(rpRole)
+
+		// If the role of the entry is not one that we are looking for, continue the loop
+		if rpRole != sellerRole && rpRole != sellerOperatorRole && rpRole != buyerRole && rpRole != buyerOperatorRole {
+			continue
+		}
+
+		switch rpRole {
+		case sellerRole:
+			sellerDid, _ = rpMap["name"].(string)
+			if sellerDid == "" {
+				result.Errors = append(result.Errors, ValidationError{
+					Field:   "relatedParty",
+					Message: "Missing or invalid 'name' field in 'relatedParty' object for 'Seller' role",
+					Code:    "MISSING_RELATED_PARTY_INFO",
+				})
+			}
+		case sellerOperatorRole:
+			sellerOperatorDid, _ = rpMap["name"].(string)
+			if sellerOperatorDid == "" {
+				result.Errors = append(result.Errors, ValidationError{
+					Field:   "relatedParty",
+					Message: "Missing or invalid 'name' field in 'relatedParty' object for 'SellerOperator' role",
+					Code:    "MISSING_RELATED_PARTY_INFO",
+				})
+			}
+		case buyerRole:
+			buyerDid, _ = rpMap["name"].(string)
+			if buyerDid == "" {
+				result.Errors = append(result.Errors, ValidationError{
+					Field:   "relatedParty",
+					Message: "Missing or invalid 'name' field in 'relatedParty' object for 'Buyer' role",
+					Code:    "MISSING_RELATED_PARTY_INFO",
+				})
+			}
+		case buyerOperatorRole:
+			buyerOperatorDid, _ = rpMap["name"].(string)
+			if buyerOperatorDid == "" {
+				result.Errors = append(result.Errors, ValidationError{
+					Field:   "relatedParty",
+					Message: "Missing or invalid 'name' field in 'relatedParty' object for 'BuyerOperator' role",
+					Code:    "MISSING_RELATED_PARTY_INFO",
+				})
 			}
 		}
 
+	}
+
+	// Set the error depending on what we have found for Seller and SellerOperator
+	if sellerDid == "" && sellerOperatorDid == "" {
 		result.Errors = append(result.Errors, ValidationError{
 			Field:   "relatedParty",
-			Message: msg,
-			Code:    "MISSING_SELLER_INFO",
+			Message: "Missing 'relatedParty' info for 'Seller' and 'SellerOperator' role",
+			Code:    "MISSING_RELATED_PARTY_INFO",
 		})
-		return
+	} else if sellerDid == "" {
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: "Missing 'relatedParty' info for 'Seller' role",
+			Code:    "MISSING_RELATED_PARTY_INFO",
+		})
+	} else if sellerOperatorDid == "" {
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: "Missing 'relatedParty' info for 'SellerOperator' role",
+			Code:    "MISSING_RELATED_PARTY_INFO",
+		})
 	}
 
 	if !obj.RequiresBuyerInfo() {
 		return
 	}
 
-	buyer, buyerOperator, err := obj.GetBuyerInfo("v4")
-	if err != nil {
-		var msg string
-		if buyer == "" && buyerOperator == "" {
-			msg = "Missing Buyer and BuyerOperator fields"
-		} else {
-			if buyer == "" {
-				msg = "Missing Buyer field"
-			} else {
-				msg = "Missing BuyerOperator field"
-			}
-		}
-
+	// Set the error depending on what we have found for Buyer and BuyerOperator
+	if buyerDid == "" && buyerOperatorDid == "" {
 		result.Errors = append(result.Errors, ValidationError{
 			Field:   "relatedParty",
-			Message: msg,
-			Code:    "MISSING_BUYER_INFO",
+			Message: "Missing 'relatedParty' info for 'Buyer' and 'BuyerOperator' role",
+			Code:    "MISSING_RELATED_PARTY_INFO",
 		})
-		return
+	} else if buyerDid == "" {
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: "Missing 'relatedParty' info for 'Buyer' role",
+			Code:    "MISSING_RELATED_PARTY_INFO",
+		})
+	} else if buyerOperatorDid == "" {
+		result.Errors = append(result.Errors, ValidationError{
+			Field:   "relatedParty",
+			Message: "Missing 'relatedParty' info for 'BuyerOperator' role",
+			Code:    "MISSING_RELATED_PARTY_INFO",
+		})
 	}
 
 }
@@ -879,115 +964,6 @@ func (obj TMFObjectMap) GetBuyerInfo(apiVersion string) (sellerDid string, selle
 		// Default to V4 for backward compatibility
 		return getUserAndUserOperatorInfoV4(obj, "Buyer", "BuyerOperator")
 	}
-}
-
-func getSellerAndBuyerInfoV4(tmfObjectMap map[string]any) (sellerDid string, sellerOperatorDid string, err error) {
-	// In V4, relatedParty is a list of maps with fields like "role", "id", "href", "name", "@referredType"
-	// We need to extract the "name" for the "Seller" and "SellerOperator" roles
-
-	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
-
-	if len(relatedParties) == 0 {
-		err = errl.Errorf("no relatedParty")
-		return
-	}
-
-	for _, rp := range relatedParties {
-		rpMap, _ := rp.(map[string]any)
-		if len(rpMap) == 0 {
-			return "", "", errl.Errorf("invalid relatedParty entry")
-		}
-
-		rpRole, _ := rpMap["role"].(string)
-		rpRole = strings.ToLower(rpRole)
-
-		if rpRole != "seller" && rpRole != "selleroperator" {
-			continue
-		}
-
-		if rpRole == "seller" {
-			sellerDid, _ = rpMap["name"].(string)
-			continue
-		}
-		if rpRole == "selleroperator" {
-			sellerOperatorDid, _ = rpMap["name"].(string)
-			continue
-		}
-	}
-
-	if sellerDid == "" && sellerOperatorDid == "" {
-		err = errl.Errorf("no seller or seller operator")
-		return
-	}
-
-	if sellerDid == "" {
-		err = errl.Errorf("no seller")
-		return
-	}
-	if sellerOperatorDid == "" {
-		err = errl.Errorf("no seller operator")
-		return
-	}
-
-	return
-
-}
-
-func getSellerAndBuyerInfoV5(tmfObjectMap map[string]any) (sellerDid string, sellerOperatorDid string, err error) {
-
-	// Look for the "Seller", "SellerOperator", "Buyer" and "BuyerOperator" roles
-	relatedParties := jpath.GetList(tmfObjectMap, "relatedParty")
-
-	if len(relatedParties) == 0 {
-		err = errl.Errorf("no relatedParty")
-		return
-	}
-
-	for _, rp := range relatedParties {
-
-		// Convert entry to a map
-		rpMap, _ := rp.(map[string]any)
-		if len(rpMap) == 0 {
-			return "", "", errl.Errorf("invalid relatedParty entry")
-		}
-
-		rpRole, _ := rpMap["role"].(string)
-		rpRole = strings.ToLower(rpRole)
-
-		if rpRole != "seller" && rpRole != "selleroperator" {
-			// Go to next entry
-			continue
-		}
-
-		if rpRole == "seller" {
-			party, _ := rpMap["partyOrPartyRole"].(map[string]any)
-			sellerDid, _ = party["name"].(string)
-			continue
-		}
-		if rpRole == "selleroperator" {
-			party, _ := rpMap["partyOrPartyRole"].(map[string]any)
-			sellerOperatorDid, _ = party["name"].(string)
-			continue
-		}
-
-	}
-
-	if sellerDid == "" && sellerOperatorDid == "" {
-		err = errl.Errorf("no seller or seller operator")
-		return
-	}
-
-	if sellerDid == "" {
-		err = errl.Errorf("no seller")
-		return
-	}
-	if sellerOperatorDid == "" {
-		err = errl.Errorf("no seller operator")
-		return
-	}
-
-	return
-
 }
 
 // getUserAndUserOperatorInfoV4 finds the relatedparty entries with the specified roles.

@@ -57,6 +57,14 @@ func NewClientWithPaging(config *PagingConfig) *ClientWithPaging {
 	}
 }
 
+func (c *ClientWithPaging) GetObjectURL(objectType string, objectID string) string {
+	pathPrefix, exists := config.GeneratedDefaultResourceToPathPrefix[objectType]
+	if !exists {
+		return ""
+	}
+	return fmt.Sprintf("%s%s/%s", c.baseURL, pathPrefix, objectID)
+}
+
 type procObj func(objType string, obj repo.TMFObjectMap) (repo.TMFObjectMap, bool, error)
 
 // GetAllObjectsOfType retrieves all objects of a specific type using pagination
@@ -152,6 +160,50 @@ func (c *ClientWithPaging) GetAllObjectsOfType(ctx context.Context, objectType s
 	return allObjects, nil
 }
 
+func (c *ClientWithPaging) GetSingleObject(ctx context.Context, objectType string, id string) (repo.TMFObjectMap, error) {
+	// Get the path prefix for this object type from the routes map
+	pathPrefix, exists := config.GeneratedDefaultResourceToPathPrefix[objectType]
+	if !exists {
+		return nil, fmt.Errorf("unknown object type: %s", objectType)
+	}
+
+	// Build URL with pagination parameters
+	url := fmt.Sprintf("%s%s/%s", c.baseURL, pathPrefix, id)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %w", err)
+	}
+
+	// Set common headers
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to execute request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("server returned status %d: %s", resp.StatusCode, string(body))
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	// If it's not an array, try to parse as a single object
+	var singleObject repo.TMFObjectMap
+	if err := json.Unmarshal(body, &singleObject); err != nil {
+		return nil, fmt.Errorf("failed to parse response as JSON: %w", err)
+	}
+
+	return singleObject, nil
+}
+
 // GetPageOfObjects retrieves up to a single page of objects of a specific type
 func (c *ClientWithPaging) GetPageOfObjects(ctx context.Context, objectType string, offset int, processObject procObj) ([]repo.TMFObjectMap, error) {
 	// Get the path prefix for this object type from the routes map
@@ -200,6 +252,15 @@ func (c *ClientWithPaging) GetPageOfObjects(ctx context.Context, objectType stri
 			return nil, fmt.Errorf("failed to parse response as JSON: %w", err)
 		}
 		objects = []repo.TMFObjectMap{singleObject}
+	}
+
+	// TODO: this is a hack because the TMF API for listing collections does not work as expected
+	// We need to retrieve each object individually, and can not trust on the object that has been retrieved with the list API
+	for i := range objects {
+		objects[i], err = c.GetSingleObject(ctx, objectType, objects[i].ID())
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	// Process each object with the user-supplied logic
