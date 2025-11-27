@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/hesusruiz/isbetmf/config"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	repo "github.com/hesusruiz/isbetmf/tmfserver/repository"
 )
@@ -70,8 +71,8 @@ func (svc *Service) UpdateGenericObject(req *Request) *Response {
 			return ErrorResponsef(http.StatusBadRequest, "failed to bind request body: %w", errl.Error(err))
 		}
 
-		// Check if the caller is trying to set the lifecycleStatus to "Launched"
-		if strings.EqualFold(incomingObjMap.LifecycleStatus(), "Launched") {
+		// Check if the caller is trying to set the lifecycleStatus of a ProductOffering to "Launched"
+		if strings.EqualFold(incomingObjMap.Type(), config.ProductOffering) && strings.EqualFold(incomingObjMap.LifecycleStatus(), "Launched") {
 			// If the feature is enabled, only the admin (server operator) can set the lifecycleStatus to "Launched"
 			if svc.Features.OfferingLaunchOnlyByAdmin {
 				caller := req.AuthUser
