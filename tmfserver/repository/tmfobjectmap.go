@@ -91,7 +91,7 @@ func (obj TMFObjectMap) Validate(resourceName string) ValidationResult {
 func (obj TMFObjectMap) validateRequiredFields(resourceName string, result *ValidationResult) {
 
 	// Special processiong for the object type: check that the object matches the resourceName and fix the object if needed.
-	objType := obj.GetType()
+	objType := obj.Type()
 	if objType != "" {
 		// If the object type is specified, it must match the resourceName passed by the caller
 		field := "@type"
@@ -288,7 +288,7 @@ func (obj TMFObjectMap) validateRelatedParty(result *ValidationResult) {
 func (obj TMFObjectMap) ToTMFObject(resourceName string) *TMFRecord {
 
 	id := obj.ID()
-	objectType := obj.GetType()
+	objectType := obj.Type()
 	if objectType == "" {
 		objectType = resourceName
 	}
@@ -339,11 +339,11 @@ func (obj TMFObjectMap) ID() string {
 }
 
 func (obj TMFObjectMap) IsIndividual() bool {
-	return strings.EqualFold(obj.GetType(), "Individual")
+	return strings.EqualFold(obj.Type(), "Individual")
 }
 
 func (obj TMFObjectMap) IsOrganization() bool {
-	return strings.EqualFold(obj.GetType(), "Organization")
+	return strings.EqualFold(obj.Type(), "Organization")
 }
 
 // SetID sets the object ID
@@ -395,8 +395,8 @@ func (obj TMFObjectMap) SetLastUpdateNow() {
 	obj["lastUpdate"] = time.Now().Format(time.RFC3339)
 }
 
-// GetType returns the object @type
-func (obj TMFObjectMap) GetType() string {
+// Type returns the object @type
+func (obj TMFObjectMap) Type() string {
 	if objType, ok := obj["@type"].(string); ok {
 		return objType
 	}
@@ -708,7 +708,7 @@ func (obj TMFObjectMap) IsOwner(caller types.AuthUser, serverOperatorDid string)
 // It calls the appropriate version-specific function based on the API version
 func (obj TMFObjectMap) SetSellerInfo(serverOperatorDid string, organizationIdentifier string, apiVersion string) (err error) {
 	// We do nothing for Individual or Organization objects, which are special and do not have Seller info
-	objType := obj.GetType()
+	objType := obj.Type()
 	objType = strings.ToLower(objType)
 	if objType == "individual" || objType == "organization" {
 		return nil
@@ -916,13 +916,13 @@ func setSellerInfoV5(tmfObjectMap map[string]any, serverOperatorDid string, orga
 }
 
 func (obj TMFObjectMap) RequiresSellerInfo() bool {
-	objType := obj.GetType()
+	objType := obj.Type()
 	objType = strings.ToLower(objType)
 	return !slices.Contains(DoNotRequireRelatedParties, objType)
 }
 
 func (obj TMFObjectMap) RequiresBuyerInfo() bool {
-	objType := obj.GetType()
+	objType := obj.Type()
 	objType = strings.ToLower(objType)
 	relp := slices.Contains(DoNotRequireRelatedParties, objType)
 	buyp := slices.Contains(DoNotRequireBuyerInfo, objType)
