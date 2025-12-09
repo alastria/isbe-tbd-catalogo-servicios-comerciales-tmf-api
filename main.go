@@ -18,6 +18,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/hesusruiz/isbetmf/config"
+	"github.com/hesusruiz/isbetmf/internal/admin"
 	"github.com/hesusruiz/isbetmf/internal/errl"
 	"github.com/hesusruiz/isbetmf/internal/sqlogger"
 	_ "github.com/hesusruiz/isbetmf/migrations"
@@ -205,6 +206,10 @@ func runNormalProcess(configuration *config.Config) {
 	// Create handler and set the routes for the APIs
 	h := fiberhandler.NewHandler(s)
 	h.RegisterRoutes(webServer)
+
+	// Create and register admin handler
+	adminHandler := admin.NewAdminHandler(s)
+	adminHandler.RegisterRoutes(webServer)
 
 	// Schedule periodic maintenance tasks
 	repository.ScheduleMaintenance(configuration, db, upg)
