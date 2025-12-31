@@ -11,6 +11,9 @@
 # secrets
 secrets/
 
+# files in the temporary directory
+tmp/
+
 # Test binary, built with `go test -c`
 *.test
 

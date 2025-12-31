@@ -46,20 +46,21 @@ func RegisterMigration(version string, up migrationfun, down migrationfun) {
 // RunMigrationsUp ensures the database migrations table exists and applies any pending migrations.
 //
 // RunMigrationsUp performs the following steps:
-//  1. Logs the start of the migration run and defers a completion log.
-//  2. Ensures the migrations table exists by executing createMigrationsTableSQL.
-//  3. Reads the version of the last applied migration from the migrations table
+//  1. Ensures the migrations table exists by executing createMigrationsTableSQL.
+//  2. Reads the version of the last applied migration from the migrations table
 //     using "SELECT version FROM migrations ORDER BY version DESC LIMIT 1".
 //     If the table is empty, no rows is treated as no previously applied migrations.
-//  4. Collects available migrations from the global `migrations` map, sorts their
+//  3. Collects available migrations from the global `migrations` map, sorts their
 //     keys lexicographically, and iterates them in that order.
-//  5. Skips any migration whose version is less than or equal to the last applied version.
-//  6. For each pending migration, calls applyMigration(db, migration) to apply it,
+//  4. Skips any migration whose version is less than or equal to the last applied version.
+//  5. For each pending migration, calls applyMigration(db, migration) to apply it,
 //     logs successful application, and stops on the first error returned by applyMigration.
 //
 // Notes and expectations:
 //   - Version comparison is lexicographical string comparison; migration version keys must be
 //     chosen so that lexicographical order corresponds to the intended application order.
+//   - Recommended version format is a timestamp in the format YYYYMMDDTHHMMSS (YearMonthDayTHoursMinutesSeconds),
+//     like '20251102T203201'.
 func RunMigrationsUp(db *sqlx.DB) error {
 
 	slog.Info("Running migrations")
@@ -78,33 +79,36 @@ func RunMigrationsUp(db *sqlx.DB) error {
 	}
 	slog.Debug("Last applied migration version", slog.String("version", lastAppliedVersion))
 
-	// Order migrations to apply by version lexicographycally
+	// lastAppliedVersion is either "" (no migrations applied yet) or a valid version string
+	// The empty string is lexicographically less than any valid version string, so this is OK
+
+	if len(migrations) == 0 {
+		slog.Info("There are no registered migrations")
+		return nil
+	}
+
+	// Order registered migrations to apply by version lexicographically
 	keys := make([]string, 0, len(migrations))
 	for k := range migrations {
 		keys = append(keys, k)
 	}
 
-	if len(keys) == 0 {
-		slog.Info("No migrations to apply")
-		return nil
-	}
-
 	sort.Strings(keys)
 
 	// Loop the keys for applying the migration or not
-	for _, currentMigration := range keys {
-		if currentMigration <= lastAppliedVersion {
-			slog.Debug("Skipping migration", slog.String("version", currentMigration))
+	for _, currentMigrationVersion := range keys {
+		if currentMigrationVersion <= lastAppliedVersion {
+			slog.Debug("Skipping migration", slog.String("version", currentMigrationVersion))
 			continue
 		}
-		migration := migrations[currentMigration]
+		migration := migrations[currentMigrationVersion]
 
 		err := applyMigration(db, migration)
 		if err != nil {
-			return err
+			return errl.Errorf("failed to apply migration %s: %w", currentMigrationVersion, err)
 		}
 
-		slog.Info("Migration applied", slog.String("version", currentMigration))
+		slog.Info("Migration applied", slog.String("version", currentMigrationVersion))
 
 	}
 
@@ -141,9 +145,12 @@ func applyMigration(db *sqlx.DB, migration oneMigration) error {
 	// Generate a random string
 	savepointName := "S_" + rand.Text()
 
-	// Start a SQLite SAVEPOINT with an unguessable name
-	// This is instead of a normal transaction so that user migration code
-	// can nest SAVEPOINTS if they wish
+	// Start a SQLite SAVEPOINT with an unguessable name.
+	// SAVEPOINTs are a method of creating transactions, similar to BEGIN and COMMIT, except that the SAVEPOINT and RELEASE commands
+	// are named and may be nested.
+	// We need this because we want to run the migration code and update the migrations table in a single transaction.
+	// User migration code does not have to create a transaction but can nest SAVEPOINTS if they wish.
+	// IMPORTANT: migration code can not use BEGIN and COMMIT, only SAVEPOINT and RELEASE. BEGIN will receive an error, as per SQLite documentation.
 	_, err := db.Exec("SAVEPOINT " + savepointName)
 	if err != nil {
 		return errl.Error(err)

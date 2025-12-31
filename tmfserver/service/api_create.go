@@ -155,7 +155,7 @@ func (svc *Service) CreateGenericObject(req *Request) *Response {
 		}
 
 		// Set the @type if not specified by the user
-		if resourceType := incomingObjectMap.GetType(); resourceType == "" {
+		if resourceType := incomingObjectMap.Type(); resourceType == "" {
 			resourceType = strings.ToUpper(req.ResourceName[0:1]) + req.ResourceName[1:]
 			incomingObjectMap.SetType(resourceType)
 		}
